@@ -16,7 +16,25 @@
     h1, h2, h3 {
       margin: 10px 0;
     }
-    /* Responsive grid: buttons arranged three per row on larger screens */
+    /* Details area appears at the top */
+    #details {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      margin-bottom: 20px;
+    }
+    #toggleDetailsBtn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    /* Responsive grid: buttons arranged in a grid */
     .grid-buttons {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -41,36 +59,6 @@
       background-color: #6c757d;
       font-size: 14px;
       padding: 10px;
-    }
-    /* Details box styling */
-    #details {
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 4px;
-      background-color: #f8f9fa;
-      margin-bottom: 20px;
-      position: relative;
-    }
-    #collapseDetails {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    /* Red Gap Information box just under the description */
-    #gapInfo {
-      background-color: #ffe6e6;
-      border: 1px solid #dc3545;
-      color: #a70000;
-      padding: 10px;
-      margin: 10px 0;
-      display: block; /* visible by default */
     }
     /* Ask AI Section styling */
     #askAISection {
@@ -115,11 +103,19 @@
 <body>
   <div class="container">
     <h1>High Impact Shared Savings</h1>
-    <p>Click one of the top‑tier buttons to display the full guideline details (with gap information). You can then use the "Ask AI" section to get the exclusion diagnosis codes (separated by OR) for use in Epic.</p>
+    <p>Below are the guideline details (expanded from the JSON) for the currently selected item. Use the button below the details to collapse/expand them. Then, click a button below to update the details. Finally, use the "Ask AI" section to get exclusion diagnosis codes for the displayed guideline.</p>
+
+    <!-- Guideline Details Display (at the very top) -->
+    <div id="details">
+      <button id="toggleDetailsBtn">Collapse Details</button>
+      <div id="guidelineDetails">
+        <p>Please select a guideline below to view its details.</p>
+      </div>
+    </div>
 
     <!-- Top-Tier Buttons -->
     <div class="grid-buttons" id="highImpactButtons">
-      <!-- Order of buttons (measure IDs) -->
+      <!-- Re-ordered top-tier buttons -->
       <button class="button" data-measure="KED">Kidney Eval</button>
       <button class="button" data-measure="CMA">Chol Adherence</button>
       <button class="button" data-measure="SUPD">Statin Use</button>
@@ -150,24 +146,10 @@
       <button class="button small-button" data-measure="PCR">Readmissions</button>
     </div>
 
-    <!-- Guideline Details Display -->
-    <div id="details">
-      <button id="collapseDetails">Collapse</button>
-      <div id="guidelineDetails">
-        <!-- This area will show the bulleted JSON details at the very top -->
-        <p>Please click a button above to display the guideline details.</p>
-      </div>
-      <!-- Gap Information (in red, directly under the description) -->
-      <div id="gapInfo">
-        <p><strong>Gap Information:</strong> <span id="gapText">[Gap info here]</span></p>
-        <button id="hideGapBtn" class="button small-button" style="background-color:#dc3545;">Hide Gap Info</button>
-      </div>
-    </div>
-
     <!-- Ask AI Section -->
     <div id="askAISection">
       <h3>Ask AI for Exclusion Diagnosis Codes</h3>
-      <p>This will compile the exclusion diagnosis codes for the displayed guideline, separated by "OR".</p>
+      <p>This will compile the exclusion codes for the displayed guideline (separated by "OR"). Paste the result into Epic to check for exclusions.</p>
       <button id="askAIBtn" class="button small-button">Get Exclusion Codes</button>
       <textarea id="exhaustiveQuery" placeholder="Exclusion codes will appear here..." style="display:none;"></textarea>
       <button id="copyQueryBtn" style="display:none;">Copy Query</button>
@@ -182,17 +164,15 @@
   </div>
 
   <script>
-    // Global variable to store the guidelines JSON
+    // Global variable for JSON data.
     let medicalData = {};
-    // Global variable to store the currently displayed guideline
+    // Global variable for currently displayed guideline.
     let currentGuideline = null;
 
-    // Load JSON data from rules.json
+    // Load guidelines from rules.json.
     fetch('rules.json')
       .then(response => {
-        if (!response.ok) {
-          throw new Error("Error loading JSON: " + response.statusText);
-        }
+        if (!response.ok) throw new Error("Error loading JSON: " + response.statusText);
         return response.json();
       })
       .then(data => {
@@ -201,7 +181,7 @@
       })
       .catch(error => console.error(error));
 
-    // Display guideline details for a given measure ID
+    // Display guideline details for a given measureID.
     function displayGuideline(measureID) {
       const guidelines = medicalData.conditions;
       let found = null;
@@ -211,72 +191,80 @@
           break;
         }
       }
-      currentGuideline = found; // store for later use
+      currentGuideline = found;
       const detailsDiv = document.getElementById("guidelineDetails");
       if (found) {
-        // Bulleted JSON details at the very top
         detailsDiv.innerHTML = `
-          <div class="guideline">
-            <h3>${found.title} (<em>${found.measure_id}</em>)</h3>
-            <ul>
-              <li><strong>Description:</strong> ${found.description}</li>
-              <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>
-              <li><strong>Ages:</strong> ${found.ages}</li>
-              <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
-            </ul>
-          </div>
+          <ul>
+            <li><strong>Title:</strong> ${found.title}</li>
+            <li><strong>Measure ID:</strong> ${found.measure_id}</li>
+            <li><strong>Description:</strong> ${found.description}</li>
+            <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>
+            <li><strong>Ages:</strong> ${found.ages}</li>
+            <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
+            <li><strong>Methods to Close Gap:</strong> ${found.methods_to_close_gap.join('; ')}</li>
+            <li><strong>Best Practices:</strong>
+              <ul>
+                ${found.best_practices.map(practice => `<li>${practice}</li>`).join('')}
+              </ul>
+            </li>
+          </ul>
         `;
-        // Show gap information (methods to close gap) in red, right under the description.
-        document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
-        document.getElementById("gapInfo").style.display = "block";
       } else {
         detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
-        hideGapInfo();
       }
+      // Show gap info section (always visible in this version).
+      document.getElementById("gapInfo").style.display = "block";
+      // Generate exhaustive query from the exclusions.
+      generateExhaustiveQuery(found);
     }
 
-    // Hide the gap information section
-    function hideGapInfo() {
-      document.getElementById("gapInfo").style.display = "none";
+    // Generate the exhaustive query string based on the guideline's denominator_exclusions.
+    function generateExhaustiveQuery(guideline) {
+      if (!guideline || !guideline.denominator_exclusions) {
+        document.getElementById("exhaustiveQuery").value = "";
+        return;
+      }
+      const codes = guideline.denominator_exclusions.map(code => code.trim()).join(' OR ');
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.value = codes;
     }
 
-    // Toggle collapse/expand for the details box
-    document.getElementById("collapseDetails").addEventListener("click", function() {
+    // Toggle collapse/expand of the details area.
+    document.getElementById("toggleDetailsBtn").addEventListener("click", function() {
       const detailsDiv = document.getElementById("guidelineDetails");
-      if (detailsDiv.style.display === "none") {
+      if (detailsDiv.style.display === "none" || detailsDiv.style.display === "") {
         detailsDiv.style.display = "block";
-        this.innerText = "Collapse";
+        this.innerText = "Collapse Details";
       } else {
         detailsDiv.style.display = "none";
-        this.innerText = "Expand";
+        this.innerText = "Expand Details";
       }
     });
 
-    // Attach event listeners to all buttons (both top-tier and also ran)
+    // Attach event listeners to all guideline buttons.
     document.querySelectorAll('button[data-measure]').forEach(button => {
       button.addEventListener('click', function() {
         const measureID = this.getAttribute('data-measure');
         displayGuideline(measureID);
-        // Hide the exhaustive query when a new guideline is selected
+        // Hide the exhaustive query area when a new guideline is selected.
         document.getElementById("exhaustiveQuery").style.display = "none";
         document.getElementById("copyQueryBtn").style.display = "none";
       });
     });
 
-    // Ask AI Section: compile the exclusion diagnosis codes separated by " OR "
+    // Ask AI Section: When clicked, show the exclusion diagnosis codes.
     document.getElementById("askAIBtn").addEventListener("click", function() {
       if (!currentGuideline || !currentGuideline.denominator_exclusions) {
         alert("No guideline selected or no exclusions available.");
         return;
       }
-      const codes = currentGuideline.denominator_exclusions.map(code => code.trim()).join(' OR ');
       const txtArea = document.getElementById("exhaustiveQuery");
-      txtArea.value = codes;
       txtArea.style.display = "block";
       document.getElementById("copyQueryBtn").style.display = "block";
     });
 
-    // Copy exhaustive query text to clipboard
+    // Copy the exhaustive query to the clipboard.
     document.getElementById("copyQueryBtn").addEventListener("click", function() {
       const txtArea = document.getElementById("exhaustiveQuery");
       txtArea.select();
