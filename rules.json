@@ -1,974 +1,941 @@
 {
-    "conditions": {
-      "Antidepressant Medication Management": {
-        "measure_id": "AMM",
-        "keywords": [
-          "Antidepressant",
-          "Major Depression",
-          "Medication Adherence",
-          "Mental Health",
-          "HEDIS 2024",
-          "Medication Management",
-          "Depression Treatment",
-          "Pharmacotherapy"
-        ],
-        "description": "The percentage of members 22 years of age and older who were treated with antidepressant medication, had a diagnosis of major depression and who remained on an antidepressant medication treatment for at least 180 days (6 months).",
-        "measurement_period": "May 1, 2023 - April 30, 2024",
-        "ages": "22 years and older",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "No major depression diagnosis within 121 days of IPSD",
-          "Antidepressant medication dispensed 105 days prior to IPSD"
-        ],
-        "methods_to_close_gap": [
-          "At least 180 days of continuous antidepressant medication treatment",
-          "Allowable gaps of up to 52 days for medication change or refill delays"
-        ],
-        "best_practices": [
-          "Encourage patients to report side effects before stopping medication",
-          "Schedule follow-ups within the first six months",
-          "Educate patients on medication effects and adherence"
-        ]
-      },
-      "Pharyngitis Treatment": {
-        "measure_id": "CWP",
-        "keywords": [
-          "Pharyngitis",
-          "Group A Streptococcus",
-          "Antibiotics",
-          "Strep Test",
-          "Respiratory Infection",
-          "HEDIS 2024",
-          "Throat Infection",
-          "Bacterial Pharyngitis"
-        ],
-        "description": "The percentage of episodes for members 22 years and older where the member was diagnosed with pharyngitis, dispensed an antibiotic, and received a group A streptococcus (strep) test.",
-        "measurement_period": "January 1, 2024 - December 28, 2024",
-        "ages": "22 years and older",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "No antibiotics dispensed within 3 days of diagnosis",
-          "Inpatient stay after diagnosis",
-          "Comorbid condition history within 12 months",
-          "Competing diagnosis within 3 days of episode"
-        ],
-        "methods_to_close_gap": [
-          "Group A streptococcus test within 7-day period around diagnosis"
-        ],
-        "best_practices": [
-          "Perform strep test before prescribing antibiotics",
-          "Educate patients on viral vs. bacterial infections",
-          "Discuss risks of antibiotic overuse and resistance"
-        ]
-      },
-      "Upper Respiratory Infection (URI) Treatment": {
-        "measure_id": "URI",
-        "keywords": [
-          "Upper Respiratory Infection",
-          "URI",
-          "Antibiotics",
-          "Cold and Flu",
-          "HEDIS 2024",
-          "Viral Infection",
-          "Sinus Infection",
-          "Bronchitis"
-        ],
-        "description": "The percentage of episodes for members 22 years and older with a diagnosis of upper respiratory infection (URI) that did not result in an antibiotic dispensing event.",
-        "measurement_period": "January 1, 2024 - December 28, 2024",
-        "ages": "22 years and older",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Inpatient stay after diagnosis",
-          "Comorbid condition history within 365 days",
-          "Competing diagnosis within 3 days of episode",
-          "Antibiotic prescription within 30 days prior"
-        ],
-        "methods_to_close_gap": [
-          "No antibiotic prescribed unless a comorbid/competing diagnosis is present"
-        ],
-        "best_practices": [
-          "Educate patients on unnecessary antibiotic risks",
-          "Promote hygiene and handwashing",
-          "Explain symptom management for viral infections",
-          "Submit comorbid/competing diagnosis codes when applicable"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Asthma Medication Ratio": {
-        "measure_id": "AMR",
-        "keywords": [
-          "Asthma",
-          "Controller Medications",
-          "Reliever Medications",
-          "Inhalers",
-          "HEDIS 2024",
-          "Pulmonary Disease",
-          "Respiratory Therapy"
-        ],
-        "description": "The percentage of members 22-64 years of age who were identified as having persistent asthma and had a ratio of controller medications to total asthma medications of 0.50 or greater during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-64 years",
-        "denominator_exclusions": [
-          "Other respiratory diseases requiring different treatment",
-          "No asthma controller or reliever medications dispensed",
-          "Hospice services",
-          "Death during the measurement year"
-        ],
-        "methods_to_close_gap": [
-          "Ensure a medication ratio of ≥0.50 by increasing controller medication usage"
-        ],
-        "best_practices": [
-          "Update prescriptions with dosage changes for future refills",
-          "Develop an asthma care plan with the patient",
-          "Identify and avoid asthma triggers",
-          "Monitor symptom control and inhaler use at each visit",
-          "Encourage 90-day fills and automatic refills for controller medications"
-        ]
-      },
-      "Breast Cancer Screening": {
-        "measure_id": "BCS-E",
-        "keywords": [
-          "Breast Cancer",
-          "Mammogram",
-          "Cancer Screening",
-          "Preventive Care",
-          "HEDIS 2024",
-          "Women's Health",
-          "Early Detection"
-        ],
-        "description": "The percentage of members 50-74 years of age who were recommended for routine breast cancer screening and had a mammogram.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "50-74 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Bilateral mastectomy",
-          "Gender-affirming chest surgery",
-          "Advanced illness and frailty in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure at least one mammogram within the last two years"
-        ],
-        "best_practices": [
-          "Use reminders to discuss screening every two years",
-          "Offer flexible scheduling for mammograms",
-          "Schedule appointments while patients are in-office",
-          "Send invitation letters and reminder calls",
-          "Address logistical barriers such as transportation and childcare"
-        ]
-      },
-      "Cervical Cancer Screening": {
-        "measure_id": "CCS",
-        "keywords": [
-          "Cervical Cancer",
-          "Pap Smear",
-          "HPV Testing",
-          "Preventive Care",
-          "HEDIS 2024",
-          "Women's Health",
-          "Cancer Screening"
-        ],
-        "description": "The percentage of members 22-64 years of age who were recommended for routine cervical cancer screening and were screened using cervical cytology or HPV testing.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-64 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Hysterectomy with no residual cervix",
-          "Cervical agenesis or absence of cervix",
-          "Assigned male at birth"
-        ],
-        "methods_to_close_gap": [
-          "Ensure cervical cytology every three years or HPV testing every five years"
-        ],
-        "best_practices": [
-          "Use EMRs to track due/overdue screenings",
-          "Perform Pap testing in PCP office when possible",
-          "Encourage routine gynecologic visits",
-          "Frame screening as routine preventive care"
-        ]
-      },
-      "Chlamydia Screening in Women": {
-        "measure_id": "CHL",
-        "keywords": [
-          "Chlamydia",
-          "Sexually Transmitted Infections",
-          "STI Screening",
-          "Preventive Health",
-          "HEDIS 2024",
-          "Women's Health",
-          "Reproductive Health"
-        ],
-        "description": "The percentage of women 22-24 years of age who were identified as sexually active and had at least one test for chlamydia during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-24 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Pregnancy test with isotretinoin or X-ray within 6 days"
-        ],
-        "methods_to_close_gap": [
-          "Ensure at least one chlamydia test during the measurement year"
-        ],
-        "best_practices": [
-          "Promote routine screening beginning at age 16",
-          "Normalize chlamydia screening as standard care",
-          "Offer in-office urine testing to improve completion rates",
-          "Educate patients on untreated chlamydia complications",
-          "Ensure correct coding to minimize patient out-of-pocket costs"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Colorectal Cancer Screening": {
-        "measure_id": "COL-E",
-        "keywords": [
-          "Colorectal Cancer",
-          "Cancer Screening",
-          "Colon Cancer",
-          "Colonoscopy",
-          "HEDIS 2024",
-          "Preventive Care",
-          "Gastroenterology"
-        ],
-        "description": "The percentage of members 45–75 years of age who had appropriate screening for colorectal cancer.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "46-75 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Colorectal cancer history",
-          "Total colectomy",
-          "Advanced illness and frailty in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure at least one colorectal cancer screening within the appropriate timeframe"
-        ],
-        "best_practices": [
-          "Offer multiple screening options (colonoscopy, FIT, sDNA test)",
-          "Use EHR reminders to identify overdue patients",
-          "Schedule colonoscopy while patients are in-office",
-          "Provide FIT kits with clear instructions and return deadlines",
-          "Follow up with patients who have not completed their screening"
-        ]
-      },
-      "Controlling High Blood Pressure": {
-        "measure_id": "CBP",
-        "keywords": [
-          "Hypertension",
-          "Blood Pressure Control",
-          "Cardiovascular Health",
-          "HEDIS 2024",
-          "Heart Disease",
-          "Lifestyle Management",
-          "Preventive Care"
-        ],
-        "description": "The percentage of members 22–85 years of age who had a diagnosis of hypertension (HTN) and whose blood pressure (BP) was adequately controlled (<140/90 mm Hg) during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-85 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "End-stage renal disease (ESRD)",
-          "Dialysis, nephrectomy, or kidney transplant",
-          "Pregnancy",
-          "Advanced illness and frailty in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure the most recent BP reading is <140/90 mm Hg"
-        ],
-        "best_practices": [
-          "Educate patients on diet, exercise, and lifestyle factors affecting BP",
-          "Encourage medication adherence",
-          "Recheck BP after patient has rested in the clinic",
-          "Refer to care management for chronic disease support",
-          "Use EHR alerts for patients with uncontrolled BP"
-        ]
-      },
-      "Eye Exam for Patients with Diabetes": {
-        "measure_id": "EED",
-        "keywords": [
-          "Diabetes",
-          "Diabetic Retinopathy",
-          "Eye Exam",
-          "Ophthalmology",
-          "HEDIS 2024",
-          "Vision Screening",
-          "Endocrinology"
-        ],
-        "description": "The percentage of members 22-75 years of age with diabetes (types 1 and 2) who had a retinal eye exam.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-75 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Advanced illness and frailty in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure a retinal or dilated eye exam within the measurement period"
-        ],
-        "best_practices": [
-          "Educate patients on the importance of annual eye exams",
-          "Provide on-site retinal screenings where possible",
-          "Develop referral partnerships with eye care providers",
-          "Use patient reminders via text, email, or phone",
-          "Submit negative exam results from the prior year to close gaps"
-        ]
-      },
-      "Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions": {
-        "measure_id": "FMC",
-        "keywords": [
-          "Emergency Department",
-          "Chronic Conditions",
-          "Care Coordination",
-          "Follow-Up Care",
-          "HEDIS 2024",
-          "Case Management",
-          "Preventive Health"
-        ],
-        "description": "The percentage of emergency department (ED) visits for members 22 years of age and older who have multiple high-risk chronic conditions and had a follow-up service within 7 days of the ED visit.",
-        "measurement_period": "January 1, 2024 - December 24, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "ED visits resulting in inpatient admission"
-        ],
-        "methods_to_close_gap": [
-          "Ensure follow-up service within 7 days after an ED visit"
-        ],
-        "best_practices": [
-          "Develop processes to identify patients in the ED",
-          "Encourage patients to notify PCP after ED discharge",
-          "Use case management for transition-of-care coordination",
-          "Follow up with patients through phone, telehealth, or office visits",
-          "Use EHR tracking to ensure timely follow-up care"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Glycemic Status Assessment for Patients With Diabetes": {
-        "measure_id": "GSD",
-        "keywords": [
-          "Diabetes",
-          "Hemoglobin A1c",
-          "Glucose Management Indicator",
-          "Blood Sugar Control",
-          "HEDIS 2024",
-          "Endocrinology",
-          "Chronic Disease Management"
-        ],
-        "description": "The percentage of members 22-75 years of age with diabetes (types 1 and 2) whose most recent glycemic status (hemoglobin A1c [HbA1c] or glucose management indicator [GMI]) was at the appropriate level during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-75 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Advanced illness and frailty in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure HbA1c < 8.0% for Commercial, Medicaid, and Marketplace members",
-          "Ensure HbA1c < 9.0% for Medicare members"
-        ],
-        "best_practices": [
-          "Submit CPT II codes or upload results where no lab feed exists",
-          "Identify members needing self-management education",
-          "Encourage engagement with a certified diabetes educator",
-          "Monitor and adjust medications to maintain glycemic control"
-        ]
-      },
-      "Kidney Health Evaluation for Patients with Diabetes": {
-        "measure_id": "KED",
-        "keywords": [
-          "Diabetes",
-          "Kidney Disease",
-          "Chronic Kidney Disease",
-          "eGFR",
-          "Urine Albumin-Creatinine Ratio",
-          "Nephrology",
-          "HEDIS 2024"
-        ],
-        "description": "The percentage of members 22–85 years of age with diabetes (type 1 and type 2) who received a kidney health evaluation, defined by an estimated glomerular filtration rate (eGFR) and a urine albumin-creatinine ratio (uACR), during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-85 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Dialysis history",
-          "End-stage renal disease (ESRD)",
-          "Advanced illness and frailty in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure both an eGFR and a uACR test during the measurement year"
-        ],
-        "best_practices": [
-          "Provide on-site urine specimen collection",
-          "Use clinical decision support tools for adherence tracking",
-          "Educate patients on diabetes and kidney health management",
-          "Encourage early intervention to prevent kidney disease progression"
-        ]
-      },
-      "Medication Adherence for Cholesterol (Statins)": {
-        "measure_id": "CMA",
-        "keywords": [
-          "Cholesterol",
-          "Statins",
-          "Lipid Management",
-          "Cardiovascular Health",
-          "HEDIS 2024",
-          "Pharmacy",
-          "Preventive Care"
-        ],
-        "description": "The percentage of plan members with a prescription for a cholesterol medication (a statin drug) who fill their prescription often enough to cover 80 percent or more of the time they are supposed to be taking the medication.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice enrollment",
-          "End-stage renal disease (ESRD) diagnosis or dialysis coverage"
-        ],
-        "methods_to_close_gap": [
-          "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
-        ],
-        "best_practices": [
-          "Encourage patients to use UPMC ID cards for statin prescriptions",
-          "Promote 100-day prescription fills for Medicare members",
-          "Ensure pharmacies receive updated prescriptions with dosage changes",
-          "Encourage automatic refills and medication adherence tools (e.g., pillboxes)"
-        ]
-      },
-      "Medication Adherence for Diabetes": {
-        "measure_id": "DMA",
-        "keywords": [
-          "Diabetes",
-          "Medication Adherence",
-          "Glycemic Control",
-          "Chronic Disease Management",
-          "HEDIS 2024",
-          "Endocrinology",
-          "Pharmacy"
-        ],
-        "description": "The percentage of plan members with a prescription for diabetes medication who fill their prescription often enough to cover 80 percent or more of the time they are supposed to be taking the medication.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice enrollment",
-          "End-stage renal disease (ESRD) diagnosis or dialysis coverage",
-          "Insulin prescriptions"
-        ],
-        "methods_to_close_gap": [
-          "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
-        ],
-        "best_practices": [
-          "Encourage patients to use UPMC ID cards for diabetes medications",
-          "Promote 100-day prescription fills for Medicare members",
-          "Ensure pharmacy updates prescriptions for dose or instruction changes",
-          "Educate patients on the importance of adherence to diabetes medications",
-          "Use automatic refills and patient engagement strategies"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Medication Adherence for Hypertension (RAS Antagonist)": {
-        "measure_id": "HMA",
-        "keywords": [
-          "Hypertension",
-          "RAS Antagonist",
-          "Blood Pressure Medication",
-          "ACE Inhibitors",
-          "ARB Medications",
-          "HEDIS 2024",
-          "Pharmacy"
-        ],
-        "description": "The percentage of plan members with a prescription for a blood pressure medication who fill their prescription often enough to cover 80 percent or more of the time they are supposed to be taking the medication.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice enrollment",
-          "End-stage renal disease (ESRD) diagnosis or dialysis coverage",
-          "One or more prescriptions for sacubitril/valsartan"
-        ],
-        "methods_to_close_gap": [
-          "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
-        ],
-        "best_practices": [
-          "Encourage 100-day prescription fills for Medicare members",
-          "Ensure pharmacy updates prescriptions for dose or instruction changes",
-          "Promote automatic refills and adherence tools",
-          "Use preferred pharmacies for better medication adherence tracking"
-        ]
-      },
-      "Medication Reconciliation Post-Discharge": {
-        "measure_id": "TRC",
-        "keywords": [
-          "Medication Reconciliation",
-          "Hospital Discharge",
-          "Transitional Care",
-          "Medication Safety",
-          "HEDIS 2024",
-          "Post-Discharge Follow-Up"
-        ],
-        "description": "The percentage of discharges for members 22 years of age and older who had documentation of medication reconciliation on the date of discharge through 30 days after discharge (31 total days).",
-        "measurement_period": "January 1, 2024 - December 1, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year"
-        ],
-        "methods_to_close_gap": [
-          "Ensure medication reconciliation by a prescribing practitioner, pharmacist, PA, or nurse within 30 days post-discharge"
-        ],
-        "best_practices": [
-          "Develop a process for completing medication reconciliation for all hospital discharge patients",
-          "Use telephonic or face-to-face medication reviews",
-          "Encourage patients to bring all medications to post-discharge visits",
-          "Address financial or adherence barriers to medication access"
-        ]
-      },
-      "Patient Engagement After Inpatient Discharge": {
-        "measure_id": "TRC",
-        "keywords": [
-          "Post-Discharge Follow-Up",
-          "Patient Engagement",
-          "Hospital Readmission Prevention",
-          "Care Coordination",
-          "HEDIS 2024",
-          "Telehealth"
-        ],
-        "description": "The percentage of discharges for members 22 years of age and older who had documentation of patient engagement (e.g., office visits, home visits, telehealth) provided within 30 days after discharge.",
-        "measurement_period": "January 1, 2024 - December 1, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year"
-        ],
-        "methods_to_close_gap": [
-          "Ensure patient engagement through outpatient visits, telephone visits, e-visits, or virtual check-ins within 30 days post-discharge"
-        ],
-        "best_practices": [
-          "Utilize ADT reports to identify patients needing follow-up",
-          "Conduct outreach for patients without a scheduled follow-up within two weeks",
-          "Offer telehealth or virtual check-ins if transportation is a barrier",
-          "Address patient concerns regarding treatment, medications, and symptoms"
-        ]
-      },
-      "Pharmacotherapy Management of COPD – Bronchodilator": {
-        "measure_id": "PCE",
-        "keywords": [
-          "COPD",
-          "Bronchodilators",
-          "Lung Disease",
-          "Pulmonary Medicine",
-          "HEDIS 2024",
-          "Chronic Disease Management"
-        ],
-        "description": "The percentage of COPD exacerbations for members 40 years of age and older who had an acute inpatient discharge or ED visit and were dispensed a bronchodilator within 30 days.",
-        "measurement_period": "January 1, 2024 - November 30, 2024",
-        "ages": "40+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year"
-        ],
-        "methods_to_close_gap": [
-          "Ensure a bronchodilator prescription is dispensed within 30 days of a COPD-related hospital or ED visit"
-        ],
-        "best_practices": [
-          "Follow up with COPD patients within 5 days of discharge",
-          "Ensure medication adherence for post-discharge COPD treatment",
-          "Educate patients on inhaler techniques and adherence",
-          "Encourage smoking cessation and lifestyle modifications"
-        ]
-      },
-      "Plan All-Cause Readmissions": {
-        "measure_id": "PCR",
-        "keywords": [
-          "Hospital Readmissions",
-          "Quality Improvement",
-          "Care Transitions",
-          "Acute Care",
-          "HEDIS 2024",
-          "Medicare"
-        ],
-        "description": "The number of acute inpatient and observation stays during the measurement year that were followed by an unplanned acute readmission for any diagnosis within 30 days.",
-        "measurement_period": "January 1, 2024 - December 1, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the hospital stay",
-          "Pregnancy-related admissions",
-          "Perinatal condition-related admissions"
-        ],
-        "methods_to_close_gap": [
-          "Prevent readmissions through proper discharge planning and post-hospital follow-up"
-        ],
-        "best_practices": [
-          "Utilize ADT reports to identify recently discharged patients needing follow-up",
-          "Ensure timely follow-up visits post-discharge",
-          "Address common causes of readmission such as medication issues and symptom management",
-          "Educate patients on when to seek primary care versus emergency care"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Statin Therapy for Patients with Cardiovascular Disease": {
-        "measure_id": "SPC",
-        "keywords": [
-          "Statins",
-          "Cardiovascular Disease",
-          "Atherosclerotic Cardiovascular Disease",
-          "Lipid Management",
-          "HEDIS 2024",
-          "Cholesterol Control",
-          "Heart Disease"
-        ],
-        "description": "The percentage of males 22-75 years old and females 40-75 years old during the measurement year who were identified as having clinical atherosclerotic cardiovascular disease (ASCVD) and who were dispensed at least one high-intensity or moderate-intensity statin medication during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "Males 22-75 years, Females 40-75 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Pregnancy",
-          "End-stage renal disease (ESRD)",
-          "Dialysis",
-          "Cirrhosis",
-          "Myopathy, Myositis, Myalgia, or Rhabdomyolysis"
-        ],
-        "methods_to_close_gap": [
-          "Ensure at least one dispensing event for a high-intensity or moderate-intensity statin medication"
-        ],
-        "best_practices": [
-          "Prescribe a statin for secondary prevention in ASCVD patients",
-          "Educate providers on appropriate exclusions",
-          "Assess patient adherence and barriers to compliance",
-          "Consider rechallenging patients with statin intolerance using alternative dosing"
-        ]
-      },
-      "Statin Therapy for Patients with Diabetes": {
-        "measure_id": "SPD",
-        "keywords": [
-          "Statins",
-          "Diabetes",
-          "Cholesterol Management",
-          "Lipid Control",
-          "HEDIS 2024",
-          "Cardiovascular Risk Reduction"
-        ],
-        "description": "The percentage of members 40-75 years of age during the measurement year with diabetes who do not have clinical atherosclerotic cardiovascular disease (ASCVD) and who were dispensed at least one statin medication of any intensity during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "40-75 years",
-        "denominator_exclusions": [
-          "Myopathy, Myositis, Myalgia, or Rhabdomyolysis",
-          "Pregnancy",
-          "End-stage renal disease (ESRD)",
-          "Cirrhosis",
-          "Hospice services",
-          "Death during the measurement year"
-        ],
-        "methods_to_close_gap": [
-          "Ensure at least one dispensing event for a high-, moderate-, or low-intensity statin medication"
-        ],
-        "best_practices": [
-          "Prescribe statins to all patients with diabetes ages 40-75 per ADA/AHA guidelines",
-          "Address adherence barriers and encourage medication refills",
-          "Utilize formularies that offer statins at no cost-share where applicable"
-        ]
-      },
-      "Statin Use in Persons with Diabetes": {
-        "measure_id": "SUPD",
-        "keywords": [
-          "Statins",
-          "Diabetes",
-          "HEDIS 2024",
-          "Cholesterol Management",
-          "Lipid Control",
-          "Preventive Care"
-        ],
-        "description": "The percentage of members 40-75 years old who were dispensed at least two diabetes medication fills and received a statin medication fill during the measurement period.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "40-75 years",
-        "denominator_exclusions": [
-          "Cirrhosis",
-          "Hospice",
-          "End-stage renal disease (ESRD)",
-          "Pregnancy",
-          "Lactation",
-          "Fertility medication use",
-          "Pre-diabetes",
-          "Polycystic ovary syndrome (PCOS)",
-          "Myopathy, Myositis, Rhabdomyolysis"
-        ],
-        "methods_to_close_gap": [
-          "Ensure patients receiving diabetes medications are also prescribed a statin"
-        ],
-        "best_practices": [
-          "Identify diabetes patients who are not currently on a statin",
-          "Discuss benefits of statins in preventing cardiovascular disease",
-          "Encourage adherence and refill compliance"
-        ]
-      },
-      "Adult Immunization Status: Influenza": {
-        "measure_id": "AIS-E",
-        "keywords": [
-          "Influenza Vaccine",
-          "Immunization",
-          "Preventive Care",
-          "Flu Shot",
-          "HEDIS 2024",
-          "Adult Vaccination"
-        ],
-        "description": "The percentage of members 22 years of age and older who are up to date on recommended routine influenza vaccines.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement period"
-        ],
-        "methods_to_close_gap": [
-          "Ensure influenza vaccination is given between July 1 of the prior year and June 30 of the measurement year"
-        ],
-        "best_practices": [
-          "Encourage annual flu vaccination in all eligible adults",
-          "Use standing orders for flu shots in clinical settings",
-          "Offer vaccinations at convenient locations such as pharmacies and workplaces"
-        ]
-      },
-      "Adult Immunization Status: Tdap": {
-        "measure_id": "AIS-E",
-        "keywords": [
-          "Tdap Vaccine",
-          "Tetanus",
-          "Diphtheria",
-          "Pertussis",
-          "Immunization",
-          "HEDIS 2024",
-          "Preventive Care"
-        ],
-        "description": "The percentage of members 22 years of age and older who are up to date on recommended routine tetanus and diphtheria (Td) or tetanus, diphtheria, and acellular pertussis (Tdap) vaccines.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement period"
-        ],
-        "methods_to_close_gap": [
-          "Ensure at least one Td or Tdap vaccine within the past 9 years"
-        ],
-        "best_practices": [
-          "Promote routine Td or Tdap vaccination during annual checkups",
-          "Educate patients on the importance of maintaining immunity against pertussis",
-          "Offer vaccinations in convenient settings such as pharmacies"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Avoidance of Treatment for Acute Bronchitis/Bronchiolitis": {
-        "measure_id": "AAB",
-        "keywords": [
-          "Bronchitis",
-          "Bronchiolitis",
-          "Antibiotic Stewardship",
-          "Upper Respiratory Infection",
-          "HEDIS 2024",
-          "Acute Respiratory Infection",
-          "Infectious Disease"
-        ],
-        "description": "The percentage of episodes for members 22 years and older with a diagnosis of acute bronchitis/bronchiolitis that did not result in an antibiotic dispensing event.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22 years and older",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Inpatient stay",
-          "Comorbid condition within 365 days prior",
-          "Competing diagnosis on or 3 days after episode date",
-          "Antibiotic prescription 30 days prior or active on episode date"
-        ],
-        "methods_to_close_gap": [
-          "No antibiotic prescription unless there is a comorbid or competing diagnosis"
-        ],
-        "best_practices": [
-          "Educate patients about the risks of unnecessary antibiotics",
-          "Explain viral vs. bacterial infections",
-          "Recommend symptom relief such as fluids, rest, and monitoring symptoms",
-          "Submit appropriate comorbid or competing diagnosis codes when applicable"
-        ]
-      },
-      "Blood Pressure Control for Patients with Diabetes": {
-        "measure_id": "BPD",
-        "keywords": [
-          "Diabetes",
-          "Hypertension",
-          "Blood Pressure Management",
-          "Cardiovascular Risk",
-          "HEDIS 2024",
-          "Endocrinology",
-          "Primary Care"
-        ],
-        "description": "The percentage of members 22–75 years of age with diabetes (types 1 and 2) whose blood pressure (BP) was adequately controlled (<140/90 mm Hg) during the measurement year.",
-        "measurement_period": "January 1, 2024 - December 31, 2024",
-        "ages": "22-75 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Frailty and advanced illness in members 66+ years"
-        ],
-        "methods_to_close_gap": [
-          "Ensure last recorded BP is <140/90 mm Hg",
-          "Use lowest systolic and diastolic values from multiple readings on same date"
-        ],
-        "best_practices": [
-          "Educate patients on diet, exercise, and lifestyle factors affecting BP",
-          "Encourage medication adherence",
-          "Ensure accurate BP measurements by rechecking if elevated initially",
-          "Refer patients to chronic disease management programs"
-        ]
-      },
-      "Concurrent Use of Opioids and Benzodiazepines": {
-        "measure_id": "COB",
-        "keywords": [
-          "Opioids",
-          "Benzodiazepines",
-          "Medication Safety",
-          "Substance Use",
-          "HEDIS 2024",
-          "Pain Management",
-          "Pharmacy"
-        ],
-        "description": "The percentage of individuals 22 years of age and older who did not have concurrent use of prescription opioids and benzodiazepines.",
-        "measurement_period": "January 1, 2024 - December 2, 2024",
-        "ages": "22 years and older",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Cancer diagnosis",
-          "Sickle cell disease",
-          "Palliative care"
-        ],
-        "methods_to_close_gap": [
-          "No concurrent opioid and benzodiazepine use for ≥30 cumulative days"
-        ],
-        "best_practices": [
-          "Consider alternatives to benzodiazepines if the patient is already on opioids",
-          "Assess whether tapering is clinically appropriate and individualize tapering plans",
-          "Limit dose and duration if new therapy is necessary",
-          "Prioritize gradual discontinuation for long-term users of both medication classes"
-        ]
-      }
-    }
-  },
-  {
-    "conditions": {
-      "Osteoporosis Management in Women Who Had a Fracture": {
-        "measure_id": "OMW",
-        "keywords": [
-          "Osteoporosis",
-          "Fracture",
-          "Bone Mineral Density",
-          "Bisphosphonates",
-          "HEDIS 2024",
-          "Women's Health",
-          "Geriatric Care"
-        ],
-        "description": "The percentage of women 67–85 years of age who suffered a fracture and who had either a bone mineral density (BMD) test or prescription for a drug to treat osteoporosis in the 180 days (six months) after the fracture.",
-        "measurement_period": "July 1, 2023 - June 30, 2024",
-        "ages": "Women 67-85 years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Death during the measurement year",
-          "Palliative care",
-          "Frailty and advanced illness in members 67+ years",
-          "Recent bone mineral density test (within 730 days)",
-          "Previous osteoporosis medication therapy (within 365 days)"
-        ],
-        "methods_to_close_gap": [
-          "Ensure BMD test or osteoporosis treatment within 180 days post-fracture"
-        ],
-        "best_practices": [
-          "Encourage lifestyle changes to reduce fracture risk (e.g., smoking cessation, fall prevention)",
-          "Ensure women with fractures receive a BMD test or osteoporosis treatment promptly",
-          "Educate patients on the importance of osteoporosis management and fracture prevention"
-        ]
-      },
-      "Polypharmacy: Use of Multiple Anticholinergic Medications in Older Adults": {
-        "measure_id": "POLY-ACH",
-        "keywords": [
-          "Polypharmacy",
-          "Anticholinergic Medications",
-          "Geriatrics",
-          "Medication Safety",
-          "HEDIS 2024",
-          "Cognitive Impairment",
-          "Beers Criteria"
-        ],
-        "description": "The percentage of individuals ≥65 years of age who do not have concurrent use of ≥2 unique anticholinergic medications.",
-        "measurement_period": "January 1, 2024 - December 2, 2024",
-        "ages": "65+ years",
-        "denominator_exclusions": [
-          "Hospice services"
-        ],
-        "methods_to_close_gap": [
-          "No concurrent use for ≥30 cumulative days of ≥2 unique anticholinergic medications"
-        ],
-        "best_practices": [
-          "Limit use of multiple anticholinergic medications in older adults",
-          "Evaluate patient medication lists for potential deprescribing opportunities",
-          "Monitor for cognitive decline and anticholinergic burden in elderly patients"
-        ]
-      },
-      "Polypharmacy: Use of Multiple CNS-Active Medications in Older Adults": {
-        "measure_id": "POLY-CNS",
-        "keywords": [
-          "Polypharmacy",
-          "CNS Medications",
-          "Benzodiazepines",
-          "Antidepressants",
-          "Opioids",
-          "HEDIS 2024",
-          "Geriatric Psychiatry"
-        ],
-        "description": "The percentage of individuals ≥65 years of age who do not have concurrent use of ≥3 unique central-nervous system (CNS)-active medications.",
-        "measurement_period": "January 1, 2024 - December 2, 2024",
-        "ages": "65+ years",
-        "denominator_exclusions": [
-          "Hospice services",
-          "Seizure disorder"
-        ],
-        "methods_to_close_gap": [
-          "No concurrent use for ≥30 cumulative days of ≥3 unique CNS-active medications"
-        ],
-        "best_practices": [
-          "Limit use of multiple CNS-active medications in older adults",
-          "Prioritize gradual discontinuation when possible",
-          "Consider non-pharmacologic alternatives for sleep and anxiety management"
-        ]
-      }
+  "conditions": {
+    "Antidepressant Medication Management": {
+      "measure_id": "AMM",
+      "keywords": [
+        "Antidepressant",
+        "Major Depression",
+        "Medication Adherence",
+        "Mental Health",
+        "HEDIS 2024",
+        "Medication Management",
+        "Depression Treatment",
+        "Pharmacotherapy"
+      ],
+      "description": "The percentage of members 22 years of age and older who were treated with antidepressant medication, had a diagnosis of major depression and who remained on an antidepressant medication treatment for at least 180 days (6 months).",
+      "measurement_period": "May 1, 2023 - April 30, 2024",
+      "ages": "22 years and older",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "No major depression diagnosis within 121 days of IPSD",
+        "Antidepressant medication dispensed 105 days prior to IPSD"
+      ],
+      "methods_to_close_gap": [
+        "At least 180 days of continuous antidepressant medication treatment",
+        "Allowable gaps of up to 52 days for medication change or refill delays"
+      ],
+      "best_practices": [
+        "Encourage patients to report side effects before stopping medication",
+        "Schedule follow-ups within the first six months",
+        "Educate patients on medication effects and adherence"
+      ]
+    },
+    "Pharyngitis Treatment": {
+      "measure_id": "CWP",
+      "keywords": [
+        "Pharyngitis",
+        "Group A Streptococcus",
+        "Antibiotics",
+        "Strep Test",
+        "Respiratory Infection",
+        "HEDIS 2024",
+        "Throat Infection",
+        "Bacterial Pharyngitis"
+      ],
+      "description": "The percentage of episodes for members 22 years and older where the member was diagnosed with pharyngitis, dispensed an antibiotic, and received a group A streptococcus (strep) test.",
+      "measurement_period": "January 1, 2024 - December 28, 2024",
+      "ages": "22 years and older",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "No antibiotics dispensed within 3 days of diagnosis",
+        "Inpatient stay after diagnosis",
+        "Comorbid condition history within 12 months",
+        "Competing diagnosis within 3 days of episode"
+      ],
+      "methods_to_close_gap": [
+        "Group A streptococcus test within 7-day period around diagnosis"
+      ],
+      "best_practices": [
+        "Perform strep test before prescribing antibiotics",
+        "Educate patients on viral vs. bacterial infections",
+        "Discuss risks of antibiotic overuse and resistance"
+      ]
+    },
+    "Upper Respiratory Infection (URI) Treatment": {
+      "measure_id": "URI",
+      "keywords": [
+        "Upper Respiratory Infection",
+        "URI",
+        "Antibiotics",
+        "Cold and Flu",
+        "HEDIS 2024",
+        "Viral Infection",
+        "Sinus Infection",
+        "Bronchitis"
+      ],
+      "description": "The percentage of episodes for members 22 years and older with a diagnosis of upper respiratory infection (URI) that did not result in an antibiotic dispensing event.",
+      "measurement_period": "January 1, 2024 - December 28, 2024",
+      "ages": "22 years and older",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Inpatient stay after diagnosis",
+        "Comorbid condition history within 365 days",
+        "Competing diagnosis within 3 days of episode",
+        "Antibiotic prescription within 30 days prior"
+      ],
+      "methods_to_close_gap": [
+        "No antibiotic prescribed unless a comorbid/competing diagnosis is present"
+      ],
+      "best_practices": [
+        "Educate patients on unnecessary antibiotic risks",
+        "Promote hygiene and handwashing",
+        "Explain symptom management for viral infections",
+        "Submit comorbid/competing diagnosis codes when applicable"
+      ]
+    },
+    "Asthma Medication Ratio": {
+      "measure_id": "AMR",
+      "keywords": [
+        "Asthma",
+        "Controller Medications",
+        "Reliever Medications",
+        "Inhalers",
+        "HEDIS 2024",
+        "Pulmonary Disease",
+        "Respiratory Therapy"
+      ],
+      "description": "The percentage of members 22-64 years of age who were identified as having persistent asthma and had a ratio of controller medications to total asthma medications of 0.50 or greater during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-64 years",
+      "denominator_exclusions": [
+        "Other respiratory diseases requiring different treatment",
+        "No asthma controller or reliever medications dispensed",
+        "Hospice services",
+        "Death during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a medication ratio of ≥0.50 by increasing controller medication usage"
+      ],
+      "best_practices": [
+        "Update prescriptions with dosage changes for future refills",
+        "Develop an asthma care plan with the patient",
+        "Identify and avoid asthma triggers",
+        "Monitor symptom control and inhaler use at each visit",
+        "Encourage 90-day fills and automatic refills for controller medications"
+      ]
+    },
+    "Breast Cancer Screening": {
+      "measure_id": "BCS-E",
+      "keywords": [
+        "Breast Cancer",
+        "Mammogram",
+        "Cancer Screening",
+        "Preventive Care",
+        "HEDIS 2024",
+        "Women's Health",
+        "Early Detection"
+      ],
+      "description": "The percentage of members 50-74 years of age who were recommended for routine breast cancer screening and had a mammogram.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "50-74 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Bilateral mastectomy",
+        "Gender-affirming chest surgery",
+        "Advanced illness and frailty in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one mammogram within the last two years"
+      ],
+      "best_practices": [
+        "Use reminders to discuss screening every two years",
+        "Offer flexible scheduling for mammograms",
+        "Schedule appointments while patients are in-office",
+        "Send invitation letters and reminder calls",
+        "Address logistical barriers such as transportation and childcare"
+      ]
+    },
+    "Cervical Cancer Screening": {
+      "measure_id": "CCS",
+      "keywords": [
+        "Cervical Cancer",
+        "Pap Smear",
+        "HPV Testing",
+        "Preventive Care",
+        "HEDIS 2024",
+        "Women's Health",
+        "Cancer Screening"
+      ],
+      "description": "The percentage of members 22-64 years of age who were recommended for routine cervical cancer screening and were screened using cervical cytology or HPV testing.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-64 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Hysterectomy with no residual cervix",
+        "Cervical agenesis or absence of cervix",
+        "Assigned male at birth"
+      ],
+      "methods_to_close_gap": [
+        "Ensure cervical cytology every three years or HPV testing every five years"
+      ],
+      "best_practices": [
+        "Use EMRs to track due/overdue screenings",
+        "Perform Pap testing in PCP office when possible",
+        "Encourage routine gynecologic visits",
+        "Frame screening as routine preventive care"
+      ]
+    },
+    "Chlamydia Screening in Women": {
+      "measure_id": "CHL",
+      "keywords": [
+        "Chlamydia",
+        "Sexually Transmitted Infections",
+        "STI Screening",
+        "Preventive Health",
+        "HEDIS 2024",
+        "Women's Health",
+        "Reproductive Health"
+      ],
+      "description": "The percentage of women 22-24 years of age who were identified as sexually active and had at least one test for chlamydia during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-24 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Pregnancy test with isotretinoin or X-ray within 6 days"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one chlamydia test during the measurement year"
+      ],
+      "best_practices": [
+        "Promote routine screening beginning at age 16",
+        "Normalize chlamydia screening as standard care",
+        "Offer in-office urine testing to improve completion rates",
+        "Educate patients on untreated chlamydia complications",
+        "Ensure correct coding to minimize patient out-of-pocket costs"
+      ]
+    },
+    "Colorectal Cancer Screening": {
+      "measure_id": "COL-E",
+      "keywords": [
+        "Colorectal Cancer",
+        "Cancer Screening",
+        "Colon Cancer",
+        "Colonoscopy",
+        "HEDIS 2024",
+        "Preventive Care",
+        "Gastroenterology"
+      ],
+      "description": "The percentage of members 45–75 years of age who had appropriate screening for colorectal cancer.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "46-75 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Colorectal cancer history",
+        "Total colectomy",
+        "Advanced illness and frailty in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one colorectal cancer screening within the appropriate timeframe"
+      ],
+      "best_practices": [
+        "Offer multiple screening options (colonoscopy, FIT, sDNA test)",
+        "Use EHR reminders to identify overdue patients",
+        "Schedule colonoscopy while patients are in-office",
+        "Provide FIT kits with clear instructions and return deadlines",
+        "Follow up with patients who have not completed their screening"
+      ]
+    },
+    "Controlling High Blood Pressure": {
+      "measure_id": "CBP",
+      "keywords": [
+        "Hypertension",
+        "Blood Pressure Control",
+        "Cardiovascular Health",
+        "HEDIS 2024",
+        "Heart Disease",
+        "Lifestyle Management",
+        "Preventive Care"
+      ],
+      "description": "The percentage of members 22–85 years of age who had a diagnosis of hypertension (HTN) and whose blood pressure (BP) was adequately controlled (<140/90 mm Hg) during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-85 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "End-stage renal disease (ESRD)",
+        "Dialysis, nephrectomy, or kidney transplant",
+        "Pregnancy",
+        "Advanced illness and frailty in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure the most recent BP reading is <140/90 mm Hg"
+      ],
+      "best_practices": [
+        "Educate patients on diet, exercise, and lifestyle factors affecting BP",
+        "Encourage medication adherence",
+        "Recheck BP after patient has rested in the clinic",
+        "Refer to care management for chronic disease support",
+        "Use EHR alerts for patients with uncontrolled BP"
+      ]
+    },
+    "Eye Exam for Patients with Diabetes": {
+      "measure_id": "EED",
+      "keywords": [
+        "Diabetes",
+        "Diabetic Retinopathy",
+        "Eye Exam",
+        "Ophthalmology",
+        "HEDIS 2024",
+        "Vision Screening",
+        "Endocrinology"
+      ],
+      "description": "The percentage of members 22-75 years of age with diabetes (types 1 and 2) who had a retinal eye exam.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-75 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Advanced illness and frailty in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a retinal or dilated eye exam within the measurement period"
+      ],
+      "best_practices": [
+        "Educate patients on the importance of annual eye exams",
+        "Provide on-site retinal screenings where possible",
+        "Develop referral partnerships with eye care providers",
+        "Use patient reminders via text, email, or phone",
+        "Submit negative exam results from the prior year to close gaps"
+      ]
+    },
+    "Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions": {
+      "measure_id": "FMC",
+      "keywords": [
+        "Emergency Department",
+        "Chronic Conditions",
+        "Care Coordination",
+        "Follow-Up Care",
+        "HEDIS 2024",
+        "Case Management",
+        "Preventive Health"
+      ],
+      "description": "The percentage of emergency department (ED) visits for members 22 years of age and older who have multiple high-risk chronic conditions and had a follow-up service within 7 days of the ED visit.",
+      "measurement_period": "January 1, 2024 - December 24, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "ED visits resulting in inpatient admission"
+      ],
+      "methods_to_close_gap": [
+        "Ensure follow-up service within 7 days after an ED visit"
+      ],
+      "best_practices": [
+        "Develop processes to identify patients in the ED",
+        "Encourage patients to notify PCP after ED discharge",
+        "Use case management for transition-of-care coordination",
+        "Follow up with patients through phone, telehealth, or office visits",
+        "Use EHR tracking to ensure timely follow-up care"
+      ]
+    },
+    "Glycemic Status Assessment for Patients With Diabetes": {
+      "measure_id": "GSD",
+      "keywords": [
+        "Diabetes",
+        "Hemoglobin A1c",
+        "Glucose Management Indicator",
+        "Blood Sugar Control",
+        "HEDIS 2024",
+        "Endocrinology",
+        "Chronic Disease Management"
+      ],
+      "description": "The percentage of members 22-75 years of age with diabetes (types 1 and 2) whose most recent glycemic status (hemoglobin A1c [HbA1c] or glucose management indicator [GMI]) was at the appropriate level during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-75 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Advanced illness and frailty in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure HbA1c < 8.0% for Commercial, Medicaid, and Marketplace members",
+        "Ensure HbA1c < 9.0% for Medicare members"
+      ],
+      "best_practices": [
+        "Submit CPT II codes or upload results where no lab feed exists",
+        "Identify members needing self-management education",
+        "Encourage engagement with a certified diabetes educator",
+        "Monitor and adjust medications to maintain glycemic control"
+      ]
+    },
+    "Kidney Health Evaluation for Patients with Diabetes": {
+      "measure_id": "KED",
+      "keywords": [
+        "Diabetes",
+        "Kidney Disease",
+        "Chronic Kidney Disease",
+        "eGFR",
+        "Urine Albumin-Creatinine Ratio",
+        "Nephrology",
+        "HEDIS 2024"
+      ],
+      "description": "The percentage of members 22–85 years of age with diabetes (type 1 and type 2) who received a kidney health evaluation, defined by an estimated glomerular filtration rate (eGFR) and a urine albumin-creatinine ratio (uACR), during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-85 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Dialysis history",
+        "End-stage renal disease (ESRD)",
+        "Advanced illness and frailty in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure both an eGFR and a uACR test during the measurement year"
+      ],
+      "best_practices": [
+        "Provide on-site urine specimen collection",
+        "Use clinical decision support tools for adherence tracking",
+        "Educate patients on diabetes and kidney health management",
+        "Encourage early intervention to prevent kidney disease progression"
+      ]
+    },
+    "Medication Adherence for Cholesterol (Statins)": {
+      "measure_id": "CMA",
+      "keywords": [
+        "Cholesterol",
+        "Statins",
+        "Lipid Management",
+        "Cardiovascular Health",
+        "HEDIS 2024",
+        "Pharmacy",
+        "Preventive Care"
+      ],
+      "description": "The percentage of plan members with a prescription for a cholesterol medication (a statin drug) who fill their prescription often enough to cover 80 percent or more of the time they are supposed to be taking the medication.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice enrollment",
+        "End-stage renal disease (ESRD) diagnosis or dialysis coverage"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
+      ],
+      "best_practices": [
+        "Encourage patients to use UPMC ID cards for statin prescriptions",
+        "Promote 100-day prescription fills for Medicare members",
+        "Ensure pharmacies receive updated prescriptions with dosage changes",
+        "Encourage automatic refills and medication adherence tools (e.g., pillboxes)"
+      ]
+    },
+    "Medication Adherence for Diabetes": {
+      "measure_id": "DMA",
+      "keywords": [
+        "Diabetes",
+        "Medication Adherence",
+        "Glycemic Control",
+        "Chronic Disease Management",
+        "HEDIS 2024",
+        "Endocrinology",
+        "Pharmacy"
+      ],
+      "description": "The percentage of plan members with a prescription for diabetes medication who fill their prescription often enough to cover 80 percent or more of the time they are supposed to be taking the medication.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice enrollment",
+        "End-stage renal disease (ESRD) diagnosis or dialysis coverage",
+        "Insulin prescriptions"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
+      ],
+      "best_practices": [
+        "Encourage patients to use UPMC ID cards for diabetes medications",
+        "Promote 100-day prescription fills for Medicare members",
+        "Ensure pharmacy updates prescriptions for dose or instruction changes",
+        "Educate patients on the importance of adherence to diabetes medications",
+        "Use automatic refills and patient engagement strategies"
+      ]
+    },
+    "Medication Adherence for Hypertension (RAS Antagonist)": {
+      "measure_id": "HMA",
+      "keywords": [
+        "Hypertension",
+        "RAS Antagonist",
+        "Blood Pressure Medication",
+        "ACE Inhibitors",
+        "ARB Medications",
+        "HEDIS 2024",
+        "Pharmacy"
+      ],
+      "description": "The percentage of plan members with a prescription for a blood pressure medication who fill their prescription often enough to cover 80 percent or more of the time they are supposed to be taking the medication.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice enrollment",
+        "End-stage renal disease (ESRD) diagnosis or dialysis coverage",
+        "One or more prescriptions for sacubitril/valsartan"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
+      ],
+      "best_practices": [
+        "Encourage 100-day prescription fills for Medicare members",
+        "Ensure pharmacy updates prescriptions for dose or instruction changes",
+        "Promote automatic refills and adherence tools",
+        "Use preferred pharmacies for better medication adherence tracking"
+      ]
+    },
+    "Medication Reconciliation Post-Discharge": {
+      "measure_id": "TRC",
+      "keywords": [
+        "Medication Reconciliation",
+        "Hospital Discharge",
+        "Transitional Care",
+        "Medication Safety",
+        "HEDIS 2024",
+        "Post-Discharge Follow-Up"
+      ],
+      "description": "The percentage of discharges for members 22 years of age and older who had documentation of medication reconciliation on the date of discharge through 30 days after discharge (31 total days).",
+      "measurement_period": "January 1, 2024 - December 1, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure medication reconciliation by a prescribing practitioner, pharmacist, PA, or nurse within 30 days post-discharge"
+      ],
+      "best_practices": [
+        "Develop a process for completing medication reconciliation for all hospital discharge patients",
+        "Use telephonic or face-to-face medication reviews",
+        "Encourage patients to bring all medications to post-discharge visits",
+        "Address financial or adherence barriers to medication access"
+      ]
+    },
+    "Patient Engagement After Inpatient Discharge": {
+      "measure_id": "TRC",
+      "keywords": [
+        "Post-Discharge Follow-Up",
+        "Patient Engagement",
+        "Hospital Readmission Prevention",
+        "Care Coordination",
+        "HEDIS 2024",
+        "Telehealth"
+      ],
+      "description": "The percentage of discharges for members 22 years of age and older who had documentation of patient engagement (e.g., office visits, home visits, telehealth) provided within 30 days after discharge.",
+      "measurement_period": "January 1, 2024 - December 1, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure patient engagement through outpatient visits, telephone visits, e-visits, or virtual check-ins within 30 days post-discharge"
+      ],
+      "best_practices": [
+        "Utilize ADT reports to identify patients needing follow-up",
+        "Conduct outreach for patients without a scheduled follow-up within two weeks",
+        "Offer telehealth or virtual check-ins if transportation is a barrier",
+        "Address patient concerns regarding treatment, medications, and symptoms"
+      ]
+    },
+    "Pharmacotherapy Management of COPD – Bronchodilator": {
+      "measure_id": "PCE",
+      "keywords": [
+        "COPD",
+        "Bronchodilators",
+        "Lung Disease",
+        "Pulmonary Medicine",
+        "HEDIS 2024",
+        "Chronic Disease Management"
+      ],
+      "description": "The percentage of COPD exacerbations for members 40 years of age and older who had an acute inpatient discharge or ED visit and were dispensed a bronchodilator within 30 days.",
+      "measurement_period": "January 1, 2024 - November 30, 2024",
+      "ages": "40+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a bronchodilator prescription is dispensed within 30 days of a COPD-related hospital or ED visit"
+      ],
+      "best_practices": [
+        "Follow up with COPD patients within 5 days of discharge",
+        "Ensure medication adherence for post-discharge COPD treatment",
+        "Educate patients on inhaler techniques and adherence",
+        "Encourage smoking cessation and lifestyle modifications"
+      ]
+    },
+    "Plan All-Cause Readmissions": {
+      "measure_id": "PCR",
+      "keywords": [
+        "Hospital Readmissions",
+        "Quality Improvement",
+        "Care Transitions",
+        "Acute Care",
+        "HEDIS 2024",
+        "Medicare"
+      ],
+      "description": "The number of acute inpatient and observation stays during the measurement year that were followed by an unplanned acute readmission for any diagnosis within 30 days.",
+      "measurement_period": "January 1, 2024 - December 1, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the hospital stay",
+        "Pregnancy-related admissions",
+        "Perinatal condition-related admissions"
+      ],
+      "methods_to_close_gap": [
+        "Prevent readmissions through proper discharge planning and post-hospital follow-up"
+      ],
+      "best_practices": [
+        "Utilize ADT reports to identify recently discharged patients needing follow-up",
+        "Ensure timely follow-up visits post-discharge",
+        "Address common causes of readmission such as medication issues and symptom management",
+        "Educate patients on when to seek primary care versus emergency care"
+      ]
+    },
+    "Statin Therapy for Patients with Cardiovascular Disease": {
+      "measure_id": "SPC",
+      "keywords": [
+        "Statins",
+        "Cardiovascular Disease",
+        "Atherosclerotic Cardiovascular Disease",
+        "Lipid Management",
+        "HEDIS 2024",
+        "Cholesterol Control",
+        "Heart Disease"
+      ],
+      "description": "The percentage of males 22-75 years old and females 40-75 years old during the measurement year who were identified as having clinical atherosclerotic cardiovascular disease (ASCVD) and who were dispensed at least one high-intensity or moderate-intensity statin medication during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "Males 22-75 years, Females 40-75 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Pregnancy",
+        "End-stage renal disease (ESRD)",
+        "Dialysis",
+        "Cirrhosis",
+        "Myopathy, Myositis, Myalgia, or Rhabdomyolysis"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one dispensing event for a high-intensity or moderate-intensity statin medication"
+      ],
+      "best_practices": [
+        "Prescribe a statin for secondary prevention in ASCVD patients",
+        "Educate providers on appropriate exclusions",
+        "Assess patient adherence and barriers to compliance",
+        "Consider rechallenging patients with statin intolerance using alternative dosing"
+      ]
+    },
+    "Statin Therapy for Patients with Diabetes": {
+      "measure_id": "SPD",
+      "keywords": [
+        "Statins",
+        "Diabetes",
+        "Cholesterol Management",
+        "Lipid Control",
+        "HEDIS 2024",
+        "Cardiovascular Risk Reduction"
+      ],
+      "description": "The percentage of members 40-75 years of age during the measurement year with diabetes who do not have clinical atherosclerotic cardiovascular disease (ASCVD) and who were dispensed at least one statin medication of any intensity during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "40-75 years",
+      "denominator_exclusions": [
+        "Myopathy, Myositis, Myalgia, or Rhabdomyolysis",
+        "Pregnancy",
+        "End-stage renal disease (ESRD)",
+        "Cirrhosis",
+        "Hospice services",
+        "Death during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one dispensing event for a high-, moderate-, or low-intensity statin medication"
+      ],
+      "best_practices": [
+        "Prescribe statins to all patients with diabetes ages 40-75 per ADA/AHA guidelines",
+        "Address adherence barriers and encourage medication refills",
+        "Utilize formularies that offer statins at no cost-share where applicable"
+      ]
+    },
+    "Statin Use in Persons with Diabetes": {
+      "measure_id": "SUPD",
+      "keywords": [
+        "Statins",
+        "Diabetes",
+        "HEDIS 2024",
+        "Cholesterol Management",
+        "Lipid Control",
+        "Preventive Care"
+      ],
+      "description": "The percentage of members 40-75 years old who were dispensed at least two diabetes medication fills and received a statin medication fill during the measurement period.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "40-75 years",
+      "denominator_exclusions": [
+        "Cirrhosis",
+        "Hospice",
+        "End-stage renal disease (ESRD)",
+        "Pregnancy",
+        "Lactation",
+        "Fertility medication use",
+        "Pre-diabetes",
+        "Polycystic ovary syndrome (PCOS)",
+        "Myopathy, Myositis, Rhabdomyolysis"
+      ],
+      "methods_to_close_gap": [
+        "Ensure patients receiving diabetes medications are also prescribed a statin"
+      ],
+      "best_practices": [
+        "Identify diabetes patients who are not currently on a statin",
+        "Discuss benefits of statins in preventing cardiovascular disease",
+        "Encourage adherence and refill compliance"
+      ]
+    },
+    "Adult Immunization Status: Influenza": {
+      "measure_id": "AIS-E",
+      "keywords": [
+        "Influenza Vaccine",
+        "Immunization",
+        "Preventive Care",
+        "Flu Shot",
+        "HEDIS 2024",
+        "Adult Vaccination"
+      ],
+      "description": "The percentage of members 22 years of age and older who are up to date on recommended routine influenza vaccines.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement period"
+      ],
+      "methods_to_close_gap": [
+        "Ensure influenza vaccination is given between July 1 of the prior year and June 30 of the measurement year"
+      ],
+      "best_practices": [
+        "Encourage annual flu vaccination in all eligible adults",
+        "Use standing orders for flu shots in clinical settings",
+        "Offer vaccinations at convenient locations such as pharmacies and workplaces"
+      ]
+    },
+    "Adult Immunization Status: Tdap": {
+      "measure_id": "AIS-E",
+      "keywords": [
+        "Tdap Vaccine",
+        "Tetanus",
+        "Diphtheria",
+        "Pertussis",
+        "Immunization",
+        "HEDIS 2024",
+        "Preventive Care"
+      ],
+      "description": "The percentage of members 22 years of age and older who are up to date on recommended routine tetanus and diphtheria (Td) or tetanus, diphtheria, and acellular pertussis (Tdap) vaccines.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement period"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one Td or Tdap vaccine within the past 9 years"
+      ],
+      "best_practices": [
+        "Promote routine Td or Tdap vaccination during annual checkups",
+        "Educate patients on the importance of maintaining immunity against pertussis",
+        "Offer vaccinations in convenient settings such as pharmacies"
+      ]
+    },
+    "Avoidance of Treatment for Acute Bronchitis/Bronchiolitis": {
+      "measure_id": "AAB",
+      "keywords": [
+        "Bronchitis",
+        "Bronchiolitis",
+        "Antibiotic Stewardship",
+        "Upper Respiratory Infection",
+        "HEDIS 2024",
+        "Acute Respiratory Infection",
+        "Infectious Disease"
+      ],
+      "description": "The percentage of episodes for members 22 years and older with a diagnosis of acute bronchitis/bronchiolitis that did not result in an antibiotic dispensing event.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22 years and older",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Inpatient stay",
+        "Comorbid condition within 365 days prior",
+        "Competing diagnosis on or 3 days after episode date",
+        "Antibiotic prescription 30 days prior or active on episode date"
+      ],
+      "methods_to_close_gap": [
+        "No antibiotic prescription unless there is a comorbid or competing diagnosis"
+      ],
+      "best_practices": [
+        "Educate patients about the risks of unnecessary antibiotics",
+        "Explain viral vs. bacterial infections",
+        "Recommend symptom relief such as fluids, rest, and monitoring symptoms",
+        "Submit appropriate comorbid or competing diagnosis codes when applicable"
+      ]
+    },
+    "Blood Pressure Control for Patients with Diabetes": {
+      "measure_id": "BPD",
+      "keywords": [
+        "Diabetes",
+        "Hypertension",
+        "Blood Pressure Management",
+        "Cardiovascular Risk",
+        "HEDIS 2024",
+        "Endocrinology",
+        "Primary Care"
+      ],
+      "description": "The percentage of members 22–75 years of age with diabetes (types 1 and 2) whose blood pressure (BP) was adequately controlled (<140/90 mm Hg) during the measurement year.",
+      "measurement_period": "January 1, 2024 - December 31, 2024",
+      "ages": "22-75 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Frailty and advanced illness in members 66+ years"
+      ],
+      "methods_to_close_gap": [
+        "Ensure last recorded BP is <140/90 mm Hg",
+        "Use lowest systolic and diastolic values from multiple readings on same date"
+      ],
+      "best_practices": [
+        "Educate patients on diet, exercise, and lifestyle factors affecting BP",
+        "Encourage medication adherence",
+        "Ensure accurate BP measurements by rechecking if elevated initially",
+        "Refer patients to chronic disease management programs"
+      ]
+    },
+    "Concurrent Use of Opioids and Benzodiazepines": {
+      "measure_id": "COB",
+      "keywords": [
+        "Opioids",
+        "Benzodiazepines",
+        "Medication Safety",
+        "Substance Use",
+        "HEDIS 2024",
+        "Pain Management",
+        "Pharmacy"
+      ],
+      "description": "The percentage of individuals 22 years of age and older who did not have concurrent use of prescription opioids and benzodiazepines.",
+      "measurement_period": "January 1, 2024 - December 2, 2024",
+      "ages": "22 years and older",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Cancer diagnosis",
+        "Sickle cell disease",
+        "Palliative care"
+      ],
+      "methods_to_close_gap": [
+        "No concurrent opioid and benzodiazepine use for ≥30 cumulative days"
+      ],
+      "best_practices": [
+        "Consider alternatives to benzodiazepines if the patient is already on opioids",
+        "Assess whether tapering is clinically appropriate and individualize tapering plans",
+        "Limit dose and duration if new therapy is necessary",
+        "Prioritize gradual discontinuation for long-term users of both medication classes"
+      ]
+    },
+    "Osteoporosis Management in Women Who Had a Fracture": {
+      "measure_id": "OMW",
+      "keywords": [
+        "Osteoporosis",
+        "Fracture",
+        "Bone Mineral Density",
+        "Bisphosphonates",
+        "HEDIS 2024",
+        "Women's Health",
+        "Geriatric Care"
+      ],
+      "description": "The percentage of women 67–85 years of age who suffered a fracture and who had either a bone mineral density (BMD) test or prescription for a drug to treat osteoporosis in the 180 days (six months) after the fracture.",
+      "measurement_period": "July 1, 2023 - June 30, 2024",
+      "ages": "Women 67-85 years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Death during the measurement year",
+        "Palliative care",
+        "Frailty and advanced illness in members 67+ years",
+        "Recent bone mineral density test (within 730 days)",
+        "Previous osteoporosis medication therapy (within 365 days)"
+      ],
+      "methods_to_close_gap": [
+        "Ensure BMD test or osteoporosis treatment within 180 days post-fracture"
+      ],
+      "best_practices": [
+        "Encourage lifestyle changes to reduce fracture risk (e.g., smoking cessation, fall prevention)",
+        "Ensure women with fractures receive a BMD test or osteoporosis treatment promptly",
+        "Educate patients on the importance of osteoporosis management and fracture prevention"
+      ]
+    },
+    "Polypharmacy: Use of Multiple Anticholinergic Medications in Older Adults": {
+      "measure_id": "POLY-ACH",
+      "keywords": [
+        "Polypharmacy",
+        "Anticholinergic Medications",
+        "Geriatrics",
+        "Medication Safety",
+        "HEDIS 2024",
+        "Cognitive Impairment",
+        "Beers Criteria"
+      ],
+      "description": "The percentage of individuals ≥65 years of age who do not have concurrent use of ≥2 unique anticholinergic medications.",
+      "measurement_period": "January 1, 2024 - December 2, 2024",
+      "ages": "65+ years",
+      "denominator_exclusions": [
+        "Hospice services"
+      ],
+      "methods_to_close_gap": [
+        "No concurrent use for ≥30 cumulative days of ≥2 unique anticholinergic medications"
+      ],
+      "best_practices": [
+        "Limit use of multiple anticholinergic medications in older adults",
+        "Evaluate patient medication lists for potential deprescribing opportunities",
+        "Monitor for cognitive decline and anticholinergic burden in elderly patients"
+      ]
+    },
+    "Polypharmacy: Use of Multiple CNS-Active Medications in Older Adults": {
+      "measure_id": "POLY-CNS",
+      "keywords": [
+        "Polypharmacy",
+        "CNS Medications",
+        "Benzodiazepines",
+        "Antidepressants",
+        "Opioids",
+        "HEDIS 2024",
+        "Geriatric Psychiatry"
+      ],
+      "description": "The percentage of individuals ≥65 years of age who do not have concurrent use of ≥3 unique central-nervous system (CNS)-active medications.",
+      "measurement_period": "January 1, 2024 - December 2, 2024",
+      "ages": "65+ years",
+      "denominator_exclusions": [
+        "Hospice services",
+        "Seizure disorder"
+      ],
+      "methods_to_close_gap": [
+        "No concurrent use for ≥30 cumulative days of ≥3 unique CNS-active medications"
+      ],
+      "best_practices": [
+        "Limit use of multiple CNS-active medications in older adults",
+        "Prioritize gradual discontinuation when possible",
+        "Consider non-pharmacologic alternatives for sleep and anxiety management"
+      ]
     }
   }
-  
-        
-  
-  
-  
+}
