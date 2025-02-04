@@ -122,7 +122,7 @@
     // First Pass: Collect Relevant Guideline IDs Using GPT‑3.5
     // ----------------------------------------------------
 async function getRelevantMeasureIDs(query) {
-  // Iterate over medicalData.conditions instead of medicalData.
+  // We'll create a reduced JSON object from medicalData.conditions.
   const reducedData = Object.keys(medicalData.conditions).reduce((acc, key) => {
     acc[key] = {
       measure_id: medicalData.conditions[key].measure_id,
@@ -131,27 +131,28 @@ async function getRelevantMeasureIDs(query) {
     return acc;
   }, {});
 
+  // Revised prompt:
   const firstPassPrompt = [
     {
       role: "system",
-      content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. Please check every guideline in the JSON. For each guideline that is relevant to the user's query, output its measure ID enclosed in double square brackets (e.g., [[BCS-E]]). If a guideline is not relevant, do not output anything for it. If no guidelines are relevant, output an empty list []. Output only the measure IDs in the following format, one per line."
+      content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. The user query may contain a specific keyword. For each guideline in the JSON, if any of its keywords (case-insensitive) contain the word 'mammogram' or are clearly related (for example, if the guideline is about breast cancer screening), then output its measure_id enclosed in double square brackets (e.g., [[BCS-E]]). Output one measure id per line. If none of the guidelines are relevant, output an empty list []. Do not output any additional text."
     },
     {
       role: "user",
-      content: `User Query: "${query}"\n\nMedical Guidelines JSON (only keys and keywords):\n${JSON.stringify(reducedData, null, 2)}`
+      content: `User Query: "${query}"\n\nMedical Guidelines JSON (only keys, measure_id, and keywords):\n${JSON.stringify(reducedData, null, 2)}`
     }
   ];
 
-  // Log the prompt being sent:
+  // Log the prompt
   console.log("First Pass Prompt Sent to GPT-3.5:", JSON.stringify(firstPassPrompt, null, 2));
 
   // Call the OpenAI API
   const gpt35Response = await callOpenAI(firstPassPrompt, "gpt-3.5-turbo");
 
-  // Log the raw GPT-3.5 response before parsing
+  // Log the raw response
   console.log("Raw GPT-3.5 Response:", gpt35Response);
 
-  // Use regex to extract all occurrences of measure IDs enclosed in double square brackets.
+  // Use a regex to extract measure IDs enclosed in [[ ... ]]
   const idRegex = /\[\[([^\]]+)\]\]/g;
   let match;
   const relevantIDs = [];
@@ -160,7 +161,6 @@ async function getRelevantMeasureIDs(query) {
   }
 
   console.log("Extracted Relevant IDs:", relevantIDs);
-
   if (relevantIDs.length === 0) {
     console.error("No measure IDs found in GPT-3.5 response.");
   }
