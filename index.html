@@ -140,8 +140,14 @@
     }
   ];
 
+  // Log the prompt being sent:
+  console.log("First Pass Prompt Sent to GPT-3.5:", JSON.stringify(firstPassPrompt, null, 2));
+
+  // Call the OpenAI API
   const gpt35Response = await callOpenAI(firstPassPrompt, "gpt-3.5-turbo");
-  console.log("Raw GPT-3.5 response:", gpt35Response);
+  
+  // Log the raw GPT-3.5 response before parsing
+  console.log("Raw GPT-3.5 Response:", gpt35Response);
 
   // Use regex to extract all occurrences of measure IDs enclosed in double square brackets.
   const idRegex = /\[\[([^\]]+)\]\]/g;
@@ -151,12 +157,15 @@
     relevantIDs.push(match[1].trim());
   }
 
+  console.log("Extracted Relevant IDs:", relevantIDs);
+
   if (relevantIDs.length === 0) {
     console.error("No measure IDs found in GPT-3.5 response.");
   }
 
   return relevantIDs;
 }
+
 
     // ----------------------------------------------------
     // Second Pass: Answer the Query Using GPT‑4
