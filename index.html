@@ -45,12 +45,10 @@
 
   <script>
     // ----------------------------------------------------
-    // API Key Decryption & Code Verification (Base Code)
+    // API Key Decryption & Code Verification
     // ----------------------------------------------------
-    // Encrypted API Key (replace with your own encrypted string)
     const encryptedAPIKey = `JOzvSNtkCCIZX8YFcGL4/cWSwC9pyDKTstx3bLRwvAEllzQRMaH+bVk0gYBnp6XNsedYU98XZGCetlJfsCRUAQ==`;
     let apiKey = null;
-
     function unlockFeatures(decryptionKey) {
       if (!decryptionKey) {
         document.getElementById('result').innerText = "Decryption key not found.";
@@ -64,7 +62,6 @@
         });
         const decryptedAPIKey = decryptedAPIKeyBytes.toString(CryptoJS.enc.Utf8);
         if (!decryptedAPIKey) throw new Error("Incorrect decryption key for API key.");
-
         apiKey = decryptedAPIKey;
         document.getElementById('result').innerText = "Verification successful. You can now use the application.";
         document.getElementById('queryInput').disabled = false;
@@ -75,15 +72,12 @@
         document.getElementById('result').innerText = "Failed to decrypt API key. Please try again.";
       }
     }
-
     async function getVerificationCode() {
       const userCode = document.getElementById('userCode').value.trim();
       try {
-        // Use your working verification endpoint
         const response = await fetch('https://verifycode-u7nxzgzwjq-uc.a.run.app/?code=' + userCode);
         if (!response.ok) throw new Error("Failed to verify the code");
         const result = await response.json();
-
         if (result.message === "Code verified!") {
           localStorage.setItem('userCode', userCode);
           document.getElementById('result').innerText = "Code verified successfully!";
@@ -101,7 +95,6 @@
     // ----------------------------------------------------
     // Load Medical Guidelines JSON Data from rules.json
     // ----------------------------------------------------
-    // Instead of an inline definition, we fetch the JSON from an adjacent file.
     let medicalData = {};
     fetch('rules.json')
       .then(response => {
@@ -119,129 +112,123 @@
       });
 
     // ----------------------------------------------------
-    // First Pass: Collect Relevant Guideline IDs Using GPT‑3.5
+    // First Pass: Process guidelines in chunks with GPT-3.5
     // ----------------------------------------------------
-async function getRelevantMeasureIDs(query) {
-  // Convert the conditions object into an array of guideline entries.
-  const guidelinesArray = Object.entries(medicalData.conditions).map(([title, guideline]) => ({
-    title: title,
-    measure_id: guideline.measure_id,
-    // Join the keywords for easier display (you could also keep them as an array)
-    keywords: guideline.keywords.join(', ')
-  }));
+    async function getRelevantMeasureIDs(query) {
+      // Convert the conditions object to an array.
+      const guidelinesArray = Object.entries(medicalData.conditions).map(([title, guideline]) => ({
+        title: title,
+        measure_id: guideline.measure_id,
+        keywords: guideline.keywords.join(', ')
+      }));
 
-  // Parameters for chunking and parallel calls
-  const chunkSize = 5; // How many guidelines per GPT-3.5 call (adjust as needed)
-  const maxParallelCalls = 3; // Maximum parallel GPT-3.5 calls
-  const chunks = [];
-  for (let i = 0; i < guidelinesArray.length; i += chunkSize) {
-    chunks.push(guidelinesArray.slice(i, i + chunkSize));
-  }
-
-  let firstPassCandidates = [];
-
-  // Process chunks in batches with a maximum of maxParallelCalls at a time.
-  for (let i = 0; i < chunks.length; i += maxParallelCalls) {
-    const currentBatch = chunks.slice(i, i + maxParallelCalls);
-    // Create an array of promises for the current batch.
-    const promises = currentBatch.map((batch, batchIndex) => {
-      // Construct a user message for this batch.
-      // Each entry shows its title, measure_id, and keywords.
-      const messageContent =
-        `User Query: "${query}"\n\n` +
-        batch
-          .map(entry =>
-            `Guideline: ${entry.title} (Measure ID: ${entry.measure_id}; Keywords: ${entry.keywords})`
-          )
-          .join('\n');
-
-      // Create the messages for GPT‑3.5.
-      const messages = [
-        {
-          role: "system",
-          content:
-            "You are an AI that selects the most relevant medical guidelines based on the user's query. " +
-            "From the provided list, select the guidelines that are most relevant and respond with the corresponding measure IDs, " +
-            "each enclosed in double square brackets (e.g. [[BCS-E]]), separated by commas. " +
-            "Output only the measure IDs."
-        },
-        { role: "user", content: messageContent }
-      ];
-
-      console.log(`Prompt for batch ${i + batchIndex + 1}:`, JSON.stringify(messages, null, 2));
-
-      // Call GPT-3.5 for this batch.
-      return callOpenAI(messages, "gpt-3.5-turbo");
-    });
-
-    // Wait for the current batch's responses.
-    const results = await Promise.all(promises);
-
-    // Process each result.
-    results.forEach((response, index) => {
-      console.log(`Response from GPT-3.5 (Batch ${i + index + 1}):`, response);
-      // Extract measure IDs enclosed in [[...]]
-      const extractedIDs =
-        response.match(/\[\[([^\]]+)\]\]/g)?.map(match =>
-          match.replace(/\[\[|\]\]/g, '').trim()
-        ) || [];
-
-      // If GPT-3.5 returned nothing for this batch, you might optionally use a backup keyword matcher.
-      if (extractedIDs.length === 0) {
-        console.warn(`No IDs returned from batch ${i + index + 1}; using backup matcher for this batch.`);
-        extractedIDs.push(
-          ...batchKeywordMatcher(currentBatch[index], query)
-        );
+      // Set chunking parameters.
+      const chunkSize = 5; // number of guidelines per GPT-3.5 call
+      const maxParallelCalls = 3; // maximum parallel calls
+      const chunks = [];
+      for (let i = 0; i < guidelinesArray.length; i += chunkSize) {
+        chunks.push(guidelinesArray.slice(i, i + chunkSize));
       }
 
-      console.log(`Extracted IDs from batch ${i + index + 1}:`, extractedIDs);
-      firstPassCandidates = firstPassCandidates.concat(extractedIDs);
-    });
-  }
+      let firstPassCandidates = [];
 
-  // Remove duplicate measure IDs.
-  firstPassCandidates = [...new Set(firstPassCandidates)];
-  console.log("Final relevant measure IDs:", firstPassCandidates);
-  return firstPassCandidates;
-}
+      for (let i = 0; i < chunks.length; i += maxParallelCalls) {
+        const currentBatch = chunks.slice(i, i + maxParallelCalls);
+        const promises = currentBatch.map((batch, batchIndex) => {
+          const messageContent =
+            `User Query: "${query}"\n\n` +
+            batch
+              .map(entry =>
+                `Guideline: ${entry.title} (Measure ID: ${entry.measure_id}; Keywords: ${entry.keywords})`
+              )
+              .join('\n');
 
-// A backup matcher that simply checks if any guideline's keywords (in the batch) appear in the query.
-function batchKeywordMatcher(batchEntry, query) {
-  const matchedIDs = [];
-  const lowerQuery = query.toLowerCase();
-  // Here, batchEntry is one guideline object from the batch.
-  if (batchEntry.keywords.toLowerCase().includes(lowerQuery)) {
-    matchedIDs.push(batchEntry.measure_id);
-  }
-  return matchedIDs;
-}
+          const messages = [
+            {
+              role: "system",
+              content:
+                "You are an AI that selects the most relevant medical guidelines based on the user's query. " +
+                "From the provided list, select the guidelines that are most relevant and respond with the corresponding measure IDs, " +
+                "each enclosed in double square brackets (e.g. [[BCS-E]]), separated by commas. " +
+                "Output only the measure IDs."
+            },
+            { role: "user", content: messageContent }
+          ];
 
+          console.log(`Prompt for batch ${i + batchIndex + 1}:`, JSON.stringify(messages, null, 2));
+          return callOpenAI(messages, "gpt-3.5-turbo");
+        });
+
+        const results = await Promise.all(promises);
+
+        results.forEach((response, index) => {
+          console.log(`Response from GPT-3.5 (Batch ${i + index + 1}):`, response);
+          const extractedIDs =
+            response.match(/\[\[([^\]]+)\]\]/g)?.map(match =>
+              match.replace(/\[\[|\]\]/g, '').trim()
+            ) || [];
+
+          console.log(`Extracted IDs from batch ${i + index + 1}:`, extractedIDs);
+
+          // Fallback: if GPT-3.5 returns nothing for this batch, use simple keyword matching.
+          if (extractedIDs.length === 0) {
+            console.warn(`No IDs from batch ${i + index + 1}; using fallback keyword matching.`);
+            const fallbackIDs = currentBatch[index].filter(entry =>
+              entry.keywords.toLowerCase().includes(query.toLowerCase())
+            ).map(entry => entry.measure_id);
+            console.log(`Fallback IDs for batch ${i + index + 1}:`, fallbackIDs);
+            firstPassCandidates = firstPassCandidates.concat(fallbackIDs);
+          } else {
+            firstPassCandidates = firstPassCandidates.concat(extractedIDs);
+          }
+        });
+      }
+
+      // Remove duplicates.
+      firstPassCandidates = [...new Set(firstPassCandidates)];
+      console.log("Final relevant measure IDs:", firstPassCandidates);
+      return firstPassCandidates;
+    }
 
     // ----------------------------------------------------
-    // Second Pass: Answer the Query Using GPT‑4
+    // Second Pass: Use GPT-4 with relevant guideline JSON segments
     // ----------------------------------------------------
     async function getDetailedAnswer(query, relevantIDs) {
-      // Gather the full JSON segments for each selected guideline.
+      // Build a JSON object of relevant guideline segments from medicalData.conditions.
       const relevantSegments = {};
       relevantIDs.forEach(id => {
-        for (const key in medicalData) {
-          if (medicalData[key].measure_id === id) {
-            relevantSegments[id] = medicalData[key];
+        for (const key in medicalData.conditions) {
+          if (medicalData.conditions[key].measure_id === id) {
+            relevantSegments[id] = medicalData.conditions[key];
             break;
           }
         }
       });
 
+      console.log("Constructed Relevant Segments for GPT-4:", JSON.stringify(relevantSegments, null, 2));
+
+      if (Object.keys(relevantSegments).length === 0) {
+        return "I'm sorry, but I can't provide the help you're looking for without the relevant guideline JSON segments.";
+      }
+
       const detailedPrompt = [
-        { role: "system", content: "You are an AI expert in medical guidelines. Given a user's query and the relevant guideline JSON segments (each identified by its measure_id), provide a concise answer to the query. Then, list the details of each relevant guideline as bullet points. Use the measure_id as the handle for each guideline. The response should include an 'Answer' section and a 'Details' section with bullet points." },
-        { role: "user", content: `User Query: "${query}"\n\nRelevant Guidelines:\n${JSON.stringify(relevantSegments, null, 2)}` }
+        {
+          role: "system",
+          content:
+            "You are an AI expert in medical guidelines. Use the provided JSON object of relevant guideline segments to answer the user's query. Provide a concise answer and then list the details of each relevant guideline as bullet points, using the measure_id as the reference. Do not mention that the JSON is missing."
+        },
+        {
+          role: "user",
+          content: `User Query: "${query}"\n\nRelevant Guidelines:\n${JSON.stringify(relevantSegments, null, 2)}`
+        }
       ];
 
+      console.log("Detailed Prompt Sent to GPT-4:", JSON.stringify(detailedPrompt, null, 2));
       return await callOpenAI(detailedPrompt, "gpt-4");
     }
 
     // ----------------------------------------------------
-    // Process Query: Orchestrates Both Passes
+    // Process Query: Orchestrate both passes
     // ----------------------------------------------------
     async function processQuery() {
       const query = document.getElementById("queryInput").value.trim();
@@ -253,8 +240,7 @@ function batchKeywordMatcher(batchEntry, query) {
         alert("API key not available. Please verify your code.");
         return;
       }
-      // Ensure that medicalData has been loaded
-      if (!Object.keys(medicalData).length) {
+      if (!medicalData.conditions || !Object.keys(medicalData.conditions).length) {
         alert("Guideline data not loaded yet. Please try again in a moment.");
         return;
       }
@@ -263,25 +249,20 @@ function batchKeywordMatcher(batchEntry, query) {
       document.getElementById("jsonSegments").innerHTML = "";
 
       try {
-        // First pass: get relevant measure IDs based on keywords (via GPT‑3.5)
         const relevantIDs = await getRelevantMeasureIDs(query);
         console.log("Relevant measure IDs:", relevantIDs);
-
         if (relevantIDs.length === 0) {
           document.getElementById("aiOutput").innerHTML = "No relevant guidelines found.";
           return;
         }
-
-        // Second pass: get the detailed answer from GPT‑4 using the full JSON segments.
         const detailedAnswer = await getDetailedAnswer(query, relevantIDs);
         document.getElementById("aiOutput").innerHTML = `<strong>AI Response:</strong><br>${detailedAnswer}`;
 
-        // Also display the relevant JSON segments in bullet-point format.
         let jsonHtml = `<strong>Relevant Guidelines Details:</strong><ul>`;
         relevantIDs.forEach(id => {
-          for (const key in medicalData) {
-            if (medicalData[key].measure_id === id) {
-              const guideline = medicalData[key];
+          for (const key in medicalData.conditions) {
+            if (medicalData.conditions[key].measure_id === id) {
+              const guideline = medicalData.conditions[key];
               jsonHtml += `<li>
                 <strong>${guideline.measure_id}:</strong> ${key}<br>
                 <strong>Description:</strong> ${guideline.description}<br>
