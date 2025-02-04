@@ -121,32 +121,43 @@
     // ----------------------------------------------------
     // First Pass: Collect Relevant Guideline IDs Using GPT‑3.5
     // ----------------------------------------------------
-    async function getRelevantMeasureIDs(query) {
-      // Create a reduced JSON object containing only keys and keywords from the loaded medicalData.
-      const reducedData = Object.keys(medicalData).reduce((acc, key) => {
-        // Assuming the structure in rules.json is similar to your inline data.
-        acc[key] = { measure_id: medicalData[key].measure_id, keywords: medicalData[key].keywords };
-        return acc;
-      }, {});
+   async function getRelevantMeasureIDs(query) {
+  // Create a reduced JSON object containing only keys and keywords from the loaded medicalData.
+  const reducedData = Object.keys(medicalData).reduce((acc, key) => {
+    // Assuming the structure in rules.json is similar to your inline data.
+    acc[key] = { measure_id: medicalData[key].measure_id, keywords: medicalData[key].keywords };
+    return acc;
+  }, {});
 
-      const firstPassPrompt = [
-        { role: "system", content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. Based solely on the user's query, select which guideline measure_ids are most relevant. Return a valid JSON object with a field 'relevant_ids' that is an array of the measure_ids. Do not include any extra text." },
-        { role: "user", content: `User Query: "${query}"\n\nMedical Guidelines JSON (only keys and keywords):\n${JSON.stringify(reducedData, null, 2)}` }
-      ];
-
-      const gpt35Response = await callOpenAI(firstPassPrompt, "gpt-3.5-turbo");
-      try {
-        const parsed = JSON.parse(gpt35Response);
-        if (parsed.relevant_ids && Array.isArray(parsed.relevant_ids)) {
-          return parsed.relevant_ids;
-        } else {
-          throw new Error("Invalid JSON structure returned from GPT-3.5");
-        }
-      } catch (e) {
-        console.error("Error parsing first pass response:", e);
-        return [];
-      }
+  const firstPassPrompt = [
+    {
+      role: "system",
+      content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. Based solely on the user's query, select which guideline measure_ids are most relevant. Return only the relevant measure IDs enclosed in double square brackets (for example, [[AMM]]). Do not include any additional text."
+    },
+    {
+      role: "user",
+      content: `User Query: "${query}"\n\nMedical Guidelines JSON (only keys and keywords):\n${JSON.stringify(reducedData, null, 2)}`
     }
+  ];
+
+  const gpt35Response = await callOpenAI(firstPassPrompt, "gpt-3.5-turbo");
+  console.log("Raw GPT-3.5 response:", gpt35Response);
+
+  // Use regex to extract all occurrences of measure IDs enclosed in double square brackets.
+  const idRegex = /\[\[([^\]]+)\]\]/g;
+  let match;
+  const relevantIDs = [];
+  while ((match = idRegex.exec(gpt35Response)) !== null) {
+    relevantIDs.push(match[1].trim());
+  }
+
+  if (relevantIDs.length === 0) {
+    console.error("No measure IDs found in GPT-3.5 response.");
+  }
+
+  return relevantIDs;
+}
+
 
     // ----------------------------------------------------
     // Second Pass: Answer the Query Using GPT‑4
