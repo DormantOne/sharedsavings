@@ -16,7 +16,7 @@
     h1, h2, h3 {
       margin: 10px 0;
     }
-    /* The details box sits at the top and is hidden by default */
+    /* Details box at the very top (hidden by default) */
     #details {
       border: 1px solid #ccc;
       padding: 15px;
@@ -138,34 +138,38 @@
 <body>
   <div class="container">
     <h1>High Impact Shared Savings</h1>
-    <p>Click one of the buttons below to display the guideline details. The details box (with gap information at the very top) will appear above the buttons. You can collapse the box to clear the screen. Use the "Ask AI" section at the bottom to get exclusion diagnosis codes for use in Epic.</p>
+    <p>Click one of the top‑tier buttons below to display the full guideline details. The details box (with a red Gap Information banner at the very top) will appear above the buttons. You can collapse the box entirely, and there is an option to expand and view all extra details. At the bottom, the "Ask AI" section will compile the exclusion diagnosis codes (separated by "OR") for use in Epic.</p>
 
-    <!-- Details Box (initially hidden) -->
+    <!-- Details Box (hidden by default) -->
     <div id="details">
       <button id="closeDetailsBtn">Close</button>
       <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
       <div id="guidelineDetails">
-        <!-- Main details (bulleted) will appear here -->
+        <!-- Bulleted JSON details will be shown here -->
         <ul>
           <li>Please select a guideline.</li>
         </ul>
       </div>
       <button id="toggleExtraBtn">Show Extra Details</button>
       <div id="extraDetails">
-        <!-- Extra details from JSON (e.g., Best Practices) will appear here -->
-        <p>[Extra details here]</p>
+        <!-- Extra details (e.g., Denominator Exclusions, Best Practices) -->
+        <ul>
+          <li>[Extra details here]</li>
+        </ul>
       </div>
     </div>
 
     <!-- Top-Tier Buttons -->
     <div class="grid-buttons" id="highImpactButtons">
+      <!-- Order: Kidney Eval, Chol Adherence, Statin Use, Statin Diabetes Med Adherence, Readmissions, Adult Immuni, Diabetes, Eye Exam, Colon Screen, Mammogram, HTN, Med Management, Med Rec, Follow Up Visits -->
       <button class="button" data-measure="KED">Kidney Eval</button>
       <button class="button" data-measure="CMA">Chol Adherence</button>
       <button class="button" data-measure="SUPD">Statin Use</button>
+      <button class="button" data-measure="DMA">Med Adherence (Diabetes)</button>
+      <button class="button" data-measure="PCR">Readmissions</button>
       <button class="button" data-measure="AIS-E">Adult Immuni</button>
       <button class="button" data-measure="GSD">Diabetes</button>
       <button class="button" data-measure="EED">Eye Exam</button>
-      <button class="button" data-measure="DMA">Med Adherence (Diabetes)</button>
       <button class="button" data-measure="COL-E">Colon Screen</button>
       <button class="button" data-measure="BCS-E">Mammogram</button>
       <button class="button" data-measure="CBP">HTN</button>
@@ -174,7 +178,7 @@
       <button class="button" data-measure="FMC">Follow Up Visits</button>
     </div>
 
-    <!-- Also Ran Buttons (secondary) -->
+    <!-- Also Ran Buttons (secondary, smaller) -->
     <div class="grid-buttons" id="alsoRanButtons">
       <button class="button small-button" data-measure="CWP">Pharyngitis</button>
       <button class="button small-button" data-measure="URI">Upper Respiratory</button>
@@ -184,15 +188,12 @@
       <button class="button small-button" data-measure="POLY-ACH">Poly ACH</button>
       <button class="button small-button" data-measure="POLY-CNS">Poly CNS</button>
       <button class="button small-button" data-measure="SPD">Statin (Diabetes)</button>
-      <button class="button small-button" data-measure="SUPD">Statin Use (Diabetes)</button>
-      <button class="button small-button" data-measure="DMA">Med Adherence (Diabetes)</button>
-      <button class="button small-button" data-measure="PCR">Readmissions</button>
     </div>
 
     <!-- Ask AI Section -->
     <div id="askAISection">
       <h3>Ask AI for Exclusion Diagnosis Codes</h3>
-      <p>This compiles the exclusion diagnosis codes for the displayed guideline, separated by "OR". Paste the result into Epic to check for exclusions.</p>
+      <p>This compiles the exclusion codes for the displayed guideline, separated by "OR". Paste the result into Epic to check for exclusions.</p>
       <button id="askAIBtn" class="button small-button">Get Exclusion Codes</button>
       <textarea id="exhaustiveQuery" placeholder="Exclusion codes will appear here..." style="display:none;"></textarea>
       <button id="copyQueryBtn" style="display:none;">Copy Query</button>
@@ -237,7 +238,7 @@
       const detailsDiv = document.getElementById("guidelineDetails");
       const extraDiv = document.getElementById("extraDetails");
       if (found) {
-        // Bulleted details at the very top.
+        // Display main bullet points at the very top.
         detailsDiv.innerHTML = `
           <ul>
             <li><strong>Title:</strong> ${found.title}</li>
@@ -247,11 +248,10 @@
             <li><strong>Ages:</strong> ${found.ages}</li>
           </ul>
         `;
-        // Extra details (e.g., Denominator Exclusions, Best Practices) for toggling.
+        // Extra details (denominator exclusions and best practices) in the extra area.
         extraDiv.innerHTML = `
           <ul>
             <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
-            <li><strong>Methods to Close Gap:</strong> ${found.methods_to_close_gap.join('; ')}</li>
             <li><strong>Best Practices:</strong>
               <ul>
                 ${found.best_practices.map(practice => `<li>${practice}</li>`).join('')}
@@ -259,9 +259,9 @@
             </li>
           </ul>
         `;
-        // Ensure details box is visible.
+        // Always display the details box.
         document.getElementById("details").style.display = "block";
-        // Show gap banner with "Methods to Close Gap" at the top.
+        // Set the gap banner using the methods to close gap.
         document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
       } else {
         detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
@@ -270,7 +270,7 @@
       }
     }
 
-    // Toggle the extra details area.
+    // Toggle extra details (show/hide).
     document.getElementById("toggleExtraBtn").addEventListener("click", function() {
       const extraDiv = document.getElementById("extraDetails");
       if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
@@ -285,7 +285,6 @@
     // Close the entire details box.
     document.getElementById("closeDetailsBtn").addEventListener("click", function() {
       document.getElementById("details").style.display = "none";
-      // Optionally, clear the current guideline.
       currentGuideline = null;
     });
 
@@ -294,15 +293,13 @@
       button.addEventListener('click', function() {
         const measureID = this.getAttribute('data-measure');
         displayGuideline(measureID);
-        // Reset extra details toggle text.
-        document.getElementById("toggleExtraBtn").innerText = "Show Extra Details";
         // Hide the exhaustive query area if visible.
         document.getElementById("exhaustiveQuery").style.display = "none";
         document.getElementById("copyQueryBtn").style.display = "none";
       });
     });
 
-    // Ask AI Section: Compile the exclusion diagnosis codes separated by " OR ".
+    // Ask AI Section: Compile exclusion diagnosis codes separated by " OR ".
     document.getElementById("askAIBtn").addEventListener("click", function() {
       if (!currentGuideline || !currentGuideline.denominator_exclusions) {
         alert("No guideline selected or no exclusions available.");
@@ -315,7 +312,7 @@
       document.getElementById("copyQueryBtn").style.display = "block";
     });
 
-    // Copy the exhaustive query text to clipboard.
+    // Copy exhaustive query text to clipboard.
     document.getElementById("copyQueryBtn").addEventListener("click", function() {
       const txtArea = document.getElementById("exhaustiveQuery");
       txtArea.select();
