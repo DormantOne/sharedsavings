@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>High Impact Shared Savings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      margin: 10px 0;
+    }
+    /* The details box is hidden by default */
+    #details {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      margin-bottom: 20px;
+      display: none;
+      position: relative;
+    }
+    /* Red banner for gap information */
+    #gapBanner {
+      background-color: #ffe6e6;
+      color: #a70000;
+      padding: 10px;
+      border: 1px solid #dc3545;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    /* Button to close the details box */
+    #closeDetailsBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    /* Button to toggle extra details */
+    #toggleExtraBtn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    /* Extra details area (hidden by default) */
+    #extraDetails {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #e9ecef;
+      border-radius: 4px;
+    }
+    /* Responsive grid for buttons */
+    .grid-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .button {
+      background-color: #007bff; /* blue */
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .small-button {
+      background-color: #6c757d; /* gray */
+      font-size: 14px;
+      padding: 10px;
+    }
+    /* Ask AI Section styling */
+    #askAISection {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f0f0f0;
+      margin-top: 30px;
+      text-align: center;
+    }
+    #exhaustiveQuery {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      display: none;
+    }
+    #copyQueryBtn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      display: none;
+    }
+    .link-buttons a {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .link-buttons a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>High Impact Shared Savings</h1>
+    <p>Click one of the buttons below to display the full guideline details. The details box (with a red Gap Information banner at the very top) will appear above the buttons. You can collapse the box entirely or expand extra details. At the bottom, the "Ask AI" section will compile the exclusion diagnosis codes for the displayed guideline (to be pasted into your AI search bar).</p>
+
+    <!-- Details Box (hidden by default) -->
+    <div id="details">
+      <button id="closeDetailsBtn">Close</button>
+      <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
+      <div id="guidelineDetails">
+        <ul>
+          <li>Please select a guideline.</li>
+        </ul>
+      </div>
+      <button id="toggleExtraBtn">Show Extra Details</button>
+      <div id="extraDetails">
+        <ul>
+          <li>[Extra details here]</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dynamic Buttons for All Measures -->
+    <div class="grid-buttons" id="allMeasuresButtons">
+      <!-- Buttons will be injected here by JavaScript -->
+    </div>
+
+    <!-- Ask AI Section (for copy-pasting prompt) -->
+    <div id="askAISection">
+      <h3>Ask AI for Exclusion Diagnosis Codes</h3>
+      <p>This will compile the current guideline information into a prompt for you to copy and paste into your AI search bar.</p>
+      <button id="askAIBtn" class="button small-button">Generate AI Prompt</button>
+      <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis prompt will appear here..." style="display:none;"></textarea>
+      <button id="copyQueryBtn" style="display:none;">Copy Prompt</button>
+      <div class="link-buttons">
+        <a href="https://www.openevidence.com/" target="_blank">Open Evidence</a>
+        <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+        <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+        <a href="https://gemini.google.com" target="_blank">Gemini</a>
+        <a href="https://www.deepseek.ai" target="_blank">DeepSeek</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variable to store JSON data and current guideline.
+    let medicalData = {};
+    let currentGuideline = null;
+
+    // Function to decide if a guideline is metabolic.
+    // Now checking for keywords such as "diabetes", "htn", "hypertension", "med adherence", "med compliance", or "glycemic".
+    function isMetabolic(guideline) {
+      const metabolicKeywords = ['diabetes', 'htn', 'hypertension', 'med adherence', 'med compliance', 'glycemic'];
+      return guideline.keywords.some(keyword => {
+        return metabolicKeywords.some(metKey => keyword.toLowerCase().includes(metKey));
+      });
+    }
+
+    // Load guidelines from rules.json.
+    fetch('rules.json')
+      .then(response => {
+        if (!response.ok) throw new Error("Error loading JSON: " + response.statusText);
+        return response.json();
+      })
+      .then(data => {
+        medicalData = data;
+        console.log("Loaded rules.json:", medicalData);
+        generateButtons();
+      })
+      .catch(error => console.error(error));
+
+    // Generate a button for each guideline.
+    function generateButtons() {
+      const container = document.getElementById("allMeasuresButtons");
+      container.innerHTML = ""; // clear if needed
+      const guidelines = medicalData.conditions;
+      for (const title in guidelines) {
+        if (guidelines.hasOwnProperty(title)) {
+          const guideline = guidelines[title];
+          // Create a button.
+          const btn = document.createElement("button");
+          // Set the data-measure attribute to the measure id.
+          btn.setAttribute("data-measure", guideline.measure_id);
+          // Use the guideline title as the button text.
+          btn.textContent = title;
+          // Apply blue (primary) styling if metabolic; otherwise use small-button style.
+          if (isMetabolic(guideline)) {
+            btn.className = "button"; // blue button
+          } else {
+            btn.className = "button small-button"; // gray, smaller button.
+          }
+          // Attach event listener.
+          btn.addEventListener("click", function() {
+            displayGuideline(guideline.measure_id);
+            // Hide the exhaustive query area if visible.
+            document.getElementById("exhaustiveQuery").style.display = "none";
+            document.getElementById("copyQueryBtn").style.display = "none";
+          });
+          container.appendChild(btn);
+        }
+      }
+    }
+
+    // Display guideline details for a given measure ID.
+    function displayGuideline(measureID) {
+      const guidelines = medicalData.conditions;
+      let found = null;
+      for (const key in guidelines) {
+        if (guidelines[key].measure_id === measureID) {
+          found = { title: key, ...guidelines[key] };
+          break;
+        }
+      }
+      currentGuideline = found;
+      const detailsDiv = document.getElementById("guidelineDetails");
+      const extraDiv = document.getElementById("extraDetails");
+      if (found) {
+        detailsDiv.innerHTML = `
+          <ul>
+            <li><strong>Title:</strong> ${found.title}</li>
+            <li><strong>Measure ID:</strong> ${found.measure_id}</li>
+            <li><strong>Description:</strong> ${found.description}</li>
+            <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>
+            <li><strong>Ages:</strong> ${found.ages}</li>
+          </ul>
+        `;
+        extraDiv.innerHTML = `
+          <ul>
+            <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
+            <li><strong>Best Practices:</strong>
+              <ul>
+                ${found.best_practices.map(practice => `<li>${practice}</li>`).join('')}
+              </ul>
+            </li>
+          </ul>
+        `;
+        document.getElementById("details").style.display = "block";
+        document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
+      } else {
+        detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
+        extraDiv.innerHTML = "";
+        document.getElementById("gapBanner").style.display = "none";
+      }
+    }
+
+    // Toggle extra details (show/hide).
+    document.getElementById("toggleExtraBtn").addEventListener("click", function() {
+      const extraDiv = document.getElementById("extraDetails");
+      if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
+        extraDiv.style.display = "block";
+        this.innerText = "Hide Extra Details";
+      } else {
+        extraDiv.style.display = "none";
+        this.innerText = "Show Extra Details";
+      }
+    });
+
+    // Close the entire details box.
+    document.getElementById("closeDetailsBtn").addEventListener("click", function() {
+      document.getElementById("details").style.display = "none";
+      currentGuideline = null;
+    });
+
+    // Ask AI Section: Build the custom prompt and display it for copy-pasting.
+    document.getElementById("askAIBtn").addEventListener("click", function() {
+      if (!currentGuideline) {
+        alert("No guideline selected.");
+        return;
+      }
+      // Build the exclusions string from the current guideline's denominator_exclusions.
+      const exclusions = currentGuideline.denominator_exclusions
+        .map(code => code.trim())
+        .join(' or ');
+      
+      const prompt = `Dear AI, please consider this Medicare shared savings condition:
+Measure ID: ${currentGuideline.measure_id}
+Description: ${currentGuideline.description}
+Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. The exclusions are: ${exclusions}
+Please provide any additional important insights you may have afterward.`;
+      
+      console.log("Ask AI Prompt:", prompt);
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.value = prompt;
+      txtArea.style.display = "block";
+      document.getElementById("copyQueryBtn").style.display = "block";
+    });
+
+    // Copy the generated prompt to the clipboard.
+    document.getElementById("copyQueryBtn").addEventListener("click", function() {
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.select();
+      document.execCommand("copy");
+      alert("Exclusion diagnosis prompt copied to clipboard!");
+    });
+  </script>
+</body>
+</html>
