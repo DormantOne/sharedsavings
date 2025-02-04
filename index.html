@@ -13,19 +13,24 @@
       max-width: 1000px;
       margin: auto;
     }
-    .buttons {
+    h1, h2, h3 {
+      margin: 10px 0;
+    }
+    .grid-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
       margin-bottom: 20px;
     }
     .button {
-      display: inline-block;
       background-color: #007bff;
       color: white;
-      padding: 15px 25px;
-      margin: 5px;
+      padding: 15px;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
-      border-radius: 4px;
+      text-align: center;
       transition: background-color 0.2s ease;
     }
     .button:hover {
@@ -34,36 +39,53 @@
     .small-button {
       background-color: #6c757d;
       font-size: 14px;
-      padding: 10px 20px;
+      padding: 10px;
     }
     #details {
       border: 1px solid #ccc;
       padding: 15px;
       border-radius: 4px;
       background-color: #f8f9fa;
-    }
-    h2 {
-      margin-top: 0;
-    }
-    .guideline {
+      position: relative;
       margin-bottom: 20px;
     }
-    .guideline h3 {
-      margin: 5px 0;
+    #collapseBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
     }
-    .guideline p {
-      margin: 5px 0;
+    #exhaustiveQuery {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+    }
+    #copyQueryBtn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>High Impact Shared Savings</h1>
-    <p>Click one of the high impact buttons to see details, or try the "also ran" options below.</p>
+    <p>Click one of the high impact buttons below to display the guideline details. Then, you can expand the exhaustive diagnostic/exclusion query for use in Epic.</p>
 
     <!-- High Impact Buttons -->
-    <div class="buttons" id="highImpactButtons">
-      <!-- These buttons are hardcoded for now; clicking will display details -->
+    <div class="grid-buttons" id="highImpactButtons">
+      <!-- Top-tier (larger) buttons -->
       <button class="button" data-measure="COL-E">Colon Screen</button>
       <button class="button" data-measure="BCS-E">Mammogram</button>
       <button class="button" data-measure="CBP">HTN</button>
@@ -71,60 +93,66 @@
       <button class="button" data-measure="AMM">Med Management</button>
       <button class="button" data-measure="TRC">Med Rec</button>
       <button class="button" data-measure="FMC">Follow Up Visits</button>
+      <!-- Extra top-tier buttons -->
+      <button class="button" data-measure="SPD">Statins (Diabetes)</button>
+      <button class="button" data-measure="DMA">Med Adherence (Diabetes)</button>
     </div>
 
-    <!-- Also Ran Buttons -->
-    <div class="buttons" id="alsoRanButtons">
-      <!-- For simplicity, we list the remaining measure_ids from the JSON -->
-      <!-- You can adjust these as desired -->
+    <!-- Also Ran Buttons (secondary, smaller) -->
+    <div class="grid-buttons" id="alsoRanButtons">
       <button class="button small-button" data-measure="CWP">Pharyngitis</button>
       <button class="button small-button" data-measure="URI">Upper Respiratory</button>
       <button class="button small-button" data-measure="AMR">Asthma Med Ratio</button>
       <button class="button small-button" data-measure="CCS">Cervical Cancer</button>
-      <button class="button small-button" data-measure="CHL">Chlamydia Screening</button>
+      <button class="button small-button" data-measure="CHL">Chlamydia</button>
       <button class="button small-button" data-measure="EED">Eye Exam (Diabetes)</button>
       <button class="button small-button" data-measure="KED">Kidney Eval</button>
-      <button class="button small-button" data-measure="CMA">Cholesterol Med Adherence</button>
-      <button class="button small-button" data-measure="DMA">Diabetes Med Adherence</button>
-      <button class="button small-button" data-measure="POLY-ACH">Polypharmacy ACH</button>
-      <button class="button small-button" data-measure="POLY-CNS">Polypharmacy CNS</button>
-      <button class="button small-button" data-measure="SPD">Statin (Diabetes)</button>
+      <button class="button small-button" data-measure="CMA">Cholesterol Adherence</button>
       <button class="button small-button" data-measure="SUPD">Statin Use (Diabetes)</button>
       <button class="button small-button" data-measure="AIS-E">Adult Immunization</button>
+      <button class="button small-button" data-measure="POLY-ACH">Poly Ach</button>
+      <button class="button small-button" data-measure="POLY-CNS">Poly CNS</button>
+      <button class="button small-button" data-measure="PCR">Readmissions</button>
     </div>
 
-    <!-- Details Display -->
+    <!-- Guideline Details Display -->
     <div id="details">
+      <button id="collapseBtn">Collapse</button>
       <h2>Guideline Details</h2>
       <div id="guidelineDetails">
         <p>Please click a button above to display the guideline details.</p>
       </div>
+      <h3>Methods to Close Gap</h3>
+      <div id="methodsToClose">
+        <!-- This content can be hard-coded or dynamically generated -->
+        <p>Review the recommended interventions and best practices to ensure guideline adherence.</p>
+      </div>
+    </div>
+
+    <!-- Exhaustive Query Section -->
+    <div id="exhaustiveSection">
+      <button id="expandExhaustiveBtn" class="button small-button">Show Exhaustive Query</button>
+      <textarea id="exhaustiveQuery" style="display:none;" placeholder="Exhaustive diagnostic/exclusion query will appear here..."></textarea>
+      <button id="copyQueryBtn" style="display:none;">Copy Query</button>
     </div>
   </div>
 
   <script>
-    // Global variable to store the guidelines JSON (loaded from rules.json)
+    // Global variable for JSON data
     let medicalData = {};
-
-    // Load the JSON from rules.json
     fetch('rules.json')
       .then(response => {
-        if (!response.ok) {
-          throw new Error("Error loading JSON: " + response.statusText);
-        }
+        if (!response.ok) throw new Error("Error loading JSON: " + response.statusText);
         return response.json();
       })
       .then(data => {
         medicalData = data;
         console.log("Loaded rules.json:", medicalData);
       })
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => console.error(error));
 
-    // Helper function to display guideline details from medicalData
+    // Display guideline details for a given measureID
     function displayGuideline(measureID) {
-      // Find the guideline in medicalData.conditions that matches the measureID.
       const guidelines = medicalData.conditions;
       let found = null;
       for (const key in guidelines) {
@@ -133,7 +161,6 @@
           break;
         }
       }
-
       const detailsDiv = document.getElementById("guidelineDetails");
       if (found) {
         detailsDiv.innerHTML = `
@@ -150,12 +177,59 @@
             </ul>
           </div>
         `;
+        // Also generate an exhaustive query snippet from the guideline
+        generateExhaustiveQuery(found);
       } else {
         detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
       }
     }
 
-    // Add click event listeners to all buttons
+    // Toggle collapse/expand of the details box.
+    document.getElementById("collapseBtn").addEventListener("click", function() {
+      const detailsDiv = document.getElementById("guidelineDetails");
+      if (detailsDiv.style.display === "none") {
+        detailsDiv.style.display = "block";
+        this.innerText = "Collapse";
+      } else {
+        detailsDiv.style.display = "none";
+        this.innerText = "Expand";
+      }
+    });
+
+    // Generate an exhaustive query string based on the guideline's diagnostic codes or exclusions.
+    // This is an example; adjust the content as needed.
+    function generateExhaustiveQuery(guideline) {
+      // Here, we assume that "denominator_exclusions" might represent diagnostic codes or conditions to check.
+      const queryParts = guideline.denominator_exclusions.map(item => item.trim());
+      const exhaustiveText = `For ${guideline.title} (${guideline.measure_id}), check for the following exclusions: ${queryParts.join(' OR ')}.`;
+      const exhaustiveQueryTextarea = document.getElementById("exhaustiveQuery");
+      exhaustiveQueryTextarea.value = exhaustiveText;
+    }
+
+    // Toggle the exhaustive query section
+    document.getElementById("expandExhaustiveBtn").addEventListener("click", function() {
+      const txtArea = document.getElementById("exhaustiveQuery");
+      const copyBtn = document.getElementById("copyQueryBtn");
+      if (txtArea.style.display === "none") {
+        txtArea.style.display = "block";
+        copyBtn.style.display = "block";
+        this.innerText = "Hide Exhaustive Query";
+      } else {
+        txtArea.style.display = "none";
+        copyBtn.style.display = "none";
+        this.innerText = "Show Exhaustive Query";
+      }
+    });
+
+    // Copy exhaustive query text to clipboard
+    document.getElementById("copyQueryBtn").addEventListener("click", function() {
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.select();
+      document.execCommand("copy");
+      alert("Exhaustive query copied to clipboard!");
+    });
+
+    // Attach click event listeners to all buttons (both high impact and also ran)
     document.querySelectorAll('button[data-measure]').forEach(button => {
       button.addEventListener('click', function() {
         const measureID = this.getAttribute('data-measure');
