@@ -16,7 +16,7 @@
     h1, h2, h3 {
       margin: 10px 0;
     }
-    /* Details box at the very top (hidden by default) */
+    /* Details box at the top (hidden by default) */
     #details {
       border: 1px solid #ccc;
       padding: 15px;
@@ -26,7 +26,7 @@
       display: none;
       position: relative;
     }
-    /* Red banner for gap information at the top of the details box */
+    /* Red banner for gap information */
     #gapBanner {
       background-color: #ffe6e6;
       color: #a70000;
@@ -36,7 +36,7 @@
       margin-bottom: 10px;
       font-weight: bold;
     }
-    /* Button to close the entire details box */
+    /* Button to close the details box */
     #closeDetailsBtn {
       position: absolute;
       top: 10px;
@@ -138,14 +138,14 @@
 <body>
   <div class="container">
     <h1>High Impact Shared Savings</h1>
-    <p>Click one of the top‑tier buttons below to display the full guideline details. The details box (with a red Gap Information banner at the very top) will appear above the buttons. You can collapse the box entirely, and there is an option to expand and view all extra details. At the bottom, the "Ask AI" section will compile the exclusion diagnosis codes (separated by "OR") for use in Epic.</p>
+    <p>Click one of the top‑tier buttons below to display the full guideline details. The details box (with a red Gap Information banner at the very top) will appear above the buttons. You can collapse the box entirely, or expand extra details. At the bottom, the "Ask AI" section will compile the exclusion diagnosis codes for the displayed guideline and provide additional insights.</p>
 
     <!-- Details Box (hidden by default) -->
     <div id="details">
       <button id="closeDetailsBtn">Close</button>
       <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
       <div id="guidelineDetails">
-        <!-- Bulleted JSON details will be shown here -->
+        <!-- Bulleted details from JSON will be shown here -->
         <ul>
           <li>Please select a guideline.</li>
         </ul>
@@ -161,7 +161,7 @@
 
     <!-- Top-Tier Buttons -->
     <div class="grid-buttons" id="highImpactButtons">
-      <!-- Order: Kidney Eval, Chol Adherence, Statin Use, Statin Diabetes Med Adherence, Readmissions, Adult Immuni, Diabetes, Eye Exam, Colon Screen, Mammogram, HTN, Med Management, Med Rec, Follow Up Visits -->
+      <!-- Ordered with the additional ones on top -->
       <button class="button" data-measure="KED">Kidney Eval</button>
       <button class="button" data-measure="CMA">Chol Adherence</button>
       <button class="button" data-measure="SUPD">Statin Use</button>
@@ -193,9 +193,14 @@
     <!-- Ask AI Section -->
     <div id="askAISection">
       <h3>Ask AI for Exclusion Diagnosis Codes</h3>
-      <p>This compiles the exclusion codes for the displayed guideline, separated by "OR". Paste the result into Epic to check for exclusions.</p>
-      <button id="askAIBtn" class="button small-button">Get Exclusion Codes</button>
-      <textarea id="exhaustiveQuery" placeholder="Exclusion codes will appear here..." style="display:none;"></textarea>
+      <p>This will send the current guideline information to AI with the following prompt:<br>
+      <em>"Dear AI, please consider this Medicare shared savings condition:<br>
+      Measure ID: [ID]<br>
+      Description: [Description]<br>
+      Please find the diagnosis codes for the exclusions and give them as numbers separated by 'or' so that I can put them into a search bar. Please provide any additional important insights you may have afterward."</em>
+      </p>
+      <button id="askAIBtn" class="button small-button">Ask AI</button>
+      <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis codes and insights will appear here..." style="display:none;"></textarea>
       <button id="copyQueryBtn" style="display:none;">Copy Query</button>
       <div class="link-buttons">
         <a href="https://www.openaccessgovernment.org/evidence" target="_blank">Open Evidence</a>
@@ -248,7 +253,7 @@
             <li><strong>Ages:</strong> ${found.ages}</li>
           </ul>
         `;
-        // Extra details (denominator exclusions and best practices) in the extra area.
+        // Extra details for toggling.
         extraDiv.innerHTML = `
           <ul>
             <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
@@ -259,9 +264,9 @@
             </li>
           </ul>
         `;
-        // Always display the details box.
+        // Ensure the details box is visible.
         document.getElementById("details").style.display = "block";
-        // Set the gap banner using the methods to close gap.
+        // Set the gap banner using methods to close gap.
         document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
       } else {
         detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
@@ -282,7 +287,7 @@
       }
     });
 
-    // Close the entire details box.
+    // Close the details box completely.
     document.getElementById("closeDetailsBtn").addEventListener("click", function() {
       document.getElementById("details").style.display = "none";
       currentGuideline = null;
@@ -293,32 +298,71 @@
       button.addEventListener('click', function() {
         const measureID = this.getAttribute('data-measure');
         displayGuideline(measureID);
-        // Hide the exhaustive query area if visible.
+        // Hide the Ask AI results if visible.
         document.getElementById("exhaustiveQuery").style.display = "none";
         document.getElementById("copyQueryBtn").style.display = "none";
       });
     });
 
-    // Ask AI Section: Compile exclusion diagnosis codes separated by " OR ".
-    document.getElementById("askAIBtn").addEventListener("click", function() {
-      if (!currentGuideline || !currentGuideline.denominator_exclusions) {
-        alert("No guideline selected or no exclusions available.");
+    // Ask AI Section: Call AI with a custom prompt.
+    document.getElementById("askAIBtn").addEventListener("click", async function() {
+      if (!currentGuideline) {
+        alert("No guideline selected.");
         return;
       }
-      const codes = currentGuideline.denominator_exclusions.map(code => code.trim()).join(' OR ');
+      const promptMessages = [
+        {
+          role: "system",
+          content: "You are an AI assistant knowledgeable about Medicare shared savings conditions."
+        },
+        {
+          role: "user",
+          content: `Dear AI, please consider this Medicare shared savings condition:\n
+Measure ID: ${currentGuideline.measure_id}\n
+Description: ${currentGuideline.description}\n
+Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. Please provide any additional important insights you may have afterward.`
+        }
+      ];
+      // Call the OpenAI API (using GPT-4 for a more detailed response).
+      const result = await callOpenAI(promptMessages, "gpt-4");
       const txtArea = document.getElementById("exhaustiveQuery");
-      txtArea.value = codes;
+      txtArea.value = result;
       txtArea.style.display = "block";
       document.getElementById("copyQueryBtn").style.display = "block";
     });
 
-    // Copy exhaustive query text to clipboard.
+    // Copy the exhaustive query text to clipboard.
     document.getElementById("copyQueryBtn").addEventListener("click", function() {
       const txtArea = document.getElementById("exhaustiveQuery");
       txtArea.select();
       document.execCommand("copy");
       alert("Exclusion diagnosis query copied to clipboard!");
     });
+
+    // Function to call the OpenAI API.
+    async function callOpenAI(messages, model) {
+      if (!apiKey) {
+        throw new Error("API key not available. Please verify your code.");
+      }
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: messages,
+          temperature: 0.2,
+          max_tokens: 500
+        })
+      });
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error.message);
+      }
+      return data.choices[0].message.content;
+    }
   </script>
 </body>
 </html>
