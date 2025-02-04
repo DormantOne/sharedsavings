@@ -16,7 +16,7 @@
     h1, h2, h3 {
       margin: 10px 0;
     }
-    /* Details box at the top (hidden by default) */
+    /* The details box is hidden by default */
     #details {
       border: 1px solid #ccc;
       padding: 15px;
@@ -145,14 +145,12 @@
       <button id="closeDetailsBtn">Close</button>
       <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
       <div id="guidelineDetails">
-        <!-- Bulleted details from JSON will be shown here -->
         <ul>
           <li>Please select a guideline.</li>
         </ul>
       </div>
       <button id="toggleExtraBtn">Show Extra Details</button>
       <div id="extraDetails">
-        <!-- Extra details (e.g., Denominator Exclusions, Best Practices) -->
         <ul>
           <li>[Extra details here]</li>
         </ul>
@@ -194,11 +192,10 @@
     <div id="askAISection">
       <h3>Ask AI for Exclusion Diagnosis Codes</h3>
       <p>This will send the current guideline information to AI with the following prompt:<br>
-      <em>"Dear AI, please consider this Medicare shared savings condition:<br>
+      <em>Dear AI, please consider this Medicare shared savings condition:<br>
       Measure ID: [ID]<br>
       Description: [Description]<br>
-      Please find the diagnosis codes for the exclusions and give them as numbers separated by 'or' so that I can put them into a search bar. Please provide any additional important insights you may have afterward."</em>
-      </p>
+      Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. Please provide any additional important insights you may have afterward.</em></p>
       <button id="askAIBtn" class="button small-button">Ask AI</button>
       <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis codes and insights will appear here..." style="display:none;"></textarea>
       <button id="copyQueryBtn" style="display:none;">Copy Query</button>
@@ -213,7 +210,7 @@
   </div>
 
   <script>
-    // Global variable for JSON data and current guideline.
+    // Global variables for JSON data and current guideline.
     let medicalData = {};
     let currentGuideline = null;
 
@@ -253,7 +250,7 @@
             <li><strong>Ages:</strong> ${found.ages}</li>
           </ul>
         `;
-        // Extra details for toggling.
+        // Extra details for toggling (e.g., Denominator Exclusions and Best Practices).
         extraDiv.innerHTML = `
           <ul>
             <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
@@ -264,9 +261,8 @@
             </li>
           </ul>
         `;
-        // Ensure the details box is visible.
         document.getElementById("details").style.display = "block";
-        // Set the gap banner using methods to close gap.
+        // Set the gap banner text from the methods to close gap.
         document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
       } else {
         detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
@@ -287,7 +283,7 @@
       }
     });
 
-    // Close the details box completely.
+    // Close the entire details box.
     document.getElementById("closeDetailsBtn").addEventListener("click", function() {
       document.getElementById("details").style.display = "none";
       currentGuideline = null;
@@ -304,12 +300,19 @@
       });
     });
 
-    // Ask AI Section: Call AI with a custom prompt.
+    // Ask AI Section: Build the custom prompt using the current guideline data.
     document.getElementById("askAIBtn").addEventListener("click", async function() {
       if (!currentGuideline) {
         alert("No guideline selected.");
         return;
       }
+      // Build the exclusions string (as numbers separated by "or"). 
+      // (Assuming the denominator_exclusions contain numbers or diagnostic codes.)
+      const exclusions = currentGuideline.denominator_exclusions
+        .map(code => code.trim())
+        .join(' or ');
+      
+      // Build the custom prompt.
       const promptMessages = [
         {
           role: "system",
@@ -317,21 +320,28 @@
         },
         {
           role: "user",
-          content: `Dear AI, please consider this Medicare shared savings condition:\n
-Measure ID: ${currentGuideline.measure_id}\n
-Description: ${currentGuideline.description}\n
-Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. Please provide any additional important insights you may have afterward.`
+          content: `Dear AI, please consider this Medicare shared savings condition:\n` +
+                   `Measure ID: ${currentGuideline.measure_id}\n` +
+                   `Description: ${currentGuideline.description}\n` +
+                   `Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. ` +
+                   `The exclusions are: ${exclusions}\n` +
+                   `Please provide any additional important insights you may have afterward.`
         }
       ];
-      // Call the OpenAI API (using GPT-4 for a more detailed response).
-      const result = await callOpenAI(promptMessages, "gpt-4");
-      const txtArea = document.getElementById("exhaustiveQuery");
-      txtArea.value = result;
-      txtArea.style.display = "block";
-      document.getElementById("copyQueryBtn").style.display = "block";
+      console.log("Ask AI Prompt:", JSON.stringify(promptMessages, null, 2));
+      try {
+        const result = await callOpenAI(promptMessages, "gpt-4");
+        const txtArea = document.getElementById("exhaustiveQuery");
+        txtArea.value = result;
+        txtArea.style.display = "block";
+        document.getElementById("copyQueryBtn").style.display = "block";
+      } catch (error) {
+        console.error("Error calling AI:", error);
+        alert("There was an error getting the AI response.");
+      }
     });
 
-    // Copy the exhaustive query text to clipboard.
+    // Copy the exhaustive query to the clipboard.
     document.getElementById("copyQueryBtn").addEventListener("click", function() {
       const txtArea = document.getElementById("exhaustiveQuery");
       txtArea.select();
