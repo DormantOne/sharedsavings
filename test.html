@@ -76,6 +76,7 @@
       gap: 10px;
       margin-bottom: 20px;
     }
+    /* Default blue button (for metabolic measures) */
     .button {
       background-color: #007bff; /* blue */
       color: white;
@@ -90,10 +91,50 @@
     .button:hover {
       background-color: #0056b3;
     }
+    /* Red button (for cancer prevention) */
+    .red-button {
+      background-color: #dc3545;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .red-button:hover {
+      background-color: #a71d2a;
+    }
+    /* Teal button (for administrative measures) */
+    .teal-button {
+      background-color: #20c997;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .teal-button:hover {
+      background-color: #1aa179;
+    }
+    /* Small gray button (for other measures) */
     .small-button {
       background-color: #6c757d; /* gray */
       font-size: 14px;
       padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .small-button:hover {
+      background-color: #5a6268;
     }
     /* Ask AI Section styling */
     #askAISection {
@@ -133,6 +174,15 @@
     .link-buttons a:hover {
       background-color: #0056b3;
     }
+    /* Category headers */
+    .category-header {
+      grid-column: 1 / -1;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 5px 0;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 5px;
+    }
   </style>
 </head>
 <body>
@@ -157,16 +207,14 @@
       </div>
     </div>
 
-    <!-- Dynamic Buttons for All Measures -->
-    <div class="grid-buttons" id="allMeasuresButtons">
-      <!-- Buttons will be injected here by JavaScript -->
-    </div>
+    <!-- Buttons will be injected here by JavaScript -->
+    <div class="grid-buttons" id="allMeasuresButtons"></div>
 
     <!-- Ask AI Section (for copy-pasting prompt) -->
     <div id="askAISection">
       <h3>Ask AI for Exclusion Diagnosis Codes</h3>
       <p>This will compile the current guideline information into a prompt for you to copy and paste into your AI search bar.</p>
-      <button id="askAIBtn" class="button small-button">Generate AI Prompt</button>
+      <button id="askAIBtn" class="small-button">Generate AI Prompt</button>
       <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis prompt will appear here..." style="display:none;"></textarea>
       <button id="copyQueryBtn" style="display:none;">Copy Prompt</button>
       <div class="link-buttons">
@@ -180,16 +228,112 @@
   </div>
 
   <script>
-    // Global variable to store JSON data and current guideline.
+    // Global variable to store JSON data and the current guideline.
     let medicalData = {};
     let currentGuideline = null;
 
-    // Function to decide if a guideline is metabolic.
-    // Now checking for keywords such as "diabetes", "htn", "hypertension", "med adherence", "med compliance", or "glycemic".
-    function isMetabolic(guideline) {
-      const metabolicKeywords = ['diabetes', 'htn', 'hypertension', 'med adherence', 'med compliance', 'glycemic'];
-      return guideline.keywords.some(keyword => {
-        return metabolicKeywords.some(metKey => keyword.toLowerCase().includes(metKey));
+    // Mapping arrays for each category.
+    // Each object contains the display name and the measure ID.
+    // (In cases where the measure ID is duplicated, additional disambiguation is handled in displayGuideline.)
+    const metabolicMeasures = [
+      { displayName: "DM BP Control", measureId: "BPD" },
+      { displayName: "DM Eye Exam", measureId: "EED" },
+      { displayName: "DM Kidney Evaluation", measureId: "KED" },
+      { displayName: "DM Medication Adherence", measureId: "DMA" },
+      { displayName: "DM Glycemic Control", measureId: "GSD" },
+      { displayName: "DM Statin Use", measureId: "SUPD" },
+      { displayName: "BP Control", measureId: "CBP" },
+      { displayName: "Statin Adherence", measureId: "CMA" },
+      { displayName: "BP Med Adherence", measureId: "HMA" },
+      { displayName: "CV Statin Therapy", measureId: "SPC" }
+    ];
+
+    const cancerMeasures = [
+      { displayName: "Breast Cancer Screen", measureId: "BCS-E" },
+      { displayName: "Cervical Cancer Screen", measureId: "CCS" },
+      { displayName: "Colorectal Screen", measureId: "COL-E" }
+    ];
+
+    const administrativeMeasures = [
+      { displayName: "ED Follow-Up Care", measureId: "FMC" },
+      { displayName: "Discharge Med Reconciliation", measureId: "TRC", type: "Reconciliation" },
+      { displayName: "Post-Discharge Engagement", measureId: "TRC", type: "Engagement" },
+      { displayName: "Readmission Prevention", measureId: "PCR" }
+    ];
+
+    const otherMeasures = [
+      { displayName: "Antidepressant Management", measureId: "AMM" },
+      { displayName: "Pharyngitis Care", measureId: "CWP" },
+      { displayName: "URI Treatment", measureId: "URI" },
+      { displayName: "Asthma Medication", measureId: "AMR" },
+      { displayName: "COPD Management", measureId: "PCE" },
+      { displayName: "Tdap Immunization", measureId: "AIS-E", subtype: "Tdap" },
+      { displayName: "Flu Immunization", measureId: "AIS-E", subtype: "Influenza" },
+      { displayName: "Bronchitis Treatment", measureId: "AAB" },
+      { displayName: "Opioid-Benzo Concurrent Use", measureId: "COB" },
+      { displayName: "Osteoporosis Care", measureId: "OMW" },
+      { displayName: "Anticholinergic Polypharmacy", measureId: "POLY-ACH" },
+      { displayName: "CNS Medication Polypharmacy", measureId: "POLY-CNS" },
+      { displayName: "Chlamydia Screen", measureId: "CHL" }
+    ];
+
+    // Function to generate buttons by category.
+    function generateButtons() {
+      const container = document.getElementById("allMeasuresButtons");
+      container.innerHTML = "";
+
+      // Helper function to create a header for each category.
+      function createHeader(text) {
+        const header = document.createElement("div");
+        header.className = "category-header";
+        header.textContent = text;
+        container.appendChild(header);
+      }
+
+      // Helper function to create a button.
+      function createButton(measure, className) {
+        const btn = document.createElement("button");
+        btn.textContent = measure.displayName;
+        btn.setAttribute("data-measure", measure.measureId);
+        // If a subtype is provided (to differentiate duplicate IDs), attach it as a data attribute.
+        if (measure.subtype) {
+          btn.setAttribute("data-subtype", measure.subtype);
+        }
+        // If type is provided (for disambiguating TRC), attach it.
+        if (measure.type) {
+          btn.setAttribute("data-type", measure.type);
+        }
+        btn.className = className;
+        btn.addEventListener("click", function() {
+          displayGuideline(measure.measureId, this.getAttribute("data-subtype"), this.getAttribute("data-type"));
+          document.getElementById("exhaustiveQuery").style.display = "none";
+          document.getElementById("copyQueryBtn").style.display = "none";
+        });
+        container.appendChild(btn);
+      }
+
+      // Metabolic measures (blue)
+      createHeader("Metabolic/Cardiometabolic Measures");
+      metabolicMeasures.forEach(measure => {
+        createButton(measure, "button");
+      });
+
+      // Cancer Prevention (red)
+      createHeader("Cancer Prevention");
+      cancerMeasures.forEach(measure => {
+        createButton(measure, "red-button");
+      });
+
+      // Administrative (teal)
+      createHeader("Administrative");
+      administrativeMeasures.forEach(measure => {
+        createButton(measure, "teal-button");
+      });
+
+      // Other Measures (gray)
+      createHeader("Other Measures");
+      otherMeasures.forEach(measure => {
+        createButton(measure, "small-button");
       });
     }
 
@@ -206,46 +350,40 @@
       })
       .catch(error => console.error(error));
 
-    // Generate a button for each guideline.
-    function generateButtons() {
-      const container = document.getElementById("allMeasuresButtons");
-      container.innerHTML = ""; // clear if needed
-      const guidelines = medicalData.conditions;
-      for (const title in guidelines) {
-        if (guidelines.hasOwnProperty(title)) {
-          const guideline = guidelines[title];
-          // Create a button.
-          const btn = document.createElement("button");
-          // Set the data-measure attribute to the measure id.
-          btn.setAttribute("data-measure", guideline.measure_id);
-          // Use the guideline title as the button text.
-          btn.textContent = title;
-          // Apply blue (primary) styling if metabolic; otherwise use small-button style.
-          if (isMetabolic(guideline)) {
-            btn.className = "button"; // blue button
-          } else {
-            btn.className = "button small-button"; // gray, smaller button.
-          }
-          // Attach event listener.
-          btn.addEventListener("click", function() {
-            displayGuideline(guideline.measure_id);
-            // Hide the exhaustive query area if visible.
-            document.getElementById("exhaustiveQuery").style.display = "none";
-            document.getElementById("copyQueryBtn").style.display = "none";
-          });
-          container.appendChild(btn);
-        }
-      }
-    }
-
     // Display guideline details for a given measure ID.
-    function displayGuideline(measureID) {
+    // For duplicate measure IDs (like TRC or AIS-E) we optionally check subtype or type.
+    function displayGuideline(measureID, subtype, type) {
       const guidelines = medicalData.conditions;
       let found = null;
+      // Loop through all guidelines.
       for (const key in guidelines) {
-        if (guidelines[key].measure_id === measureID) {
-          found = { title: key, ...guidelines[key] };
-          break;
+        if (guidelines.hasOwnProperty(key)) {
+          const guideline = guidelines[key];
+          if (guideline.measure_id === measureID) {
+            // For duplicate measure IDs, check subtype/type if provided.
+            if (measureID === "TRC" && type) {
+              if (type === "Reconciliation" && guideline.description.includes("medication reconciliation")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+              if (type === "Engagement" && guideline.description.includes("patient engagement")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+            } else if (measureID === "AIS-E" && subtype) {
+              if (subtype === "Tdap" && guideline.description.includes("tetnus") ) {
+                found = { title: key, ...guideline };
+                break;
+              }
+              if (subtype === "Influenza" && guideline.description.includes("influenza")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+            } else {
+              found = { title: key, ...guideline };
+              break;
+            }
+          }
         }
       }
       currentGuideline = found;
@@ -280,7 +418,7 @@
       }
     }
 
-    // Toggle extra details (show/hide).
+    // Toggle extra details.
     document.getElementById("toggleExtraBtn").addEventListener("click", function() {
       const extraDiv = document.getElementById("extraDetails");
       if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
@@ -292,19 +430,18 @@
       }
     });
 
-    // Close the entire details box.
+    // Close the details box.
     document.getElementById("closeDetailsBtn").addEventListener("click", function() {
       document.getElementById("details").style.display = "none";
       currentGuideline = null;
     });
 
-    // Ask AI Section: Build the custom prompt and display it for copy-pasting.
+    // Ask AI Section: Build and display a prompt based on the current guideline.
     document.getElementById("askAIBtn").addEventListener("click", function() {
       if (!currentGuideline) {
         alert("No guideline selected.");
         return;
       }
-      // Build the exclusions string from the current guideline's denominator_exclusions.
       const exclusions = currentGuideline.denominator_exclusions
         .map(code => code.trim())
         .join(' or ');
@@ -322,7 +459,7 @@ Please provide any additional important insights you may have afterward.`;
       document.getElementById("copyQueryBtn").style.display = "block";
     });
 
-    // Copy the generated prompt to the clipboard.
+    // Copy the prompt to the clipboard.
     document.getElementById("copyQueryBtn").addEventListener("click", function() {
       const txtArea = document.getElementById("exhaustiveQuery");
       txtArea.select();
