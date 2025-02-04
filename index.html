@@ -121,18 +121,16 @@
     // ----------------------------------------------------
     // First Pass: Collect Relevant Guideline IDs Using GPT‑3.5
     // ----------------------------------------------------
- async function getRelevantMeasureIDs(query) {
-  // Instead of iterating over medicalData (which has a "conditions" property),
-  // iterate over medicalData.conditions.
+async function getRelevantMeasureIDs(query) {
+  // Iterate over medicalData.conditions instead of medicalData.
   const reducedData = Object.keys(medicalData.conditions).reduce((acc, key) => {
-    acc[key] = { 
-      measure_id: medicalData.conditions[key].measure_id, 
-      keywords: medicalData.conditions[key].keywords 
+    acc[key] = {
+      measure_id: medicalData.conditions[key].measure_id,
+      keywords: medicalData.conditions[key].keywords
     };
     return acc;
   }, {});
 
-  // Modified prompt with explicit instructions:
   const firstPassPrompt = [
     {
       role: "system",
@@ -149,7 +147,7 @@
 
   // Call the OpenAI API
   const gpt35Response = await callOpenAI(firstPassPrompt, "gpt-3.5-turbo");
-  
+
   // Log the raw GPT-3.5 response before parsing
   console.log("Raw GPT-3.5 Response:", gpt35Response);
 
