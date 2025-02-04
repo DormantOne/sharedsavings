@@ -16,6 +16,7 @@
     h1, h2, h3 {
       margin: 10px 0;
     }
+    /* Responsive grid: buttons arranged three per row on larger screens */
     .grid-buttons {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -41,6 +42,7 @@
       font-size: 14px;
       padding: 10px;
     }
+    /* Details box styling */
     #details {
       border: 1px solid #ccc;
       padding: 15px;
@@ -61,15 +63,16 @@
       border-radius: 4px;
       font-size: 14px;
     }
-    /* The Gap Info section appears in red */
+    /* Red Gap Information box just under the description */
     #gapInfo {
       background-color: #ffe6e6;
       border: 1px solid #dc3545;
+      color: #a70000;
       padding: 10px;
       margin: 10px 0;
-      display: none;
+      display: block; /* visible by default */
     }
-    /* Ask AI section styling */
+    /* Ask AI Section styling */
     #askAISection {
       border: 1px solid #ccc;
       padding: 15px;
@@ -112,16 +115,18 @@
 <body>
   <div class="container">
     <h1>High Impact Shared Savings</h1>
-    <p>Click one of the buttons below to display guideline details. Use the gap section to view detailed gap information and then “Ask AI” for diagnostic/exclusion codes if needed.</p>
+    <p>Click one of the top‑tier buttons to display the full guideline details (with gap information). You can then use the "Ask AI" section to get the exclusion diagnosis codes (separated by OR) for use in Epic.</p>
 
-    <!-- High Impact Buttons (top-tier) -->
+    <!-- Top-Tier Buttons -->
     <div class="grid-buttons" id="highImpactButtons">
-      <!-- Re-order these buttons as desired -->
+      <!-- Order of buttons (measure IDs) -->
       <button class="button" data-measure="KED">Kidney Eval</button>
       <button class="button" data-measure="CMA">Chol Adherence</button>
       <button class="button" data-measure="SUPD">Statin Use</button>
       <button class="button" data-measure="AIS-E">Adult Immuni</button>
       <button class="button" data-measure="GSD">Diabetes</button>
+      <button class="button" data-measure="EED">Eye Exam</button>
+      <button class="button" data-measure="DMA">Med Adherence (Diabetes)</button>
       <button class="button" data-measure="COL-E">Colon Screen</button>
       <button class="button" data-measure="BCS-E">Mammogram</button>
       <button class="button" data-measure="CBP">HTN</button>
@@ -130,17 +135,17 @@
       <button class="button" data-measure="FMC">Follow Up Visits</button>
     </div>
 
-    <!-- Also Ran Buttons (secondary) -->
+    <!-- Also Ran Buttons (secondary, smaller) -->
     <div class="grid-buttons" id="alsoRanButtons">
       <button class="button small-button" data-measure="CWP">Pharyngitis</button>
       <button class="button small-button" data-measure="URI">Upper Respiratory</button>
       <button class="button small-button" data-measure="AMR">Asthma Med Ratio</button>
       <button class="button small-button" data-measure="CCS">Cervical Cancer</button>
       <button class="button small-button" data-measure="CHL">Chlamydia</button>
-      <button class="button small-button" data-measure="EED">Eye Exam (Diabetes)</button>
       <button class="button small-button" data-measure="POLY-ACH">Poly ACH</button>
       <button class="button small-button" data-measure="POLY-CNS">Poly CNS</button>
       <button class="button small-button" data-measure="SPD">Statin (Diabetes)</button>
+      <button class="button small-button" data-measure="SUPD">Statin Use (Diabetes)</button>
       <button class="button small-button" data-measure="DMA">Med Adherence (Diabetes)</button>
       <button class="button small-button" data-measure="PCR">Readmissions</button>
     </div>
@@ -148,24 +153,24 @@
     <!-- Guideline Details Display -->
     <div id="details">
       <button id="collapseDetails">Collapse</button>
-      <h2>Guideline Details</h2>
       <div id="guidelineDetails">
+        <!-- This area will show the bulleted JSON details at the very top -->
         <p>Please click a button above to display the guideline details.</p>
       </div>
-      <!-- Gap Information Section (initially hidden) -->
+      <!-- Gap Information (in red, directly under the description) -->
       <div id="gapInfo">
-        <p><strong>Gap Information:</strong> <span id="gapText">[Gap details here]</span></p>
+        <p><strong>Gap Information:</strong> <span id="gapText">[Gap info here]</span></p>
         <button id="hideGapBtn" class="button small-button" style="background-color:#dc3545;">Hide Gap Info</button>
       </div>
     </div>
 
     <!-- Ask AI Section -->
     <div id="askAISection">
-      <h3>Ask AI for Diagnostic/Exclusion Codes</h3>
-      <p>This will compile all the exclusion codes (separated by "or") from the displayed guideline.</p>
-      <button id="askAIBtn" class="button small-button">Ask AI</button>
-      <textarea id="exhaustiveQuery" placeholder="Exhaustive diagnostic/exclusion query will appear here..."></textarea>
-      <button id="copyQueryBtn">Copy Query</button>
+      <h3>Ask AI for Exclusion Diagnosis Codes</h3>
+      <p>This will compile the exclusion diagnosis codes for the displayed guideline, separated by "OR".</p>
+      <button id="askAIBtn" class="button small-button">Get Exclusion Codes</button>
+      <textarea id="exhaustiveQuery" placeholder="Exclusion codes will appear here..." style="display:none;"></textarea>
+      <button id="copyQueryBtn" style="display:none;">Copy Query</button>
       <div class="link-buttons">
         <a href="https://www.openaccessgovernment.org/evidence" target="_blank">Open Evidence</a>
         <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
@@ -177,8 +182,12 @@
   </div>
 
   <script>
-    // Global variable to store the guidelines JSON (loaded from rules.json)
+    // Global variable to store the guidelines JSON
     let medicalData = {};
+    // Global variable to store the currently displayed guideline
+    let currentGuideline = null;
+
+    // Load JSON data from rules.json
     fetch('rules.json')
       .then(response => {
         if (!response.ok) {
@@ -192,7 +201,7 @@
       })
       .catch(error => console.error(error));
 
-    // Helper function to display guideline details from medicalData by measure ID.
+    // Display guideline details for a given measure ID
     function displayGuideline(measureID) {
       const guidelines = medicalData.conditions;
       let found = null;
@@ -202,39 +211,36 @@
           break;
         }
       }
+      currentGuideline = found; // store for later use
       const detailsDiv = document.getElementById("guidelineDetails");
       if (found) {
+        // Bulleted JSON details at the very top
         detailsDiv.innerHTML = `
           <div class="guideline">
             <h3>${found.title} (<em>${found.measure_id}</em>)</h3>
-            <p><strong>Description:</strong> ${found.description}</p>
-            <p><strong>Measurement Period:</strong> ${found.measurement_period}</p>
-            <p><strong>Ages:</strong> ${found.ages}</p>
-            <p><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</p>
+            <ul>
+              <li><strong>Description:</strong> ${found.description}</li>
+              <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>
+              <li><strong>Ages:</strong> ${found.ages}</li>
+              <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
+            </ul>
           </div>
         `;
-        // Show gap information below the description in red.
-        showGapInfo(found);
+        // Show gap information (methods to close gap) in red, right under the description.
+        document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
+        document.getElementById("gapInfo").style.display = "block";
       } else {
         detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
         hideGapInfo();
       }
     }
 
-    // Show the gap information (rendered in red) and a button to hide it.
-    function showGapInfo(guideline) {
-      const gapInfoDiv = document.getElementById("gapInfo");
-      // You can customize this text. Here we simply join the "methods_to_close_gap"
-      // in red text below the description.
-      document.getElementById("gapText").innerText = guideline.methods_to_close_gap.join('; ');
-      gapInfoDiv.style.display = "block";
-    }
-    // Hide the gap information.
+    // Hide the gap information section
     function hideGapInfo() {
       document.getElementById("gapInfo").style.display = "none";
     }
 
-    // Toggle the details box's collapse/expand.
+    // Toggle collapse/expand for the details box
     document.getElementById("collapseDetails").addEventListener("click", function() {
       const detailsDiv = document.getElementById("guidelineDetails");
       if (detailsDiv.style.display === "none") {
@@ -246,39 +252,36 @@
       }
     });
 
-    // Attach click event listeners to all guideline buttons.
+    // Attach event listeners to all buttons (both top-tier and also ran)
     document.querySelectorAll('button[data-measure]').forEach(button => {
       button.addEventListener('click', function() {
         const measureID = this.getAttribute('data-measure');
         displayGuideline(measureID);
+        // Hide the exhaustive query when a new guideline is selected
+        document.getElementById("exhaustiveQuery").style.display = "none";
+        document.getElementById("copyQueryBtn").style.display = "none";
       });
     });
 
-    // Ask AI section:
-    // When "Ask AI" is clicked, compile all diagnostic/exclusion codes (from the currently displayed guideline)
-    // separated by "or" and show them in a text area.
+    // Ask AI Section: compile the exclusion diagnosis codes separated by " OR "
     document.getElementById("askAIBtn").addEventListener("click", function() {
-      // Retrieve the currently displayed guideline from the details box.
-      const detailsDiv = document.getElementById("guidelineDetails");
-      const exclusionText = detailsDiv.querySelector("p strong")?.nextSibling?.textContent || "";
-      // Alternatively, if you prefer to use the stored JSON data,
-      // you can store the last measureID and then look up its denominator_exclusions.
-      // For this example, we'll assume that the "Denominator Exclusions" text is in the details.
-      // Here we use the gap info from the guideline (or fallback to the displayed text).
-      const gapInfo = document.getElementById("gapText").innerText || "";
-      const diagnosisCodes = gapInfo.split(';').map(code => code.trim()).join(' OR ');
-      const exhaustiveQueryTextarea = document.getElementById("exhaustiveQuery");
-      exhaustiveQueryTextarea.value = diagnosisCodes;
-      exhaustiveQueryTextarea.style.display = "block";
+      if (!currentGuideline || !currentGuideline.denominator_exclusions) {
+        alert("No guideline selected or no exclusions available.");
+        return;
+      }
+      const codes = currentGuideline.denominator_exclusions.map(code => code.trim()).join(' OR ');
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.value = codes;
+      txtArea.style.display = "block";
       document.getElementById("copyQueryBtn").style.display = "block";
     });
 
-    // Copy exhaustive query text to clipboard.
+    // Copy exhaustive query text to clipboard
     document.getElementById("copyQueryBtn").addEventListener("click", function() {
       const txtArea = document.getElementById("exhaustiveQuery");
       txtArea.select();
       document.execCommand("copy");
-      alert("Exhaustive query copied to clipboard!");
+      alert("Exclusion diagnosis query copied to clipboard!");
     });
   </script>
 </body>
