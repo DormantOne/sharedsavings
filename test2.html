@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>High Impact Shared Savings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      margin: 10px 0;
+    }
+    /* The details box is hidden by default */
+    #details {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      margin-bottom: 20px;
+      display: none;
+      position: relative;
+    }
+    /* Red banner for gap information */
+    #gapBanner {
+      background-color: #ffe6e6;
+      color: #a70000;
+      padding: 10px;
+      border: 1px solid #dc3545;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    /* Button to close the details box */
+    #closeDetailsBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    /* Button to toggle extra details */
+    #toggleExtraBtn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    /* Extra details area (hidden by default) */
+    #extraDetails {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #e9ecef;
+      border-radius: 4px;
+    }
+    /* Responsive grid for buttons */
+    .grid-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    /* Default blue button (for metabolic measures) */
+    .button {
+      background-color: #007bff; /* blue */
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    /* Red button (for cancer prevention) */
+    .red-button {
+      background-color: #dc3545;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .red-button:hover {
+      background-color: #a71d2a;
+    }
+    /* Teal button (for administrative measures) */
+    .teal-button {
+      background-color: #20c997;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .teal-button:hover {
+      background-color: #1aa179;
+    }
+    /* Small gray button (for other measures) */
+    .small-button {
+      background-color: #6c757d; /* gray */
+      font-size: 14px;
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .small-button:hover {
+      background-color: #5a6268;
+    }
+    /* Ask AI Section styling */
+    #askAISection {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f0f0f0;
+      margin-top: 30px;
+      text-align: center;
+    }
+    #exhaustiveQuery {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      display: none;
+    }
+    #copyQueryBtn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      display: none;
+    }
+    .link-buttons a {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .link-buttons a:hover {
+      background-color: #0056b3;
+    }
+    /* Category headers */
+    .category-header {
+      grid-column: 1 / -1;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 5px 0;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>High Impact Shared Savings</h1>
+    <p>Click one of the buttons below to display the full guideline details. The details box (with a red Gap Information banner at the very top) will appear above the buttons. You can collapse the box entirely or expand extra details. At the bottom, the "Ask AI" section will compile the exclusion diagnosis codes for the displayed guideline (to be pasted into your AI search bar).</p>
+
+    <!-- Details Box (hidden by default) -->
+    <div id="details">
+      <button id="closeDetailsBtn">Close</button>
+      <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
+      <div id="guidelineDetails">
+        <ul>
+          <li>Please select a guideline.</li>
+        </ul>
+      </div>
+      <button id="toggleExtraBtn">Show Extra Details</button>
+      <div id="extraDetails">
+        <ul>
+          <li>[Extra details here]</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Buttons will be injected here by JavaScript -->
+    <div class="grid-buttons" id="allMeasuresButtons"></div>
+
+    <!-- Ask AI Section (for copy-pasting prompt) -->
+    <div id="askAISection">
+      <h3>Ask AI for Exclusion Diagnosis Codes</h3>
+      <p>This will compile the current guideline information into a prompt for you to copy and paste into your AI search bar.</p>
+      <button id="askAIBtn" class="small-button">Generate AI Prompt</button>
+      <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis prompt will appear here..." style="display:none;"></textarea>
+      <button id="copyQueryBtn" style="display:none;">Copy Prompt</button>
+      <div class="link-buttons">
+        <a href="https://www.openevidence.com/" target="_blank">Open Evidence</a>
+        <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+        <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+        <a href="https://gemini.google.com" target="_blank">Gemini</a>
+        <a href="https://www.deepseek.ai" target="_blank">DeepSeek</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variable to store JSON data and the current guideline.
+    let medicalData = {};
+    let currentGuideline = null;
+
+    // Mapping arrays for each category.
+    // Each object contains the display name and the measure ID.
+    // (In cases where the measure ID is duplicated, additional disambiguation is handled in displayGuideline.)
+    const metabolicMeasures = [
+      { displayName: "DM BP Control", measureId: "BPD" },
+      { displayName: "DM Eye Exam", measureId: "EED" },
+      { displayName: "DM Kidney Evaluation", measureId: "KED" },
+      { displayName: "DM Medication Adherence", measureId: "DMA" },
+      { displayName: "DM Glycemic Control", measureId: "GSD" },
+      { displayName: "DM Statin Use", measureId: "SUPD" },
+      { displayName: "BP Control", measureId: "CBP" },
+      { displayName: "Statin Adherence", measureId: "CMA" },
+      { displayName: "BP Med Adherence", measureId: "HMA" },
+      { displayName: "CV Statin Therapy", measureId: "SPC" }
+    ];
+
+    const cancerMeasures = [
+      { displayName: "Breast Cancer Screen", measureId: "BCS-E" },
+      { displayName: "Cervical Cancer Screen", measureId: "CCS" },
+      { displayName: "Colorectal Screen", measureId: "COL-E" }
+    ];
+
+    const administrativeMeasures = [
+      { displayName: "ED Follow-Up Care", measureId: "FMC" },
+      { displayName: "Discharge Med Reconciliation", measureId: "TRC", type: "Reconciliation" },
+      { displayName: "Post-Discharge Engagement", measureId: "TRC", type: "Engagement" },
+      { displayName: "Readmission Prevention", measureId: "PCR" }
+    ];
+
+    const otherMeasures = [
+      { displayName: "Antidepressant Management", measureId: "AMM" },
+      { displayName: "Pharyngitis Care", measureId: "CWP" },
+      { displayName: "URI Treatment", measureId: "URI" },
+      { displayName: "Asthma Medication", measureId: "AMR" },
+      { displayName: "COPD Management", measureId: "PCE" },
+      { displayName: "Tdap Immunization", measureId: "AIS-E", subtype: "Tdap" },
+      { displayName: "Flu Immunization", measureId: "AIS-E", subtype: "Influenza" },
+      { displayName: "Bronchitis Treatment", measureId: "AAB" },
+      { displayName: "Opioid-Benzo Concurrent Use", measureId: "COB" },
+      { displayName: "Osteoporosis Care", measureId: "OMW" },
+      { displayName: "Anticholinergic Polypharmacy", measureId: "POLY-ACH" },
+      { displayName: "CNS Medication Polypharmacy", measureId: "POLY-CNS" },
+      { displayName: "Chlamydia Screen", measureId: "CHL" }
+    ];
+
+    // Function to generate buttons by category.
+    function generateButtons() {
+      const container = document.getElementById("allMeasuresButtons");
+      container.innerHTML = "";
+
+      // Helper function to create a header for each category.
+      function createHeader(text) {
+        const header = document.createElement("div");
+        header.className = "category-header";
+        header.textContent = text;
+        container.appendChild(header);
+      }
+
+      // Helper function to create a button.
+      function createButton(measure, className) {
+        const btn = document.createElement("button");
+        btn.textContent = measure.displayName;
+        btn.setAttribute("data-measure", measure.measureId);
+        // If a subtype is provided (to differentiate duplicate IDs), attach it as a data attribute.
+        if (measure.subtype) {
+          btn.setAttribute("data-subtype", measure.subtype);
+        }
+        // If type is provided (for disambiguating TRC), attach it.
+        if (measure.type) {
+          btn.setAttribute("data-type", measure.type);
+        }
+        btn.className = className;
+        btn.addEventListener("click", function() {
+          displayGuideline(
+            measure.measureId, 
+            this.getAttribute("data-subtype"), 
+            this.getAttribute("data-type")
+          );
+          document.getElementById("exhaustiveQuery").style.display = "none";
+          document.getElementById("copyQueryBtn").style.display = "none";
+          // Scroll to the top of the page smoothly.
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        container.appendChild(btn);
+      }
+
+      // Metabolic measures (blue)
+      createHeader("Metabolic/Cardiometabolic Measures");
+      metabolicMeasures.forEach(measure => {
+        createButton(measure, "button");
+      });
+
+      // Cancer Prevention (red)
+      createHeader("Cancer Prevention");
+      cancerMeasures.forEach(measure => {
+        createButton(measure, "red-button");
+      });
+
+      // Administrative (teal)
+      createHeader("Administrative");
+      administrativeMeasures.forEach(measure => {
+        createButton(measure, "teal-button");
+      });
+
+      // Other Measures (gray)
+      createHeader("Other Measures");
+      otherMeasures.forEach(measure => {
+        createButton(measure, "small-button");
+      });
+    }
+
+    // Load guidelines from rules.json.
+    fetch('rules.json')
+      .then(response => {
+        if (!response.ok) throw new Error("Error loading JSON: " + response.statusText);
+        return response.json();
+      })
+      .then(data => {
+        medicalData = data;
+        console.log("Loaded rules.json:", medicalData);
+        generateButtons();
+      })
+      .catch(error => console.error(error));
+
+    // Display guideline details for a given measure ID.
+    // For duplicate measure IDs (like TRC or AIS-E) we optionally check subtype or type.
+    function displayGuideline(measureID, subtype, type) {
+      const guidelines = medicalData.conditions;
+      let found = null;
+      // Loop through all guidelines.
+      for (const key in guidelines) {
+        if (guidelines.hasOwnProperty(key)) {
+          const guideline = guidelines[key];
+          if (guideline.measure_id === measureID) {
+            // For duplicate measure IDs, check subtype/type if provided.
+            if (measureID === "TRC" && type) {
+              if (type === "Reconciliation" && guideline.description.includes("medication reconciliation")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+              if (type === "Engagement" && guideline.description.includes("patient engagement")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+            } else if (measureID === "AIS-E" && subtype) {
+              if (subtype === "Tdap" && guideline.description.toLowerCase().includes("tetnus")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+              if (subtype === "Influenza" && guideline.description.toLowerCase().includes("influenza")) {
+                found = { title: key, ...guideline };
+                break;
+              }
+            } else {
+              found = { title: key, ...guideline };
+              break;
+            }
+          }
+        }
+      }
+      currentGuideline = found;
+      const detailsDiv = document.getElementById("guidelineDetails");
+      const extraDiv = document.getElementById("extraDetails");
+      if (found) {
+        detailsDiv.innerHTML = `
+          <ul>
+            <li><strong>Title:</strong> ${found.title}</li>
+            <li><strong>Measure ID:</strong> ${found.measure_id}</li>
+            <li><strong>Description:</strong> ${found.description}</li>
+            <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>
+            <li><strong>Ages:</strong> ${found.ages}</li>
+          </ul>
+        `;
+        extraDiv.innerHTML = `
+          <ul>
+            <li><strong>Denominator Exclusions:</strong> ${found.denominator_exclusions.join('; ')}</li>
+            <li><strong>Best Practices:</strong>
+              <ul>
+                ${found.best_practices.map(practice => `<li>${practice}</li>`).join('')}
+              </ul>
+            </li>
+          </ul>
+        `;
+        document.getElementById("details").style.display = "block";
+        document.getElementById("gapText").innerText = found.methods_to_close_gap.join('; ');
+      } else {
+        detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
+        extraDiv.innerHTML = "";
+        document.getElementById("gapBanner").style.display = "none";
+      }
+    }
+
+    // Toggle extra details.
+    document.getElementById("toggleExtraBtn").addEventListener("click", function() {
+      const extraDiv = document.getElementById("extraDetails");
+      if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
+        extraDiv.style.display = "block";
+        this.innerText = "Hide Extra Details";
+      } else {
+        extraDiv.style.display = "none";
+        this.innerText = "Show Extra Details";
+      }
+    });
+
+    // Close the details box.
+    document.getElementById("closeDetailsBtn").addEventListener("click", function() {
+      document.getElementById("details").style.display = "none";
+      currentGuideline = null;
+    });
+
+    // Ask AI Section: Build and display a prompt based on the current guideline.
+    document.getElementById("askAIBtn").addEventListener("click", function() {
+      if (!currentGuideline) {
+        alert("No guideline selected.");
+        return;
+      }
+      const exclusions = currentGuideline.denominator_exclusions
+        .map(code => code.trim())
+        .join(' or ');
+      
+      const prompt = `Dear AI, please consider this Medicare shared savings condition:
+Measure ID: ${currentGuideline.measure_id}
+Description: ${currentGuideline.description}
+Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. The exclusions are: ${exclusions}
+Please provide any additional important insights you may have afterward.`;
+      
+      console.log("Ask AI Prompt:", prompt);
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.value = prompt;
+      txtArea.style.display = "block";
+      document.getElementById("copyQueryBtn").style.display = "block";
+    });
+
+    // Copy the prompt to the clipboard.
+    document.getElementById("copyQueryBtn").addEventListener("click", function() {
+      const txtArea = document.getElementById("exhaustiveQuery");
+      txtArea.select();
+      document.execCommand("copy");
+      alert("Exclusion diagnosis prompt copied to clipboard!");
+    });
+  </script>
+</body>
+</html>
