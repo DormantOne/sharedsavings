@@ -124,15 +124,15 @@
    async function getRelevantMeasureIDs(query) {
   // Create a reduced JSON object containing only keys and keywords from the loaded medicalData.
   const reducedData = Object.keys(medicalData).reduce((acc, key) => {
-    // Assuming the structure in rules.json is similar to your inline data.
     acc[key] = { measure_id: medicalData[key].measure_id, keywords: medicalData[key].keywords };
     return acc;
   }, {});
 
+  // Modified prompt with explicit instructions:
   const firstPassPrompt = [
     {
       role: "system",
-      content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. Based solely on the user's query, select which guideline measure_ids are most relevant. Return only the relevant measure IDs enclosed in double square brackets (for example, [[AMM]]). Do not include any additional text."
+      content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. Please check every guideline in the JSON. For each guideline that is relevant to the user's query, output its measure ID enclosed in double square brackets (e.g., [[BCS-E]]). If a guideline is not relevant, do not output anything for it. If no guidelines are relevant, output an empty list []. Output only the measure IDs in the following format, one per line."
     },
     {
       role: "user",
