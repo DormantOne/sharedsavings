@@ -121,7 +121,7 @@
     // ----------------------------------------------------
     // First Pass: Collect Relevant Guideline IDs Using GPT‑3.5
     // ----------------------------------------------------
-   async function getRelevantMeasureIDs(query) {
+  async function getRelevantMeasureIDs(query) {
   // Create a reduced JSON object containing only keys and keywords from the loaded medicalData.
   const reducedData = Object.keys(medicalData).reduce((acc, key) => {
     acc[key] = { measure_id: medicalData[key].measure_id, keywords: medicalData[key].keywords };
@@ -157,7 +157,6 @@
 
   return relevantIDs;
 }
-
 
     // ----------------------------------------------------
     // Second Pass: Answer the Query Using GPT‑4
