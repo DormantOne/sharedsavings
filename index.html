@@ -122,51 +122,100 @@
     // First Pass: Collect Relevant Guideline IDs Using GPT‑3.5
     // ----------------------------------------------------
 async function getRelevantMeasureIDs(query) {
-  // We'll create a reduced JSON object from medicalData.conditions.
-  const reducedData = Object.keys(medicalData.conditions).reduce((acc, key) => {
-    acc[key] = {
-      measure_id: medicalData.conditions[key].measure_id,
-      keywords: medicalData.conditions[key].keywords
-    };
-    return acc;
-  }, {});
+  // Convert the conditions object into an array of guideline entries.
+  const guidelinesArray = Object.entries(medicalData.conditions).map(([title, guideline]) => ({
+    title: title,
+    measure_id: guideline.measure_id,
+    // Join the keywords for easier display (you could also keep them as an array)
+    keywords: guideline.keywords.join(', ')
+  }));
 
-  // Revised prompt:
-  const firstPassPrompt = [
-    {
-      role: "system",
-      content: "You are an AI that examines a JSON object of medical guidelines. Each guideline has a 'measure_id' and a 'keywords' array. The user query may contain a specific keyword. For each guideline in the JSON, if any of its keywords (case-insensitive) contain the word 'mammogram' or are clearly related (for example, if the guideline is about breast cancer screening), then output its measure_id enclosed in double square brackets (e.g., [[BCS-E]]). Output one measure id per line. If none of the guidelines are relevant, output an empty list []. Do not output any additional text."
-    },
-    {
-      role: "user",
-      content: `User Query: "${query}"\n\nMedical Guidelines JSON (only keys, measure_id, and keywords):\n${JSON.stringify(reducedData, null, 2)}`
-    }
-  ];
-
-  // Log the prompt
-  console.log("First Pass Prompt Sent to GPT-3.5:", JSON.stringify(firstPassPrompt, null, 2));
-
-  // Call the OpenAI API
-  const gpt35Response = await callOpenAI(firstPassPrompt, "gpt-3.5-turbo");
-
-  // Log the raw response
-  console.log("Raw GPT-3.5 Response:", gpt35Response);
-
-  // Use a regex to extract measure IDs enclosed in [[ ... ]]
-  const idRegex = /\[\[([^\]]+)\]\]/g;
-  let match;
-  const relevantIDs = [];
-  while ((match = idRegex.exec(gpt35Response)) !== null) {
-    relevantIDs.push(match[1].trim());
+  // Parameters for chunking and parallel calls
+  const chunkSize = 5; // How many guidelines per GPT-3.5 call (adjust as needed)
+  const maxParallelCalls = 3; // Maximum parallel GPT-3.5 calls
+  const chunks = [];
+  for (let i = 0; i < guidelinesArray.length; i += chunkSize) {
+    chunks.push(guidelinesArray.slice(i, i + chunkSize));
   }
 
-  console.log("Extracted Relevant IDs:", relevantIDs);
-  if (relevantIDs.length === 0) {
-    console.error("No measure IDs found in GPT-3.5 response.");
+  let firstPassCandidates = [];
+
+  // Process chunks in batches with a maximum of maxParallelCalls at a time.
+  for (let i = 0; i < chunks.length; i += maxParallelCalls) {
+    const currentBatch = chunks.slice(i, i + maxParallelCalls);
+    // Create an array of promises for the current batch.
+    const promises = currentBatch.map((batch, batchIndex) => {
+      // Construct a user message for this batch.
+      // Each entry shows its title, measure_id, and keywords.
+      const messageContent =
+        `User Query: "${query}"\n\n` +
+        batch
+          .map(entry =>
+            `Guideline: ${entry.title} (Measure ID: ${entry.measure_id}; Keywords: ${entry.keywords})`
+          )
+          .join('\n');
+
+      // Create the messages for GPT‑3.5.
+      const messages = [
+        {
+          role: "system",
+          content:
+            "You are an AI that selects the most relevant medical guidelines based on the user's query. " +
+            "From the provided list, select the guidelines that are most relevant and respond with the corresponding measure IDs, " +
+            "each enclosed in double square brackets (e.g. [[BCS-E]]), separated by commas. " +
+            "Output only the measure IDs."
+        },
+        { role: "user", content: messageContent }
+      ];
+
+      console.log(`Prompt for batch ${i + batchIndex + 1}:`, JSON.stringify(messages, null, 2));
+
+      // Call GPT-3.5 for this batch.
+      return callOpenAI(messages, "gpt-3.5-turbo");
+    });
+
+    // Wait for the current batch's responses.
+    const results = await Promise.all(promises);
+
+    // Process each result.
+    results.forEach((response, index) => {
+      console.log(`Response from GPT-3.5 (Batch ${i + index + 1}):`, response);
+      // Extract measure IDs enclosed in [[...]]
+      const extractedIDs =
+        response.match(/\[\[([^\]]+)\]\]/g)?.map(match =>
+          match.replace(/\[\[|\]\]/g, '').trim()
+        ) || [];
+
+      // If GPT-3.5 returned nothing for this batch, you might optionally use a backup keyword matcher.
+      if (extractedIDs.length === 0) {
+        console.warn(`No IDs returned from batch ${i + index + 1}; using backup matcher for this batch.`);
+        extractedIDs.push(
+          ...batchKeywordMatcher(currentBatch[index], query)
+        );
+      }
+
+      console.log(`Extracted IDs from batch ${i + index + 1}:`, extractedIDs);
+      firstPassCandidates = firstPassCandidates.concat(extractedIDs);
+    });
   }
 
-  return relevantIDs;
+  // Remove duplicate measure IDs.
+  firstPassCandidates = [...new Set(firstPassCandidates)];
+  console.log("Final relevant measure IDs:", firstPassCandidates);
+  return firstPassCandidates;
 }
+
+// A backup matcher that simply checks if any guideline's keywords (in the batch) appear in the query.
+function batchKeywordMatcher(batchEntry, query) {
+  const matchedIDs = [];
+  const lowerQuery = query.toLowerCase();
+  // Here, batchEntry is one guideline object from the batch.
+  if (batchEntry.keywords.toLowerCase().includes(lowerQuery)) {
+    matchedIDs.push(batchEntry.measure_id);
+  }
+  return matchedIDs;
+}
+
 
     // ----------------------------------------------------
     // Second Pass: Answer the Query Using GPT‑4
