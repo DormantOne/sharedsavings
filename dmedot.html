@@ -409,18 +409,13 @@
     
     // Email button
     emailButton.addEventListener("click", function() {
-      const dotPhrase = dotPhraseText.value
-        // Replace bullet points with regular hyphens to avoid encoding issues
-        .replace(/•/g, '-')
-        // Replace special characters with plain text equivalents
-        .replace(/≥/g, ">=")
-        .replace(/≤/g, "<=")
-        // Replace any other problematic characters
-        .replace(/[^\x20-\x7E]/g, '');  
+      // Get the content already formatted with \r\n line breaks
+      const dotPhrase = dotPhraseText.value;
       
+      // Create subject
       const subject = "DME Documentation Dot Phrase: " + currentDME.showName;
       
-      // Create a mailto link with properly encoded content
+      // Create a plain text email with the content
       const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(dotPhrase)}`;
       
       // Open the user's email client
