@@ -152,25 +152,64 @@
       margin-bottom: 20px;
       font-size: 15px;
     }
-    .documentation-section {
-      margin-bottom: 20px;
+    
+    /* Diagnoses Section */
+    .diagnoses-section {
+      margin: 15px 0;
+      background-color: #ffebee; /* Light red background */
+      border-radius: 5px;
+      padding: 15px;
+      border-left: 4px solid #e74c3c;
+    }
+    .diagnoses-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .diagnoses-title {
+      font-weight: bold;
+      color: #c0392b;
+      margin: 0;
+    }
+    .toggle-diagnoses {
+      background: none;
+      border: none;
+      color: #c0392b;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .diagnoses-content {
+      display: none; /* Hidden by default */
+    }
+    .diagnoses-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .diagnoses-table th, .diagnoses-table td {
+      padding: 6px 8px;
+      text-align: left;
+      border-bottom: 1px solid #f8d7da;
+    }
+    .diagnoses-table th {
+      background-color: #f8d7da;
+      font-weight: bold;
+    }
+    .diagnoses-table tr:hover {
+      background-color: #fff5f5;
+    }
+    
+    /* Dot Phrase Section */
+    .dot-phrase-section {
+      margin-top: 20px;
     }
     .section-title {
       font-size: 18px;
       font-weight: bold;
       margin-bottom: 10px;
       color: #2c3e50;
-    }
-    .documentation-list {
-      list-style-type: disc;
-      padding-left: 20px;
-      margin-bottom: 15px;
-    }
-    .documentation-list li {
-      margin-bottom: 8px;
-    }
-    .dot-phrase-section {
-      margin-top: 20px;
     }
     .dot-phrase-textarea {
       width: 100%;
@@ -208,39 +247,6 @@
       background-color: #2980b9;
     }
     
-    /* Diagnoses Section */
-    .diagnoses-section {
-      margin-top: 20px;
-      display: none;
-    }
-    .show-diagnoses {
-      background-color: #f8f9fa;
-      border: 1px solid #ced4da;
-      border-radius: 4px;
-      padding: 10px 15px;
-      width: 100%;
-      text-align: center;
-      font-size: 14px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-    .diagnoses-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-    .diagnoses-table th, .diagnoses-table td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #e9ecef;
-    }
-    .diagnoses-table th {
-      background-color: #f8f9fa;
-      font-weight: bold;
-    }
-    .diagnoses-table tr:hover {
-      background-color: #f1f1f1;
-    }
     .loading {
       text-align: center;
       padding: 50px;
@@ -265,7 +271,6 @@
   <div class="container">
     <!-- Category Controls -->
     <div class="category-controls">
-      <button id="all-category" class="category-button active">All Categories</button>
       <button id="mobility-category" class="category-button">Mobility Equipment</button>
       <button id="support_surfaces-category" class="category-button">Support Surfaces</button>
       <button id="hospital_beds-category" class="category-button">Hospital Beds</button>
@@ -283,43 +288,33 @@
       
       <div id="commentSection" class="comment-section"></div>
       
-      <div class="documentation-section">
-        <div class="section-title">Required Documentation:</div>
-        <ul id="positiveDoc" class="documentation-list"></ul>
-        
-        <div id="negativeSection">
-          <div class="section-title">Document Absence of:</div>
-          <ul id="negativeDoc" class="documentation-list"></ul>
+      <!-- Diagnoses Section (Now at the top) -->
+      <div id="diagnosesSection" class="diagnoses-section">
+        <div class="diagnoses-header">
+          <div class="diagnoses-title">Recommended Diagnosis Codes</div>
+          <button id="toggleDiagnoses" class="toggle-diagnoses">+</button>
         </div>
-        
-        <div id="specificationsSection">
-          <div class="section-title">Specifications:</div>
-          <ul id="specifications" class="documentation-list"></ul>
+        <div id="diagnosesContent" class="diagnoses-content">
+          <table class="diagnoses-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="diagnosesTable"></tbody>
+          </table>
         </div>
       </div>
       
+      <!-- Dot Phrase Section (Now the main content) -->
       <div class="dot-phrase-section">
-        <div class="section-title">Dot Phrase:</div>
+        <div class="section-title">Documentation Dot Phrase:</div>
         <textarea id="dotPhraseText" class="dot-phrase-textarea" readonly></textarea>
         <div class="action-buttons">
           <button id="copyButton" class="copy-button">Copy Dot Phrase</button>
           <button id="emailButton" class="email-button">Email Dot Phrase</button>
         </div>
-      </div>
-      
-      <button id="showDiagnoses" class="show-diagnoses">Show Recommended Diagnoses</button>
-      
-      <div id="diagnosesSection" class="diagnoses-section">
-        <div class="section-title">Recommended Diagnosis Codes:</div>
-        <table class="diagnoses-table">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody id="diagnosesTable"></tbody>
-        </table>
       </div>
     </div>
     
@@ -332,7 +327,7 @@
   <script>
     // Global variables
     let dmeData = [];
-    let currentCategory = "all";
+    let currentCategory = "mobility"; // Default to mobility instead of all
     let currentDME = null;
     
     // DOM Elements
@@ -341,14 +336,10 @@
     const closePanel = document.getElementById("closePanel");
     const panelTitle = document.getElementById("panelTitle");
     const commentSection = document.getElementById("commentSection");
-    const positiveDoc = document.getElementById("positiveDoc");
-    const negativeSection = document.getElementById("negativeSection");
-    const negativeDoc = document.getElementById("negativeDoc");
-    const specificationsSection = document.getElementById("specificationsSection");
-    const specifications = document.getElementById("specifications");
     const dotPhraseText = document.getElementById("dotPhraseText");
     const diagnosesSection = document.getElementById("diagnosesSection");
-    const showDiagnoses = document.getElementById("showDiagnoses");
+    const diagnosesContent = document.getElementById("diagnosesContent");
+    const toggleDiagnoses = document.getElementById("toggleDiagnoses");
     const diagnosesTable = document.getElementById("diagnosesTable");
     const copyButton = document.getElementById("copyButton");
     const emailButton = document.getElementById("emailButton");
@@ -357,10 +348,6 @@
     document.addEventListener("DOMContentLoaded", initializeApp);
     
     // Category buttons
-    document.getElementById("all-category").addEventListener("click", function() {
-      setActiveCategory("all");
-    });
-    
     document.getElementById("mobility-category").addEventListener("click", function() {
       setActiveCategory("mobility");
     });
@@ -391,13 +378,13 @@
     });
     
     // Toggle diagnoses section
-    showDiagnoses.addEventListener("click", function() {
-      if (diagnosesSection.style.display === "block") {
-        diagnosesSection.style.display = "none";
-        this.textContent = "Show Recommended Diagnoses";
+    toggleDiagnoses.addEventListener("click", function() {
+      if (diagnosesContent.style.display === "block") {
+        diagnosesContent.style.display = "none";
+        this.textContent = "+";
       } else {
-        diagnosesSection.style.display = "block";
-        this.textContent = "Hide Recommended Diagnoses";
+        diagnosesContent.style.display = "block";
+        this.textContent = "−";
       }
     });
     
@@ -433,7 +420,7 @@
       fetchDMEData()
         .then(data => {
           dmeData = data.dme;
-          renderDMEGrid();
+          setActiveCategory("mobility"); // Start with mobility category selected
         })
         .catch(error => {
           console.error("Error loading DME data:", error);
@@ -443,16 +430,18 @@
     
     function fetchDMEData() {
       // In a real app, this would be a fetch call to your server
-      // For this example, we'll return a promise that resolves with the sample data
+      // For this example, let's simulate a response
       
-      return fetch('dmedot.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        });
+      return new Promise((resolve) => {
+        // We'll use the hardcoded data
+        setTimeout(() => {
+          resolve({ dme: window.dmeDataFromJSON || [] });
+        }, 500);
+      });
     }
+    
+    // This would be populated from your JSON in a real app
+    window.dmeDataFromJSON = JSON.parse(`{"dme": ${JSON.stringify(dmeData)}}`);
     
     function setActiveCategory(category) {
       currentCategory = category;
@@ -472,9 +461,7 @@
     
     function renderDMEGrid() {
       // Filter items based on current category
-      const filteredItems = dmeData.filter(item => {
-        return currentCategory === "all" || item.category === currentCategory;
-      });
+      const filteredItems = dmeData.filter(item => item.category === currentCategory);
       
       if (filteredItems.length === 0) {
         dmeGrid.innerHTML = `<div class="no-results">No DME items found in this category.</div>`;
@@ -523,35 +510,12 @@
         commentSection.style.display = "none";
       }
       
-      // Update positive documentation
-      positiveDoc.innerHTML = dmeItem.positive_documentation.map(doc => `<li>${doc}</li>`).join('');
-      
-      // Update negative documentation
-      if (dmeItem.negative_documentation && dmeItem.negative_documentation.length > 0) {
-        negativeDoc.innerHTML = dmeItem.negative_documentation.map(doc => `<li>${doc}</li>`).join('');
-        negativeSection.style.display = "block";
-      } else {
-        negativeSection.style.display = "none";
-      }
-      
-      // Update specifications
-      if (dmeItem.specifications) {
-        specificationsSection.style.display = "block";
-        let specsHtml = '';
-        for (const [key, value] of Object.entries(dmeItem.specifications)) {
-          specsHtml += `<li><strong>${key}:</strong> ${value}</li>`;
-        }
-        specifications.innerHTML = specsHtml;
-      } else {
-        specificationsSection.style.display = "none";
-      }
-      
       // Generate and update dot phrase
       dotPhraseText.value = formatDotPhrase(dmeItem);
       
       // Reset diagnoses section
-      diagnosesSection.style.display = "none";
-      showDiagnoses.textContent = "Show Recommended Diagnoses";
+      diagnosesContent.style.display = "none";
+      toggleDiagnoses.textContent = "+";
       
       // Update diagnoses table
       if (dmeItem.recommended_diagnoses && dmeItem.recommended_diagnoses.length > 0) {
@@ -565,10 +529,10 @@
           `;
         });
         diagnosesTable.innerHTML = diagnosesHtml;
-        showDiagnoses.style.display = "block";
+        diagnosesSection.style.display = "block";
       } else {
         diagnosesTable.innerHTML = '<tr><td colspan="2">No recommended diagnoses available</td></tr>';
-        showDiagnoses.style.display = "none";
+        diagnosesSection.style.display = "none";
       }
       
       // Show the documentation panel
@@ -608,6 +572,14 @@
         for (const [key, value] of Object.entries(dme.specifications)) {
           result += `• ${key}: ${value}\n`;
         }
+      }
+      
+      // Add recommended diagnoses to the dot phrase
+      if (dme.recommended_diagnoses && dme.recommended_diagnoses.length > 0) {
+        result += "\nRECOMMENDED DIAGNOSIS CODES:\n";
+        dme.recommended_diagnoses.forEach((dx) => {
+          result += `• ${dx.code}: ${dx.description}\n`;
+        });
       }
       
       return result;

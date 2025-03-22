@@ -599,8 +599,8 @@
       "category": "respiratory",
       "comment": "Prior to initiating therapy, a complete, facility-based, attended polysomnogram must be performed documenting both A and B. BiPAP with backup rate is typically required for these conditions.",
       "positive_documentation": [
-        "Diagnosis of central sleep apnea (CSA) or complex sleep apnea (CompSA)",
-        "Significant improvement of the sleep-associated hypoventilation with the tested PAP with or without backup rate while breathing prescribed FiO₂",
+        "Requirement A - Diagnosis of central sleep apnea (CSA) or complex sleep apnea (CompSA)",
+        "Requirement B - Significant improvement of the sleep-associated hypoventilation with the tested PAP with or without backup rate while breathing prescribed FiO₂",
         
         "For either CSA or CompSA, the sleep study must identify the central apnea-central hypopnea index (CAHI)",
         
