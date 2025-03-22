@@ -326,7 +326,7 @@
 
   <script>
     // Global variables
-    let dmeData = [];
+    let dmeData = []; // Will be populated from JSON data
     let currentCategory = "mobility"; // Default to mobility instead of all
     let currentDME = null;
     
@@ -419,8 +419,14 @@
       
       fetchDMEData()
         .then(data => {
-          dmeData = data.dme;
-          setActiveCategory("mobility"); // Start with mobility category selected
+          if (data && Array.isArray(data.dme)) {
+            dmeData = data.dme;
+            console.log("DME data loaded successfully:", dmeData.length, "items");
+            setActiveCategory("mobility"); // Start with mobility category selected
+          } else {
+            console.error("Invalid data format received:", data);
+            dmeGrid.innerHTML = `<div class="no-results">Error: Invalid data format received. Please refresh the page.</div>`;
+          }
         })
         .catch(error => {
           console.error("Error loading DME data:", error);
@@ -429,19 +435,15 @@
     }
     
     function fetchDMEData() {
-      // In a real app, this would be a fetch call to your server
-      // For this example, let's simulate a response
-      
-      return new Promise((resolve) => {
-        // We'll use the hardcoded data
-        setTimeout(() => {
-          resolve({ dme: window.dmeDataFromJSON || [] });
-        }, 500);
-      });
+      // Fetch data from the dmedot.json file
+      return fetch('dmedot.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        });
     }
-    
-    // This would be populated from your JSON in a real app
-    window.dmeDataFromJSON = JSON.parse(`{"dme": ${JSON.stringify(dmeData)}}`);
     
     function setActiveCategory(category) {
       currentCategory = category;
@@ -455,8 +457,14 @@
       // Hide the documentation panel
       documentationPanel.style.display = "none";
       
-      // Re-render the DME grid
-      renderDMEGrid();
+      // Make sure dmeData is an array before rendering
+      if (Array.isArray(dmeData)) {
+        // Re-render the DME grid
+        renderDMEGrid();
+      } else {
+        console.error("dmeData is not an array:", dmeData);
+        dmeGrid.innerHTML = `<div class="no-results">Error: Data not properly loaded. Please refresh the page.</div>`;
+      }
     }
     
     function renderDMEGrid() {
