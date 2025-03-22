@@ -565,9 +565,11 @@
     }
     
     function formatDotPhrase(dme) {
-      const dmeId = dme.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
-      let result = `.DME_${dmeId}\n`;
-      result += `Documentation for ${dme.name}\n\n`;
+      // Create a single word with no spaces or special characters
+      const dmeId = "DME" + dme.name.replace(/[\s\-\(\)\/]+/g, '').toUpperCase();
+      
+      let result = `.${dmeId}\r\n\r\n`;
+      result += `Documentation for ${dme.name}\r\n\r\n`;
       
       if (dme.comment) {
         // Replace special characters in comment
@@ -576,10 +578,10 @@
           .replace(/≤/g, "<=")
           .replace(/>/g, ">")
           .replace(/</g, "<");
-        result += `Note: ${comment}\n\n`;
+        result += `Note: ${comment}\r\n\r\n`;
       }
       
-      result += "REQUIRED DOCUMENTATION:\n";
+      result += "REQUIRED DOCUMENTATION:\r\n";
       if (dme.positive_documentation && dme.positive_documentation.length > 0) {
         dme.positive_documentation.forEach((doc) => {
           // Replace special characters in documentation
@@ -588,14 +590,14 @@
             .replace(/≤/g, "<=")
             .replace(/>/g, ">")
             .replace(/</g, "<");
-          result += `- ${cleanDoc}\n`;
+          result += `- ${cleanDoc}\r\n`;
         });
       } else {
-        result += "No specific documentation requirements listed.\n";
+        result += "No specific documentation requirements listed.\r\n";
       }
       
       if (dme.negative_documentation && dme.negative_documentation.length > 0) {
-        result += "\nDOCUMENT ABSENCE OF:\n";
+        result += "\r\nDOCUMENT ABSENCE OF:\r\n";
         dme.negative_documentation.forEach((doc) => {
           // Replace special characters in documentation
           let cleanDoc = doc
@@ -603,12 +605,12 @@
             .replace(/≤/g, "<=")
             .replace(/>/g, ">")
             .replace(/</g, "<");
-          result += `- ${cleanDoc}\n`;
+          result += `- ${cleanDoc}\r\n`;
         });
       }
       
       if (dme.specifications) {
-        result += "\nSPECIFICATIONS:\n";
+        result += "\r\nSPECIFICATIONS:\r\n";
         for (const [key, value] of Object.entries(dme.specifications)) {
           // Replace special characters in specifications
           let cleanKey = key
@@ -621,7 +623,7 @@
             .replace(/≤/g, "<=")
             .replace(/>/g, ">")
             .replace(/</g, "<");
-          result += `- ${cleanKey}: ${cleanValue}\n`;
+          result += `- ${cleanKey}: ${cleanValue}\r\n`;
         }
       }
       
