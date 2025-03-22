@@ -61,20 +61,12 @@
       background-color: #2c3e50;
       box-shadow: 0 0 5px rgba(44, 62, 80, 0.5);
     }
-    .search-box {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ced4da;
-      border-radius: 4px;
-      font-size: 16px;
-    }
     
     /* DME Grid */
     .dme-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
       margin-bottom: 30px;
     }
     .dme-card {
@@ -83,131 +75,88 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       overflow: hidden;
       transition: transform 0.2s;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+      text-align: center;
     }
     .dme-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-    .dme-header {
+    .dme-button {
+      width: 100%;
+      padding: 15px 10px;
+      border: none;
       background-color: #3498db;
       color: white;
-      padding: 15px;
+      font-size: 14px;
       font-weight: bold;
-      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .mobility .dme-header {
+    .mobility .dme-button {
       background-color: #3498db; /* Blue */
     }
-    .support_surfaces .dme-header {
+    .support_surfaces .dme-button {
       background-color: #e74c3c; /* Red */
     }
-    .hospital_beds .dme-header {
+    .hospital_beds .dme-button {
       background-color: #2ecc71; /* Green */
     }
-    .oxygen .dme-header {
+    .oxygen .dme-button {
       background-color: #9b59b6; /* Purple */
     }
-    .respiratory .dme-header {
+    .respiratory .dme-button {
       background-color: #f39c12; /* Orange */
     }
-    .nebulizer .dme-header {
+    .nebulizer .dme-button {
       background-color: #1abc9c; /* Teal */
     }
-    .dme-comment {
-      background-color: #fff9c4; /* Light yellow */
-      padding: 10px;
-      font-size: 14px;
-      border-bottom: 1px solid #ffe082;
-    }
-    .dme-content {
-      padding: 15px;
-      flex-grow: 1;
-    }
-    .dme-footer {
-      padding: 10px 15px;
-      background-color: #f8f9fa;
-      text-align: right;
-      border-top: 1px solid #e9ecef;
-    }
-    .view-button {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .view-button:hover {
-      background-color: #2980b9;
+    .dme-button:hover {
+      filter: brightness(90%);
     }
     
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      z-index: 1000;
-      overflow-y: auto;
-    }
-    .modal-content {
+    /* Documentation Panel */
+    .documentation-panel {
       background-color: white;
-      margin: 50px auto;
-      padding: 20px;
-      width: 80%;
-      max-width: 800px;
       border-radius: 5px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-    }
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #aaa;
-    }
-    .close-button:hover {
-      color: #333;
-    }
-    .tab-buttons {
-      display: flex;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #dee2e6;
-    }
-    .tab-button {
-      padding: 10px 15px;
-      background-color: #f8f9fa;
-      border: none;
-      border-radius: 5px 5px 0 0;
-      cursor: pointer;
-      margin-right: 5px;
-      font-size: 14px;
-    }
-    .tab-button.active {
-      background-color: #3498db;
-      color: white;
-    }
-    .tab-content {
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 30px;
       display: none;
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .panel-title {
+      margin: 0;
+      font-size: 22px;
+      color: #2c3e50;
+    }
+    .close-panel {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #777;
+    }
+    .comment-section {
+      background-color: #fff9c4; /* Light yellow */
       padding: 15px;
-      background-color: #f8f9fa;
-      border-radius: 0 0 5px 5px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 15px;
     }
-    .tab-content.active {
-      display: block;
+    .documentation-section {
+      margin-bottom: 20px;
     }
-    
-    /* Documentation */
-    .documentation-title {
+    .section-title {
+      font-size: 18px;
       font-weight: bold;
       margin-bottom: 10px;
       color: #2c3e50;
@@ -218,10 +167,8 @@
       margin-bottom: 15px;
     }
     .documentation-list li {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
-    
-    /* Dot Phrase */
     .dot-phrase-section {
       margin-top: 20px;
     }
@@ -249,6 +196,7 @@
       border-radius: 4px;
       cursor: pointer;
       font-size: 14px;
+      flex: 1;
     }
     .copy-button:hover, .email-button:hover {
       background-color: #27ae60;
@@ -259,48 +207,32 @@
     .email-button:hover {
       background-color: #2980b9;
     }
-    .email-form {
-      display: none;
-      margin-top: 15px;
-      padding: 15px;
-      background-color: #edf2f7;
-      border-radius: 5px;
-    }
-    .email-input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ced4da;
-      border-radius: 4px;
-    }
-    .send-button {
-      padding: 10px 15px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
     
     /* Diagnoses Section */
-    .diagnoses {
-      margin-top: 15px;
+    .diagnoses-section {
+      margin-top: 20px;
+      display: none;
     }
-    .diagnoses-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #2c3e50;
+    .show-diagnoses {
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      padding: 10px 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 15px;
     }
     .diagnoses-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
+      margin-top: 15px;
     }
     .diagnoses-table th, .diagnoses-table td {
       padding: 8px;
       text-align: left;
       border-bottom: 1px solid #e9ecef;
-      font-size: 14px;
     }
     .diagnoses-table th {
       background-color: #f8f9fa;
@@ -321,15 +253,6 @@
       font-size: 18px;
       color: #777;
     }
-    .category-label {
-      background-color: #e9ecef;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: 12px;
-      color: #495057;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
   </style>
 </head>
 <body>
@@ -340,9 +263,7 @@
   </header>
   
   <div class="container">
-    <!-- Search and Category Controls -->
-    <input type="text" id="searchBox" class="search-box" placeholder="Search for DME items...">
-    
+    <!-- Category Controls -->
     <div class="category-controls">
       <button id="all-category" class="category-button active">All Categories</button>
       <button id="mobility-category" class="category-button">Mobility Equipment</button>
@@ -353,70 +274,58 @@
       <button id="nebulizer-category" class="category-button">Nebulizers</button>
     </div>
     
+    <!-- Documentation Panel -->
+    <div id="documentationPanel" class="documentation-panel">
+      <div class="panel-header">
+        <h2 class="panel-title" id="panelTitle">DME Documentation</h2>
+        <button class="close-panel" id="closePanel">&times;</button>
+      </div>
+      
+      <div id="commentSection" class="comment-section"></div>
+      
+      <div class="documentation-section">
+        <div class="section-title">Required Documentation:</div>
+        <ul id="positiveDoc" class="documentation-list"></ul>
+        
+        <div id="negativeSection">
+          <div class="section-title">Document Absence of:</div>
+          <ul id="negativeDoc" class="documentation-list"></ul>
+        </div>
+        
+        <div id="specificationsSection">
+          <div class="section-title">Specifications:</div>
+          <ul id="specifications" class="documentation-list"></ul>
+        </div>
+      </div>
+      
+      <div class="dot-phrase-section">
+        <div class="section-title">Dot Phrase:</div>
+        <textarea id="dotPhraseText" class="dot-phrase-textarea" readonly></textarea>
+        <div class="action-buttons">
+          <button id="copyButton" class="copy-button">Copy Dot Phrase</button>
+          <button id="emailButton" class="email-button">Email Dot Phrase</button>
+        </div>
+      </div>
+      
+      <button id="showDiagnoses" class="show-diagnoses">Show Recommended Diagnoses</button>
+      
+      <div id="diagnosesSection" class="diagnoses-section">
+        <div class="section-title">Recommended Diagnosis Codes:</div>
+        <table class="diagnoses-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody id="diagnosesTable"></tbody>
+        </table>
+      </div>
+    </div>
+    
     <!-- DME Items Grid -->
     <div id="dmeGrid" class="dme-grid">
       <div class="loading">Loading DME items...</div>
-    </div>
-    
-    <!-- DME Details Modal -->
-    <div id="dmeModal" class="modal">
-      <div class="modal-content">
-        <span class="close-button" id="closeModal">&times;</span>
-        <h2 id="modalTitle">DME Item Details</h2>
-        
-        <div class="tab-buttons">
-          <button class="tab-button active" data-tab="documentation">Documentation Requirements</button>
-          <button class="tab-button" data-tab="dotphrase">Dot Phrase</button>
-          <button class="tab-button" data-tab="diagnoses">Diagnoses Codes</button>
-        </div>
-        
-        <div id="documentation-tab" class="tab-content active">
-          <div id="commentSection" class="dme-comment"></div>
-          
-          <div class="documentation-title">Positive Documentation Required:</div>
-          <ul id="positiveDoc" class="documentation-list"></ul>
-          
-          <div id="negativeSection">
-            <div class="documentation-title">Document Absence of:</div>
-            <ul id="negativeDoc" class="documentation-list"></ul>
-          </div>
-          
-          <div id="specificationsSection">
-            <div class="documentation-title">Specifications:</div>
-            <ul id="specifications" class="documentation-list"></ul>
-          </div>
-        </div>
-        
-        <div id="dotphrase-tab" class="tab-content">
-          <div class="dot-phrase-section">
-            <div class="documentation-title">Dot Phrase for EHR System:</div>
-            <textarea id="dotPhraseText" class="dot-phrase-textarea" readonly></textarea>
-            <div class="action-buttons">
-              <button id="copyButton" class="copy-button">Copy Dot Phrase</button>
-              <button id="emailButton" class="email-button">Email Dot Phrase</button>
-            </div>
-            <div id="emailForm" class="email-form">
-              <input type="email" id="emailInput" class="email-input" placeholder="Enter your email address" autocomplete="on">
-              <button id="sendButton" class="send-button">Send Dot Phrase</button>
-            </div>
-          </div>
-        </div>
-        
-        <div id="diagnoses-tab" class="tab-content">
-          <div class="diagnoses">
-            <div class="diagnoses-title">Recommended Diagnosis Codes:</div>
-            <table class="diagnoses-table">
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody id="diagnosesTable"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -428,10 +337,9 @@
     
     // DOM Elements
     const dmeGrid = document.getElementById("dmeGrid");
-    const searchBox = document.getElementById("searchBox");
-    const modal = document.getElementById("dmeModal");
-    const closeModal = document.getElementById("closeModal");
-    const modalTitle = document.getElementById("modalTitle");
+    const documentationPanel = document.getElementById("documentationPanel");
+    const closePanel = document.getElementById("closePanel");
+    const panelTitle = document.getElementById("panelTitle");
     const commentSection = document.getElementById("commentSection");
     const positiveDoc = document.getElementById("positiveDoc");
     const negativeSection = document.getElementById("negativeSection");
@@ -439,21 +347,14 @@
     const specificationsSection = document.getElementById("specificationsSection");
     const specifications = document.getElementById("specifications");
     const dotPhraseText = document.getElementById("dotPhraseText");
+    const diagnosesSection = document.getElementById("diagnosesSection");
+    const showDiagnoses = document.getElementById("showDiagnoses");
     const diagnosesTable = document.getElementById("diagnosesTable");
-    const tabButtons = document.querySelectorAll(".tab-button");
-    const tabContents = document.querySelectorAll(".tab-content");
     const copyButton = document.getElementById("copyButton");
     const emailButton = document.getElementById("emailButton");
-    const emailForm = document.getElementById("emailForm");
-    const emailInput = document.getElementById("emailInput");
-    const sendButton = document.getElementById("sendButton");
     
     // Event Listeners
     document.addEventListener("DOMContentLoaded", initializeApp);
-    
-    searchBox.addEventListener("input", function() {
-      filterDMEItems();
-    });
     
     // Category buttons
     document.getElementById("all-category").addEventListener("click", function() {
@@ -484,30 +385,20 @@
       setActiveCategory("nebulizer");
     });
     
-    // Modal events
-    closeModal.addEventListener("click", function() {
-      modal.style.display = "none";
+    // Panel events
+    closePanel.addEventListener("click", function() {
+      documentationPanel.style.display = "none";
     });
     
-    window.addEventListener("click", function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
+    // Toggle diagnoses section
+    showDiagnoses.addEventListener("click", function() {
+      if (diagnosesSection.style.display === "block") {
+        diagnosesSection.style.display = "none";
+        this.textContent = "Show Recommended Diagnoses";
+      } else {
+        diagnosesSection.style.display = "block";
+        this.textContent = "Hide Recommended Diagnoses";
       }
-    });
-    
-    // Tab navigation
-    tabButtons.forEach(button => {
-      button.addEventListener("click", function() {
-        const tabId = this.getAttribute("data-tab");
-        
-        // Update active tab button
-        tabButtons.forEach(btn => btn.classList.remove("active"));
-        this.classList.add("active");
-        
-        // Update active tab content
-        tabContents.forEach(content => content.classList.remove("active"));
-        document.getElementById(tabId + "-tab").classList.add("active");
-      });
     });
     
     // Copy button
@@ -520,27 +411,14 @@
     
     // Email button
     emailButton.addEventListener("click", function() {
-      if (emailForm.style.display === "block") {
-        emailForm.style.display = "none";
-      } else {
-        emailForm.style.display = "block";
-      }
-    });
-    
-    // Send email button
-    sendButton.addEventListener("click", function() {
-      const email = emailInput.value;
-      if (!email || !email.includes("@")) {
-        alert("Please enter a valid email address");
-        return;
-      }
+      const dotPhrase = dotPhraseText.value;
+      const subject = "DME Documentation Dot Phrase: " + currentDME.showName;
       
-      // In a real application, you would send this to your server
-      alert(`Dot phrase would be sent to ${email}\n\nThis is a simulation - in a real application, an API call would send the email.`);
+      // Create a mailto link
+      const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(dotPhrase)}`;
       
-      // Clear input and hide form
-      emailInput.value = "";
-      emailForm.style.display = "none";
+      // Open the user's email client
+      window.location.href = mailtoLink;
     });
     
     // App Functions
@@ -585,81 +463,46 @@
       });
       document.getElementById(category + "-category").classList.add("active");
       
+      // Hide the documentation panel
+      documentationPanel.style.display = "none";
+      
       // Re-render the DME grid
       renderDMEGrid();
     }
     
-    function filterDMEItems() {
-      renderDMEGrid();
-    }
-    
     function renderDMEGrid() {
-      const searchTerm = searchBox.value.toLowerCase();
-      
-      // Filter items based on search term and current category
+      // Filter items based on current category
       const filteredItems = dmeData.filter(item => {
-        const matchesSearch = !searchTerm || 
-          item.name.toLowerCase().includes(searchTerm) || 
-          item.showName.toLowerCase().includes(searchTerm) ||
-          (item.comment && item.comment.toLowerCase().includes(searchTerm));
-        
-        const matchesCategory = currentCategory === "all" || item.category === currentCategory;
-        
-        return matchesSearch && matchesCategory;
+        return currentCategory === "all" || item.category === currentCategory;
       });
       
       if (filteredItems.length === 0) {
-        dmeGrid.innerHTML = `<div class="no-results">No DME items found matching your search criteria.</div>`;
+        dmeGrid.innerHTML = `<div class="no-results">No DME items found in this category.</div>`;
         return;
       }
       
-      // Build HTML for each DME card
+      // Build HTML for each DME button
       let html = '';
       filteredItems.forEach(item => {
         html += `
           <div class="dme-card ${item.category}">
-            <div class="dme-header">${item.name}</div>
-            ${item.comment ? `<div class="dme-comment">${item.comment}</div>` : ''}
-            <div class="dme-content">
-              <div class="category-label">${getCategoryDisplayName(item.category)}</div>
-              <strong>Documentation Required:</strong>
-              <ul class="documentation-list">
-                ${item.positive_documentation.slice(0, 2).map(doc => `<li>${doc}</li>`).join('')}
-                ${item.positive_documentation.length > 2 ? `<li>... and ${item.positive_documentation.length - 2} more requirements</li>` : ''}
-              </ul>
-            </div>
-            <div class="dme-footer">
-              <button class="view-button" data-dme="${item.name}">View Documentation</button>
-            </div>
+            <button class="dme-button" data-dme="${item.name}">${item.showName}</button>
           </div>
         `;
       });
       
       dmeGrid.innerHTML = html;
       
-      // Add event listeners to view buttons
-      document.querySelectorAll(".view-button").forEach(button => {
+      // Add event listeners to DME buttons
+      document.querySelectorAll(".dme-button").forEach(button => {
         button.addEventListener("click", function() {
           const dmeName = this.getAttribute("data-dme");
-          openDMEDetails(dmeName);
+          showDocumentation(dmeName);
         });
       });
     }
     
-    function getCategoryDisplayName(category) {
-      const categoryNames = {
-        "mobility": "Mobility Equipment",
-        "support_surfaces": "Support Surfaces",
-        "hospital_beds": "Hospital Beds",
-        "oxygen": "Oxygen Equipment",
-        "respiratory": "Respiratory Equipment",
-        "nebulizer": "Nebulizers"
-      };
-      
-      return categoryNames[category] || "Other";
-    }
-    
-    function openDMEDetails(dmeName) {
+    function showDocumentation(dmeName) {
       // Find the DME item
       const dmeItem = dmeData.find(item => item.name === dmeName);
       if (!dmeItem) {
@@ -669,8 +512,8 @@
       
       currentDME = dmeItem;
       
-      // Update modal title
-      modalTitle.textContent = dmeItem.name;
+      // Update panel title
+      panelTitle.textContent = dmeItem.name;
       
       // Update comment section
       if (dmeItem.comment) {
@@ -706,6 +549,10 @@
       // Generate and update dot phrase
       dotPhraseText.value = formatDotPhrase(dmeItem);
       
+      // Reset diagnoses section
+      diagnosesSection.style.display = "none";
+      showDiagnoses.textContent = "Show Recommended Diagnoses";
+      
       // Update diagnoses table
       if (dmeItem.recommended_diagnoses && dmeItem.recommended_diagnoses.length > 0) {
         let diagnosesHtml = '';
@@ -718,24 +565,23 @@
           `;
         });
         diagnosesTable.innerHTML = diagnosesHtml;
+        showDiagnoses.style.display = "block";
       } else {
         diagnosesTable.innerHTML = '<tr><td colspan="2">No recommended diagnoses available</td></tr>';
+        showDiagnoses.style.display = "none";
       }
       
-      // Reset to first tab
-      tabButtons.forEach(btn => btn.classList.remove("active"));
-      tabContents.forEach(content => content.classList.remove("active"));
-      document.querySelector('[data-tab="documentation"]').classList.add("active");
-      document.getElementById("documentation-tab").classList.add("active");
+      // Show the documentation panel
+      documentationPanel.style.display = "block";
       
-      // Show the modal
-      modal.style.display = "block";
+      // Scroll to the panel
+      documentationPanel.scrollIntoView({ behavior: 'smooth' });
     }
     
     function formatDotPhrase(dme) {
       const dmeId = dme.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
       let result = `.DME_${dmeId}\n`;
-      result += `*** Documentation for ${dme.name} ***\n\n`;
+      result += `Documentation for ${dme.name}\n\n`;
       
       if (dme.comment) {
         result += `Note: ${dme.comment}\n\n`;
@@ -761,16 +607,6 @@
         result += "\nSPECIFICATIONS:\n";
         for (const [key, value] of Object.entries(dme.specifications)) {
           result += `${key}: ${value}\n`;
-        }
-      }
-      
-      if (dme.recommended_diagnoses && dme.recommended_diagnoses.length > 0) {
-        result += "\nRECOMMENDED DIAGNOSES:\n";
-        dme.recommended_diagnoses.slice(0, 5).forEach(dx => {
-          result += `${dx.code}: ${dx.description}\n`;
-        });
-        if (dme.recommended_diagnoses.length > 5) {
-          result += `...and ${dme.recommended_diagnoses.length - 5} more diagnosis codes\n`;
         }
       }
       
