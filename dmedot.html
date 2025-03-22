@@ -166,6 +166,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      cursor: pointer; /* Make the entire header clickable */
     }
     .diagnoses-title {
       font-weight: bold;
@@ -290,7 +291,7 @@
       
       <!-- Diagnoses Section (Now at the top) -->
       <div id="diagnosesSection" class="diagnoses-section">
-        <div class="diagnoses-header">
+        <div class="diagnoses-header" id="diagnosesHeader">
           <div class="diagnoses-title">Recommended Diagnosis Codes</div>
           <button id="toggleDiagnoses" class="toggle-diagnoses">+</button>
         </div>
@@ -378,15 +379,25 @@
     });
     
     // Toggle diagnoses section
-    toggleDiagnoses.addEventListener("click", function() {
+    toggleDiagnoses.addEventListener("click", function(e) {
+      e.stopPropagation(); // Prevent the header click event from firing
+      toggleDiagnosesVisibility();
+    });
+    
+    // Make the entire header clickable
+    document.getElementById("diagnosesHeader").addEventListener("click", function() {
+      toggleDiagnosesVisibility();
+    });
+    
+    function toggleDiagnosesVisibility() {
       if (diagnosesContent.style.display === "block") {
         diagnosesContent.style.display = "none";
-        this.textContent = "+";
+        toggleDiagnoses.textContent = "+";
       } else {
         diagnosesContent.style.display = "block";
-        this.textContent = "−";
+        toggleDiagnoses.textContent = "−";
       }
-    });
+    }
     
     // Copy button
     copyButton.addEventListener("click", function() {
@@ -580,14 +591,6 @@
         for (const [key, value] of Object.entries(dme.specifications)) {
           result += `• ${key}: ${value}\n`;
         }
-      }
-      
-      // Add recommended diagnoses to the dot phrase
-      if (dme.recommended_diagnoses && dme.recommended_diagnoses.length > 0) {
-        result += "\nRECOMMENDED DIAGNOSIS CODES:\n";
-        dme.recommended_diagnoses.forEach((dx) => {
-          result += `• ${dx.code}: ${dx.description}\n`;
-        });
       }
       
       return result;
