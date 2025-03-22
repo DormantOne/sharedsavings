@@ -589,8 +589,8 @@
       
       result += "REQUIRED DOCUMENTATION:\n";
       if (dme.positive_documentation && dme.positive_documentation.length > 0) {
-        dme.positive_documentation.forEach((doc, index) => {
-          result += `${index + 1}. ${doc}\n`;
+        dme.positive_documentation.forEach((doc) => {
+          result += `• ${doc}\n`;
         });
       } else {
         result += "No specific documentation requirements listed.\n";
@@ -598,15 +598,15 @@
       
       if (dme.negative_documentation && dme.negative_documentation.length > 0) {
         result += "\nDOCUMENT ABSENCE OF:\n";
-        dme.negative_documentation.forEach((doc, index) => {
-          result += `${index + 1}. ${doc}\n`;
+        dme.negative_documentation.forEach((doc) => {
+          result += `• ${doc}\n`;
         });
       }
       
       if (dme.specifications) {
         result += "\nSPECIFICATIONS:\n";
         for (const [key, value] of Object.entries(dme.specifications)) {
-          result += `${key}: ${value}\n`;
+          result += `• ${key}: ${value}\n`;
         }
       }
       

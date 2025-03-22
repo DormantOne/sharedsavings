@@ -99,7 +99,6 @@
         "Limited mobility - Patient cannot independently make changes in body position significant enough to alleviate pressure",
         "If patient meets limited mobility or pressure ulcer criteria, they must also have at least one of the following: impaired nutritional status, fecal or urinary incontinence, altered sensory perception, or compromised circulatory status"
       ],
-      "negative_documentation": [],
       "recommended_diagnoses": [
         {"code": "L89.150", "description": "Pressure ulcer of sacral region, unstageable"},
         {"code": "L89.153", "description": "Pressure ulcer of sacral region, stage 3"},
@@ -122,13 +121,11 @@
       "comment": "Powered pressure-reducing support surfaces including alternating pressure mattresses and low air loss mattresses",
       "positive_documentation": [
         "Prior authorization is REQUIRED for all types of Group 2 support surfaces prior to delivery (decision takes a minimum of 5 days)",
-        "Patient must meet criteria 1 AND 2 OR criteria 3 OR criteria 4 below:",
-        "1. Multiple stage 2 pressure ulcers located on trunk or pelvis that have failed to improve over the last month AND",
-        "2. Patient has been on a comprehensive ulcer treatment program for at least the past month including: use of appropriate Group 1 support surface; regular assessment; appropriate turning, positioning, and wound care; moisture and incontinence management; and nutritional assessment and intervention",
-        "3. Large or multiple stage 3 or 4 pressure ulcer(s) on the trunk or pelvis",
-        "4. Recent myocutaneous flap or skin graft for a pressure ulcer on the trunk or pelvis (surgery within the past 60 days) AND patient has been on a Group 2 or 3 support surface immediately prior to discharge from the hospital or nursing facility (discharge within the past 30 days)"
+        "Patient must meet any of the following criteria:",
+        "Multiple stage 2 pressure ulcers located on trunk or pelvis that have failed to improve over the last month AND patient has been on a comprehensive ulcer treatment program for at least the past month including: use of appropriate pressure-relieving surface; regular assessment; appropriate turning, positioning, and wound care; moisture and incontinence management; and nutritional assessment and intervention",
+        "Large or multiple stage 3 or 4 pressure ulcer(s) on the trunk or pelvis",
+        "Recent myocutaneous flap or skin graft for a pressure ulcer on the trunk or pelvis (surgery within the past 60 days) AND patient has been on a support surface immediately prior to discharge from the hospital or nursing facility (discharge within the past 30 days)"
       ],
-      "negative_documentation": [],
       "recommended_diagnoses": [
         {"code": "L89.152", "description": "Pressure ulcer of sacral region, stage 2"},
         {"code": "L89.153", "description": "Pressure ulcer of sacral region, stage 3"},
@@ -151,16 +148,15 @@
       "comment": "Complete bed systems that use the circulation of filtered air through silicone beads to create a fluid-like environment",
       "positive_documentation": [
         "Patient must meet ALL of the following criteria:",
-        "1. Stage 3 (full-thickness tissue loss) or stage 4 (deep tissue destruction) pressure sore",
-        "2. Bedridden or chair bound as a result of severely limited mobility",
-        "3. In absence of an air-fluidized bed, the patient would require institutionalization",
-        "4. The air-fluidized bed is ordered in writing by the patient's attending physician based upon a comprehensive assessment and evaluation of the patient after conservative treatment has been tried without success",
-        "5. Conservative treatment should generally include: frequent repositioning; use of Group 2 surface; management; nutritional optimization; education of patient and caregiver on prevention/management of pressure ulcers; and assessment by physician, nurse, or other licensed health care practitioner at least weekly",
-        "6. A trained adult caregiver is available to assist with activities of daily living, fluid balance, dietary needs, prescribed treatments, and management of air-fluidized bed system",
-        "7. A treating practitioner directs the home treatment regimen and reevaluates and recertifies the need for the air-fluidized bed on a monthly basis",
-        "8. All other alternative equipment has been considered and ruled out"
+        "Stage 3 (full-thickness tissue loss) or stage 4 (deep tissue destruction) pressure sore",
+        "Bedridden or chair bound as a result of severely limited mobility",
+        "In absence of an air-fluidized bed, the patient would require institutionalization",
+        "The air-fluidized bed is ordered in writing by the patient's attending physician based upon a comprehensive assessment and evaluation of the patient after conservative treatment has been tried without success",
+        "Conservative treatment should generally include: frequent repositioning; use of pressure-reducing surface; management; nutritional optimization; education of patient and caregiver on prevention/management of pressure ulcers; and assessment by physician, nurse, or other licensed health care practitioner at least weekly",
+        "A trained adult caregiver is available to assist with activities of daily living, fluid balance, dietary needs, prescribed treatments, and management of air-fluidized bed system",
+        "A treating practitioner directs the home treatment regimen and reevaluates and recertifies the need for the air-fluidized bed on a monthly basis",
+        "All other alternative equipment has been considered and ruled out"
       ],
-      "negative_documentation": [],
       "recommended_diagnoses": [
         {"code": "L89.153", "description": "Pressure ulcer of sacral region, stage 3"},
         {"code": "L89.154", "description": "Pressure ulcer of sacral region, stage 4"},
@@ -187,7 +183,6 @@
         "Patient requires the head of the bed to be elevated more than 30 degrees most of the time because of congestive heart failure (CHF), chronic obstructive pulmonary disease (COPD), or problems with aspiration",
         "Patient requires traction equipment that can only be attached to a hospital bed"
       ],
-      "negative_documentation": [],
       "recommended_diagnoses": [
         {"code": "I50.9", "description": "Heart failure, unspecified"},
         {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
@@ -209,11 +204,13 @@
       "category": "hospital_beds",
       "comment": "Hospital bed with electric motor to adjust head and foot positions, but manual height adjustment. Medicare does not cover full electric beds.",
       "positive_documentation": [
-        "Patient meets one of the criteria for a fixed-height hospital bed AND",
+        "Patient has a medical condition which requires positioning of the body in ways not feasible with an ordinary bed",
+        "Patient requires positioning of the body in ways not feasible with an ordinary bed in order to alleviate pain",
+        "Patient requires the head of the bed to be elevated more than 30 degrees most of the time because of congestive heart failure (CHF), chronic obstructive pulmonary disease (COPD), or problems with aspiration",
+        "Patient requires traction equipment that can only be attached to a hospital bed",
         "Patient requires frequent changes in body position to alleviate pain, pressure, or aspiration",
         "If a heavy-duty-type bed is medically necessary, the weight must be at least 350 pounds and must be documented"
       ],
-      "negative_documentation": [],
       "recommended_diagnoses": [
         {"code": "I50.9", "description": "Heart failure, unspecified"},
         {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
@@ -260,7 +257,7 @@
       "name": "Walker",
       "showName": "Walker",
       "category": "mobility",
-      "comment": "Specialty wallets (heavy duty, wheeled) are only covered if patient meets criteria for a walker but cannot use standard due to severe neurologic disorder or restricted use of one hand.",
+      "comment": "Specialty walkers (heavy duty, wheeled) are only covered if patient meets criteria for a walker but cannot use standard due to severe neurologic disorder or restricted use of one hand.",
       "positive_documentation": [
         "Beneficiary has a mobility limitation that impairs the ability to participate in at least one mobility-related activity of daily living (MRADL) in the home",
         "Beneficiary has a mobility limitation that cannot be corrected with a cane and has a significant impact on the ability to perform MRADL in the home",
@@ -290,14 +287,13 @@
       "category": "mobility",
       "comment": "Medicare pays for the least costly alternative. Heavy duty is covered if weight is greater than 250 pounds. Extra heavy duty is covered if weight is greater than 300 pounds.",
       "positive_documentation": [
-        "All the requirements below must be met for a standard manual wheelchair:",
         "The beneficiary has a mobility limitation that significantly impairs their ability to participate in one or more MRADLs such as toileting, feeding, dressing, grooming, and bathing in customary locations in the home",
         "The beneficiary's mobility limitation cannot be sufficiently resolved by the use of an appropriately fitted cane or walker",
         "Use of a manual wheelchair will significantly improve the beneficiary's ability to participate in MRADLs and the beneficiary will use it on a regular basis in the home",
         "Beneficiary's home provides adequate access between rooms for use of the manual wheelchair",
         "The beneficiary has not expressed an unwillingness to use the manual wheelchair",
-        "In addition to the above, one of the following: The beneficiary has sufficient upper extremity function and other physical and mental capabilities needed to safely propel the manual wheelchair, OR has a caregiver who is available and willing to provide assistance with wheelchair",
-        "The beneficiary MUST be independent in self-propelling with the lightweight wheelchair (cannot use a proxy safety for caregiver convenience)"
+        "The beneficiary has sufficient upper extremity function and other physical and mental capabilities needed to safely propel the manual wheelchair, OR has a caregiver who is available and willing to provide assistance with wheelchair",
+        "For lightweight wheelchair: The beneficiary MUST be independent in self-propelling with the lightweight wheelchair (cannot use a proxy safety for caregiver convenience)"
       ],
       "specifications": {
         "standard": "Base needs: 250-pound weight capacity, lifetime on frame, 12-month on parts",
@@ -391,7 +387,7 @@
       "positive_documentation": [
         "The medical need is clear for any medical condition",
         "The treating practitioner has ordered and evaluated the results of the qualifying blood gas study performed at the time of need",
-        "The beneficiary's blood gas study meets criteria for Group 1 (arterial blood gas PO2 at/below 55 mmHg, or arterial saturation at/below 88%, taken at rest, during exercise, or during sleep)",
+        "The beneficiary's blood gas study meets criteria for Group 1: arterial blood gas PO2 at/below 55 mmHg, or arterial saturation at/below 88%, taken at rest, during exercise, or during sleep",
         "The provision of oxygen therapy and equipment in the home setting will improve the beneficiary's condition",
         "Testing performed by a qualified provider or laboratory service that can bill Medicare such as an independent diagnostic testing facility (IDTF)",
         "Study must have been performed at time of need",
@@ -423,13 +419,12 @@
       "category": "oxygen",
       "comment": "Requires reevaluation and repeat qualifying blood gas test by the treating practitioner between the 61st and 90th day after initiation of therapy and a new CMN by the prescribing practitioner.",
       "positive_documentation": [
-        "Absence of criteria outlined in Group 1 above",
-        "A medical record that supports physiologic, cognitive, and/or functional symptoms documented in high-quality peer-reviewed literature to be improved by oxygen therapy, such as nocturnal restlessness, foot drop, etc.",
         "Arterial blood gas PO2 of 56-59 mm Hg or oxygen saturation of 89% at rest, while awake, during sleep for 5 minutes, or during exercise",
+        "A medical record that supports physiologic, cognitive, and/or functional symptoms documented in high-quality peer-reviewed literature to be improved by oxygen therapy, such as nocturnal restlessness, foot drop, etc.",
         "At least one of the following conditions must be documented:",
-        "1. Dependent edema suggesting CHF",
-        "2. Pulmonary hypertension or cor pulmonale, determined by measurement of pulmonary artery pressure, echocardiogram, or 'P' pulmonale on EKG",
-        "3. Erythrocythemia with hematocrit greater than 56%"
+        "Dependent edema suggesting CHF",
+        "Pulmonary hypertension or cor pulmonale, determined by measurement of pulmonary artery pressure, echocardiogram, or 'P' pulmonale on EKG",
+        "Erythrocythemia with hematocrit greater than 56%"
       ],
       "recommended_diagnoses": [
         {"code": "I50.9", "description": "Heart failure, unspecified"},
@@ -458,10 +453,10 @@
       ],
       "negative_documentation": [
         "Oxygen will be denied as not reasonable and necessary if any of the following conditions are present:",
-        "1. Angina pectoris in the absence of hypoxemia",
-        "2. Dyspnea without cor pulmonale or evidence of hypoxemia",
-        "3. Severe peripheral vascular disease resulting in clinically evident desaturation in one or more extremities but in the absence of systemic hypoxemia",
-        "4. Terminal illnesses that do not affect the ability to breathe"
+        "Angina pectoris in the absence of hypoxemia",
+        "Dyspnea without cor pulmonale or evidence of hypoxemia",
+        "Severe peripheral vascular disease resulting in clinically evident desaturation in one or more extremities but in the absence of systemic hypoxemia",
+        "Terminal illnesses that do not affect the ability to breathe"
       ],
       "recommended_diagnoses": [
         {"code": "G44.009", "description": "Cluster headache syndrome, unspecified, not intractable"},
@@ -539,12 +534,12 @@
       "comment": "There are 4 different clinical groups characterized for Respiratory Assist Devices (RADs). RADs are BiPAP (Bi-level Positive Airway Pressure) devices that provide ventilatory assistance for patients with breathing disorders.",
       "positive_documentation": [
         "Documentation must show all of the following:",
-        "1. Neuromuscular disease OR thoracic cage abnormality, AND",
-        "2. One of the following:",
-        "   a. Arterial blood gas (ABG) PaCO₂ while awake and breathing patient's prescribed FiO₂ is greater than 45 mm Hg, OR",
-        "   b. Sleep oximetry demonstrates oxygen saturation less than 88% for more than 5 minutes nocturnal, while breathing prescribed FiO₂, OR",
-        "   c. For neuromuscular disease only: Maximal inspiratory pressure less than 60 cm H₂O OR forced vital capacity less than 50% predicted",
-        "3. COPD does not contribute significantly to patient's pulmonary function"
+        "Neuromuscular disease OR thoracic cage abnormality",
+        "One of the following:",
+        "Arterial blood gas (ABG) PaCO₂ while awake and breathing patient's prescribed FiO₂ is greater than 45 mm Hg, OR",
+        "Sleep oximetry demonstrates oxygen saturation less than 88% for more than 5 minutes nocturnal, while breathing prescribed FiO₂, OR",
+        "For neuromuscular disease only: Maximal inspiratory pressure less than 60 cm H₂O OR forced vital capacity less than 50% predicted",
+        "COPD does not contribute significantly to patient's pulmonary function"
       ],
       "recommended_diagnoses": [
         {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
@@ -567,21 +562,21 @@
       "category": "respiratory",
       "comment": "BiPAP without backup rate (E0470): Covered when the patient has clinical evidence of COPD and meets specified criteria. BiPAP with backup rate (E0471): Covered for COPD in specific situations.",
       "positive_documentation": [
-        "BiPAP without backup rate (E0470):",
-        "1. ABG PaCO₂ while awake and breathing patient's prescribed FiO₂ greater than 52 mm Hg, AND",
-        "2. Sleep oximetry demonstrates oxygen saturation of less than or equal to 88% for at least 5 minutes nocturnal while breathing at 2 lpm or the patient's prescribed FiO₂ (whichever is higher), AND",
-        "3. Prior to initiating therapy, OSA and treatment with a continuous positive airway pressure device (CPAP) has been considered and ruled out. (Note: formal sleep testing is not required, but there is sufficient information in the medical record to demonstrate that the beneficiary has COPD rather than a form of sleep apnea, including obstructive sleep apnea, CSA, or CompSA, as the predominant cause of awake hypoventilation or nocturnal arterial oxygen desaturation)",
+        "BiPAP without backup rate (E0470) requirements:",
+        "ABG PaCO₂ while awake and breathing patient's prescribed FiO₂ greater than 52 mm Hg",
+        "Sleep oximetry demonstrates oxygen saturation of less than or equal to 88% for at least 5 minutes nocturnal while breathing at 2 lpm or the patient's prescribed FiO₂ (whichever is higher)",
+        "Prior to initiating therapy, OSA and treatment with a continuous positive airway pressure device (CPAP) has been considered and ruled out",
+        "There is sufficient information in the medical record to demonstrate that the beneficiary has COPD rather than a form of sleep apnea, including obstructive sleep apnea, CSA, or CompSA, as the predominant cause of awake hypoventilation or nocturnal arterial oxygen desaturation",
         
-        "BiPAP with backup rate (E0471):",
-        "Covered for COPD in the following 2 situations:",
+        "BiPAP with backup rate (E0471) requirements - either of the following situations:",
         
-        "Situation 1 - BiPAP with backup rate started any time after a period of initial use of BiPAP without backup rate if both A and B are met:",
-        "A. ABG PaCO₂, done while awake and breathing beneficiary's prescribed FiO₂, shows that the beneficiary's PaCO₂ worsened greater than or equal to 7 mm Hg compared to original result in above, AND",
-        "B. Sleep oximetry demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording 2 hours) while using BiPAP without backup rate that is not caused by obstructive upper airway events",
+        "Situation 1 - After initial use of BiPAP without backup rate:",
+        "ABG PaCO₂ done while awake breathing beneficiary's prescribed FiO₂ shows that the beneficiary's PaCO₂ worsened by 7 mm Hg or more compared to the original result",
+        "Sleep oximetry demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording 2 hours) while using BiPAP without backup rate, not caused by obstructive upper airway events",
         
-        "Situation 2 - BiPAP with backup rate no sooner than 61 days after initial use of BiPAP without backup rate if both A and B are met:",
-        "A. ABG PaCO₂ done while awake and breathing beneficiary's prescribed FiO₂, still remains greater than or equal to 52 mm Hg, AND",
-        "B. Sleep oximetry while breathing with BiPAP without backup rate, demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) while breathing oxygen at 2 lpm or prescribed FiO₂, whichever is higher"
+        "Situation 2 - After 61 days of BiPAP without backup rate:",
+        "ABG PaCO₂ done while awake and breathing beneficiary's prescribed FiO₂ still remains greater than or equal to 52 mm Hg",
+        "Sleep oximetry while breathing with BiPAP without backup rate demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) while breathing oxygen at 2 lpm or prescribed FiO₂, whichever is higher"
       ],
       "recommended_diagnoses": [
         {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
@@ -604,32 +599,23 @@
       "category": "respiratory",
       "comment": "Prior to initiating therapy, a complete, facility-based, attended polysomnogram must be performed documenting both A and B. BiPAP with backup rate is typically required for these conditions.",
       "positive_documentation": [
-        "A. Diagnosis of central sleep apnea (CSA) or complex sleep apnea (CompSA), AND",
-        "B. Significant improvement of the sleep-associated hypoventilation with the tested PAP with or without backup rate while breathing prescribed FiO₂",
+        "Diagnosis of central sleep apnea (CSA) or complex sleep apnea (CompSA)",
+        "Significant improvement of the sleep-associated hypoventilation with the tested PAP with or without backup rate while breathing prescribed FiO₂",
         
-        "For either CSA or CompSA, the sleep study must identify the central apnea-central hypopnea index (CAHI) defined below.",
+        "For either CSA or CompSA, the sleep study must identify the central apnea-central hypopnea index (CAHI)",
         
-        "Central sleep apnea (CSA) is defined as:",
-        "1. An AHI greater than or equal to 5, AND",
-        "2. The sum total of central apneas plus central hypopneas is greater than 50% of the total apneas and hypopneas, AND",
-        "3. A CAHI is greater than or equal to 5 per hour, AND",
-        "4. Presence of at least one of the following:",
-        "   • Sleepiness",
-        "   • Difficulty initiating or maintaining sleep, frequent awakenings, or nonrestorative sleep",
-        "   • Awakening short of breath",
-        "   • Snoring",
-        "   • Witnessed apneas",
-        "5. There is no evidence of daytime or nocturnal hypoventilation",
+        "Central sleep apnea (CSA) is defined by all of the following:",
+        "An AHI greater than or equal to 5",
+        "The sum total of central apneas plus central hypopneas is greater than 50% of the total apneas and hypopneas",
+        "A central apnea-central hypopnea index (CAHI) is greater than or equal to 5 per hour",
+        "Presence of at least one of the following symptoms: sleepiness; difficulty initiating or maintaining sleep; frequent awakenings or nonrestorative sleep; awakening short of breath; snoring; or witnessed apneas",
+        "There is no evidence of daytime or nocturnal hypoventilation",
         
-        "For diagnosis of CSA, the central CAHI is defined as the average number of episodes of central apneas and central hypopneas per hour of sleep without the use of a positive airway pressure device.",
-        
-        "Complex sleep apnea (CompSA) is a form of central apnea specifically identified by all of the following:",
-        "1. With use of a positive airway pressure device without a backup rate (E0601 or E0470):",
-        "   a. PSG shows a pattern of apneas and hypopneas that demonstrates the persistence or emergence of central apneas or central hypopneas upon exposure to CPAP (E0601) or a BiPAP without backup rate (E0470) device titration to the point where obstructive events have been effectively treated (obstructive AHI less than 5 per hour)",
-        "   b. After resolution of the obstructive events, the sum total of central apneas plus central hypopneas is greater than 50% of the total apneas and hypopneas; and",
-        "   c. After resolution of the obstructive events, the CAHI greater than or equal to 5 per hour",
-        
-        "For CompSA, the CAHI is determined during the use of a positive airway pressure device after obstructive events have disappeared.",
+        "Complex sleep apnea (CompSA) is defined by all of the following:",
+        "Use of a positive airway pressure device without a backup rate (E0601 or E0470) shows a pattern of apneas and hypopneas that demonstrates the persistence or emergence of central apneas or central hypopneas upon exposure to CPAP or BiPAP without backup rate",
+        "The device has been titrated to the point where obstructive events have been effectively treated (obstructive AHI less than 5 per hour)",
+        "After resolution of the obstructive events, the sum total of central apneas plus central hypopneas is greater than 50% of the total apneas and hypopneas",
+        "After resolution of the obstructive events, the central apnea-central hypopnea index is greater than or equal to 5 per hour",
         
         "If the AHI or CAHI is calculated based on less than 2 hours of continuous recorded sleep, the total number of recorded events used to calculate the AHI or CAHI must be at least the number of events that would have been required in a 2-hour period (i.e., greater than or equal to 10 events)"
       ],
@@ -652,12 +638,13 @@
       "name": "RAD/BiPAP (Group 4 - Hypoventilation Syndrome)",
       "showName": "BiPAP - Hypoventilation",
       "category": "respiratory",
-      "comment": "BiPAP without backup rate covered if 1, 2, and either 3 or 4 are met. BiPAP with backup rate may be necessary for some patients with hypoventilation syndrome.",
+      "comment": "BiPAP without backup rate covered if all criteria are met. BiPAP with backup rate may be necessary for some patients with hypoventilation syndrome.",
       "positive_documentation": [
-        "1. ABG PaCO₂, done while awake and breathing prescribed FiO₂ is greater than or equal to 45 mm Hg, AND",
-        "2. Spirometry shows FEV1/FVC greater than or equal to 70%, AND",
-        "3. ABG PaCO₂, done during sleep or immediately upon awaking breathing prescribed FiO₂ shows the beneficiary's PaCO₂ worsened greater than or equal to 7mm Hg compared to result in criteria 1 above, OR",
-        "4. PSG demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) not caused by obstructive upper airway events"
+        "ABG PaCO₂ done while awake and breathing prescribed FiO₂ is greater than or equal to 45 mm Hg",
+        "Spirometry shows FEV1/FVC greater than or equal to 70%",
+        "And either of the following:",
+        "ABG PaCO₂ done during sleep or immediately upon awaking breathing prescribed FiO₂ shows the beneficiary's PaCO₂ worsened greater than or equal to 7mm Hg compared to the awake ABG result, OR",
+        "PSG demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) not caused by obstructive upper airway events"
       ],
       "recommended_diagnoses": [
         {"code": "E66.2", "description": "Morbid (severe) obesity with alveolar hypoventilation"},
@@ -678,12 +665,13 @@
       "name": "RAD/BiPAP with Backup Rate for Hypoventilation",
       "showName": "BiPAP with Backup Rate",
       "category": "respiratory",
-      "comment": "BiPAP with backup rate (E0471) covered if 1, 2, and either 3 or 4 are met. This continues documentation for Hypoventilation Syndrome patients who require a device with backup rate.",
+      "comment": "BiPAP with backup rate (E0471) covered if all criteria are met. This continues documentation for Hypoventilation Syndrome patients who require a device with backup rate.",
       "positive_documentation": [
-        "1. BiPAP without backup rate is being used",
-        "2. Spirometry shows FEV1/FVC greater than or equal to 70%",
-        "3. ABG PaCO₂ done while awake breathing prescribed FiO₂ shows the beneficiary's PaCO₂ worsened greater than or equal to 7 mm Hg compared to ABG determined to qualify for bilevel PAP without backup rate, OR",
-        "4. PSG demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) that is not caused by obstructive upper airway events"
+        "BiPAP without backup rate is being used",
+        "Spirometry shows FEV1/FVC greater than or equal to 70%",
+        "And either of the following:",
+        "ABG PaCO₂ done while awake breathing prescribed FiO₂ shows the beneficiary's PaCO₂ worsened greater than or equal to 7 mm Hg compared to the ABG that qualified for bilevel PAP without backup rate, OR",
+        "PSG demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) that is not caused by obstructive upper airway events"
       ],
       "recommended_diagnoses": [
         {"code": "E66.2", "description": "Morbid (severe) obesity with alveolar hypoventilation"},
@@ -707,15 +695,17 @@
       "comment": "Requirements for continued coverage beyond the first 3 months for all RAD/BiPAP devices. Re-evaluation must be conducted no sooner than 61st day after initial therapy.",
       "positive_documentation": [
         "Between 31 and 91 days of therapy, the following must occur:",
-        "1. Face-to-face clinical re-evaluation with treating practitioner documenting that symptoms of OSA are improved and the patient is benefiting from therapy",
-        "2. Objective evidence of adherence to therapy, reviewed by the treating practitioner. Adherence to therapy is defined as use for at least 4 hours per night on 70% of nights during a consecutive 30-day period anytime during the trial period",
+        "Face-to-face clinical re-evaluation with treating practitioner documenting that symptoms of OSA are improved and the patient is benefiting from therapy",
+        "Objective evidence of adherence to therapy, reviewed by the treating practitioner",
+        "Adherence to therapy is defined as use for at least 4 hours per night on 70% of nights during a consecutive 30-day period anytime during the trial period",
         
-        "If patient fails the above 3-month trial period, they need to re-qualify for PAP device and then follow the initial coverage criteria. The medical equipment supplier does not receive reimbursement where the trial period is considered failed",
+        "If patient fails the above 3-month trial period, they need to re-qualify for PAP device and then follow the initial coverage criteria",
+        "The medical equipment supplier does not receive reimbursement where the trial period is considered failed",
         
-        "If RAD device is tried and found ineffective, whether it's during the facility testing or in the home, substitution of a bilevel PAP without backup may occur according to the following:",
-        "1. If more than 30 days remaining in trial period, the length of the trial period does not change",
-        "2. If less than 30 days remaining in trial period, the length of the trial, the clinical re-evaluation and adherence to therapy must occur before the 120th day",
-        "3. If RAD device was used more than 3 months, then switched, the clinical re-evaluation must occur between the 31st-91st day following the initiation of the bilevel PAP without backup"
+        "If RAD device is tried and found ineffective, substitution of a bilevel PAP without backup may occur according to these guidelines:",
+        "If more than 30 days remaining in trial period, the length of the trial period does not change",
+        "If less than 30 days remaining in trial period, the clinical re-evaluation and adherence to therapy must occur before the 120th day",
+        "If RAD device was used more than 3 months before being switched, the clinical re-evaluation must occur between the 31st-91st day following the initiation of the bilevel PAP without backup"
       ],
       "recommended_diagnoses": [
         {"code": "G47.33", "description": "Obstructive sleep apnea (adult) (pediatric)"},
@@ -738,8 +728,8 @@
       "category": "respiratory",
       "comment": "For patients requiring simultaneous use of home oxygen therapy and a RAD device.",
       "positive_documentation": [
-        "Documentation by the treating practitioner in the medical record must clearly demonstrate that the requirements for coverage outlined in both the RAD and oxygen policy have been met",
-        "Refer to the oxygen section for coverage criteria of home oxygen therapy"
+        "Documentation by the treating practitioner in the medical record must clearly demonstrate that the requirements for coverage outlined in both the RAD policy and oxygen policy have been met",
+        "For oxygen requirements, see the separate oxygen documentation sections"
       ],
       "recommended_diagnoses": [
         {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
@@ -762,19 +752,17 @@
       "category": "respiratory",
       "comment": "For positive airway pressure or bilevel PAP without backup—the only diagnosis that is covered is obstructive sleep apnea (OSA), CPAP (E0601).",
       "positive_documentation": [
-        "For initial coverage, all 3 of the following have been met:",
-        "1. Evidence of a face-to-face evaluation by the treating practitioner prior to the sleep test to assess the patient for OSA",
-        "2. Sleep test meets either of the following:",
-        "   a. The AHI or RDI is greater than or equal to 15 events per hour with a minimum of 30 events, OR",
-        "   b. The AHI or RDI is greater than or equal to 5 and less than 15 events per hour with a minimum of 10 events and at least ONE of the following:",
-        "      i. Excessive daytime sleepiness, impaired cognition, mood disorders, insomnia, OR",
-        "      ii. Hypertension, ischemic heart disease, or history of stroke",
-        "3. The patient and/or caregiver has received instruction from the supplier on the proper use and care of the equipment",
+        "For initial coverage, all 3 of the following must be met:",
+        "Evidence of a face-to-face evaluation by the treating practitioner prior to the sleep test to assess the patient for OSA",
+        "Sleep test meets either of the following criteria:",
+        "The AHI or RDI is greater than or equal to 15 events per hour with a minimum of 30 events, OR",
+        "The AHI or RDI is greater than or equal to 5 and less than 15 events per hour with a minimum of 10 events and at least ONE of the following: excessive daytime sleepiness, impaired cognition, mood disorders, insomnia, hypertension, ischemic heart disease, or history of stroke",
+        "The patient and/or caregiver has received instruction from the supplier on the proper use and care of the equipment",
         
-       "Medicare FFS defines hypopnea as an abnormal event lasting at least 10 seconds associated with at least a 30% reduction in thoracoabdominal movement or airflow as compared to baseline, and with at least a 4% decrease in oxygen saturation",
+        "Medicare defines hypopnea as an abnormal event lasting at least 10 seconds associated with at least a 30% reduction in thoracoabdominal movement or airflow as compared to baseline, and with at least a 4% decrease in oxygen saturation",
         
-        "Coverage for these diagnoses of OSA includes:",
-        "A sleep test (Type I, II, III, IV) that meets the Medicare requirements for a valid sleep test as outlined in the NCD 240.4.1",
+        "Requirements for valid sleep tests:",
+        "The sleep test must meet Medicare requirements for a valid sleep test as outlined in the NCD 240.4.1",
         "The sleep test is ordered by the beneficiary's treating practitioner",
         "The sleep test is conducted by an entity that qualifies as a Medicare provider of sleep tests and is compliant with all applicable state regulatory requirements"
       ],
@@ -836,18 +824,18 @@
         "Patient has documented pulmonary artery hypertension (I27.0 or I27.2)", 
         "Pulmonary hypertension is not secondary to pulmonary venous hypertension or disorders of the respiratory system",
         "Patient has either primary pulmonary hypertension or pulmonary hypertension which is secondary to one of the following conditions:",
-        "1. Connective tissue disease, OR",
-        "2. Thromboembolic disease of the pulmonary arteries, OR",
-        "3. HIV infection, OR",
-        "4. Cirrhosis, OR",
-        "5. Anorexigens (diet drugs), OR",
-        "6. Congenital left to right shunts, etc.",
+        "Connective tissue disease",
+        "Thromboembolic disease of the pulmonary arteries",
+        "HIV infection",
+        "Cirrhosis",
+        "Anorexigens (diet drugs)",
+        "Congenital left to right shunts",
         
         "If one of the above conditions is present, the following criteria must also be met:",
-        "1. Pulmonary hypertension has progressed despite maximal medical and/or surgical treatment of the identified condition, AND",
-        "2. Mean pulmonary artery pressure is greater than 25 mm Hg at rest or greater than 30 mm Hg with exertion, AND",
-        "3. Patient has significant symptoms from the pulmonary hypertension (such as severe dyspnea on exertion, fatigue, angina, syncope), AND",
-        "4. Treatment with oral calcium channel blockers has been tried and failed, or has been considered and ruled out"
+        "Pulmonary hypertension has progressed despite maximal medical and/or surgical treatment of the identified condition",
+        "Mean pulmonary artery pressure is greater than 25 mm Hg at rest or greater than 30 mm Hg with exertion",
+        "Patient has significant symptoms from the pulmonary hypertension (such as severe dyspnea on exertion, fatigue, angina, syncope)",
+        "Treatment with oral calcium channel blockers has been tried and failed, or has been considered and ruled out"
       ],
       "negative_documentation": [
         "If none of the above criteria are covered, the compressor, nebulizer, and other related accessories/supplies will be denied as not reasonable and necessary"
