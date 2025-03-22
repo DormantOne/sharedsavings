@@ -1,0 +1,871 @@
+{
+  "dme": [
+    {
+      "name": "Bedside Commode",
+      "showName": "Bedside Commode",
+      "category": "mobility",
+      "positive_documentation": [
+        "Patient is room-confined or unable to get to toilet facilities",
+        "Medical need documented in patient's medical record",
+        "Patient is physically incapable of utilizing regular toilet facilities",
+        "Patient is confined to a single room OR confined to one level of home without toilet OR confined to home with no toilet facilities"
+      ],
+      "negative_documentation": [
+        "Commode is not placed next to the toilet in the bathroom"
+      ],
+      "specifications": {
+        "heavy_duty": "Width ≥ 23 inches and weight capacity ≥ 300 pounds",
+        "detachable_arms": "Required for facilitating transfers or if patient body configuration requires extra width"
+      },
+      "recommended_diagnoses": [
+        {"code": "R26.2", "description": "Difficulty in walking"},
+        {"code": "M19.90", "description": "Unspecified osteoarthritis"},
+        {"code": "M17.0", "description": "Bilateral primary osteoarthritis of knee"},
+        {"code": "I69.351", "description": "Hemiplegia following cerebral infarction"},
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "R53.1", "description": "Weakness"},
+        {"code": "M16.0", "description": "Bilateral primary osteoarthritis of hip"},
+        {"code": "R29.6", "description": "Repeated falls"},
+        {"code": "Z74.01", "description": "Bed confinement status"},
+        {"code": "G20", "description": "Parkinson's disease"},
+        {"code": "G30.9", "description": "Alzheimer's disease, unspecified"},
+        {"code": "S72.001", "description": "Fracture of hip, unspecified part"}
+      ]
+    },
+    {
+      "name": "Patient Lift",
+      "showName": "Patient Lift",
+      "category": "mobility",
+      "positive_documentation": [
+        "Transfer between bed and chair/wheelchair/commode requires assistance of more than one person",
+        "Without the use of a lift, the patient would be bed-confined"
+      ],
+      "negative_documentation": [
+        "Patient is not able to be safely transferred by one caregiver"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "G82.50", "description": "Quadriplegia, unspecified"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "I69.351", "description": "Hemiplegia following cerebral infarction"},
+        {"code": "M62.81", "description": "Muscle weakness (generalized)"},
+        {"code": "S06.2X9", "description": "Traumatic brain injury with loss of consciousness"},
+        {"code": "G20", "description": "Parkinson's disease"},
+        {"code": "G35", "description": "Multiple sclerosis"},
+        {"code": "R53.1", "description": "Weakness"},
+        {"code": "R26.2", "description": "Difficulty in walking"},
+        {"code": "Z74.01", "description": "Bed confinement status"}
+      ]
+    },
+    {
+      "name": "Lift Chair",
+      "showName": "Lift Chair",
+      "category": "mobility",
+      "positive_documentation": [
+        "Patient is able to ambulate once standing",
+        "Patient has severe arthritis of hip or knee, or severe neuromuscular disease",
+        "Chair is included in physician's course of treatment",
+        "Chair is prescribed to effect improvement or arrest deterioration",
+        "Patient is completely incapable of standing up from any chair in their home",
+        "Patient has the ability to ambulate once standing"
+      ],
+      "negative_documentation": [
+        "Patient does not use wheelchair or power operated vehicle (POV)"
+      ],
+      "recommended_diagnoses": [
+        {"code": "M17.0", "description": "Bilateral primary osteoarthritis of knee"},
+        {"code": "M16.0", "description": "Bilateral primary osteoarthritis of hip"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G20", "description": "Parkinson's disease"},
+        {"code": "M15.0", "description": "Primary generalized osteoarthritis"},
+        {"code": "G35", "description": "Multiple sclerosis"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "M45.9", "description": "Ankylosing spondylitis"},
+        {"code": "M05.79", "description": "Rheumatoid arthritis with involvement of multiple sites"},
+        {"code": "M19.90", "description": "Unspecified osteoarthritis"},
+        {"code": "G12.29", "description": "Other motor neuron disease"}
+      ]
+    },
+    {
+      "name": "Support Surface Group 1 (Standard Mattress Overlay/Replacement)",
+      "showName": "Support Surface Group 1",
+      "category": "support_surfaces",
+      "comment": "Basic non-powered pressure-reducing support surfaces including mattress overlays and mattress replacements",
+      "positive_documentation": [
+        "Patient meets at least one of the following criteria: completely immobile, limited mobility, OR any stage pressure ulcer on trunk or pelvis",
+        "Complete immobility - Patient cannot make any changes in body position without assistance",
+        "Limited mobility - Patient cannot independently make changes in body position significant enough to alleviate pressure",
+        "If patient meets limited mobility or pressure ulcer criteria, they must also have at least one of the following: impaired nutritional status, fecal or urinary incontinence, altered sensory perception, or compromised circulatory status"
+      ],
+      "negative_documentation": [],
+      "recommended_diagnoses": [
+        {"code": "L89.150", "description": "Pressure ulcer of sacral region, unstageable"},
+        {"code": "L89.153", "description": "Pressure ulcer of sacral region, stage 3"},
+        {"code": "L89.154", "description": "Pressure ulcer of sacral region, stage 4"},
+        {"code": "R26.2", "description": "Difficulty in walking"},
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "G82.50", "description": "Quadriplegia, unspecified"},
+        {"code": "R40.20", "description": "Unspecified coma"},
+        {"code": "R15.9", "description": "Fecal incontinence"},
+        {"code": "R32", "description": "Unspecified urinary incontinence"},
+        {"code": "E44.0", "description": "Moderate protein-calorie malnutrition"},
+        {"code": "I95.9", "description": "Hypotension, unspecified"},
+        {"code": "R20.0", "description": "Anesthesia of skin"}
+      ]
+    },
+    {
+      "name": "Support Surface Group 2 (Powered Air/Pressure Alternating Mattress)",
+      "showName": "Support Surface Group 2",
+      "category": "support_surfaces",
+      "comment": "Powered pressure-reducing support surfaces including alternating pressure mattresses and low air loss mattresses",
+      "positive_documentation": [
+        "Prior authorization is REQUIRED for all types of Group 2 support surfaces prior to delivery (decision takes a minimum of 5 days)",
+        "Patient must meet criteria 1 AND 2 OR criteria 3 OR criteria 4 below:",
+        "1. Multiple stage 2 pressure ulcers located on trunk or pelvis that have failed to improve over the last month AND",
+        "2. Patient has been on a comprehensive ulcer treatment program for at least the past month including: use of appropriate Group 1 support surface; regular assessment; appropriate turning, positioning, and wound care; moisture and incontinence management; and nutritional assessment and intervention",
+        "3. Large or multiple stage 3 or 4 pressure ulcer(s) on the trunk or pelvis",
+        "4. Recent myocutaneous flap or skin graft for a pressure ulcer on the trunk or pelvis (surgery within the past 60 days) AND patient has been on a Group 2 or 3 support surface immediately prior to discharge from the hospital or nursing facility (discharge within the past 30 days)"
+      ],
+      "negative_documentation": [],
+      "recommended_diagnoses": [
+        {"code": "L89.152", "description": "Pressure ulcer of sacral region, stage 2"},
+        {"code": "L89.153", "description": "Pressure ulcer of sacral region, stage 3"},
+        {"code": "L89.154", "description": "Pressure ulcer of sacral region, stage 4"},
+        {"code": "L89.313", "description": "Pressure ulcer of right buttock, stage 3"},
+        {"code": "L89.314", "description": "Pressure ulcer of right buttock, stage 4"},
+        {"code": "L89.323", "description": "Pressure ulcer of left buttock, stage 3"},
+        {"code": "L89.324", "description": "Pressure ulcer of left buttock, stage 4"},
+        {"code": "L89.893", "description": "Pressure ulcer of other site, stage 3"},
+        {"code": "L89.894", "description": "Pressure ulcer of other site, stage 4"},
+        {"code": "Z98.89", "description": "Other specified postprocedural states"},
+        {"code": "Z48.1", "description": "Encounter for planned postprocedural wound and anastomosis aftercare"},
+        {"code": "T81.31", "description": "Disruption of external operation wound, not elsewhere classified"}
+      ]
+    },
+    {
+      "name": "Support Surface Group 3 (Air-Fluidized Bed System)",
+      "showName": "Support Surface Group 3",
+      "category": "support_surfaces",
+      "comment": "Complete bed systems that use the circulation of filtered air through silicone beads to create a fluid-like environment",
+      "positive_documentation": [
+        "Patient must meet ALL of the following criteria:",
+        "1. Stage 3 (full-thickness tissue loss) or stage 4 (deep tissue destruction) pressure sore",
+        "2. Bedridden or chair bound as a result of severely limited mobility",
+        "3. In absence of an air-fluidized bed, the patient would require institutionalization",
+        "4. The air-fluidized bed is ordered in writing by the patient's attending physician based upon a comprehensive assessment and evaluation of the patient after conservative treatment has been tried without success",
+        "5. Conservative treatment should generally include: frequent repositioning; use of Group 2 surface; management; nutritional optimization; education of patient and caregiver on prevention/management of pressure ulcers; and assessment by physician, nurse, or other licensed health care practitioner at least weekly",
+        "6. A trained adult caregiver is available to assist with activities of daily living, fluid balance, dietary needs, prescribed treatments, and management of air-fluidized bed system",
+        "7. A treating practitioner directs the home treatment regimen and reevaluates and recertifies the need for the air-fluidized bed on a monthly basis",
+        "8. All other alternative equipment has been considered and ruled out"
+      ],
+      "negative_documentation": [],
+      "recommended_diagnoses": [
+        {"code": "L89.153", "description": "Pressure ulcer of sacral region, stage 3"},
+        {"code": "L89.154", "description": "Pressure ulcer of sacral region, stage 4"},
+        {"code": "L89.313", "description": "Pressure ulcer of right buttock, stage 3"},
+        {"code": "L89.314", "description": "Pressure ulcer of right buttock, stage 4"},
+        {"code": "L89.323", "description": "Pressure ulcer of left buttock, stage 3"},
+        {"code": "L89.324", "description": "Pressure ulcer of left buttock, stage 4"},
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "G82.50", "description": "Quadriplegia, unspecified"},
+        {"code": "R53.2", "description": "Functional quadriplegia"},
+        {"code": "G30.9", "description": "Alzheimer's disease, unspecified"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"}
+      ]
+    },
+    {
+      "name": "Hospital Bed (Fixed-height)",
+      "showName": "Hospital Bed - Fixed Height",
+      "category": "hospital_beds",
+      "comment": "Manual hospital bed with adjustable head and foot positions but fixed overall height",
+      "positive_documentation": [
+        "Patient has a medical condition which requires positioning of the body in ways not feasible with an ordinary bed",
+        "Patient requires positioning of the body in ways not feasible with an ordinary bed in order to alleviate pain",
+        "Patient requires the head of the bed to be elevated more than 30 degrees most of the time because of congestive heart failure (CHF), chronic obstructive pulmonary disease (COPD), or problems with aspiration",
+        "Patient requires traction equipment that can only be attached to a hospital bed"
+      ],
+      "negative_documentation": [],
+      "recommended_diagnoses": [
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J69.0", "description": "Pneumonitis due to inhalation of food and vomit"},
+        {"code": "M54.5", "description": "Low back pain"},
+        {"code": "G89.29", "description": "Other chronic pain"},
+        {"code": "M25.50", "description": "Pain in unspecified joint"},
+        {"code": "G47.33", "description": "Obstructive sleep apnea"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "G80.9", "description": "Cerebral palsy, unspecified"},
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "M84.40", "description": "Pathological fracture, unspecified site"},
+        {"code": "M19.90", "description": "Unspecified osteoarthritis, unspecified site"}
+      ]
+    },
+    {
+      "name": "Hospital Bed (Semi-electric)",
+      "showName": "Hospital Bed - Semi-electric",
+      "category": "hospital_beds",
+      "comment": "Hospital bed with electric motor to adjust head and foot positions, but manual height adjustment. Medicare does not cover full electric beds.",
+      "positive_documentation": [
+        "Patient meets one of the criteria for a fixed-height hospital bed AND",
+        "Patient requires frequent changes in body position to alleviate pain, pressure, or aspiration",
+        "If a heavy-duty-type bed is medically necessary, the weight must be at least 350 pounds and must be documented"
+      ],
+      "negative_documentation": [],
+      "recommended_diagnoses": [
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "L89.150", "description": "Pressure ulcer of sacral region, unstageable"},
+        {"code": "G89.29", "description": "Other chronic pain"},
+        {"code": "M54.5", "description": "Low back pain"},
+        {"code": "J69.0", "description": "Pneumonitis due to inhalation of food and vomit"},
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "G82.50", "description": "Quadriplegia, unspecified"},
+        {"code": "E66.01", "description": "Morbid (severe) obesity due to excess calories"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G80.9", "description": "Cerebral palsy, unspecified"}
+      ]
+    },
+    {
+      "name": "Cane",
+      "showName": "Cane",
+      "category": "mobility",
+      "comment": "Medicare pays for the least costly alternative. This information/need to be clearly documented in the medical record.",
+      "positive_documentation": [
+        "Beneficiary has a mobility limitation that impairs the ability to participate in at least one mobility-related activity of daily living (MRADL) in the home",
+        "Beneficiary has a mobility limitation that cannot be corrected with a cane and has a significant impact on the ability to perform MRADL in the home"
+      ],
+      "specifications": {
+        "heavy_duty": "Requires that patient weigh more than 300 pounds"
+      },
+      "recommended_diagnoses": [
+        {"code": "R26.2", "description": "Difficulty in walking"},
+        {"code": "M17.0", "description": "Bilateral primary osteoarthritis of knee"},
+        {"code": "M16.0", "description": "Bilateral primary osteoarthritis of hip"},
+        {"code": "R26.81", "description": "Unsteadiness on feet"},
+        {"code": "I69.351", "description": "Hemiplegia following cerebral infarction"},
+        {"code": "G20", "description": "Parkinson's disease"},
+        {"code": "M54.5", "description": "Low back pain"},
+        {"code": "R29.6", "description": "Repeated falls"},
+        {"code": "M19.90", "description": "Unspecified osteoarthritis"},
+        {"code": "G57.00", "description": "Lesion of sciatic nerve"},
+        {"code": "M48.06", "description": "Spinal stenosis, lumbar region"},
+        {"code": "S72.001D", "description": "Fracture of hip, subsequent encounter"}
+      ]
+    },
+    {
+      "name": "Walker",
+      "showName": "Walker",
+      "category": "mobility",
+      "comment": "Specialty wallets (heavy duty, wheeled) are only covered if patient meets criteria for a walker but cannot use standard due to severe neurologic disorder or restricted use of one hand.",
+      "positive_documentation": [
+        "Beneficiary has a mobility limitation that impairs the ability to participate in at least one mobility-related activity of daily living (MRADL) in the home",
+        "Beneficiary has a mobility limitation that cannot be corrected with a cane and has a significant impact on the ability to perform MRADL in the home",
+        "For heavy duty: Patient weight greater than 300 pounds"
+      ],
+      "negative_documentation": [
+        "Obesity alone is not a sufficient reason for a wheeled walker"
+      ],
+      "recommended_diagnoses": [
+        {"code": "R26.2", "description": "Difficulty in walking"},
+        {"code": "M17.0", "description": "Bilateral primary osteoarthritis of knee"},
+        {"code": "M16.0", "description": "Bilateral primary osteoarthritis of hip"},
+        {"code": "R26.81", "description": "Unsteadiness on feet"},
+        {"code": "I69.351", "description": "Hemiplegia following cerebral infarction"},
+        {"code": "G20", "description": "Parkinson's disease"},
+        {"code": "E66.01", "description": "Morbid (severe) obesity due to excess calories"},
+        {"code": "R29.6", "description": "Repeated falls"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G35", "description": "Multiple sclerosis"},
+        {"code": "M48.06", "description": "Spinal stenosis, lumbar region"},
+        {"code": "G82.20", "description": "Paraplegia, unspecified"}
+      ]
+    },
+    {
+      "name": "Manual Wheelchair (Standard)",
+      "showName": "Manual Wheelchair",
+      "category": "mobility",
+      "comment": "Medicare pays for the least costly alternative. Heavy duty is covered if weight is greater than 250 pounds. Extra heavy duty is covered if weight is greater than 300 pounds.",
+      "positive_documentation": [
+        "All the requirements below must be met for a standard manual wheelchair:",
+        "The beneficiary has a mobility limitation that significantly impairs their ability to participate in one or more MRADLs such as toileting, feeding, dressing, grooming, and bathing in customary locations in the home",
+        "The beneficiary's mobility limitation cannot be sufficiently resolved by the use of an appropriately fitted cane or walker",
+        "Use of a manual wheelchair will significantly improve the beneficiary's ability to participate in MRADLs and the beneficiary will use it on a regular basis in the home",
+        "Beneficiary's home provides adequate access between rooms for use of the manual wheelchair",
+        "The beneficiary has not expressed an unwillingness to use the manual wheelchair",
+        "In addition to the above, one of the following: The beneficiary has sufficient upper extremity function and other physical and mental capabilities needed to safely propel the manual wheelchair, OR has a caregiver who is available and willing to provide assistance with wheelchair",
+        "The beneficiary MUST be independent in self-propelling with the lightweight wheelchair (cannot use a proxy safety for caregiver convenience)"
+      ],
+      "specifications": {
+        "standard": "Base needs: 250-pound weight capacity, lifetime on frame, 12-month on parts",
+        "lightweight": "Needs manual wheelchair and standard weight cannot be used due to lower level activity or use of upper limbs for MRADLs",
+        "high-strength_lightweight": "Requires active lifestyle and activity level of use of home, plus manual wheelchair and standard/lightweight not appropriate due to weight, seat width, seat depth, seat-to-floor height",
+        "heavy_duty": "Requires manual wheelchair and patient weighs > 250 pounds",
+        "extra_heavy_duty": "Requires manual wheelchair and patient weighs > 300 pounds",
+        "transport_chair": "Covered in lieu of standard manual wheelchair for use within the home"
+      },
+      "recommended_diagnoses": [
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "G82.50", "description": "Quadriplegia, unspecified"},
+        {"code": "I69.351", "description": "Hemiplegia following cerebral infarction"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G20", "description": "Parkinson's disease"},
+        {"code": "G35", "description": "Multiple sclerosis"},
+        {"code": "R26.2", "description": "Difficulty in walking"},
+        {"code": "M48.06", "description": "Spinal stenosis, lumbar region"},
+        {"code": "M17.0", "description": "Bilateral primary osteoarthritis of knee"},
+        {"code": "M16.0", "description": "Bilateral primary osteoarthritis of hip"},
+        {"code": "E66.01", "description": "Morbid (severe) obesity due to excess calories"},
+        {"code": "R53.1", "description": "Weakness"}
+      ]
+    },
+    {
+      "name": "Ultra Lightweight Manual Wheelchair",
+      "showName": "Ultra Lightweight Wheelchair",
+      "category": "mobility",
+      "comment": "Requires assistive technology professional (ATP) and physical/occupational therapist evaluation as well as face-to-face exam by physician.",
+      "positive_documentation": [
+        "Patient must have past history of use of some type of basic and activity both inside and outside the home",
+        "Patient must be a full-time, independent, manual wheelchair user",
+        "Patient must have a specific need for features or components that are not limited to: axle configuration, wheel camber, seat and back angles which will make wheelchair safe for home and community",
+        "Need must be very specific as to what is needed on this base that is NOT available on a high-strength lightweight wheelchair"
+      ],
+      "negative_documentation": [
+        "Not covered if requested solely for leisure or recreational activities",
+        "Not covered if requested solely for sports activities"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G82.20", "description": "Paraplegia, unspecified"},
+        {"code": "G82.50", "description": "Quadriplegia, unspecified"},
+        {"code": "I69.351", "description": "Hemiplegia following cerebral infarction"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G35", "description": "Multiple sclerosis"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "S14.109S", "description": "Unspecified injury of cervical spinal cord, sequela"},
+        {"code": "Q05.4", "description": "Spina bifida, thoracolumbar"},
+        {"code": "G80.3", "description": "Athetoid cerebral palsy"},
+        {"code": "Q78.0", "description": "Osteogenesis imperfecta"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "G60.0", "description": "Hereditary motor and sensory neuropathy"}
+      ]
+    },
+    {
+      "name": "Non-Invasive Ventilator (NIV)",
+      "showName": "Non-Invasive Ventilator",
+      "category": "respiratory",
+      "comment": "Remember, Medicare only pays for the least costly alternative, which means a bilevel positive airway pressure (BiPAP) or bilevel spontaneous/timed (S/T) machine needs to be considered, or tried and ruled out. Clinical documentation must be specific to the individual patient's needs.",
+      "positive_documentation": [
+        "Treatment is needed for one of the following:",
+        "Neuromuscular disorder",
+        "Thoracic disorder diseases",
+        "Chronic respiratory failure associated with a respiratory illness such as chronic obstructive pulmonary disease (COPD)",
+        "Patient has had repeated hospital admissions due to respiratory failure",
+        "If a ventilator is used, make sure follow-up visits are documented in the medical record by the treating practitioner to show there was a decrease in admissions",
+        "Documentation is very clear and thorough as to why the patient needs a ventilator versus a respiratory assist device such as BiPAP or S/T",
+        "The medical record needs to include documentation that supports the severity of the disease and why the ventilator is the appropriate piece of equipment for the patient",
+        "The key component is painting the picture, which means tell the story of the patient's medical condition that warrants a NIV versus a bilevel PAP. Supporting documentation can include arterial blood gas (ABG), pulmonary function test (PFT), assessments by respiratory therapists (RTs) or physical therapists (PTs), nurses' notes, etc."
+      ],
+      "recommended_diagnoses": [
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified, without hypoxia or hypercapnia"},
+        {"code": "J96.11", "description": "Chronic respiratory failure, unspecified, with hypoxia"},
+        {"code": "J96.12", "description": "Chronic respiratory failure, unspecified, with hypercapnia"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G47.33", "description": "Obstructive sleep apnea"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "J84.10", "description": "Pulmonary fibrosis, unspecified"},
+        {"code": "J84.112", "description": "Idiopathic pulmonary fibrosis"},
+        {"code": "M95.4", "description": "Acquired deformity of chest and rib"},
+        {"code": "Q67.8", "description": "Other congenital deformities of chest"}
+      ]
+    },
+    {
+      "name": "Oxygen and Oxygen Equipment (Group 1 - Severe Hypoxemia)",
+      "showName": "Oxygen - Severe Hypoxemia",
+      "category": "oxygen",
+      "comment": "A new medical oxygen order (CMN) is effective for dates of service on or after January 1, 2023. The key is making sure the medical record from the patient's chart or other source including the initial need and support for home oxygen.",
+      "positive_documentation": [
+        "The medical need is clear for any medical condition",
+        "The treating practitioner has ordered and evaluated the results of the qualifying blood gas study performed at the time of need",
+        "The beneficiary's blood gas study meets criteria for Group 1 (arterial blood gas PO2 at/below 55 mmHg, or arterial saturation at/below 88%, taken at rest, during exercise, or during sleep)",
+        "The provision of oxygen therapy and equipment in the home setting will improve the beneficiary's condition",
+        "Testing performed by a qualified provider or laboratory service that can bill Medicare such as an independent diagnostic testing facility (IDTF)",
+        "Study must have been performed at time of need",
+        "Time of need is defined as during the patient's illness when prescription of home provision of oxygen will improve the patient's condition in the home setting",
+        "For an inpatient hospital on oxygen anticipated to require oxygen upon going home, the time of need would be within 2 days of discharge",
+        "Method 1: Qualifying blood gas study must document all of the following - Oxygen saturation on room air at rest at/below 88%, Oxygen saturation on room air with exercise at/below 88%, Oxygen saturation on oxygen with exercise showing improvement with oxygen",
+        "Method 2: During sleep on room air oxygen saturation equal to or less than 88%. Test must be a minimum of 2 hours of recording time",
+        "Method 3: During exercise on room air, the qualifying blood gas study that shows the patient's blood oxygen decreased to 88% or less",
+        "If patient qualifies with Method 1, the provider must document and provide all 3 test results described, otherwise the oxygen will not be covered"
+      ],
+      "recommended_diagnoses": [
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.11", "description": "Chronic respiratory failure with hypoxia"},
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "J84.112", "description": "Idiopathic pulmonary fibrosis"},
+        {"code": "J84.10", "description": "Pulmonary fibrosis, unspecified"},
+        {"code": "E84.0", "description": "Cystic fibrosis with pulmonary manifestations"},
+        {"code": "J47.9", "description": "Bronchiectasis, uncomplicated"},
+        {"code": "D57.1", "description": "Sickle-cell disease without crisis"},
+        {"code": "J43.9", "description": "Emphysema, unspecified"},
+        {"code": "I27.0", "description": "Primary pulmonary hypertension"},
+        {"code": "D64.9", "description": "Anemia, unspecified"}
+      ]
+    },
+    {
+      "name": "Oxygen and Oxygen Equipment (Group 2 - Moderate Hypoxemia with Related Conditions)",
+      "showName": "Oxygen - Moderate Hypoxemia",
+      "category": "oxygen",
+      "comment": "Requires reevaluation and repeat qualifying blood gas test by the treating practitioner between the 61st and 90th day after initiation of therapy and a new CMN by the prescribing practitioner.",
+      "positive_documentation": [
+        "Absence of criteria outlined in Group 1 above",
+        "A medical record that supports physiologic, cognitive, and/or functional symptoms documented in high-quality peer-reviewed literature to be improved by oxygen therapy, such as nocturnal restlessness, foot drop, etc.",
+        "Arterial blood gas PO2 of 56-59 mm Hg or oxygen saturation of 89% at rest, while awake, during sleep for 5 minutes, or during exercise",
+        "At least one of the following conditions must be documented:",
+        "1. Dependent edema suggesting CHF",
+        "2. Pulmonary hypertension or cor pulmonale, determined by measurement of pulmonary artery pressure, echocardiogram, or 'P' pulmonale on EKG",
+        "3. Erythrocythemia with hematocrit greater than 56%"
+      ],
+      "recommended_diagnoses": [
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "I27.0", "description": "Primary pulmonary hypertension"},
+        {"code": "I27.20", "description": "Pulmonary hypertension, unspecified"},
+        {"code": "I27.81", "description": "Cor pulmonale (chronic)"},
+        {"code": "D75.1", "description": "Secondary polycythemia"},
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.11", "description": "Chronic respiratory failure with hypoxia"},
+        {"code": "J84.112", "description": "Idiopathic pulmonary fibrosis"},
+        {"code": "I27.21", "description": "Secondary pulmonary arterial hypertension"},
+        {"code": "I27.29", "description": "Other secondary pulmonary hypertension"},
+        {"code": "R94.31", "description": "Abnormal electrocardiogram [ECG] [EKG]"}
+      ]
+    },
+    {
+      "name": "Oxygen and Oxygen Equipment (Group 3 - Cluster Headaches)",
+      "showName": "Oxygen - Cluster Headaches",
+      "category": "oxygen",
+      "comment": "Group 3 coverage is currently for cluster headaches only.",
+      "positive_documentation": [
+        "Documented diagnosis of cluster headaches",
+        "Evidence that oxygen therapy provides relief for cluster headaches",
+        "Other treatments have been tried and failed or are contraindicated"
+      ],
+      "negative_documentation": [
+        "Oxygen will be denied as not reasonable and necessary if any of the following conditions are present:",
+        "1. Angina pectoris in the absence of hypoxemia",
+        "2. Dyspnea without cor pulmonale or evidence of hypoxemia",
+        "3. Severe peripheral vascular disease resulting in clinically evident desaturation in one or more extremities but in the absence of systemic hypoxemia",
+        "4. Terminal illnesses that do not affect the ability to breathe"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G44.009", "description": "Cluster headache syndrome, unspecified, not intractable"},
+        {"code": "G44.019", "description": "Episodic cluster headache, not intractable"},
+        {"code": "G44.029", "description": "Chronic cluster headache, not intractable"},
+        {"code": "G44.099", "description": "Other trigeminal autonomic cephalalgias (TACs)"},
+        {"code": "G44.1", "description": "Vascular headache, not elsewhere classified"},
+        {"code": "R51.9", "description": "Headache, unspecified"},
+        {"code": "G44.209", "description": "Tension-type headache, unspecified, not intractable"},
+        {"code": "G43.909", "description": "Migraine, unspecified, not intractable"},
+        {"code": "G44.89", "description": "Other headache syndrome"},
+        {"code": "G44.059", "description": "Cluster headache syndrome, unspecified, intractable"},
+        {"code": "G44.011", "description": "Episodic cluster headache, intractable"},
+        {"code": "G44.021", "description": "Chronic cluster headache, intractable"}
+      ]
+    },
+    {
+      "name": "Portable Oxygen Systems",
+      "showName": "Portable Oxygen",
+      "category": "oxygen",
+      "comment": "Portable oxygen is considered when the blood gas study is performed while patient is mobile or with exercise. Medicare does not cover: oxygen used during sleep only (8pm-8am), oxygen on PRN basis, or portable oxygen for standby. DME(POS) suppliers are not considered as qualified to perform blood gas studies. Beneficiaries do not change group classification when going from initial coverage to continued coverage for portable oxygen or changes in blood oxygen testing values.",
+      "positive_documentation": [
+        "Portable oxygen is considered when the blood gas study is performed while patient is mobile or with exercise and demonstrates the need for portable oxygen",
+        "Blood gas study must show desaturation during mobility or exercise",
+        "Documentation must show improvement in oxygen saturation with supplemental oxygen during mobility or exercise",
+        "Documentation must show that portable oxygen is required for mobility outside the home, not just as a backup to a stationary system"
+      ],
+      "recommended_diagnoses": [
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.11", "description": "Chronic respiratory failure with hypoxia"},
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "J84.112", "description": "Idiopathic pulmonary fibrosis"},
+        {"code": "J84.10", "description": "Pulmonary fibrosis, unspecified"},
+        {"code": "E84.0", "description": "Cystic fibrosis with pulmonary manifestations"},
+        {"code": "J47.9", "description": "Bronchiectasis, uncomplicated"},
+        {"code": "J43.9", "description": "Emphysema, unspecified"},
+        {"code": "I27.0", "description": "Primary pulmonary hypertension"},
+        {"code": "M54.5", "description": "Low back pain"},
+        {"code": "R53.1", "description": "Weakness"}
+      ]
+    },
+    {
+      "name": "Obstructive Sleep Apnea (OSA) with Oxygen Therapy",
+      "showName": "OSA with Oxygen",
+      "category": "oxygen",
+      "comment": "For patients requiring the use of home oxygen and PAP device, both the PAP and oxygen policies must be met. If OSA is suspected, the patient must have a sleep test during a titration study at a sleep lab facility making sure the pressure is at an optimal setting.",
+      "positive_documentation": [
+        "Documented diagnosis of OSA through appropriate sleep study",
+        "Titration study with minimum of 2 hours of recording time",
+        "Reduction in apnea-hypopnea index/respiratory disturbance index (AHI/RDI) to an acceptable level (equal to or less than 10 events/hour, or if the initial AHI/RDI was less than 10 events/hour, further reduced)",
+        "Documentation of continued oxygen desaturation despite optimal PAP therapy",
+        "Evidence of another medical condition beyond OSA that requires oxygen therapy",
+        "The medical condition requiring oxygen must be clearly documented and cannot be justified solely for the diagnosis of OSA"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G47.33", "description": "Obstructive sleep apnea (adult) (pediatric)"},
+        {"code": "G47.30", "description": "Sleep apnea, unspecified"},
+        {"code": "G47.34", "description": "Idiopathic sleep related nonobstructive alveolar hypoventilation"},
+        {"code": "G47.35", "description": "Congenital central alveolar hypoventilation syndrome"},
+        {"code": "G47.36", "description": "Sleep related hypoventilation in conditions classified elsewhere"},
+        {"code": "G47.31", "description": "Primary central sleep apnea"},
+        {"code": "G47.37", "description": "Central sleep apnea in conditions classified elsewhere"},
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "E66.01", "description": "Morbid (severe) obesity due to excess calories"},
+        {"code": "E66.9", "description": "Obesity, unspecified"}
+      ]
+    },
+    {
+      "name": "RAD/BiPAP (Group 1 - Restrictive Thoracic Disorders)",
+      "showName": "BiPAP - Restrictive Disorders",
+      "category": "respiratory",
+      "comment": "There are 4 different clinical groups characterized for Respiratory Assist Devices (RADs). RADs are BiPAP (Bi-level Positive Airway Pressure) devices that provide ventilatory assistance for patients with breathing disorders.",
+      "positive_documentation": [
+        "Documentation must show all of the following:",
+        "1. Neuromuscular disease OR thoracic cage abnormality, AND",
+        "2. One of the following:",
+        "   a. Arterial blood gas (ABG) PaCO₂ while awake and breathing patient's prescribed FiO₂ is greater than 45 mm Hg, OR",
+        "   b. Sleep oximetry demonstrates oxygen saturation less than 88% for more than 5 minutes nocturnal, while breathing prescribed FiO₂, OR",
+        "   c. For neuromuscular disease only: Maximal inspiratory pressure less than 60 cm H₂O OR forced vital capacity less than 50% predicted",
+        "3. COPD does not contribute significantly to patient's pulmonary function"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "G14", "description": "Postpolio syndrome"},
+        {"code": "M95.4", "description": "Acquired deformity of chest and rib"},
+        {"code": "Q67.8", "description": "Other congenital deformities of chest"},
+        {"code": "J98.6", "description": "Disorders of diaphragm"},
+        {"code": "M41.9", "description": "Scoliosis, unspecified"},
+        {"code": "G61.0", "description": "Guillain-Barre syndrome"},
+        {"code": "G12.0", "description": "Infantile spinal muscular atrophy, type I"},
+        {"code": "Q76.3", "description": "Congenital scoliosis due to congenital bony malformation"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"}
+      ]
+    },
+    {
+      "name": "RAD/BiPAP (Group 2 - Severe COPD)",
+      "showName": "BiPAP - COPD",
+      "category": "respiratory",
+      "comment": "BiPAP without backup rate (E0470): Covered when the patient has clinical evidence of COPD and meets specified criteria. BiPAP with backup rate (E0471): Covered for COPD in specific situations.",
+      "positive_documentation": [
+        "BiPAP without backup rate (E0470):",
+        "1. ABG PaCO₂ while awake and breathing patient's prescribed FiO₂ greater than 52 mm Hg, AND",
+        "2. Sleep oximetry demonstrates oxygen saturation of less than or equal to 88% for at least 5 minutes nocturnal while breathing at 2 lpm or the patient's prescribed FiO₂ (whichever is higher), AND",
+        "3. Prior to initiating therapy, OSA and treatment with a continuous positive airway pressure device (CPAP) has been considered and ruled out. (Note: formal sleep testing is not required, but there is sufficient information in the medical record to demonstrate that the beneficiary has COPD rather than a form of sleep apnea, including obstructive sleep apnea, CSA, or CompSA, as the predominant cause of awake hypoventilation or nocturnal arterial oxygen desaturation)",
+        
+        "BiPAP with backup rate (E0471):",
+        "Covered for COPD in the following 2 situations:",
+        
+        "Situation 1 - BiPAP with backup rate started any time after a period of initial use of BiPAP without backup rate if both A and B are met:",
+        "A. ABG PaCO₂, done while awake and breathing beneficiary's prescribed FiO₂, shows that the beneficiary's PaCO₂ worsened greater than or equal to 7 mm Hg compared to original result in above, AND",
+        "B. Sleep oximetry demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording 2 hours) while using BiPAP without backup rate that is not caused by obstructive upper airway events",
+        
+        "Situation 2 - BiPAP with backup rate no sooner than 61 days after initial use of BiPAP without backup rate if both A and B are met:",
+        "A. ABG PaCO₂ done while awake and breathing beneficiary's prescribed FiO₂, still remains greater than or equal to 52 mm Hg, AND",
+        "B. Sleep oximetry while breathing with BiPAP without backup rate, demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) while breathing oxygen at 2 lpm or prescribed FiO₂, whichever is higher"
+      ],
+      "recommended_diagnoses": [
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J43.9", "description": "Emphysema, unspecified"},
+        {"code": "J44.1", "description": "Chronic obstructive pulmonary disease with acute exacerbation"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.11", "description": "Chronic respiratory failure with hypoxia"},
+        {"code": "J96.12", "description": "Chronic respiratory failure with hypercapnia"},
+        {"code": "J44.0", "description": "Chronic obstructive pulmonary disease with acute lower respiratory infection"},
+        {"code": "J43.1", "description": "Panlobular emphysema"},
+        {"code": "J43.2", "description": "Centrilobular emphysema"},
+        {"code": "J42", "description": "Unspecified chronic bronchitis"},
+        {"code": "J41.8", "description": "Mixed simple and mucopurulent chronic bronchitis"},
+        {"code": "Z99.11", "description": "Dependence on respirator [ventilator] status"}
+      ]
+    },
+    {
+      "name": "RAD/BiPAP (Group 3 - Central Sleep Apnea or Complex Sleep Apnea)",
+      "showName": "BiPAP - Sleep Apnea",
+      "category": "respiratory",
+      "comment": "Prior to initiating therapy, a complete, facility-based, attended polysomnogram must be performed documenting both A and B. BiPAP with backup rate is typically required for these conditions.",
+      "positive_documentation": [
+        "A. Diagnosis of central sleep apnea (CSA) or complex sleep apnea (CompSA), AND",
+        "B. Significant improvement of the sleep-associated hypoventilation with the tested PAP with or without backup rate while breathing prescribed FiO₂",
+        
+        "For either CSA or CompSA, the sleep study must identify the central apnea-central hypopnea index (CAHI) defined below.",
+        
+        "Central sleep apnea (CSA) is defined as:",
+        "1. An AHI greater than or equal to 5, AND",
+        "2. The sum total of central apneas plus central hypopneas is greater than 50% of the total apneas and hypopneas, AND",
+        "3. A CAHI is greater than or equal to 5 per hour, AND",
+        "4. Presence of at least one of the following:",
+        "   • Sleepiness",
+        "   • Difficulty initiating or maintaining sleep, frequent awakenings, or nonrestorative sleep",
+        "   • Awakening short of breath",
+        "   • Snoring",
+        "   • Witnessed apneas",
+        "5. There is no evidence of daytime or nocturnal hypoventilation",
+        
+        "For diagnosis of CSA, the central CAHI is defined as the average number of episodes of central apneas and central hypopneas per hour of sleep without the use of a positive airway pressure device.",
+        
+        "Complex sleep apnea (CompSA) is a form of central apnea specifically identified by all of the following:",
+        "1. With use of a positive airway pressure device without a backup rate (E0601 or E0470):",
+        "   a. PSG shows a pattern of apneas and hypopneas that demonstrates the persistence or emergence of central apneas or central hypopneas upon exposure to CPAP (E0601) or a BiPAP without backup rate (E0470) device titration to the point where obstructive events have been effectively treated (obstructive AHI less than 5 per hour)",
+        "   b. After resolution of the obstructive events, the sum total of central apneas plus central hypopneas is greater than 50% of the total apneas and hypopneas; and",
+        "   c. After resolution of the obstructive events, the CAHI greater than or equal to 5 per hour",
+        
+        "For CompSA, the CAHI is determined during the use of a positive airway pressure device after obstructive events have disappeared.",
+        
+        "If the AHI or CAHI is calculated based on less than 2 hours of continuous recorded sleep, the total number of recorded events used to calculate the AHI or CAHI must be at least the number of events that would have been required in a 2-hour period (i.e., greater than or equal to 10 events)"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G47.31", "description": "Primary central sleep apnea"},
+        {"code": "G47.37", "description": "Central sleep apnea in conditions classified elsewhere"},
+        {"code": "G47.30", "description": "Sleep apnea, unspecified"},
+        {"code": "G47.34", "description": "Idiopathic sleep related nonobstructive alveolar hypoventilation"},
+        {"code": "G47.35", "description": "Congenital central alveolar hypoventilation syndrome"},
+        {"code": "G47.36", "description": "Sleep related hypoventilation in conditions classified elsewhere"},
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "I50.1", "description": "Left ventricular failure, unspecified"},
+        {"code": "I50.21", "description": "Acute systolic (congestive) heart failure"},
+        {"code": "G93.1", "description": "Anoxic brain damage, not elsewhere classified"},
+        {"code": "G47.39", "description": "Other sleep apnea"},
+        {"code": "Z99.11", "description": "Dependence on respirator [ventilator] status"}
+      ]
+    },
+    {
+      "name": "RAD/BiPAP (Group 4 - Hypoventilation Syndrome)",
+      "showName": "BiPAP - Hypoventilation",
+      "category": "respiratory",
+      "comment": "BiPAP without backup rate covered if 1, 2, and either 3 or 4 are met. BiPAP with backup rate may be necessary for some patients with hypoventilation syndrome.",
+      "positive_documentation": [
+        "1. ABG PaCO₂, done while awake and breathing prescribed FiO₂ is greater than or equal to 45 mm Hg, AND",
+        "2. Spirometry shows FEV1/FVC greater than or equal to 70%, AND",
+        "3. ABG PaCO₂, done during sleep or immediately upon awaking breathing prescribed FiO₂ shows the beneficiary's PaCO₂ worsened greater than or equal to 7mm Hg compared to result in criteria 1 above, OR",
+        "4. PSG demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) not caused by obstructive upper airway events"
+      ],
+      "recommended_diagnoses": [
+        {"code": "E66.2", "description": "Morbid (severe) obesity with alveolar hypoventilation"},
+        {"code": "G47.34", "description": "Idiopathic sleep related nonobstructive alveolar hypoventilation"},
+        {"code": "G47.35", "description": "Congenital central alveolar hypoventilation syndrome"},
+        {"code": "G47.36", "description": "Sleep related hypoventilation in conditions classified elsewhere"},
+        {"code": "E66.01", "description": "Morbid (severe) obesity due to excess calories"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.12", "description": "Chronic respiratory failure with hypercapnia"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G47.8", "description": "Other sleep disorders"},
+        {"code": "Z99.11", "description": "Dependence on respirator [ventilator] status"}
+      ]
+    },
+    {
+      "name": "RAD/BiPAP with Backup Rate for Hypoventilation",
+      "showName": "BiPAP with Backup Rate",
+      "category": "respiratory",
+      "comment": "BiPAP with backup rate (E0471) covered if 1, 2, and either 3 or 4 are met. This continues documentation for Hypoventilation Syndrome patients who require a device with backup rate.",
+      "positive_documentation": [
+        "1. BiPAP without backup rate is being used",
+        "2. Spirometry shows FEV1/FVC greater than or equal to 70%",
+        "3. ABG PaCO₂ done while awake breathing prescribed FiO₂ shows the beneficiary's PaCO₂ worsened greater than or equal to 7 mm Hg compared to ABG determined to qualify for bilevel PAP without backup rate, OR",
+        "4. PSG demonstrates oxygen saturation less than or equal to 88% for at least 5 minutes nocturnal (minimum recording time of 2 hours) that is not caused by obstructive upper airway events"
+      ],
+      "recommended_diagnoses": [
+        {"code": "E66.2", "description": "Morbid (severe) obesity with alveolar hypoventilation"},
+        {"code": "G47.34", "description": "Idiopathic sleep related nonobstructive alveolar hypoventilation"},
+        {"code": "G47.35", "description": "Congenital central alveolar hypoventilation syndrome"},
+        {"code": "G47.36", "description": "Sleep related hypoventilation in conditions classified elsewhere"},
+        {"code": "J96.12", "description": "Chronic respiratory failure with hypercapnia"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "E66.01", "description": "Morbid (severe) obesity due to excess calories"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "E66.8", "description": "Other obesity"},
+        {"code": "Z99.11", "description": "Dependence on respirator [ventilator] status"}
+      ]
+    },
+    {
+      "name": "Continued Coverage for RAD/BiPAP Devices",
+      "showName": "BiPAP Continued Coverage",
+      "category": "respiratory",
+      "comment": "Requirements for continued coverage beyond the first 3 months for all RAD/BiPAP devices. Re-evaluation must be conducted no sooner than 61st day after initial therapy.",
+      "positive_documentation": [
+        "Between 31 and 91 days of therapy, the following must occur:",
+        "1. Face-to-face clinical re-evaluation with treating practitioner documenting that symptoms of OSA are improved and the patient is benefiting from therapy",
+        "2. Objective evidence of adherence to therapy, reviewed by the treating practitioner. Adherence to therapy is defined as use for at least 4 hours per night on 70% of nights during a consecutive 30-day period anytime during the trial period",
+        
+        "If patient fails the above 3-month trial period, they need to re-qualify for PAP device and then follow the initial coverage criteria. The medical equipment supplier does not receive reimbursement where the trial period is considered failed",
+        
+        "If RAD device is tried and found ineffective, whether it's during the facility testing or in the home, substitution of a bilevel PAP without backup may occur according to the following:",
+        "1. If more than 30 days remaining in trial period, the length of the trial period does not change",
+        "2. If less than 30 days remaining in trial period, the length of the trial, the clinical re-evaluation and adherence to therapy must occur before the 120th day",
+        "3. If RAD device was used more than 3 months, then switched, the clinical re-evaluation must occur between the 31st-91st day following the initiation of the bilevel PAP without backup"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G47.33", "description": "Obstructive sleep apnea (adult) (pediatric)"},
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "G47.31", "description": "Primary central sleep apnea"},
+        {"code": "G47.37", "description": "Central sleep apnea in conditions classified elsewhere"},
+        {"code": "E66.2", "description": "Morbid (severe) obesity with alveolar hypoventilation"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.12", "description": "Chronic respiratory failure with hypercapnia"},
+        {"code": "G70.00", "description": "Myasthenia gravis without exacerbation"},
+        {"code": "G47.35", "description": "Congenital central alveolar hypoventilation syndrome"},
+        {"code": "Z99.11", "description": "Dependence on respirator [ventilator] status"}
+      ]
+    },
+    {
+      "name": "Concurrent Use of Oxygen with RAD/BiPAP Therapy",
+      "showName": "Oxygen with BiPAP",
+      "category": "respiratory",
+      "comment": "For patients requiring simultaneous use of home oxygen therapy and a RAD device.",
+      "positive_documentation": [
+        "Documentation by the treating practitioner in the medical record must clearly demonstrate that the requirements for coverage outlined in both the RAD and oxygen policy have been met",
+        "Refer to the oxygen section for coverage criteria of home oxygen therapy"
+      ],
+      "recommended_diagnoses": [
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J96.10", "description": "Chronic respiratory failure, unspecified"},
+        {"code": "J96.11", "description": "Chronic respiratory failure with hypoxia"},
+        {"code": "J96.12", "description": "Chronic respiratory failure with hypercapnia"},
+        {"code": "G47.33", "description": "Obstructive sleep apnea (adult) (pediatric)"},
+        {"code": "G47.31", "description": "Primary central sleep apnea"},
+        {"code": "E66.2", "description": "Morbid (severe) obesity with alveolar hypoventilation"},
+        {"code": "G12.21", "description": "Amyotrophic lateral sclerosis"},
+        {"code": "G71.0", "description": "Muscular dystrophy"},
+        {"code": "I50.9", "description": "Heart failure, unspecified"},
+        {"code": "J84.10", "description": "Pulmonary fibrosis, unspecified"},
+        {"code": "Z99.11", "description": "Dependence on respirator [ventilator] status"}
+      ]
+    },
+    {
+      "name": "Positive Airway Pressure (PAP) Devices for Obstructive Sleep Apnea",
+      "showName": "CPAP for Sleep Apnea",
+      "category": "respiratory",
+      "comment": "For positive airway pressure or bilevel PAP without backup—the only diagnosis that is covered is obstructive sleep apnea (OSA), CPAP (E0601).",
+      "positive_documentation": [
+        "For initial coverage, all 3 of the following have been met:",
+        "1. Evidence of a face-to-face evaluation by the treating practitioner prior to the sleep test to assess the patient for OSA",
+        "2. Sleep test meets either of the following:",
+        "   a. The AHI or RDI is greater than or equal to 15 events per hour with a minimum of 30 events, OR",
+        "   b. The AHI or RDI is greater than or equal to 5 and less than 15 events per hour with a minimum of 10 events and at least ONE of the following:",
+        "      i. Excessive daytime sleepiness, impaired cognition, mood disorders, insomnia, OR",
+        "      ii. Hypertension, ischemic heart disease, or history of stroke",
+        "3. The patient and/or caregiver has received instruction from the supplier on the proper use and care of the equipment",
+        
+       "Medicare FFS defines hypopnea as an abnormal event lasting at least 10 seconds associated with at least a 30% reduction in thoracoabdominal movement or airflow as compared to baseline, and with at least a 4% decrease in oxygen saturation",
+        
+        "Coverage for these diagnoses of OSA includes:",
+        "A sleep test (Type I, II, III, IV) that meets the Medicare requirements for a valid sleep test as outlined in the NCD 240.4.1",
+        "The sleep test is ordered by the beneficiary's treating practitioner",
+        "The sleep test is conducted by an entity that qualifies as a Medicare provider of sleep tests and is compliant with all applicable state regulatory requirements"
+      ],
+      "recommended_diagnoses": [
+        {"code": "G47.33", "description": "Obstructive sleep apnea (adult) (pediatric)"},
+        {"code": "G47.30", "description": "Sleep apnea, unspecified"},
+        {"code": "I10", "description": "Essential (primary) hypertension"},
+        {"code": "I25.10", "description": "Atherosclerotic heart disease of native coronary artery without angina pectoris"},
+        {"code": "G47.10", "description": "Insomnia, unspecified"},
+        {"code": "F51.01", "description": "Primary insomnia"},
+        {"code": "F32.9", "description": "Major depressive disorder, single episode, unspecified"},
+        {"code": "F41.9", "description": "Anxiety disorder, unspecified"},
+        {"code": "I63.9", "description": "Cerebral infarction, unspecified"},
+        {"code": "R40.0", "description": "Somnolence"},
+        {"code": "G47.11", "description": "Insomnia due to medical condition"},
+        {"code": "G47.13", "description": "Insomnia due to other mental disorder"}
+      ]
+    },
+    {
+      "name": "Small Volume Nebulizer Machines",
+      "showName": "Small Volume Nebulizer",
+      "category": "nebulizer",
+      "comment": "Nebulizers are covered only in specific situations with documented medical necessity. Covered drugs and their monthly limits include: Albuterol (124 mg/month), Arformoterol (62 mcg/month), Budesonide (93 units/month), Cromolyn Sodium (2480 mg/month), Dornase alfa (78 mg/month), Formoterol (1240 mcg/month), Ipratropium bromide (93 mg/month), Levalbuterol (232.5 mg/month), Metaproterenol (2800 mg/month), Pentamidine (300 mg/month), Racepinephrine (2.5 mg/month), Tobramycin (10 units/month), and Treprostinil (31 units/month).",
+      "positive_documentation": [
+        "Documentation must support the medical necessity for the specific drug being administered",
+        "Medical record must document one of the covered conditions for the prescribed drug",
+        "For obstructive pulmonary disease: Albuterol, Arformoterol, Budesonide, Cromolyn Sodium, Formoterol, Ipratropium bromide, Levalbuterol, Metaproterenol, and Racepinephrine",
+        "For cystic fibrosis: Dornase alfa and Tobramycin",
+        "For bronchiectasis: Tobramycin",
+        "For HIV/Pneumocystis pneumonia: Pentamidine",
+        "For pulmonary hypertension: Treprostinil"
+      ],
+      "nebulizer_types": [
+        "Large Volume Nebulizer (E0570): Covered for cystic fibrosis",
+        "Compressor with Nebulizer (E0565, E0572): Covered for cystic fibrosis and bronchiectasis",
+        "Filtered Nebulizer (E0580): Covered for HIV, pneumocystis, and complications of organ transplants"
+      ],
+      "recommended_diagnoses": [
+        {"code": "J44.9", "description": "Chronic obstructive pulmonary disease, unspecified"},
+        {"code": "J43.9", "description": "Emphysema, unspecified"},
+        {"code": "J45.909", "description": "Unspecified asthma, uncomplicated"},
+        {"code": "E84.0", "description": "Cystic fibrosis with pulmonary manifestations"},
+        {"code": "E84.9", "description": "Cystic fibrosis, unspecified"},
+        {"code": "J47.9", "description": "Bronchiectasis, uncomplicated"},
+        {"code": "B20", "description": "Human immunodeficiency virus [HIV] disease"},
+        {"code": "B59", "description": "Pneumocystosis"},
+        {"code": "I27.0", "description": "Primary pulmonary hypertension"},
+        {"code": "I27.2", "description": "Other secondary pulmonary hypertension"},
+        {"code": "J41.0", "description": "Simple chronic bronchitis"},
+        {"code": "J41.1", "description": "Mucopurulent chronic bronchitis"}
+      ]
+    },
+    {
+      "name": "Ultrasonic Nebulizer with Treprostinil or Continuous Drug Delivery System",
+      "showName": "Ultrasonic Nebulizer",
+      "category": "nebulizer",
+      "comment": "Special coverage for ultrasonic nebulizer with Treprostinil (J7686) or Continuous Drug Delivery System (K0730) and Iloprost (Q4074). When albuterol, levalbuterol, or metaproterenol are prescribed as rescue/supplemental medication for beneficiaries taking formoterol or arformoterol, the maximum mg/month limits are: Albuterol (78 mg/month), Albuterol/ipratropium combination (31 units/month), Levalbuterol (39 mg/month - 78 units/month), and Metaproterenol (470 mg/month - 47 units/month).",
+      "positive_documentation": [
+        "Patient has documented pulmonary artery hypertension (I27.0 or I27.2)", 
+        "Pulmonary hypertension is not secondary to pulmonary venous hypertension or disorders of the respiratory system",
+        "Patient has either primary pulmonary hypertension or pulmonary hypertension which is secondary to one of the following conditions:",
+        "1. Connective tissue disease, OR",
+        "2. Thromboembolic disease of the pulmonary arteries, OR",
+        "3. HIV infection, OR",
+        "4. Cirrhosis, OR",
+        "5. Anorexigens (diet drugs), OR",
+        "6. Congenital left to right shunts, etc.",
+        
+        "If one of the above conditions is present, the following criteria must also be met:",
+        "1. Pulmonary hypertension has progressed despite maximal medical and/or surgical treatment of the identified condition, AND",
+        "2. Mean pulmonary artery pressure is greater than 25 mm Hg at rest or greater than 30 mm Hg with exertion, AND",
+        "3. Patient has significant symptoms from the pulmonary hypertension (such as severe dyspnea on exertion, fatigue, angina, syncope), AND",
+        "4. Treatment with oral calcium channel blockers has been tried and failed, or has been considered and ruled out"
+      ],
+      "negative_documentation": [
+        "If none of the above criteria are covered, the compressor, nebulizer, and other related accessories/supplies will be denied as not reasonable and necessary"
+      ],
+      "recommended_diagnoses": [
+        {"code": "I27.0", "description": "Primary pulmonary hypertension"},
+        {"code": "I27.2", "description": "Other secondary pulmonary hypertension"},
+        {"code": "I27.21", "description": "Secondary pulmonary arterial hypertension"},
+        {"code": "I27.83", "description": "Eisenmenger's syndrome"},
+        {"code": "I27.9", "description": "Pulmonary heart disease, unspecified"},
+        {"code": "M32.10", "description": "Systemic lupus erythematosus, organ or system involvement unspecified"},
+        {"code": "M34.0", "description": "Progressive systemic sclerosis"},
+        {"code": "M34.1", "description": "CREST syndrome"},
+        {"code": "I26.99", "description": "Other pulmonary embolism without acute cor pulmonale"},
+        {"code": "B20", "description": "Human immunodeficiency virus [HIV] disease"},
+        {"code": "K74.60", "description": "Unspecified cirrhosis of liver"},
+        {"code": "Q21.1", "description": "Atrial septal defect"}
+      ]
+    }
+  ]
+}
