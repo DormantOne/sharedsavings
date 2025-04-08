@@ -777,31 +777,33 @@ function displayBonusTiers(measureId) {
   const serviceLineData = measureData.service_lines[serviceLineKey];
   
   // Format the data as a table
-  let html = `
-    <p><strong>${measureData.measure_name}</strong></p>
-    <p>${serviceLineData.description}</p>
-    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
-      <tr style="background-color: #f0f0f0; font-weight: bold;">
-        <td style="padding: 8px; border: 1px solid #ddd;">Tier</td>
-        <td style="padding: 8px; border: 1px solid #ddd;">Threshold</td>
-        <td style="padding: 8px; border: 1px solid #ddd;">Bonus Points</td>
-      </tr>
-      <tr>
-        <td style="padding: 8px; border: 1px solid #ddd;">Tier 3</td>
-        <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_3.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
-        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_3.points}</td>
-      </tr>
-      <tr>
-        <td style="padding: 8px; border: 1px solid #ddd;">Tier 2</td>
-        <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_2.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
-        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_2.points}</td>
-      </tr>
-      <tr>
-        <td style="padding: 8px; border: 1px solid #ddd;">Tier 1</td>
-        <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_1.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
-        <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_1.points}</td>
-      </tr>
-    </table>`;
+// In the displayBonusTiers function
+// Format the data as a table
+let html = `
+  <p><strong>${measureData.measure_name}</strong></p>
+  <p>${serviceLineData.description}</p>
+  <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+    <tr style="background-color: #f0f0f0; font-weight: bold;">
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Threshold</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Bonus Weight</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 3</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_3.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_3.points}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 2</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_2.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_2.points}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 1</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_1.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_1.points}</td>
+    </tr>
+  </table>`;
     
   // Add note for PCR measure which is inversed
   if (measureId === "PCR" && serviceLineData.note) {
