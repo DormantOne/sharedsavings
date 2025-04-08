@@ -1,0 +1,1228 @@
+
+{
+  "conditions": {
+    "Adult Immunization Status: Influenza": {
+      "measure_id": "AIS-E",
+      "keywords": [
+        "influenza",
+        "flu vaccine",
+        "adult immunization",
+        "HEDIS",
+        "NCQA",
+        "preventive care",
+        "immunization adherence",
+        "public health",
+        "seasonal vaccination",
+        "vaccine administration"
+      ],
+      "description": "The percentage of members who are up to date on recommended routine influenza vaccines.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "19 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "member deceased"
+      ],
+      "methods_to_close_gap": [
+        "Claim",
+        "Upload to Novillus Care Gap Management Application (CGMA)"
+      ],
+      "best_practices": [
+        "Educate patients on the importance of the annual influenza vaccine and provide informational resources.",
+        "Host flu vaccine clinics in the fall to increase accessibility.",
+        "Notify patients when flu vaccines are available and encourage scheduling an appointment.",
+        "Advise patients to inform their PCP if they receive the vaccine at an external location (e.g., pharmacy, community clinic)."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Transitioned from a display measure to an incentive measure in 2025.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/Ec2VUra8NjlFssXRgMSdzRsB8Mdpp7LsulG7dHhPT4KLAg?e=1iu0nG"
+    },
+    "Appropriate Treatment for Upper Respiratory Infection": {
+      "measure_id": "URI",
+      "keywords": [
+        "upper respiratory infection",
+        "URI",
+        "antibiotic stewardship",
+        "HEDIS",
+        "NCQA",
+        "inappropriate antibiotic use",
+        "viral infections",
+        "public health"
+      ],
+      "description": "The percentage of episodes for members with a diagnosis of upper respiratory infection (URI) that did not result in an antibiotic dispensing event.",
+      "measurement_period": "January 1, 2025 - December 28, 2025",
+      "ages": "3 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "inpatient stay",
+        "comorbid conditions within 365 days",
+        "prior antibiotic prescription within 30 days",
+        "competing diagnosis on or within 3 days of the episode"
+      ],
+      "methods_to_close_gap": [
+        "No antibiotic prescribed unless a comorbid/competing diagnosis is present"
+      ],
+      "best_practices": [
+        "Educate patients on proper hand hygiene and hygiene to prevent URI.",
+        "Explain that most URIs are viral and do not require antibiotics.",
+        "Recommend symptom relief methods such as rest and fluids."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EVrA4xYb0hlJkdcJfLgRXu8BuP_SUs_EIHTeANWDuwDaKg?e=td4oBZ"
+    },
+    "Asthma Medication Ratio": {
+      "measure_id": "AMR",
+      "keywords": [
+        "asthma",
+        "controller medication",
+        "HEDIS",
+        "NCQA",
+        "inhaled corticosteroids",
+        "medication adherence",
+        "chronic disease management"
+      ],
+      "description": "The percentage of members with persistent asthma who had a ratio of controller medications to total asthma medications of 0.50 or greater.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "5 years and older",
+      "denominator_exclusions": [
+        "other respiratory diseases requiring different treatments",
+        "no asthma medications dispensed",
+        "hospice services"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a medication ratio of ≥0.50 by increasing controller medication usage"
+      ],
+      "best_practices": [
+        "Ensure patients understand the difference between controller and reliever medications.",
+        "Encourage proper inhaler technique and adherence.",
+        "Consider 90-day prescriptions and automatic refills for controller medications."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Added albuterol-budesonide as an asthma reliever medication.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/Ec_6Y0IUFiFLnd5vLRKniroBGFfpKoRsypfQaFd8hGFC3g?e=QTTgYv"
+    },
+    "Breast Cancer Screening": {
+      "measure_id": "BCS-E",
+      "keywords": [
+        "breast cancer screening",
+        "mammogram",
+        "cancer prevention",
+        "early detection",
+        "women's health",
+        "HEDIS",
+        "NCQA",
+        "preventive care"
+      ],
+      "description": [
+        "The percentage of members 40–74 years of age who were recommended for routine breast cancer screening and had a mammogram to screen for breast cancer.",
+        "Mammogram every 2 years: One or more mammograms any time on or between Oct. 1 two years prior to the measurement period and the end of the measurement period."
+      ],
+      "measurement_period": "January 1, 2025 - December 31, 2025; but actually looking back 2 years",
+      "ages": "40-74 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "bilateral mastectomy or absence of both breasts",
+        "gender-affirming chest surgery with gender dysphoria diagnosis",
+        "frailty and advanced illness in members 66 years or older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one mammogram within the required timeframe"
+      ],
+      "best_practices": [
+        "Set provider-patient reminders to discuss breast cancer screening annually.",
+        "Offer convenient scheduling options, including weekend or walk-in appointments.",
+        "Send reminder letters and follow-up phone calls to patients due for screening.",
+        "Address logistical barriers such as transportation or childcare support."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Added a laboratory claim exclusion to the Absence of Left Value Set and Absence of Right Breast Value Set.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "bonus_lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EZDySY1iqDNGqbOXGOmf-cIBs_wKS2Pbxhf15KS_KhGegA?e=7SU7Sh"
+    },
+    "Cervical Cancer Screening": {
+      "measure_id": "CCS-E",
+      "keywords": [
+        "cervical cancer screening",
+        "Pap test",
+        "HPV testing",
+        "women's health",
+        "cancer prevention",
+        "early detection",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members recommended for routine cervical cancer screening who had an appropriate screening test performed within the specified time frame.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "24-64 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "hysterectomy with no residual cervix",
+        "cervical agenesis or acquired absence of cervix",
+        "sex assigned at birth as male"
+      ],
+      "methods_to_close_gap": [
+        "Ensure cervical cytology every three years or HPV testing every five years"
+      ],
+      "best_practices": [
+        "Leverage Electronic Medical Records (EMR) to identify patients due for screening.",
+        "Encourage in-office Pap testing when possible.",
+        "Educate patients about the importance of cervical cancer screening."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "The measure is now reported using Electronic Clinical Data Systems (ECDS).",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "bonus_lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EUa2grlqqdJAvrUaRIfHSjABYkpdG4SatV1Ybq4kJCw3YA?e=KX67G7"
+    },
+    "Chlamydia Screening": {
+      "measure_id": "CHL",
+      "keywords": [
+        "chlamydia screening",
+        "STI screening",
+        "sexual health",
+        "public health",
+        "preventive care",
+        "women's health",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members recommended for routine chlamydia screening who were identified as sexually active and had at least one test for chlamydia during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "16-24 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "sex assigned at birth as male",
+        "pregnancy test with isotretinoin or diagnostic imaging"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one chlamydia test during the measurement year"
+      ],
+      "best_practices": [
+        "Normalize chlamydia screening as routine care for sexually active individuals.",
+        "Offer urine-based testing in-office to ensure completion.",
+        "Educate patients about asymptomatic infections and long-term complications.",
+        "Ensure appropriate coding to minimize out-of-pocket costs for patients."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Updated the measure title from 'Chlamydia Screening in Women' to 'Chlamydia Screening'. Expanded eligibility criteria.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "bonus_lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EdFJMaU8MbBOt2nPIhLY2hgBNhQcpErHQgQkqEPqPng6oA?e=49X47t"
+    },
+    "Colorectal Cancer Screening": {
+      "measure_id": "COL-E",
+      "keywords": [
+        "colorectal cancer screening",
+        "colon cancer",
+        "cancer prevention",
+        "early detection",
+        "colonoscopy",
+        "HEDIS",
+        "NCQA",
+        "preventive care"
+      ],
+      "description": [
+        "The percentage of members 45–75 years of age who had appropriate screening for colorectal cancer:",
+        "Fecal occult blood test (FOBT Lab Test Value Set; FOBT Test Result or Finding Value Set) during the measurement period.",
+        "Stool DNA (sDNA) with FIT test (sDNA FIT Lab Test Value Set) during the measurement period or the 2 years prior to the measurement period.",
+        "Flexible sigmoidoscopy (Flexible Sigmoidoscopy Value Set) during the measurement period or the 4 years prior to the measurement period.",
+        "CT colonography (CT Colonography Value Set) during the measurement period or the 4 years prior to the measurement period. Note that CT colonography may not be a covered service, but will close the quality gap in care.",
+        "Colonoscopy (Colonoscopy Value Set) during the measurement period or the 9 years prior to the measurement period."
+      ],
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "46-75 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "colorectal cancer history",
+        "total colectomy",
+        "frailty and advanced illness in members 66 years or older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one colorectal cancer screening within the appropriate timeframe"
+      ],
+      "best_practices": [
+        "Offer multiple screening options to improve patient compliance.",
+        "Use electronic health record (EHR) alerts to identify overdue patients.",
+        "Encourage FIT testing as a less invasive alternative when patients decline colonoscopy.",
+        "Ensure staff provide clear instructions on FIT kit use and return."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "New incentive measure for UPMC for You (Medicaid).",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EQzQAU1kvQRCh7tW7i3DjbgB4YeRbrXambuJsgUv7IgB1A?e=MB0cEp"
+    },
+    "Concurrent Use of Opioids and Benzodiazepines": {
+      "measure_id": "COB",
+      "keywords": [
+        "opioid use",
+        "benzodiazepines",
+        "medication safety",
+        "substance use disorder",
+        "pain management",
+        "HEDIS",
+        "NCQA",
+        "PQA"
+      ],
+      "description": "The percentage of individuals who did not have concurrent use of prescription opioids and benzodiazepines.",
+      "measurement_period": "January 1, 2025 - December 2, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "cancer diagnosis",
+        "sickle cell disease",
+        "palliative care"
+      ],
+      "methods_to_close_gap": [
+        "No concurrent opioid and benzodiazepine use for ≥ 30 days"
+      ],
+      "best_practices": [
+        "Avoid prescribing benzodiazepines when opioids are already prescribed.",
+        "If tapering is necessary, create an individualized tapering plan for the patient.",
+        "Monitor patients with multiple sedative prescriptions and explore alternative treatments.",
+        "Encourage non-pharmacologic options for anxiety and pain management."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/Eb5X3ZGtuLZMnFUOmhjySFAB7RhkGrCT723hKWqX6ifF-A?e=ejlzkh"
+    },
+    "Controlling High Blood Pressure": {
+      "measure_id": "CBP",
+      "keywords": [
+        "high blood pressure",
+        "hypertension",
+        "blood pressure control",
+        "cardiovascular health",
+        "chronic disease management",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members who had a diagnosis of hypertension (HTN) and whose blood pressure (BP) was adequately controlled (<140/90 mm Hg) during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18-85 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "end-stage renal disease (ESRD)",
+        "pregnancy",
+        "frailty and advanced illness in members 66 years or older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure the most recent BP reading is <140/90 mm Hg"
+      ],
+      "best_practices": [
+        "Educate patients on the importance of lifestyle changes for blood pressure control.",
+        "Encourage medication adherence for patients with hypertension.",
+        "Recheck elevated BP readings after allowing the patient to sit and relax.",
+        "Use electronic health records (EHR) to track and manage hypertensive patients."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EXhfInLMo4dFhU5sOauYsWcBB57MVydShk_jARaq5RAJDw?e=rqYueT"
+    },
+    "Depression Screening": {
+      "measure_id": "DS",
+      "keywords": [
+        "depression screening",
+        "mental health",
+        "behavioral health",
+        "preventive care",
+        "early detection",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members who had a depression screening during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "members who die during the measurement year",
+        "Premier Partners Program participants are ineligible for the Quality Partners Program incentive."
+      ],
+      "methods_to_close_gap": [
+        "Submit depression screening result codes (G8431, G8510, G8511, G8940, G0444, 96127)"
+      ],
+      "best_practices": [
+        "Use Electronic Medical Records (EMR) to track screenings and ensure results are submitted.",
+        "Implement standardized two-step screening: initial brief screen followed by a more detailed questionnaire if positive.",
+        "Offer follow-up interventions including counseling, medications, or specialty referrals."
+      ],
+      "source": "UPMC Health Plan",
+      "summary_of_changes_2025": "No changes."
+    },
+    "Eye Exam for Patients with Diabetes": {
+      "measure_id": "EED",
+      "keywords": [
+        "diabetes",
+        "eye exam",
+        "retinal screening",
+        "diabetic retinopathy",
+        "preventive care",
+        "vision health",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members with diabetes (types 1 and 2) who had a retinal eye exam.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18-75 years",
+      "denominator_exclusions": [
+        "bilateral eye enucleation",
+        "hospice services",
+        "palliative care",
+        "frailty and advanced illness in members 66 years or older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a retinal or dilated eye exam within the measurement year"
+      ],
+      "best_practices": [
+        "Educate patients on the importance of diabetic retinal screenings.",
+        "Provide on-site retinal imaging and ensure results are interpreted by an eye care professional.",
+        "Develop relationships with local eye care providers to improve patient access.",
+        "Use patient reminders via email, phone, or text for scheduling."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Moved bilateral eye enucleation from numerator to required exclusions.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ESLrz5N4vNxGvs5w2Dgcs58Bq8szEjcjZrAg5NI9spTHDw?e=stIvpq"
+    },
+    "Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions": {
+      "measure_id": "FMC",
+      "keywords": [
+        "emergency department",
+        "follow-up care",
+        "chronic conditions",
+        "care coordination",
+        "preventable hospitalizations",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of emergency department (ED) visits for members with multiple high-risk chronic conditions who had a follow-up service within 7 days of the ED visit.",
+      "measurement_period": "January 1, 2025 - December 24, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "ED visits resulting in inpatient admission"
+      ],
+      "methods_to_close_gap": [
+        "Ensure follow-up service within 7 days after an ED visit"
+      ],
+      "best_practices": [
+        "Develop a process to identify ED visits and coordinate timely follow-up.",
+        "Educate patients to notify the PCP office when discharged from the ED.",
+        "Schedule follow-up visits before ED discharge whenever possible.",
+        "Use dedicated care managers to assist patients in coordinating follow-up care."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Added a laboratory claim exclusion to a value set.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "bonus_lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EY2o_csCf0lLnk4nBHcH2qoBLHVYp-beroGjiGgcRW-_sA?e=MeDAAB"
+    },
+    "Glycemic Status Assessment for Patients With Diabetes": {
+      "measure_id": "GSD",
+      "keywords": [
+        "diabetes",
+        "glycemic control",
+        "HbA1c",
+        "glucose management indicator",
+        "blood sugar control",
+        "chronic disease management",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members with diabetes (types 1 and 2) whose most recent glycemic status (hemoglobin A1c [HbA1c] or glucose management indicator [GMI]) was controlled during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18-75 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "frailty and advanced illness for members 66 and older",
+        "institutionalized Medicare members 66 and older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure HbA1c < 8.0% for Commercial and Medicaid members"
+      ],
+      "best_practices": [
+        "Submit CPT II codes or upload results where no lab feed exists.",
+        "Identify members who would benefit from diabetes education programs.",
+        "Use continuous glucose monitoring for more accurate assessment."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "bonus_lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ES99IoxkUTROowjAO_7ZVaoB5YQ--q-IDUh2iTlG4AU9GQ?e=mz0m9w"
+    },
+    "Glycemic Status Assessment for Patients With Diabetes Under Medicare": {
+      "measure_id": "GSD-Medicare",
+      "keywords": [
+        "diabetes",
+        "glycemic control",
+        "HbA1c",
+        "glucose management indicator",
+        "blood sugar control",
+        "chronic disease management",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members with diabetes (types 1 and 2) whose most recent glycemic status (hemoglobin A1c [HbA1c] or glucose management indicator [GMI]) was controlled during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18-75 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "frailty and advanced illness for members 66 and older",
+        "institutionalized Medicare members 66 and older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure HbA1c < 9.0% for Medicare members"
+      ],
+      "best_practices": [
+        "Submit CPT II codes or upload results where no lab feed exists.",
+        "Identify members who would benefit from diabetes education programs.",
+        "Use continuous glucose monitoring for more accurate assessment."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ES99IoxkUTROowjAO_7ZVaoB5YQ--q-IDUh2iTlG4AU9GQ?e=mz0m9w"
+    },
+    "Kidney Health Evaluation for Patients with Diabetes": {
+      "measure_id": "KED",
+      "keywords": [
+        "kidney health",
+        "diabetes",
+        "chronic kidney disease",
+        "glomerular filtration rate",
+        "urine albumin-creatinine ratio",
+        "renal function",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members with diabetes (type 1 and type 2) who received a kidney health evaluation, defined by an estimated glomerular filtration rate (eGFR) and a urine albumin-creatinine ratio (uACR), during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18-85 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "end-stage renal disease (ESRD)",
+        "dialysis treatment",
+        "palliative care",
+        "frailty and advanced illness for members 66 and older",
+        "institutionalized Medicare members 66 and older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure both an eGFR and a uACR test during the measurement year"
+      ],
+      "best_practices": [
+        "Ensure urine specimen collection is available at the practice.",
+        "Educate patients on the importance of routine kidney health evaluation.",
+        "Use electronic alerts to remind providers of necessary screenings."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EcGpcFXP5dJKm2Km4h-QiA0BILwrq53o7OKzHMedJ1V4sg?e=Mq0JGa"
+    },
+    "Medication Adherence for Diabetes": {
+      "measure_id": "DMA",
+      "keywords": [
+        "diabetes",
+        "medication adherence",
+        "PDC",
+        "proportion of days covered",
+        "oral antidiabetics",
+        "glycemic control",
+        "PQA"
+      ],
+      "description": "The percentage of individuals who met the Proportion of Days Covered (PDC) threshold of 80% for diabetes medications during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18 years and older for Quality Partners Program; 22 years and older for Premier Partners Program",
+      "denominator_exclusions": [
+        "hospice care at any time during the measurement year",
+        "end-stage renal disease (ESRD) diagnosis at any time during the measurement year",
+        "one or more prescription claims for insulin during the treatment period"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a proportion of days covered (PDC) threshold of 80% during the treatment period"
+      ],
+      "best_practices": [
+        "Urge patients to use UPMC ID cards to fill prescriptions - many formulary medications are available at no cost share at preferred pharmacies",
+        "Encourage 100-day prescription fills for UPMC for Life (Medicare/SNP) members",
+        "Ensure pharmacy receives updated prescriptions when medication doses or instructions change",
+        "Recommend use of UPMC Health Plan-preferred pharmacies",
+        "Encourage automatic refills and use of a pill box to maintain adherence",
+        "Use medication samples before sending prescriptions to determine tolerance"
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "N/A",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "bonus_lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ETvXYojdGrJEm6amxepVBs0BAwFqOK4N72DvD-2zyJXFIg?e=RvCimP"
+    },
+    "Medication Adherence for Cholesterol (Statins)": {
+      "measure_id": "CMA",
+      "keywords": [
+        "medication adherence",
+        "cholesterol management",
+        "statins",
+        "lipid-lowering therapy",
+        "cardiovascular health",
+        "HEDIS",
+        "PQA"
+      ],
+      "description": "The percentage of individuals who met the Proportion of Days Covered (PDC) threshold of 80% for statins during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "end-stage renal disease (ESRD)"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a proportion of days covered (PDC) threshold of 80% during the measurement year"
+      ],
+      "best_practices": [
+        "Encourage patients to use UPMC-preferred pharmacies.",
+        "Recommend 100-day prescription fills to improve adherence.",
+        "Ensure medication changes are updated with pharmacies to avoid gaps in adherence."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ESL19RgQ0PFOpsxE74Zi5G8B4q9YsA-XzvMNtDTBUU_FLw?e=fLXa0I"
+    },
+    "Medication Adherence for Hypertension (RAS Antagonist)": {
+      "measure_id": "HMA",
+      "keywords": [
+        "hypertension",
+        "RAS antagonist",
+        "medication adherence",
+        "renin-angiotensin system",
+        "blood pressure control",
+        "cardiovascular health",
+        "HEDIS",
+        "PQA"
+      ],
+      "description": "The percentage of individuals who met the Proportion of Days Covered (PDC) threshold of 80% for RAS antagonists during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "end-stage renal disease (ESRD)",
+        "prescription for sacubitril/valsartan during the treatment period"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a proportion of days covered (PDC) threshold of 80% during the treatment period"
+      ],
+      "best_practices": [
+        "Encourage 100-day prescription fills to improve adherence.",
+        "Ensure the pharmacy receives updated prescriptions when doses change.",
+        "Recommend automatic refills and use of a pill organizer to maintain adherence."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EZG5WD5eYMJLhBhNPOREtAMB28ETUgmnVOdfjhuo-5JyGg?e=WjRsN4"
+    },
+    "Medication Reconciliation Post-Discharge": {
+      "measure_id": "TRC",
+      "keywords": [
+        "medication reconciliation",
+        "post-discharge care",
+        "care coordination",
+        "medication safety",
+        "hospital transition",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of discharges for members who had documentation of medication reconciliation within 30 days after discharge.",
+      "measurement_period": "January 1, 2025 - December 1, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "member deceased during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure medication reconciliation by a prescribing practitioner, pharmacist, PA, or nurse within 30 days post-discharge"
+      ],
+      "best_practices": [
+        "Perform medication reconciliation via phone or in-person within a week of discharge.",
+        "Ask patients to bring all medications to their follow-up visit to ensure accuracy.",
+        "Update the patient's medication list in their health record to prevent discrepancies."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ERkJvyuJs05HnOURl5---SEBZdCaPn1UEEWPMsCIO4sDfg?e=eUfxaj"
+    },
+    "Patient Engagement After Inpatient Discharge": {
+      "measure_id": "TRC-ENG",
+      "keywords": [
+        "post-discharge care",
+        "patient engagement",
+        "care transition",
+        "hospital follow-up",
+        "preventable readmissions",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of discharges for members who had documentation of patient engagement within 30 days after discharge.",
+      "measurement_period": "January 1, 2025 - December 1, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "member deceased during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure patient engagement through outpatient visits, telephone visits, e-visits, or virtual check-ins within 30 days post-discharge"
+      ],
+      "best_practices": [
+        "Use Admission, Discharge, Transfer (ADT) reports to identify patients needing follow-up.",
+        "Perform outreach within two weeks if a follow-up visit is not scheduled.",
+        "Address transportation barriers by offering telehealth or virtual check-ins."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "New display measure for Commercial and UPMC for You (Medicaid).",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EXTA5WURfQNHs28mX2VQN0MBICeYPkHWomnsJBR_XNR4lg?e=m8V1Q6"
+    },
+    "Pharmacotherapy Management of COPD: Bronchodilator": {
+      "measure_id": "PCE",
+      "keywords": [
+        "COPD",
+        "bronchodilator",
+        "pharmacotherapy",
+        "pulmonary health",
+        "chronic disease management",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of COPD exacerbations for members 40 years of age and older who had an acute inpatient discharge or ED visit and were dispensed a bronchodilator within 30 days of the event.",
+      "measurement_period": "January 1, 2025 - November 30, 2025",
+      "ages": "40 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "member deceased during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure a bronchodilator prescription is dispensed within 30 days of a COPD-related hospital or ED visit"
+      ],
+      "best_practices": [
+        "Follow up with COPD patients within five days post-discharge to confirm medication adherence.",
+        "Ensure inhaler technique training is provided to improve medication effectiveness.",
+        "Encourage early refill requests to prevent medication gaps."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "No changes.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EV3_oQ8mEeBAoQw7IVkH6F0BSwHiOmlhoj9YGuzAMmJLGw?e=czGUKW"
+    },
+    "Plan All-Cause Readmissions": {
+      "measure_id": "PCR",
+      "keywords": [
+        "readmissions",
+        "hospitalization",
+        "acute inpatient stay",
+        "observation stay",
+        "care transitions",
+        "preventable hospitalizations",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "For members who meet the age criteria, the number of acute inpatient and observation stays during the measurement year that were followed by an unplanned acute readmission for any diagnosis within 30 days and the predicted probability of an acute readmission.",
+      "measurement_period": "January 1, 2025 - December 1, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "hospital stay where the index admission date equals the index discharge date",
+        "hospital stay where the member died",
+        "principal diagnosis of pregnancy or perinatal conditions"
+      ],
+      "methods_to_close_gap": [
+        "Prevent readmissions through proper discharge planning and post-hospital follow-up"
+      ],
+      "best_practices": [
+        "Use Admission, Discharge, Transfer (ADT) reports to identify recently discharged patients.",
+        "Ensure all patients receive follow-up care after hospital discharge.",
+        "Address common causes of readmission at follow-up visits, such as medication reconciliation and symptom management."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "N/A",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "bonus_lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EXx3t8lkGZ9Dk_oiCnw3YMUBaLQYdFYmOV_ouGlf-ZizZA?e=1JJ06i"
+    },
+    "Polypharmacy: Use of Multiple Anticholinergic Medications in Older Adults": {
+      "measure_id": "POLY-ACH",
+      "keywords": [
+        "polypharmacy",
+        "anticholinergic medications",
+        "older adults",
+        "medication safety",
+        "cognitive impairment",
+        "HEDIS",
+        "PQA"
+      ],
+      "description": "The percentage of individuals 65 years of age and older who do not have concurrent use of two or more unique anticholinergic medications.",
+      "measurement_period": "January 1, 2025 - December 2, 2025",
+      "ages": "65 years and older",
+      "denominator_exclusions": [
+        "hospice services"
+      ],
+      "methods_to_close_gap": [
+        "No concurrent use for ≥ 30 cumulative days of ≥ 2 unique anticholinergic medications"
+      ],
+      "best_practices": [
+        "Avoid prescribing multiple anticholinergic medications when clinically unnecessary.",
+        "Consider alternative agents with fewer cognitive side effects for older adults.",
+        "Periodically reassess the need for anticholinergic medications and deprescribe when appropriate."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "Transitioned from a display measure to an incentive measure.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EUmFswQ-27dMizHjmyVbwTYBwiGpgFGregistK5kXYKzdg?e=c81Uqr"
+    },
+    "Statin Therapy for Patients with Cardiovascular Disease": {
+      "measure_id": "SPC",
+      "keywords": [
+        "statin therapy",
+        "cardiovascular disease",
+        "ASCVD",
+        "lipid-lowering therapy",
+        "cholesterol management",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members who were identified as having clinical atherosclerotic cardiovascular disease (ASCVD) and who were dispensed at least one high-intensity or moderate-intensity statin medication during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "21-75 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "pregnancy",
+        "chronic kidney disease or dialysis",
+        "muscular reactions to statins"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one dispensing event for a high-intensity or moderate-intensity statin medication"
+      ],
+      "best_practices": [
+        "Ensure all ASCVD patients are prescribed a moderate or high-intensity statin.",
+        "Assess statin intolerance and consider alternative dosing schedules for patients with muscle symptoms.",
+        "Encourage medication adherence through patient education and cost-saving programs."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Added a required exclusion for muscular reactions to statins.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)",
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EQir2Gr1AtRCrGnSYpBdLBEBQcFsK0uuzuEZxlajKyirgQ?e=02Ygfb"
+    },
+    "Statin Therapy for Patients with Diabetes": {
+      "measure_id": "SPD",
+      "keywords": [
+        "statin therapy",
+        "diabetes",
+        "lipid management",
+        "cardiovascular health",
+        "medication adherence",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": [
+        "The percentage of members 40-75 years of age during the measurement year with diabetes who do not have clinical atherosclerotic cardiovascular disease (ASCVD) who were dispensed at least one statin medication of any intensity during the measurement year.",
+        "DM is defined as being prescribed a DM medication or having the diagnosis of DMx2 in the chart."
+      ],
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "40-75 years",
+      "denominator_exclusions": [
+        "clinical ASCVD",
+        "pregnancy or fertility treatments",
+        "end-stage renal disease (ESRD)",
+        "cirrhosis",
+        "statin-induced muscle disorders"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one dispensing event for a high-intensity, moderate-intensity, or low-intensity statin medication"
+      ],
+      "best_practices": [
+        "Prescribe statins for all eligible patients with diabetes regardless of lipid levels.",
+        "Encourage adherence through education and reminders.",
+        "Use formulary-preferred statins to minimize cost barriers.",
+        "Monitor for statin side effects and adjust regimens accordingly."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "Added a required exclusion for muscular reactions to statins.",
+      "lines_of_business": [
+        "Commercial",
+        "UPMC for You (Medicaid)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/Efu-Eur8Jy5Iv4Xn_oQWSlYB6w6sNiO0Q5FfpjSrEgAkQQ?e=SJzRno"
+    },
+    "Statin Use in Persons with Diabetes": {
+      "measure_id": "SUPD",
+      "keywords": [
+        "statin use",
+        "diabetes",
+        "lipid control",
+        "cardiovascular prevention",
+        "medication adherence",
+        "HEDIS",
+        "PQA"
+      ],
+      "description": "The percentage of members 40-75 years old who were dispensed at least two diabetes medication fills and received a statin medication fill during the measurement period.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "40-75 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "ESRD",
+        "rhabdomyolysis or myopathy",
+        "pregnancy, lactation, or fertility treatment",
+        "cirrhosis",
+        "pre-diabetes",
+        "polycystic ovary syndrome (PCOS)"
+      ],
+      "methods_to_close_gap": [
+        "Ensure patients receiving diabetes medications are also prescribed a statin"
+      ],
+      "best_practices": [
+        "Ensure all eligible diabetes patients are prescribed a statin per ADA/AHA guidelines.",
+        "Check adherence and refill status during patient visits.",
+        "Educate providers on the importance of statin use in diabetes management.",
+        "Monitor for potential statin intolerance and adjust therapy if needed."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "N/A",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EUkIH6a3vrtHoeis6dh7ItQBVqvLNwZ9am6QVPYYKnq8PA?e=aPrdMW"
+    },
+    "7-Day Follow-Up for Inpatient Discharge": {
+      "measure_id": "TRC-FU",
+      "keywords": [
+        "hospital discharge",
+        "follow-up care",
+        "preventable readmissions",
+        "care transitions",
+        "post-discharge visit",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of inpatient discharges for members 22 years of age and older who had documentation of patient engagement (e.g., office visits, visits to the home, telehealth) provided within 7 days after discharge.",
+      "measurement_period": "January 1, 2025 - December 24, 2025",
+      "ages": "22 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "patient deceased during the measurement year"
+      ],
+      "methods_to_close_gap": [
+        "Ensure an outpatient visit, telehealth visit, or home visit within 7 days post-discharge"
+      ],
+      "best_practices": [
+        "Utilize ADT reports to identify patients needing follow-up.",
+        "Conduct outreach to patients within two weeks if a follow-up is not scheduled.",
+        "Address transportation barriers by offering telehealth follow-up."
+      ],
+      "source": "NCQA, HEDIS MY 2025 TRC specs; UPMC Health Plan",
+      "summary_of_changes_2025": "Observation stays were removed from the denominator for this measure.",
+      "lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "bonus_lines_of_business": [
+        "UPMC for Life (Medicare/SNP)"
+      ],
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EeqdSCilpp9EnkRyEHZRquYBajW_FztKARsGNfgUS428kQ?e=1HAhyz"
+    },
+    "Adult Immunization Status: Pneumococcal": {
+      "measure_id": "AIS-E-DISPLAY",
+      "keywords": [
+        "pneumococcal vaccine",
+        "adult immunization",
+        "preventive care",
+        "vaccination",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members 65 years of age and older who are up to date on recommended routine pneumococcal vaccine.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "65 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "member deceased during the measurement period"
+      ],
+      "methods_to_close_gap": [
+        "Ensure at least one dose of an adult pneumococcal vaccine on or after the 19th birthday"
+      ],
+      "best_practices": [
+        "Educate patients on the importance of routine vaccines with supporting research and resources.",
+        "Ensure vaccine availability at primary care locations to increase uptake."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "New display measure in 2025."
+    },
+    "Blood Pressure Control for Patients with Diabetes": {
+      "measure_id": "BPD",
+      "keywords": [
+        "blood pressure control",
+        "diabetes",
+        "hypertension",
+        "cardiovascular health",
+        "chronic disease management",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members with diabetes (types 1 and 2) whose blood pressure (BP) was adequately controlled (<140/90 mm Hg) during the measurement year.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18-75 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "frailty and advanced illness for members 66 and older"
+      ],
+      "methods_to_close_gap": [
+        "Ensure the most recent BP reading is <140/90 mm Hg"
+      ],
+      "best_practices": [
+        "Educate patients on the impact of diet, exercise, and stress management on blood pressure.",
+        "Recheck elevated BP readings after allowing the patient to sit and relax.",
+        "Encourage adherence to antihypertensive medications and lifestyle modifications."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "N/A",
+      "link": "https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/EdWgS68YjkRDgALytsPlQ2YBwKEclScc-FnPuA3uJ0G6BA?e=Hdc9sz"
+    },
+    "Depression Screening and Follow-Up: Follow-Up on Positive Screen": {
+      "measure_id": "DSF-E",
+      "keywords": [
+        "depression screening",
+        "behavioral health",
+        "mental health",
+        "follow-up care",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of members who were screened for clinical depression using a standardized instrument and, if screened positive, received follow-up care within 30 days of the positive screen finding.",
+      "measurement_period": "January 1, 2025 - December 1, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "bipolar disorder history",
+        "hospice services",
+        "member deceased during the measurement period"
+      ],
+      "methods_to_close_gap": [
+        "Ensure follow-up care within 30 days of a positive depression screen"
+      ],
+      "best_practices": [
+        "Use validated screening tools and ensure positive results lead to follow-up care.",
+        "Establish workflows for rapid access to mental health services.",
+        "Incorporate depression screening into routine primary care visits."
+      ],
+      "source": "NCQA, HEDIS MY 2025, UPMC Health Plan",
+      "summary_of_changes_2025": "New display measure in 2025 primary care incentive programs."
+    },
+    "Initial Opioid Prescribing for Long Duration": {
+      "measure_id": "IOP-LD",
+      "keywords": [
+        "opioid prescribing",
+        "pain management",
+        "substance use prevention",
+        "opioid safety",
+        "HEDIS",
+        "PQA"
+      ],
+      "description": "The percentage of members who did not receive an initial opioid prescription exceeding 7 cumulative days' supply.",
+      "measurement_period": "January 1, 2025 - December 31, 2025",
+      "ages": "18 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "cancer diagnosis"
+      ],
+      "methods_to_close_gap": [
+        "Limit initial opioid prescriptions to ≥ 7 days' supply"
+      ],
+      "best_practices": [
+        "Limit opioid prescriptions to the lowest effective dose and duration.",
+        "Encourage non-opioid pain management options."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "New display measure in 2025 for UPMC for Life (Medicare/SNP)."
+    },
+    "Osteoporosis Management in Women Who Had a Fracture": {
+      "measure_id": "OMW",
+      "keywords": [
+        "osteoporosis management",
+        "fracture",
+        "bone mineral density",
+        "BMD test",
+        "osteoporosis therapy",
+        "elderly care",
+        "HEDIS",
+        "NCQA"
+      ],
+      "description": "The percentage of women 67–85 years of age who suffered a fracture and who had either a bone mineral density (BMD) test or prescription for a drug to treat osteoporosis in the 180 days (six months) after the fracture.",
+      "measurement_period": "July 1, 2024 - June 30, 2025",
+      "ages": "67-85 years",
+      "denominator_exclusions": [
+        "hospice services",
+        "palliative care",
+        "long-term institutionalized members",
+        "frailty and advanced illness in members 67-80 years old",
+        "members with a prior BMD test or osteoporosis medication in the past 365 days"
+      ],
+      "methods_to_close_gap": [
+        "Ensure BMD test or osteoporosis therapy within 180 days post-fracture"
+      ],
+      "best_practices": [
+        "Encourage fall prevention strategies to reduce fracture risk.",
+        "Ensure patients with fractures receive osteoporosis therapy or BMD testing within six months.",
+        "Educate patients on the importance of osteoporosis screening and treatment."
+      ],
+      "source": "NCQA, HEDIS MY 2025",
+      "summary_of_changes_2025": "N/A"
+    },
+    "Unplanned Care Utilization": {
+  "measure_id": "UCU",
+  "keywords": [
+    "unplanned care",
+    "emergency department",
+    "hospital readmission",
+    "preventable ED visits",
+    "care coordination",
+    "utilization management"
+  ],
+  "description": "Data not yet available - This measure tracks the rate of unplanned care utilization that could potentially be prevented through effective outpatient care, disease management, and care coordination.",
+  "measurement_period": "Data not yet available",
+  "ages": "All ages",
+  "denominator_exclusions": [
+    "Data not yet available"
+  ],
+  "methods_to_close_gap": [
+    "Data not yet available"
+  ],
+  "best_practices": [
+    "Data not yet available"
+  ],
+  "source": "Data not yet available",
+  "summary_of_changes_2025": "New measure for 2025"
+},
+    "Polypharmacy: Use of Multiple CNS-Active Medications in Older Adults": {
+      "measure_id": "POLY-CNS",
+      "keywords": [
+        "polypharmacy",
+        "CNS-active medications",
+        "elderly medication safety",
+        "cognitive impairment",
+        "medication deprescribing",
+        "HEDIS",
+        "PQA"
+      ],
+      "description": "The percentage of individuals 65 years of age and older who do not have concurrent use of three or more unique central nervous system (CNS)-active medications.",
+      "measurement_period": "January 1, 2025 - December 2, 2025",
+      "ages": "65 years and older",
+      "denominator_exclusions": [
+        "hospice services",
+        "seizure disorder"
+      ],
+      "methods_to_close_gap": [
+        "No concurrent use for ≥ 30 cumulative days of ≥ 3 unique CNS-active medications"
+      ],
+      "best_practices": [
+        "Limit unnecessary polypharmacy in elderly patients.",
+        "Perform medication reconciliation regularly to identify potential overuse of CNS-active medications.",
+        "Evaluate patients for deprescribing opportunities where appropriate."
+      ],
+      "source": "PQA 2024",
+      "summary_of_changes_2025": "N/A"
+    }
+  }
+}

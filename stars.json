@@ -1,0 +1,618 @@
+
+{
+  "healthcare_quality_measures": {
+    "BCS-E": {
+      "measure_name": "Breast Cancer Screening",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.63,
+            "3_stars": 0.70,
+            "4_stars": 0.79,
+            "5_stars": 0.86
+          }
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.73,
+            "3_stars": 0.761,
+            "4_stars": 0.794,
+            "5_stars": 0.822
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.535,
+            "3_stars": 0.57,
+            "4_stars": 0.64,
+            "5_stars": 0.682
+          }
+        }
+      }
+    },
+    "CBP": {
+      "measure_name": "Controlling High Blood Pressure",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.76,
+            "3_stars": 0.81,
+            "4_stars": 0.85,
+            "5_stars": 0.89
+          }
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.621,
+            "3_stars": 0.674,
+            "4_stars": 0.739,
+            "5_stars": 0.79
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.679,
+            "3_stars": 0.702,
+            "4_stars": 0.74,
+            "5_stars": 0.80
+          }
+        }
+      }
+    },
+    "CMA": {
+      "measure_name": "Medication Adherence for Cholesterol (Statins)",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.83,
+            "3_stars": 0.87,
+            "4_stars": 0.91,
+            "5_stars": 0.95
+          }
+        }
+      }
+    },
+    "COL-E": {
+      "measure_name": "Colorectal Cancer Screening",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.63,
+            "3_stars": 0.73,
+            "4_stars": 0.80,
+            "5_stars": 0.87
+          }
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.599,
+            "3_stars": 0.643,
+            "4_stars": 0.682,
+            "5_stars": 0.738
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.41,
+            "3_stars": 0.44,
+            "4_stars": 0.47,
+            "5_stars": 0.525
+          }
+        }
+      }
+    },
+    "DMA": {
+      "measure_name": "Medication Adherence for Diabetes Medications",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.83,
+            "3_stars": 0.87,
+            "4_stars": 0.89,
+            "5_stars": 0.93
+          }
+        }
+      }
+    },
+    "EED": {
+      "measure_name": "Eye Exam for Patients with Diabetes",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.67,
+            "3_stars": 0.78,
+            "4_stars": 0.82,
+            "5_stars": 0.87
+          }
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.471,
+            "3_stars": 0.516,
+            "4_stars": 0.59,
+            "5_stars": 0.657
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.54,
+            "3_stars": 0.59,
+            "4_stars": 0.64,
+            "5_stars": 0.672
+          }
+        }
+      }
+    },
+    "FMC": {
+      "measure_name": "Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.49,
+            "3_stars": 0.59,
+            "4_stars": 0.67,
+            "5_stars": 0.75
+          }
+        }
+      }
+    },
+    "GSD-Medicare": {
+      "measure_name": "Glycemic Status Assessment for Patients with Diabetes (<=9%)",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.59,
+            "3_stars": 0.82,
+            "4_stars": 0.89,
+            "5_stars": 0.95
+          }
+        }
+      }
+    },
+    "GSD": {
+      "measure_name": "Glycemic Status Assessment for Patients with Diabetes (<8%)",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.615,
+            "3_stars": 0.662,
+            "4_stars": 0.71,
+            "5_stars": 0.748
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.63,
+            "3_stars": 0.66,
+            "4_stars": 0.68,
+            "5_stars": 0.70
+          }
+        }
+      }
+    },
+    "HMA": {
+      "measure_name": "Medication Adherence for Hypertension (RAS Antagonist)",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.85,
+            "3_stars": 0.89,
+            "4_stars": 0.92,
+            "5_stars": 0.94
+          }
+        }
+      }
+    },
+    "KED": {
+      "measure_name": "Kidney Health Evaluation for Patients with Diabetes",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.27,
+            "3_stars": 0.45,
+            "4_stars": 0.56,
+            "5_stars": 0.75
+          }
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.448,
+            "3_stars": 0.491,
+            "4_stars": 0.552,
+            "5_stars": 0.614
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.385,
+            "3_stars": 0.45,
+            "4_stars": 0.53,
+            "5_stars": 0.56
+          }
+        }
+      }
+    },
+    "POLY-ACH": {
+      "measure_name": "Polypharmacy: Use of Multiple Anticholinergic Medications in Older Adults",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.81,
+            "3_stars": 0.88,
+            "4_stars": 0.91,
+            "5_stars": 0.93
+          }
+        }
+      }
+    },
+    "COB": {
+      "measure_name": "Concurrent Use of Opioids and Benzodiazepines",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.76,
+            "3_stars": 0.82,
+            "4_stars": 0.88,
+            "5_stars": 0.92
+          }
+        }
+      }
+    },
+    "PCR": {
+      "measure_name": "Plan All-Cause Readmissions",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.12,
+            "3_stars": 0.10,
+            "4_stars": 0.08,
+            "5_stars": 0.06
+          },
+          "note": "Lower percentages indicate better performance"
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.88,
+            "3_stars": 0.79,
+            "4_stars": 0.66,
+            "5_stars": 0.58
+          },
+          "note": "Observed/Expected Ratio - lower values indicate better performance"
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 1.04,
+            "3_stars": 0.96,
+            "4_stars": 0.91,
+            "5_stars": 0.84
+          },
+          "note": "Observed/Expected Ratio - lower values indicate better performance"
+        }
+      }
+    },
+    "SPC": {
+      "measure_name": "Statin Therapy for Patients with Cardiovascular Disease",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.86,
+            "3_stars": 0.89,
+            "4_stars": 0.91,
+            "5_stars": 0.95
+          }
+        },
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.812,
+            "3_stars": 0.833,
+            "4_stars": 0.859,
+            "5_stars": 0.883
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.83,
+            "3_stars": 0.84,
+            "4_stars": 0.87,
+            "5_stars": 0.88
+          }
+        }
+      }
+    },
+    "SUPD": {
+      "measure_name": "Statin Use In Person with Diabetes",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.82,
+            "3_stars": 0.88,
+            "4_stars": 0.92,
+            "5_stars": 0.96
+          }
+        }
+      }
+    },
+    "TRC": {
+      "measure_name": "Medication Reconciliation Post-Discharge",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.52,
+            "3_stars": 0.67,
+            "4_stars": 0.80,
+            "5_stars": 0.92
+          }
+        }
+      }
+    },
+    "TRC-ENG": {
+      "measure_name": "Patient Engagement After Inpatient Discharge",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.71,
+            "3_stars": 0.81,
+            "4_stars": 0.87,
+            "5_stars": 0.91
+          }
+        }
+      }
+    },
+    "AIS-E": {
+      "measure_name": "Adult Immunization Status - Influenza",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.222,
+            "3_stars": 0.282,
+            "4_stars": 0.365,
+            "5_stars": 0.441
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.18,
+            "3_stars": 0.20,
+            "4_stars": 0.26,
+            "5_stars": 0.33
+          }
+        }
+      }
+    },
+    "AMR": {
+      "measure_name": "Asthma Medication Ratio",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.835,
+            "3_stars": 0.857,
+            "4_stars": 0.885,
+            "5_stars": 0.924
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 3,
+          "star_thresholds": {
+            "2_stars": 0.656,
+            "3_stars": 0.714,
+            "4_stars": 0.776,
+            "5_stars": 0.821
+          }
+        }
+      }
+    },
+    "CCS-E": {
+      "measure_name": "Cervical Cancer Screening",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.723,
+            "3_stars": 0.745,
+            "4_stars": 0.785,
+            "5_stars": 0.815
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.545,
+            "3_stars": 0.59,
+            "4_stars": 0.652,
+            "5_stars": 0.70
+          }
+        }
+      }
+    },
+    "CHL": {
+      "measure_name": "Chlamydia Screening in Women",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.427,
+            "3_stars": 0.461,
+            "4_stars": 0.542,
+            "5_stars": 0.657
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.545,
+            "3_stars": 0.58,
+            "4_stars": 0.668,
+            "5_stars": 0.709
+          }
+        }
+      }
+    },
+    "PCE": {
+      "measure_name": "Pharmacotherapy Management of COPD - Bronchodilator",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.812,
+            "3_stars": 0.842,
+            "4_stars": 0.888,
+            "5_stars": 0.937
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.85,
+            "3_stars": 0.875,
+            "4_stars": 0.912,
+            "5_stars": 0.938
+          }
+        }
+      }
+    },
+    "SPD": {
+      "measure_name": "Statin Therapy for Patients with Diabetes",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.64,
+            "3_stars": 0.655,
+            "4_stars": 0.685,
+            "5_stars": 0.713
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.684,
+            "3_stars": 0.695,
+            "4_stars": 0.735,
+            "5_stars": 0.76
+          }
+        }
+      }
+    },
+    "URI": {
+      "measure_name": "Appropriate Treatment For Upper Respiratory Infection",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "weight": 2,
+          "star_thresholds": {
+            "2_stars": 0.642,
+            "3_stars": 0.683,
+            "4_stars": 0.723,
+            "5_stars": 0.776
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.753,
+            "3_stars": 0.777,
+            "4_stars": 0.825,
+            "5_stars": 0.877
+          }
+        }
+      }
+    },
+    "AAB": {
+      "measure_name": "Avoidance of Antibiotic Treatment for Acute Bronchitis/Bronchiolitis",
+      "service_lines": {
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "weight": 1,
+          "star_thresholds": {
+            "2_stars": 0.403,
+            "3_stars": 0.427,
+            "4_stars": 0.488,
+            "5_stars": 0.513
+          }
+        }
+      }
+    }
+  }
+}

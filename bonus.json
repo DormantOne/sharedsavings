@@ -1,0 +1,328 @@
+
+{
+  "bonus_measures": {
+    "BCS-E": {
+      "measure_id": "BCS-E",
+      "measure_name": "Breast Cancer Screening",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "description": "Bonus points for meeting performance thresholds in breast cancer screening",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.82,
+              "points": 1,
+              "description": "Performance at or above 82.0%"
+            },
+            "tier_2": {
+              "threshold": 0.85,
+              "points": 2,
+              "description": "Performance at or above 85.0%"
+            },
+            "tier_3": {
+              "threshold": 0.90,
+              "points": 3,
+              "description": "Performance at or above 90.0%"
+            }
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "description": "Bonus points for meeting performance thresholds in breast cancer screening",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.70,
+              "points": 1,
+              "description": "Performance at or above 70.0%"
+            },
+            "tier_2": {
+              "threshold": 0.75,
+              "points": 2,
+              "description": "Performance at or above 75.0%"
+            },
+            "tier_3": {
+              "threshold": 0.80,
+              "points": 3,
+              "description": "Performance at or above 80.0%"
+            }
+          }
+        }
+      }
+    },
+    "CCS-E": {
+      "measure_id": "CCS-E",
+      "measure_name": "Cervical Cancer Screening",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "description": "Bonus points for meeting performance thresholds in cervical cancer screening",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.82,
+              "points": 1,
+              "description": "Performance at or above 82.0%"
+            },
+            "tier_2": {
+              "threshold": 0.85,
+              "points": 2,
+              "description": "Performance at or above 85.0%"
+            },
+            "tier_3": {
+              "threshold": 0.88,
+              "points": 3,
+              "description": "Performance at or above 88.0%"
+            }
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "description": "Bonus points for meeting performance thresholds in cervical cancer screening",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.72,
+              "points": 1,
+              "description": "Performance at or above 72.0%"
+            },
+            "tier_2": {
+              "threshold": 0.75,
+              "points": 2,
+              "description": "Performance at or above 75.0%"
+            },
+            "tier_3": {
+              "threshold": 0.78,
+              "points": 3,
+              "description": "Performance at or above 78.0%"
+            }
+          }
+        }
+      }
+    },
+    "CHL": {
+      "measure_id": "CHL",
+      "measure_name": "Chlamydia Screening",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "description": "Bonus points for meeting performance thresholds in chlamydia screening",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.66,
+              "points": 1,
+              "description": "Performance at or above 66.0%"
+            },
+            "tier_2": {
+              "threshold": 0.70,
+              "points": 2,
+              "description": "Performance at or above 70.0%"
+            },
+            "tier_3": {
+              "threshold": 0.75,
+              "points": 3,
+              "description": "Performance at or above 75.0%"
+            }
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "description": "Bonus points for meeting performance thresholds in chlamydia screening",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.72,
+              "points": 1,
+              "description": "Performance at or above 72.0%"
+            },
+            "tier_2": {
+              "threshold": 0.75,
+              "points": 2,
+              "description": "Performance at or above 75.0%"
+            },
+            "tier_3": {
+              "threshold": 0.78,
+              "points": 3,
+              "description": "Performance at or above 78.0%"
+            }
+          }
+        }
+      }
+    },
+    "GSD": {
+      "measure_id": "GSD",
+      "measure_name": "Glycemic Status Assessment for Patients with Diabetes",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "description": "Bonus points for meeting performance thresholds in glycemic status assessment",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.75,
+              "points": 1,
+              "description": "Performance at or above 75.0%"
+            },
+            "tier_2": {
+              "threshold": 0.80,
+              "points": 2,
+              "description": "Performance at or above 80.0%"
+            },
+            "tier_3": {
+              "threshold": 0.85,
+              "points": 3,
+              "description": "Performance at or above 85.0%"
+            }
+          }
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "description": "Bonus points for meeting performance thresholds in glycemic status assessment",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.72,
+              "points": 1,
+              "description": "Performance at or above 72.0%"
+            },
+            "tier_2": {
+              "threshold": 0.76,
+              "points": 2,
+              "description": "Performance at or above 76.0%"
+            },
+            "tier_3": {
+              "threshold": 0.80,
+              "points": 3,
+              "description": "Performance at or above 80.0%"
+            }
+          }
+        }
+      }
+    },
+    "PCR": {
+      "measure_id": "PCR",
+      "measure_name": "Plan All-Cause Readmissions",
+      "service_lines": {
+        "commercial": {
+          "line_name": "Commercial",
+          "description": "Bonus points for meeting performance thresholds in reducing readmissions",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.55,
+              "points": 1,
+              "description": "Performance at or below 0.55 (O/E ratio)"
+            },
+            "tier_2": {
+              "threshold": 0.50,
+              "points": 2,
+              "description": "Performance at or below 0.50 (O/E ratio)"
+            },
+            "tier_3": {
+              "threshold": 0.45,
+              "points": 3,
+              "description": "Performance at or below 0.45 (O/E ratio)"
+            }
+          },
+          "note": "Lower values indicate better performance (O/E ratio)"
+        },
+        "medicaid": {
+          "line_name": "UPMC for You (Medicaid)",
+          "description": "Bonus points for meeting performance thresholds in reducing readmissions",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.80,
+              "points": 1,
+              "description": "Performance at or below 0.80 (O/E ratio)"
+            },
+            "tier_2": {
+              "threshold": 0.75,
+              "points": 2,
+              "description": "Performance at or below 0.75 (O/E ratio)"
+            },
+            "tier_3": {
+              "threshold": 0.70,
+              "points": 3,
+              "description": "Performance at or below 0.70 (O/E ratio)"
+            }
+          },
+          "note": "Lower values indicate better performance (O/E ratio)"
+        }
+      }
+    },
+    "FMC": {
+      "measure_id": "FMC",
+      "measure_name": "Follow-Up After Emergency Department Visit for People with Multiple High-Risk Chronic Conditions",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "description": "Bonus points for meeting performance thresholds in follow-up care",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.80,
+              "points": 1,
+              "description": "Performance at or above 80.0%"
+            },
+            "tier_2": {
+              "threshold": 0.85,
+              "points": 2,
+              "description": "Performance at or above 85.0%"
+            },
+            "tier_3": {
+              "threshold": 0.90,
+              "points": 3,
+              "description": "Performance at or above 90.0%"
+            }
+          }
+        }
+      }
+    },
+    "DMA": {
+      "measure_id": "DMA",
+      "measure_name": "Medication Adherence for Diabetes Medications",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "description": "Bonus points for meeting performance thresholds in diabetes medication adherence",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.95,
+              "points": 1,
+              "description": "Performance at or above 95.0%"
+            },
+            "tier_2": {
+              "threshold": 0.96,
+              "points": 2,
+              "description": "Performance at or above 96.0%"
+            },
+            "tier_3": {
+              "threshold": 0.97,
+              "points": 3,
+              "description": "Performance at or above 97.0%"
+            }
+          }
+        }
+      }
+    },
+    "TRC-FU": {
+      "measure_id": "TRC-FU",
+      "measure_name": "7-Day Follow-Up for Inpatient Discharge",
+      "service_lines": {
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "description": "Bonus points for meeting performance thresholds in 7-day follow-up",
+          "tiers": {
+            "tier_1": {
+              "threshold": 0.85,
+              "points": 1,
+              "description": "Performance at or above 85.0%"
+            },
+            "tier_2": {
+              "threshold": 0.88,
+              "points": 2,
+              "description": "Performance at or above 88.0%"
+            },
+            "tier_3": {
+              "threshold": 0.92,
+              "points": 3,
+              "description": "Performance at or above 92.0%"
+            }
+          }
+        }
+      }
+    }
+  }
+}
