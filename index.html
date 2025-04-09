@@ -1146,7 +1146,7 @@ function populateExclusions(guideline) {
     if (frailtyFound) {
       exclusionsHtml += `
         <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
-          <p><strong>Epic Dot Phrase:</strong> <code>.frailtynote</code> - For frailty documentation, search terms, suggested diagnosis and next steps (e.g., wellness visit with trusted support)</p>
+          <p><strong>Epic Dot Phrase:</strong> <code>.frailtynote</code> - For frailty documentation, search terms, suggested dx & actions</p>
         </div>
       `;
     }
@@ -1156,10 +1156,7 @@ function populateExclusions(guideline) {
   
   dropdown.innerHTML = exclusionsHtml;
   
-  // Add an alert for debugging
-  if (frailtyFound) {
-    alert("Frailty found but dot phrase may not be showing");
-  }
+  
 }
 
 // Display guideline details
