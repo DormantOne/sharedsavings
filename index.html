@@ -1348,22 +1348,24 @@ document.getElementById("toggleExtraBtn").addEventListener("click", function() {
   }
 });
 
+ 
+
   // Add event listener for toggle star ratings button
-  document.getElementById("toggleStarRatingsBtn").addEventListener("click", function() {
-    const starRatingsDiv = document.getElementById("starRatingsDetails");
-    if (starRatingsDiv.style.display === "none" || starRatingsDiv.style.display === "") {
-      starRatingsDiv.style.display = "block";
-      this.innerText = "Hide Star Ratings";
-      
-      // Display star ratings for current measure if available
-      if (currentGuideline) {
-        displayStarRatings(currentGuideline.measure_id);
-      }
-    } else {
-      starRatingsDiv.style.display = "none";
-      this.innerText = "Show Star Ratings";
+document.getElementById("toggleStarRatingsBtn").addEventListener("click", function() {
+  const starRatingsDiv = document.getElementById("starRatingsDetails");
+  if (starRatingsDiv.style.display === "none" || starRatingsDiv.style.display === "") {
+    starRatingsDiv.style.display = "block";
+    this.innerText = "Hide Star Ratings";
+    
+    // Display star ratings for current measure if available
+    if (currentGuideline) {
+      displayStarRatings(currentGuideline.measure_id);
     }
-  });
+  } else {
+    starRatingsDiv.style.display = "none";
+    this.innerText = "Show Star Ratings";
+  }
+});
   
   // Add event listener for toggle bonus tiers button
   document.getElementById("toggleBonusTiersBtn").addEventListener("click", function() {
