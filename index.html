@@ -433,6 +433,52 @@
       font-weight: bold;
       font-size: 12px;
     }
+
+    /* Exclusions Button */
+.exclusions-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.exclusions-button:hover {
+  background-color: #c82333;
+}
+
+/* Exclusions Dropdown */
+#exclusionsDropdown {
+  display: none;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.exclusion-item {
+  margin-bottom: 8px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.exclusion-item:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #dc3545;
+}
+
+.frailty-item {
+  color: #dc3545;
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -456,52 +502,40 @@
       <div class="stat">Points: <span id="point-count">0</span></div>
     </div>
 
-<!-- Details Box (hidden by default) -->
-<div id="details">
-  <button id="closeDetailsBtn">Close</button>
-  <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
-  <button id="showExclusionsBtn" class="red-exclusion-button">Exclusions ▼</button>
-  
-  <!-- New Exclusions dropdown section -->
-  <div id="exclusionsDropdown" style="display: none;">
-    <div id="frailtyAdvancedIllness" class="frailty-section"></div>
-    <div id="otherExclusions" class="other-exclusions"></div>
-    <div id="epicDotPhrases" class="dot-phrases-section">
-      <p><strong>Epic Dot Phrases:</strong></p>
-      <p><code>.searchfrailty</code> - Search for frailty conditions</p>
-      <p><code>.relateddiagnosis</code> - Search for related diagnoses</p>
+    <div id="details">
+      <button id="closeDetailsBtn">Close</button>
+      <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
+      <button id="exclusionsBtn" class="exclusions-button">Exclusions ▼</button>
+      <div id="exclusionsDropdown"></div>
+      <div id="weightBanner">Weight: <span id="weightText">[Weight info]</span></div>
+      <div id="guidelineDetails">
+        <ul>
+          <li>Please select a measure.</li>
+        </ul>
+      </div>
+      <div class="details-buttons">
+        <button id="toggleExtraBtn">Show Extra Details</button>
+        <button id="toggleStarRatingsBtn">Show Star Ratings</button>
+        <button id="toggleBonusTiersBtn" style="display: none;">Show Bonus Tiers</button>
+      </div>
+      <div id="extraDetails">
+        <ul>
+          <li>[Extra details here]</li>
+        </ul>
+      </div>
+      <div id="starRatingsDetails">
+        <h4>Star Ratings Thresholds</h4>
+        <div id="starRatingsContent">
+          <p>Select a measure to see star ratings.</p>
+        </div>
+      </div>
+      <div id="bonusTiersDetails">
+        <h4>Bonus Tier Thresholds</h4>
+        <div id="bonusTiersContent">
+          <p>Select a bonus measure to see tier thresholds.</p>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div id="weightBanner">Weight: <span id="weightText">[Weight info]</span></div>
-  <div id="guidelineDetails">
-    <ul>
-      <li>Please select a measure.</li>
-    </ul>
-  </div>
-  <div class="details-buttons">
-    <button id="toggleExtraBtn">Show Extra Details</button>
-    <button id="toggleStarRatingsBtn">Show Star Ratings</button>
-    <button id="toggleBonusTiersBtn" style="display: none;">Show Bonus Tiers</button>
-  </div>
-  <div id="extraDetails">
-    <ul>
-      <li>[Extra details here]</li>
-    </ul>
-  </div>
-  <div id="starRatingsDetails">
-    <h4>Star Ratings Thresholds</h4>
-    <div id="starRatingsContent">
-      <p>Select a measure to see star ratings.</p>
-    </div>
-  </div>
-  <div id="bonusTiersDetails">
-    <h4>Bonus Tier Thresholds</h4>
-    <div id="bonusTiersContent">
-      <p>Select a bonus measure to see tier thresholds.</p>
-    </div>
-  </div>
-</div>
 
     <!-- Buttons for measures -->
     <div class="grid-buttons" id="allMeasuresButtons"></div>
@@ -530,96 +564,6 @@
   </div>
 
   <script>
-// Helper functions for exclusions and best practices
-function displayExclusions(guidelineData) {
-  const frailtyContainer = document.getElementById("frailtyAdvancedIllness");
-  const otherContainer = document.getElementById("otherExclusions");
-  const dotPhraseElement = document.getElementById("measureSpecificDotPhrase");
-  
-  // Null checks
-  if (!frailtyContainer || !otherContainer) return;
-  
-  // Clear previous content
-  frailtyContainer.innerHTML = "";
-  otherContainer.innerHTML = "";
-  
-  // Update measure-specific dot phrase
-  if (dotPhraseElement && guidelineData && guidelineData.measure_id) {
-    dotPhraseElement.textContent = `.${guidelineData.measure_id.toLowerCase()}patientinfo`;
-  } else if (dotPhraseElement) {
-    dotPhraseElement.textContent = `.measurepatientinfo`;
-  }
-  
-  if (!guidelineData || !guidelineData.denominator_exclusions || guidelineData.denominator_exclusions.length === 0) {
-    otherContainer.innerHTML = "<p>No exclusions specified for this measure.</p>";
-    return;
-  }
-  
-  // Create exclusion list
-  const frailtyItems = [];
-  const otherItems = [];
-  
-  guidelineData.denominator_exclusions.forEach(exclusion => {
-    const exclusionText = exclusion.trim();
-    const isFramiltyOrAdvancedIllness = 
-      exclusionText.toLowerCase().includes("frailty") || 
-      exclusionText.toLowerCase().includes("advanced illness");
-    
-    if (isFramiltyOrAdvancedIllness) {
-      frailtyItems.push(`<div class="exclusion-item frailty-item">${exclusionText}</div>`);
-    } else {
-      otherItems.push(`<div class="exclusion-item">${exclusionText}</div>`);
-    }
-  });
-  
-  // Display frailty/advanced illness items
-  if (frailtyItems.length > 0) {
-    frailtyContainer.innerHTML = `
-      <strong>Frailty/Advanced Illness Exclusions:</strong>
-      ${frailtyItems.join('')}
-    `;
-  } else {
-    frailtyContainer.innerHTML = "<p>No frailty or advanced illness exclusions for this measure.</p>";
-  }
-  
-  // Display other exclusions
-  if (otherItems.length > 0) {
-    otherContainer.innerHTML = `
-      <strong>Other Exclusions:</strong>
-      ${otherItems.join('')}
-    `;
-  } else {
-    otherContainer.innerHTML = "<p>No other exclusions for this measure.</p>";
-  }
-}
-
-function displayBestPractices(guidelineData) {
-  const container = document.getElementById("bestPracticesContent");
-  const dotPhraseElement = document.getElementById("measureSpecificDotPhrase");
-  
-  // Null check
-  if (!container) return;
-  
-  // Update measure-specific dot phrase
-  if (dotPhraseElement && guidelineData && guidelineData.measure_id) {
-    dotPhraseElement.textContent = `.${guidelineData.measure_id.toLowerCase()}patientinfo`;
-  } else if (dotPhraseElement) {
-    dotPhraseElement.textContent = `.measurepatientinfo`;
-  }
-  
-  if (!guidelineData || !guidelineData.best_practices || guidelineData.best_practices.length === 0) {
-    container.innerHTML = "<p>No best practices specified for this measure.</p>";
-    return;
-  }
-  
-  // Create best practices list
-  const practices = guidelineData.best_practices.map(practice => 
-    `<li>${practice}</li>`
-  ).join('');
-  
-  container.innerHTML = `<ul>${practices}</ul>`;
-}
-
  // Global variables
 let medicalData = {};
 let currentPlan = "commercial";
@@ -1167,6 +1111,34 @@ function switchPlan(planName) {
   // Generate all measure buttons
   generateButtons(planName);
 }
+// Function to populate exclusions dropdown
+function populateExclusions(guideline) {
+  // Reset exclusions dropdown
+  const dropdown = document.getElementById("exclusionsDropdown");
+  dropdown.style.display = "none";
+  const exclusionsBtn = document.getElementById("exclusionsBtn");
+  exclusionsBtn.textContent = "Exclusions ▼";
+  
+  // Generate exclusions content
+  let exclusionsHtml = "";
+  
+  if (guideline.denominator_exclusions && guideline.denominator_exclusions.length > 0) {
+    guideline.denominator_exclusions.forEach(exclusion => {
+      const exclusionText = exclusion.trim();
+      // Check if it's a frailty/advanced illness item
+      if (exclusionText.toLowerCase().includes("frailty") || 
+          exclusionText.toLowerCase().includes("advanced illness")) {
+        exclusionsHtml += `<div class="exclusion-item frailty-item">${exclusionText}</div>`;
+      } else {
+        exclusionsHtml += `<div class="exclusion-item">${exclusionText}</div>`;
+      }
+    });
+  } else {
+    exclusionsHtml = "<p>No exclusions specified for this measure.</p>";
+  }
+  
+  dropdown.innerHTML = exclusionsHtml;
+}
 
 // Display guideline details
 function displayGuideline(measureID, subtype, type, points) {
@@ -1209,6 +1181,10 @@ function displayGuideline(measureID, subtype, type, points) {
   document.getElementById("starRatingsDetails").style.display = "none";
   document.getElementById("toggleStarRatingsBtn").innerText = "Show Star Ratings";
   
+  // Reset exclusions dropdown
+document.getElementById("exclusionsDropdown").style.display = "none";
+document.getElementById("exclusionsBtn").textContent = "Exclusions ▼";
+
   document.getElementById("bonusTiersDetails").style.display = "none";
   document.getElementById("toggleBonusTiersBtn").innerText = "Show Bonus Tiers";
   
@@ -1281,6 +1257,9 @@ function displayGuideline(measureID, subtype, type, points) {
     // Display gap closure information as a list
     document.getElementById("gapText").innerHTML = gapMethodsHtml;
     
+    // Populate the exclusions dropdown
+populateExclusions(found);
+
 // Display weight information
 const weightText = document.getElementById("weightText");
 if (points === 3) {
@@ -1323,6 +1302,18 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("medicare-btn").addEventListener("click", function() {
     switchPlan("medicare");
   });
+
+  // Add event listener for exclusions button
+document.getElementById("exclusionsBtn").addEventListener("click", function() {
+  const dropdown = document.getElementById("exclusionsDropdown");
+  if (dropdown.style.display === "none" || dropdown.style.display === "") {
+    dropdown.style.display = "block";
+    this.textContent = "Exclusions ▲";
+  } else {
+    dropdown.style.display = "none";
+    this.textContent = "Exclusions ▼";
+  }
+});
 
   // Toggle extra details
   document.getElementById("toggleExtraBtn").addEventListener("click", function() {
