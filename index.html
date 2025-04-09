@@ -1121,8 +1121,19 @@ function populateExclusions(guideline) {
   
   // Generate exclusions content
   let exclusionsHtml = "";
-  
+  let hasFrailtyOrAdvancedIllness = false;
+
   if (guideline.denominator_exclusions && guideline.denominator_exclusions.length > 0) {
+    // First check if any items contain frailty or advanced illness
+    guideline.denominator_exclusions.forEach(exclusion => {
+      const exclusionText = exclusion.trim().toLowerCase();
+      if (exclusionText.includes("frailty") || exclusionText.includes("advanced illness")) {
+        hasFrailtyOrAdvancedIllness = true;
+      }
+    });
+    
+    // Then build the HTML
+    exclusionsHtml += "<div>";
     guideline.denominator_exclusions.forEach(exclusion => {
       const exclusionText = exclusion.trim();
       // Check if it's a frailty/advanced illness item
@@ -1133,6 +1144,17 @@ function populateExclusions(guideline) {
         exclusionsHtml += `<div class="exclusion-item">${exclusionText}</div>`;
       }
     });
+    exclusionsHtml += "</div>";
+    
+    // Add the dot phrase note for frailty if applicable
+    console.log("Has frailty or advanced illness:", hasFrailtyOrAdvancedIllness);
+    if (hasFrailtyOrAdvancedIllness) {
+      exclusionsHtml += `
+        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
+          <p><strong>Epic Dot Phrase:</strong> <code>.frailtynote</code> - For frailty documentation, search terms, suggested diagnosis and next steps (e.g., wellness visit with trusted support)</p>
+        </div>
+      `;
+    }
   } else {
     exclusionsHtml = "<p>No exclusions specified for this measure.</p>";
   }
