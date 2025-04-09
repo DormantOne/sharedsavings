@@ -1350,16 +1350,20 @@ document.getElementById("toggleExtraBtn").addEventListener("click", function() {
 
  
 
-  // Add event listener for toggle star ratings button
+// Add event listener for toggle star ratings button
 document.getElementById("toggleStarRatingsBtn").addEventListener("click", function() {
   const starRatingsDiv = document.getElementById("starRatingsDetails");
   if (starRatingsDiv.style.display === "none" || starRatingsDiv.style.display === "") {
     starRatingsDiv.style.display = "block";
     this.innerText = "Hide Star Ratings";
     
-    // Display star ratings for current measure if available
-    if (currentGuideline) {
+    // Call displayStarRatings with current measure if available
+    if (currentGuideline && typeof displayStarRatings === "function") {
+      console.log("Calling displayStarRatings with:", currentGuideline.measure_id);
       displayStarRatings(currentGuideline.measure_id);
+    } else {
+      console.log("Cannot display star ratings - currentGuideline or function missing");
+      document.getElementById("starRatingsContent").innerHTML = "<p>Star ratings information not available for this measure.</p>";
     }
   } else {
     starRatingsDiv.style.display = "none";
