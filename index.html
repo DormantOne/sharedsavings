@@ -433,89 +433,7 @@
       font-weight: bold;
       font-size: 12px;
     }
-
-/* Red Exclusions Button */
-.red-exclusion-button {
-  display: block;
-  margin: 10px 0;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.red-exclusion-button:hover {
-  background-color: #c82333;
-}
-
-/* Exclusions Dropdown Section */
-#exclusionsDropdown {
-  margin: 8px 0 15px 0;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.frailty-section {
-  margin-bottom: 15px;
-}
-
-.frailty-item {
-  color: #dc3545;
-  font-weight: bold;
-  padding: 4px 8px;
-  margin-bottom: 5px;
-  border-left: 3px solid #dc3545;
-  background-color: rgba(220, 53, 69, 0.05);
-}
-
-.exclusion-item {
-  padding: 4px 8px;
-  margin-bottom: 5px;
-  border-left: 3px solid #6c757d;
-}
-
-/* Best Practices Section */
-#bestPracticesDetails {
-  display: none;
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-}
-
-#bestPracticesDotPhrase {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px dashed #ccc;
-  background-color: rgba(0, 123, 255, 0.05);
-  padding: 8px;
-  border-radius: 4px;
-}
-
-/* Dot Phrases Styling */
-.dot-phrases-section {
-  margin-top: 15px;
-  padding: 8px;
-  background-color: rgba(0, 123, 255, 0.05);
-  border-radius: 4px;
-  border-top: 1px dashed #ccc;
-}
-
-code {
-  background-color: #e9ecef;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-family: monospace;
-  color: #212529;
-}</style>
+</style>
 </head>
 <body>
   <div class="container">
@@ -554,47 +472,39 @@ code {
       <p><code>.relateddiagnosis</code> - Search for related diagnoses</p>
     </div>
   </div>
-  
+
   <div id="weightBanner">Weight: <span id="weightText">[Weight info]</span></div>
   <div id="guidelineDetails">
     <ul>
       <li>Please select a measure.</li>
     </ul>
   </div>
-  
   <div class="details-buttons">
-    <button id="toggleBestPracticesBtn">Best Practices</button>
+    <button id="toggleExtraBtn">Show Extra Details</button>
     <button id="toggleStarRatingsBtn">Show Star Ratings</button>
     <button id="toggleBonusTiersBtn" style="display: none;">Show Bonus Tiers</button>
   </div>
-  
-  <!-- Best Practices Section -->
-  <div id="bestPracticesDetails">
-    <div id="bestPracticesContent">
-      <ul>
-        <li>[Best practices will appear here]</li>
-      </ul>
-    </div>
-    <div id="bestPracticesDotPhrase">
-      <p><strong>Epic Dot Phrase:</strong></p>
-      <p><code id="measureSpecificDotPhrase">.measurepatientinfo</code> - Patient info for this measure</p>
-    </div>
+  <div id="extraDetails">
+    <ul>
+      <li>[Extra details here]</li>
+    </ul>
   </div>
-  
   <div id="starRatingsDetails">
     <h4>Star Ratings Thresholds</h4>
     <div id="starRatingsContent">
       <p>Select a measure to see star ratings.</p>
     </div>
   </div>
-  
   <div id="bonusTiersDetails">
     <h4>Bonus Tier Thresholds</h4>
     <div id="bonusTiersContent">
       <p>Select a bonus measure to see tier thresholds.</p>
     </div>
   </div>
-</div><div class="grid-buttons" id="allMeasuresButtons"></div>
+</div>
+
+    <!-- Buttons for measures -->
+    <div class="grid-buttons" id="allMeasuresButtons"></div>
     
     <!-- Focus Measures Section (Bonus Measures) moved here -->
     <div class="focus-measures-section">
@@ -626,14 +536,17 @@ function displayExclusions(guidelineData) {
   const otherContainer = document.getElementById("otherExclusions");
   const dotPhraseElement = document.getElementById("measureSpecificDotPhrase");
   
+  // Null checks
+  if (!frailtyContainer || !otherContainer) return;
+  
   // Clear previous content
   frailtyContainer.innerHTML = "";
   otherContainer.innerHTML = "";
   
   // Update measure-specific dot phrase
-  if (guidelineData && guidelineData.measure_id) {
+  if (dotPhraseElement && guidelineData && guidelineData.measure_id) {
     dotPhraseElement.textContent = `.${guidelineData.measure_id.toLowerCase()}patientinfo`;
-  } else {
+  } else if (dotPhraseElement) {
     dotPhraseElement.textContent = `.measurepatientinfo`;
   }
   
@@ -684,10 +597,13 @@ function displayBestPractices(guidelineData) {
   const container = document.getElementById("bestPracticesContent");
   const dotPhraseElement = document.getElementById("measureSpecificDotPhrase");
   
+  // Null check
+  if (!container) return;
+  
   // Update measure-specific dot phrase
-  if (guidelineData && guidelineData.measure_id) {
+  if (dotPhraseElement && guidelineData && guidelineData.measure_id) {
     dotPhraseElement.textContent = `.${guidelineData.measure_id.toLowerCase()}patientinfo`;
-  } else {
+  } else if (dotPhraseElement) {
     dotPhraseElement.textContent = `.measurepatientinfo`;
   }
   
@@ -1291,14 +1207,6 @@ function displayGuideline(measureID, subtype, type, points) {
   
   // Reset star ratings and bonus tiers divs to hidden when a new measure is selected
   document.getElementById("starRatingsDetails").style.display = "none";
-  // Hide exclusions dropdown
-  document.getElementById("exclusionsDropdown").style.display = "none";
-  document.getElementById("showExclusionsBtn").textContent = "Exclusions ▼";
-  
-  // Reset best practices
-  document.getElementById("bestPracticesDetails").style.display = "none";
-  document.getElementById("toggleBestPracticesBtn").textContent = "Best Practices";
-
   document.getElementById("toggleStarRatingsBtn").innerText = "Show Star Ratings";
   
   document.getElementById("bonusTiersDetails").style.display = "none";
@@ -1372,10 +1280,6 @@ function displayGuideline(measureID, subtype, type, points) {
     
     // Display gap closure information as a list
     document.getElementById("gapText").innerHTML = gapMethodsHtml;
-    // Prepare exclusions and best practices data
-    displayExclusions(found);
-    displayBestPractices(found);
-    
     
 // Display weight information
 const weightText = document.getElementById("weightText");
@@ -1474,30 +1378,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear active button state when closing details
     clearActiveButtonState();
   });
-  // Exclusions button event listener
-  document.getElementById("showExclusionsBtn").addEventListener("click", function() {
-    const dropdown = document.getElementById("exclusionsDropdown");
-    if (dropdown.style.display === "none" || dropdown.style.display === "") {
-      dropdown.style.display = "block";
-      this.textContent = "Exclusions ▲";
-    } else {
-      dropdown.style.display = "none";
-      this.textContent = "Exclusions ▼";
-    }
-  });
-
-  // Best Practices button event listener
-  document.getElementById("toggleBestPracticesBtn").addEventListener("click", function() {
-    const bestPracticesDiv = document.getElementById("bestPracticesDetails");
-    if (bestPracticesDiv.style.display === "none" || bestPracticesDiv.style.display === "") {
-      bestPracticesDiv.style.display = "block";
-      this.textContent = "Hide Best Practices";
-    } else {
-      bestPracticesDiv.style.display = "none";
-      this.textContent = "Best Practices";
-    }
-  });
-
 
   // Ask AI Section: Build and display a prompt based on the current guideline
   document.getElementById("askAIBtn").addEventListener("click", function() {
