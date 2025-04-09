@@ -514,7 +514,7 @@
         </ul>
       </div>
       <div class="details-buttons">
-        <button id="toggleExtraBtn">Show Extra Details</button>
+        <button id="toggleExtraBtn">Best Practices</button>
         <button id="toggleStarRatingsBtn">Show Star Ratings</button>
         <button id="toggleBonusTiersBtn" style="display: none;">Show Bonus Tiers</button>
       </div>
@@ -1248,11 +1248,11 @@ document.getElementById("exclusionsBtn").textContent = "Exclusions ▼";
     }
     
     extraDiv.innerHTML = `
-      <ul>
-        <li><strong>Denominator Exclusions:</strong> ${exclusionsHtml}</li>
-        <li><strong>Best Practices:</strong> ${practicesHtml}</li>
-      </ul>
-    `;
+  <ul>
+    <li><strong>Best Practices:</strong> ${practicesHtml}</li>
+    <li><strong>Epic Dot Phrase:</strong> <code>.${measureID.toLowerCase()}patientinfo</code> - Patient info for this measure</li>
+  </ul>
+`;
     
     // Display gap closure information as a list
     document.getElementById("gapText").innerHTML = gapMethodsHtml;
@@ -1315,17 +1315,19 @@ document.getElementById("exclusionsBtn").addEventListener("click", function() {
   }
 });
 
-  // Toggle extra details
-  document.getElementById("toggleExtraBtn").addEventListener("click", function() {
-    const extraDiv = document.getElementById("extraDetails");
-    if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
-      extraDiv.style.display = "block";
-      this.innerText = "Hide Extra Details";
-    } else {
-      extraDiv.style.display = "none";
-      this.innerText = "Show Extra Details";
-    }
-  });
+
+
+// Toggle best practices
+document.getElementById("toggleExtraBtn").addEventListener("click", function() {
+  const extraDiv = document.getElementById("extraDetails");
+  if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
+    extraDiv.style.display = "block";
+    this.innerText = "Hide Best Practices";
+  } else {
+    extraDiv.style.display = "none";
+    this.innerText = "Best Practices";
+  }
+});
 
   // Add event listener for toggle star ratings button
   document.getElementById("toggleStarRatingsBtn").addEventListener("click", function() {
