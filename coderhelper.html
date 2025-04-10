@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lab Test Medical Necessity Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 15px;
+      line-height: 1.5; /* Increased line-height */
+      background-color: #f4f4f4; /* Light background */
+    }
+    .container {
+      max-width: 1100px; /* Wider container */
+      margin: auto;
+      background-color: #fff; /* White background for content */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    h2 {
+        font-size: 24px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    h3 {
+        font-size: 18px;
+        color: #0056b3; /* Blue for subheadings */
+        margin-top: 20px;
+    }
+    h4 {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 8px;
+    }
+    ul {
+        padding-left: 20px;
+        margin-top: 5px;
+    }
+    li {
+        margin-bottom: 5px;
+    }
+    code {
+        background-color: #e9ecef;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        color: #c7254e; /* Dark pink for code */
+    }
+    .disclaimer {
+        font-size: 12px;
+        color: #6c757d;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    /* Plan toggle buttons */
+    .plan-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center; /* Center buttons */
+    }
+    .plan-button {
+      padding: 10px 18px; /* Larger padding */
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .plan-button.active {
+      background-color: #007bff; /* Primary blue */
+      box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    }
+    /* Grid for measure buttons */
+    .grid-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Wider buttons */
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    /* Category headers */
+    .category-header {
+      grid-column: 1 / -1;
+      font-weight: bold;
+      font-size: 17px; /* Slightly larger */
+      padding: 8px 0;
+      border-bottom: 2px solid #007bff; /* Blue underline */
+      margin-bottom: 10px;
+      color: #0056b3;
+    }
+    /* Base button style */
+    .measure-button {
+      color: white;
+      padding: 14px; /* Larger padding */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+      transition: background-color 0.2s, transform 0.1s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background-color: #5a6268; /* Default gray */
+    }
+    .measure-button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    .measure-button.active-measure {
+      outline: 3px solid #333;
+      box-shadow: 0 0 0 1px white inset, 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .active-measure::after { /* Checkmark for active */
+      content: "✓";
+      position: absolute;
+      bottom: 5px;
+      right: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Category-specific colors */
+    .category-ChemistryPanels .measure-button,
+    .category-ElectrolytesMinerals .measure-button { background-color: #007bff; } /* Blue */
+    .category-Hematology .measure-button,
+    .category-ProteinStudies .measure-button { background-color: #6f42c1; } /* Purple */
+    .category-Vitamins .measure-button { background-color: #fd7e14; } /* Orange */
+    .category-Endocrine .measure-button { background-color: #28a745; } /* Green */
+    .category-InflammatoryAutoimmune .measure-button { background-color: #ffc107; color: #333;} /* Yellow */
+    .category-UrineStudies .measure-button { background-color: #17a2b8; } /* Teal */
+    .category-CancerScreening .measure-button,
+    .category-InfectiousDiseaseSTI .measure-button { background-color: #dc3545; } /* Red */
+
+
+    /* Details box */
+    #details {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 6px;
+      background-color: #f8f9fa;
+      margin-bottom: 25px;
+      display: none;
+      position: relative;
+    }
+    #closeDetailsBtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+     #closeDetailsBtn:hover {
+        background-color: #5a6268;
+     }
+    #testOverviewBanner { /* Renamed from gapBanner */
+      background-color: #e2e3e5; /* Light gray */
+      color: #343a40; /* Dark gray text */
+      padding: 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    #testOverviewBanner strong {
+        color: #0056b3; /* Blue title */
+    }
+    .details-section { /* Container for details */
+        margin-top: 15px;
+    }
+    .details-section h3 {
+        margin-bottom: 10px;
+    }
+
+    /* Not Covered Button & Dropdown */
+    .not-covered-button {
+      background-color: #dc3545;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+    .not-covered-button:hover {
+      background-color: #c82333;
+    }
+    #notCoveredDropdown {
+      display: none;
+      padding: 15px;
+      background-color: #fff0f1; /* Light pink */
+      border: 1px solid #f5c6cb; /* Pink border */
+      border-radius: 4px;
+      margin-bottom: 15px;
+      color: #721c24; /* Dark red text */
+    }
+    #notCoveredDropdown ul {
+        list-style-type: disc; /* Use bullets */
+    }
+    #notCoveredDropdown code {
+        background-color: #f8d7da; /* Lighter pink for code */
+        color: #721c24;
+    }
+
+    /* Frequency/Payer Notes */
+    #frequencyPayerNotes {
+      margin-top: 15px;
+      padding: 12px;
+      border: 1px solid #d6d8db;
+      background-color: #e9ecef;
+      border-radius: 4px;
+      font-size: 13px; /* Smaller font */
+    }
+     #frequencyPayerNotes h4 {
+         margin-top: 0;
+         margin-bottom: 8px;
+         color: #495057;
+     }
+
+
+    /* Ask AI Section styling */
+    #askAISection {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 6px;
+      background-color: #f8f9fa;
+      margin-top: 30px;
+      text-align: center;
+    }
+     #askAISection h3 { color: #333; }
+    #exhaustiveQuery {
+      width: calc(100% - 22px); /* Adjust for padding/border */
+      height: 100px; /* Increased height */
+      margin-top: 15px;
+      display: none;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    #copyQueryBtn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 10px;
+      display: none;
+    }
+     #copyQueryBtn:hover { background-color: #218838; }
+    .link-buttons { margin-top: 15px; }
+    .link-buttons a {
+      display: inline-block;
+      margin: 5px 8px;
+      padding: 9px 14px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 13px;
+      transition: background-color 0.2s;
+    }
+    .link-buttons a:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+      <h2 style="margin: 0; margin-right: 15px;">Lab Test Medical Necessity Guide</h2>
+    </div>
+
+    <h5 class="disclaimer"><small>Information based on analysis of Medicare (Novitas JL) and Western PA commercial payer guidance. This is for informational purposes only and does not constitute medical or billing advice. Verify codes and policies with current payer resources.</small></h5>
+
+    <!-- Plan Toggle Buttons -->
+    <div class="plan-toggle">
+      <button id="combined-btn" class="plan-button active">Combined Guidance (Medicare & Commercial)</button>
+      <!-- Add other buttons here if specific plan views are ever needed -->
+    </div>
+
+    <div id="details">
+      <button id="closeDetailsBtn">Close</button>
+      <div id="testOverviewBanner">
+          <strong>Test:</strong> <span id="testName">[Test Name]</span><br>
+          <strong>CPT Codes:</strong> <span id="cptCodes">[CPT]</span><br>
+          <span id="testDescription">[Description]</span>
+      </div>
+
+      <div class="details-section" id="guidelineDetails">
+        <h3>Covered Indications</h3>
+        <p>Please select a lab test.</p>
+      </div>
+
+      <button id="notCoveredBtn" class="not-covered-button">Not Covered / Insufficient Diagnoses ▼</button>
+      <div id="notCoveredDropdown"></div>
+
+      <div id="frequencyPayerNotes">
+        <h4>Frequency & Payer Notes</h4>
+        <div id="freqPayNotesContent">
+            <p>Select a test to see notes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons for measures -->
+    <div class="grid-buttons" id="allMeasuresButtons"></div>
+
+    <!-- Ask AI Section -->
+    <div id="askAISection">
+      <h3>Ask AI about ICD-10 Codes</h3>
+      <p>Generate a prompt for an AI assistant to find specific ICD-10 codes based on the selected lab test's medical necessity guidelines.</p>
+      <button id="askAIBtn" class="measure-button" style="background-color: #6c757d; max-width: 200px; margin: 10px auto; display: block;">Generate AI Prompt</button>
+      <textarea id="exhaustiveQuery" placeholder="AI prompt will appear here..." style="display:none;"></textarea>
+      <button id="copyQueryBtn" style="display:none;">Copy Prompt</button>
+      <div class="link-buttons">
+        <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+        <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+        <a href="https://gemini.google.com" target="_blank">Gemini</a>
+        <a href="https://claude.ai/" target="_blank">Claude</a>
+        <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+ // Global variables
+let labNecessityData = {}; // Will hold our hardcoded data
+let currentGuideline = null; // Holds the data for the currently selected lab test
+let currentPlan = "combined"; // Default view
+
+// --- Hardcoded Lab Necessity Data ---
+// (Derived from the provided text document)
+labNecessityData = {
+    "CMP": {
+        measure_id: "CMP",
+        displayName: "Comprehensive Metabolic Panel",
+        category: "ChemistryPanels",
+        cpt_codes: "80053",
+        description: "Evaluates metabolic state, kidney function, liver function, electrolytes, and glucose. Covered for specific diseases/symptoms, not routine wellness.",
+        covered_indications: [
+            { category_name: "Chronic Conditions (Diabetes, Renal, Liver)", codes: ["E11.22 (Type 2 DM with CKD)", "N18.3 – N18.5 (Chronic kidney disease Stage 3–5)", "I12.9 (Hypertensive CKD)", "K76.9 (Liver disease, unspecified)", "K74.60 (Unspecified cirrhosis)"] },
+            { category_name: "Electrolyte and Metabolic Disorders", codes: ["E87.2 (Acidosis)", "E87.3 (Alkalosis)", "E83.51 (Hypocalcemia)", "E83.52 (Hypercalcemia)", "E87.0 (Hyperosmolality and hypernatremia)", "E87.1 (Hypo-osmolality and hyponatremia)", "E87.5 (Hyperkalemia)", "E87.6 (Hypokalemia)"] },
+            { category_name: "Cardiovascular Disease/Hypertension", codes: ["I10 (Essential hypertension)", "I50.9 (Heart failure, unspecified)", "I25.10 (Atherosclerotic heart disease)"] },
+            { category_name: "Medication Monitoring", codes: ["Z79.899 (Other long-term current drug therapy) - *Use with condition being treated or drug effect, e.g., diuretic use monitoring K+*"] },
+            { category_name: "Symptoms of Metabolic Disturbances", codes: ["R53.83 (Other fatigue) - *If evaluating electrolyte/metabolic cause*", "R41.0 (Disorientation)", "R41.82 (Altered mental status)", "R63.4 (Abnormal weight loss)", "R79.89 (Other specified abnormal blood chemistry) - *e.g., follow-up on prior abnormal lab*"] }
+        ],
+        not_covered: [
+            "Z00.00 (General adult medical examination without abnormal findings) - Routine physical/screening",
+            "Z13.6 (Encounter for screening for cardiovascular disorders)",
+            "Z13.1 (Encounter for screening for diabetes mellitus)",
+            "Vague complaints without specific suspicion of metabolic/organ issues."
+        ],
+        frequency_notes: "Generally ordered as needed for diagnosis or monitoring active conditions. Routine serial CMPs without clinical change may not be necessary.",
+        payer_notes: "Medicare and commercial payers require specific medical necessity; routine screening panels are typically not covered."
+    },
+    "PHOS": {
+        measure_id: "PHOS",
+        displayName: "Serum Phosphorus",
+        category: "ElectrolytesMinerals",
+        cpt_codes: "84100",
+        description: "Evaluates phosphate levels, often related to kidney disease, parathyroid disorders, or vitamin D metabolism.",
+        covered_indications: [
+            { category_name: "Parathyroid Disorders", codes: ["E21.0 (Primary hyperparathyroidism)", "E21.3 (Hyperparathyroidism, unspecified)", "E20.9 (Hypoparathyroidism, unspecified)"] },
+            { category_name: "Vitamin D & Calcium Metabolism", codes: ["E55.9 (Vitamin D deficiency, unspecified)", "E83.51 (Hypocalcemia)", "E83.52 (Hypercalcemia)", "E83.30 (Disorder of phosphorus metabolism, unspecified)", "E83.39 (Other disorders of phosphorus metabolism)"] },
+            { category_name: "Chronic Kidney Disease", codes: ["N18.3 - N18.5 (CKD stage 3-5)", "N18.9 (CKD unspecified)", "N25.81 (Secondary hyperparathyroidism of renal origin)", "N17.9 (Acute kidney failure, unspecified)"] },
+            { category_name: "Malnutrition/Malabsorption", codes: ["E40–E46 (Malnutrition codes)", "K90.9 (Intestinal malabsorption, unspecified)", "E88.81 (Metabolic syndrome - often associated with refeeding)"] },
+            { category_name: "Other Causes of Imbalance", codes: ["E83.42 (Hypomagnesemia)", "R79.89 (Other specified abnormal blood chemistry) - *e.g., prior abnormal phosphate*", "R79.9 (Abnormal finding of blood chemistry, unspecified)", "R53.81 / R53.83 (Weakness/Fatigue) - *If investigating electrolyte cause*"] }
+        ],
+        not_covered: [
+            "N18.6 (ESRD) *alone* is not sufficient for testing frequency beyond routine dialysis monitoring (typically monthly).",
+            "Routine screening in asymptomatic patients without risk factors.",
+            "Z13.0 (Encounter for screening for diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism)"
+        ],
+        frequency_notes: "Monthly for dialysis patients unless specific indication for more. Annually or as needed for other chronic conditions.",
+        payer_notes: null
+    },
+    "MAG": {
+        measure_id: "MAG",
+        displayName: "Serum Magnesium",
+        category: "ElectrolytesMinerals",
+        cpt_codes: "83735",
+        description: "Measures magnesium levels, crucial for neuromuscular function and enzyme activity. Often checked with electrolyte issues, kidney disease, or certain symptoms/meds.",
+        covered_indications: [
+            { category_name: "Endocrine & Metabolic Disorders", codes: ["E11.9 (Type 2 DM without complications)", "E11.10 (Type 2 DM with ketoacidosis without coma)", "E83.42 (Hypomagnesemia)", "E87.0-E87.8 (Other fluid/electrolyte disorders)"] },
+            { category_name: "Cardiovascular", codes: ["I10 (Essential hypertension)", "I12.9 (Hypertensive CKD)", "I47.2 (Ventricular tachycardia)", "I49.01 (Ventricular fibrillation)", "I45.81 (Long QT syndrome)"] },
+            { category_name: "Renal Disease", codes: ["N18.3 - N18.5 (CKD stage 3-5)", "Z99.2 (Dependence on renal dialysis)"] },
+            { category_name: "Malabsorption/Nutrition/Meds", codes: ["K90.9 (Intestinal malabsorption, unspecified)", "F10.20 (Alcohol dependence)", "Z79.899 (Other long-term drug therapy) - *e.g., diuretics, PPIs, cisplatin*", "E40-E46 (Malnutrition codes)"] },
+            { category_name: "Neuromuscular Symptoms", codes: ["R25.2 (Cramp and spasm)", "G40.909 (Epilepsy, unspecified)", "R41.82 (Altered mental status)", "R29.0 (Tetany)", "R53.1 (Weakness)"] }
+        ],
+        not_covered: [
+            "Routine asymptomatic screening.",
+            "Testing more than ~3 times per year in stable chronic conditions without new issues (per some Medicare guidance)."
+        ],
+        frequency_notes: "Frequency depends on stability. May be checked frequently in acute settings (ICU, DKA) or with initiation of Mg-affecting drugs. Less frequent in stable outpatients.",
+        payer_notes: null
+    },
+     "CBC": {
+        measure_id: "CBC",
+        displayName: "Complete Blood Count w/ Diff",
+        category: "Hematology",
+        cpt_codes: "85025 (auto diff), 85027 (auto hemogram/platelet)",
+        description: "Evaluates red cells, white cells, and platelets. Used broadly for anemia, infection, inflammation, bleeding disorders, and monitoring treatments.",
+        covered_indications: [
+            { category_name: "Anemia and Blood Disorders", codes: ["D64.9 (Anemia, unspecified)", "D50.9 (Iron deficiency anemia, unspecified)", "D51.0 (Pernicious anemia)", "D53.9 (Nutritional anemia, unspecified)", "D63.1 (Anemia in CKD)", "D45 (Polycythemia vera)", "D69.6 (Thrombocytopenia, unspecified)", "D70.9 (Neutropenia, unspecified)", "D72.819 (Decreased white blood cell count, unspecified)"] },
+            { category_name: "Infection, Inflammation, Fever", codes: ["R50.9 (Fever, unspecified)", "J18.9 (Pneumonia)", "N39.0 (UTI)", "A41.9 (Sepsis)", "M06.9 (Rheumatoid arthritis)", "M32.9 (SLE)"] },
+            { category_name: "Chronic Diseases with Blood Effects", codes: ["N18.x (CKD stages)", "B20 (HIV disease)", "C codes (Malignancy - monitoring effects)", "K90.9 (Malabsorption)"] },
+            { category_name: "Medication Monitoring", codes: ["Z79.899 (Long-term drug therapy) - *e.g., chemotherapy, immunosuppressants, methotrexate*", "Z79.01 (Long term use of anticoagulants)", "Z79.02 (Long term use of systemic steroids)"] },
+            { category_name: "Symptoms Suggesting Blood Disorder", codes: ["R53.81 (Malaise)", "R53.83 (Other fatigue)", "R58 (Hemorrhage, unspecified)", "R23.3 (Spontaneous ecchymoses - bruising)", "R06.02 (Shortness of breath)", "R00.0 (Tachycardia)"] }
+        ],
+        not_covered: [
+            "Z00.00 / Z00.01 (Routine general exam) - without specific symptoms/findings",
+            "Z13.0 (Screening examination for diseases of the blood...)",
+            "Excessive frequency without clinical change (e.g., daily CBC outpatient without acute reason)."
+        ],
+        frequency_notes: "Initial workup often involves one CBC. Repeats guided by clinical condition, monitoring treatment response (e.g., infection resolving, chemo cycles, anemia therapy).",
+        payer_notes: "Medicare NCD 190.15 outlines coverage; generally requires signs/symptoms or relevant disease."
+    },
+     "B12FOL": {
+        measure_id: "B12FOL",
+        displayName: "Vitamin B12 & Folate",
+        category: "Vitamins",
+        cpt_codes: "82607 (B12), 82746 (Folate)",
+        description: "Measures levels of Vitamin B12 and Folate, important for RBC production and neurological function. Tested for macrocytic anemia or specific neurological symptoms.",
+        covered_indications: [
+            { category_name: "Megaloblastic and Nutritional Anemias", codes: ["D51.0 (Pernicious anemia)", "D51.1, D51.3, D51.8, D51.9 (Other B12 deficiency anemias)", "D52.8, D52.9 (Folate deficiency anemias)", "D53.1 (Other megaloblastic anemias, NEC)", "D53.9 (Nutritional anemia, unspecified) - *if macrocytic or suspected B12/folate def*", "D64.9 (Anemia, unspecified) - *if macrocytic features present*"] },
+            { category_name: "Neurologic Manifestations", codes: ["G60.9 (Hereditary and idiopathic neuropathy)", "R20.2 (Paresthesia of skin)", "R26.89 / R26.9 (Other abnormalities of gait / Unspecified abnormality of gait)", "R41.3 (Other amnesia - memory loss)", "F03.90 (Unspecified dementia) - *rule out reversible causes*", "G32.0 (Subacute combined degeneration of spinal cord in diseases classified elsewhere)"] },
+            { category_name: "Malabsorption and Risk Factors", codes: ["K90.9 (Intestinal malabsorption, unspecified)", "K91.2 (Postsurgical malabsorption, not elsewhere classified)", "Z98.84 (Bariatric surgery status)", "Z79.899 (Other long-term drug therapy) - *e.g., metformin, PPIs*", "F10.20 (Alcohol dependence)", "Z86.39 (Personal history of other endocrine, nutritional and metabolic disease)"] },
+            { category_name: "Other Indications", codes: ["E53.8 (Deficiency of other specified B group vitamins)", "E72.11 (Homocystinuria)"] }
+        ],
+        not_covered: [
+            "Routine screening in asymptomatic patients without anemia or neurological signs.",
+            "General fatigue (R53.83) or malaise (R53.81) *alone* without suspicion of anemia/neuropathy.",
+            "Ordering as part of non-specific 'vitamin panels' (Medicare explicitly considers these screening)."
+        ],
+        frequency_notes: "Initial diagnosis. Repeat testing after initiating therapy to confirm repletion (e.g., 3-4 months). Annual testing may be appropriate for monitoring ongoing replacement therapy (e.g., pernicious anemia).",
+        payer_notes: "Medicare generally covers only when targeted for specific clinical suspicion."
+    },
+    "IRON": {
+        measure_id: "IRON",
+        displayName: "Iron Panel (Fe, TIBC, %Sat, Ferritin)",
+        category: "Hematology",
+        cpt_codes: "83540 (Iron), 83550 (TIBC), 82728 (Ferritin)",
+        description: "Evaluates iron status, used for diagnosing iron deficiency anemia, anemia of chronic disease, and iron overload.",
+        covered_indications: [
+            { category_name: "Iron Deficiency Anemia & Blood Loss", codes: ["D50.0 (Iron deficiency anemia secondary to blood loss)", "D50.9 (Iron deficiency anemia, unspecified)", "D50.8 (Other iron deficiency anemias)", "D64.9 (Anemia, unspecified) - *if evaluating for iron def*", "R71.0 (Precipitous drop in hematocrit or hemoglobin)", "N92.0 (Excessive and frequent menstruation with regular cycle)", "K92.2 (Gastrointestinal hemorrhage, unspecified)"] },
+            { category_name: "Anemia of Chronic Disease (vs. Iron Deficiency)", codes: ["D63.1 (Anemia in chronic kidney disease)", "D63.0 (Anemia in neoplastic disease)", "D63.8 (Anemia in other chronic diseases classified elsewhere) - *e.g., RA, SLE*"] },
+            { category_name: "Hemochromatosis / Iron Overload", codes: ["E83.110 (Hereditary hemochromatosis)", "E83.119 (Hemochromatosis, unspecified)", "E83.10 (Disorder of iron metabolism, unspecified)", "R79.0 (Abnormal level of iron) - *if following up known abnormal*"] },
+            { category_name: "Other Indications", codes: ["N18.x (CKD stages) - *especially if on EPO*", "Z99.2 (Dependence on renal dialysis)", "G25.81 (Restless legs syndrome)", "K90.0 (Celiac disease)", "R53.83 (Fatigue) / R53.81 (Malaise) - *if anemia present or high suspicion of deficiency*"] }
+        ],
+        not_covered: [
+            "Preventive screening for hemochromatosis in asymptomatic individuals without risk factors or abnormal labs.",
+            "Routine screening for iron deficiency in non-anemic, asymptomatic individuals.",
+            "Z13.89 (Encounter for screening for other specified diseases and disorders)",
+            "Fatigue (R53.83) *alone* without anemia or specific reason to suspect iron issues."
+        ],
+        frequency_notes: "Test to diagnose. Re-test after initiating iron therapy (e.g., 2-3 months) to assess response. Monitor periodically in CKD/dialysis or hemochromatosis as clinically indicated.",
+        payer_notes: null
+    },
+    "PSA": {
+        measure_id: "PSA",
+        displayName: "Prostate Specific Antigen (PSA)",
+        category: "CancerScreening",
+        cpt_codes: "84153 (Total PSA); G0103 (Medicare Screening PSA)",
+        description: "Used for prostate cancer screening and monitoring. Coverage differs significantly between screening and diagnostic contexts.",
+        covered_indications: [
+            { category_name: "Diagnostic PSA (Signs/Symptoms/History)", codes: [
+                "N40.0 (Benign prostatic hyperplasia without LUTS)", "N40.1 (BPH with LUTS)",
+                "N41.1 (Chronic prostatitis)", "N41.9 (Inflammatory disease of prostate, unspecified)",
+                "R35.0 (Frequency of urination)", "R33.8 (Other retention of urine)", "R32 (Unspecified urinary incontinence)", "R31.0 (Gross hematuria)", "R31.9 (Unspecified hematuria)",
+                "R93.6 (Abnormal findings on diagnostic imaging of urinary organs - *if prostate lesion seen*)", "R97.20 (Elevated PSA) - *follow-up*",
+                "C61 (Malignant neoplasm of prostate)", "Z85.46 (Personal history of malignant neoplasm of prostate)"]
+            },
+            { category_name: "Screening PSA (Preventive)", codes: [
+                 "Z12.5 (Encounter for screening for malignant neoplasm of prostate) - *Use with CPT G0103 for Medicare annual screen age 50+.*",
+                 "*Commercial plans typically cover Z12.5 annually per USPSTF guidelines (often ages 50-69, consult plan).*" ]
+            }
+        ],
+        not_covered: [
+            "Using Z12.5 (screening code) for a *diagnostic* PSA test (CPT 84153) - Medicare requires a symptom/condition code.",
+            "Using Z00.00 (General exam) for a diagnostic PSA.",
+            "Vague symptoms like fatigue without genitourinary context.",
+            "Screening PSA (G0103) more often than once every 12 months for Medicare.",
+            "Excessive diagnostic PSA testing without clinical change."
+        ],
+        frequency_notes: "Medicare covers one screening PSA (G0103) per year for men 50+. Diagnostic PSA (84153) frequency depends on clinical situation (e.g., monitoring active surveillance, post-treatment).",
+        payer_notes: "Crucial to use correct CPT (84153 vs G0103) and diagnosis code (diagnostic vs Z12.5 screening) based on intent."
+    },
+     "LIPID": {
+        measure_id: "LIPID",
+        displayName: "Lipid Panel",
+        category: "ChemistryPanels",
+        cpt_codes: "80061",
+        description: "Measures cholesterol (Total, HDL, LDL calc) and triglycerides. Used to assess cardiovascular risk and manage dyslipidemia.",
+        covered_indications: [
+            { category_name: "Hyperlipidemia and Mixed Dyslipidemia", codes: ["E78.0 (Pure hypercholesterolemia)", "E78.01 (Familial hypercholesterolemia)", "E78.1 (Pure hyperglyceridemia)", "E78.2 (Mixed hyperlipidemia)", "E78.5 (Hyperlipidemia, unspecified)", "R79.89 (Other specified abnormal blood chemistry) - *if following up prior abnormal lipid*"] },
+            { category_name: "Cardiovascular Disease", codes: ["I25.10 (Atherosclerotic heart disease of native coronary artery without angina pectoris)", "I20-I25.x (Other Ischemic Heart Disease codes)", "I63.x (Cerebral infarction)", "I65-I67 (Occlusion and stenosis codes)", "I21.x (Acute myocardial infarction)", "Z95.1 (Presence of aortocoronary bypass graft)", "Z95.5 (Presence of coronary angioplasty implant and graft)"] },
+            { category_name: "Diabetes and Metabolic Syndrome", codes: ["E11.9 (Type 2 DM without complications)", "E08-E13 series (Diabetes codes)", "E66.9 (Obesity, unspecified)", "E88.81 (Metabolic syndrome)"] },
+            { category_name: "Hypertension and Cardiovascular Risk Factors", codes: ["I10 (Essential (primary) hypertension)", "I11-I13 (Hypertensive heart/CKD disease)", "Z72.0 (Tobacco use) - *as contributing risk factor with other condition*"] },
+            { category_name: "Hypothyroidism", codes: ["E03.9 (Hypothyroidism, unspecified)", "E03.8 (Other specified hypothyroidism)"] },
+            { category_name: "Chronic Kidney Disease", codes: ["N18.3-N18.6 (CKD stages 3–5)", "I12.9 (Hypertensive CKD)"] },
+            { category_name: "Medication use", codes: ["Z79.899 (Other long term (current) drug therapy) - *e.g., statin monitoring, or drug causing dyslipidemia*", "Z79.83 (Long term (current) use of agents affecting estrogen receptors and estrogen levels)"] }
+        ],
+        not_covered: [
+            "Z13.220 (Encounter for screening for lipoid disorders) - *Medicare diagnostic context. Medicare allows one 5-year CV screen.*",
+            "Routine screening in asymptomatic, low-risk individuals beyond Medicare's 5-year benefit or commercial preventive schedule.",
+            "Family history (e.g., Z83.42) *alone* without personal diagnosis or findings (considered screening by Medicare).",
+            "Excessively frequent testing (e.g., monthly) without active management changes."
+        ],
+        frequency_notes: "Medicare: Initial diagnosis/treatment adjustment (~every 2-3 months), then stable monitoring (~every 6-12 months). Commercial: Often covers annual screening preventively. Medicare NCD 190.23 applies.",
+        payer_notes: "Medicare covers one 'Cardiovascular Screening Blood Test' (includes lipids) every 5 years (use Z13.6 / Z13.220). Diagnostic testing requires a condition. Commercial plans often cover screening more broadly per USPSTF."
+    },
+    "LDLD": {
+        measure_id: "LDLD",
+        displayName: "Direct LDL Cholesterol",
+        category: "ChemistryPanels",
+        cpt_codes: "83721",
+        description: "Directly measures LDL cholesterol. Used when calculation is inaccurate (high triglycerides) or precise LDL is needed.",
+        covered_indications: [
+            { category_name: "High Triglycerides preventing calculation", codes: ["E78.1 (Pure hyperglyceridemia) or E78.2 (Mixed hyperlipidemia) - *when TG > 400 mg/dL*", "R79.89 (Other specified abnormal blood chemistry) - *if initial panel noted 'LDL cannot be calculated'*"] },
+            { category_name: "Specific Dyslipidemias / Risk Management", codes: ["E78.01 (Familial hypercholesterolemia)", "E78.5 (Hyperlipidemia, unspecified) - *if needing precise LDL for therapy decisions*", "I25.10 (CAD), E11.9 (Diabetes) - *if TG elevated or precise LDL target needed*"] }
+        ],
+        not_covered: [
+            "Routine use when standard lipid panel (calculated LDL) is sufficient (i.e., TG < 400 mg/dL).",
+            "General screening (Z13.220) or use without a diagnosis from the Lipid Panel list.",
+            "Substituting for standard panel without justification."
+        ],
+        frequency_notes: "Ordered only when necessary based on standard panel results or specific clinical need.",
+        payer_notes: "Payers expect justification for using Direct LDL over calculated LDL."
+    },
+    "UA": {
+        measure_id: "UA",
+        displayName: "Urinalysis (UA)",
+        category: "UrineStudies",
+        cpt_codes: "81001 (automated w/o scope), 81003 (automated w/ scope)",
+        description: "Basic urine test for infection, kidney disease, diabetes complications, dehydration, etc.",
+        covered_indications: [
+            { category_name: "Urinary Tract Symptoms or Infection", codes: ["N39.0 (UTI, site unspecified)", "R30.0 (Dysuria)", "R35.0 (Frequency of urination)", "R33.9 (Retention of urine, unspecified)", "N30.00 (Acute cystitis without hematuria)", "N34.1 (Nonspecific urethritis)", "N76.0 (Acute vaginitis)"] },
+            { category_name: "Hematuria or Stone Disease", codes: ["R31.9 (Unspecified hematuria)", "R31.0 (Gross hematuria)", "N20.0 (Calculus of kidney)", "N20.1 (Calculus of ureter)", "R10.2 (Pelvic and perineal pain - *if flank pain/stone suspected*)"] },
+            { category_name: "Metabolic or Renal Disease Monitoring", codes: ["E11.9 (Type 2 DM) / E10.9 (Type 1 DM) - *check glucose/ketones*", "E13.10 (Other specified DM with ketoacidosis without coma)", "N18.x (CKD stages) - *monitor protein/blood*", "Z94.0 (Kidney transplant status) + Z48.22 (Aftercare following kidney transplant)", "R80.9 (Proteinuria, unspecified)"] },
+            { category_name: "General Symptoms / Workup", codes: ["R50.9 (Fever, unspecified) - *part of FUO workup*", "R10.x (Abdominal pain) - *if lower abd/flank*", "R41.0 (Disorientation) / R41.82 (Altered mental status) - *esp. elderly, rule out UTI*"] }
+        ],
+        not_covered: [
+            "Z00.00 / Z00.01 (Routine general exam) - without specific indication/symptom.",
+            "Z13.89 (Screening for other specified diseases) - general screening.",
+            "Excessive frequency in stable patients without new symptoms."
+        ],
+        frequency_notes: "As needed for symptoms or monitoring specific conditions.",
+        payer_notes: "Requires a clinical indication; not typically covered as part of a routine physical by Medicare."
+    },
+    "UACR": {
+        measure_id: "UACR",
+        displayName: "Urine Albumin/Creatinine Ratio (Microalbumin)",
+        category: "UrineStudies",
+        cpt_codes: "82043 (microalbumin quant), 82570 (creat urine quant)",
+        description: "Detects small amounts of albumin in urine, primarily for early diabetic nephropathy screening/monitoring.",
+        covered_indications: [
+            { category_name: "Diabetes Mellitus", codes: ["E11.9 (Type 2 DM without complications) - *annual screening*", "E10.9 (Type 1 DM without complications) - *annual screening after 5 yrs duration*", "E11.21 (Type 2 DM with diabetic nephropathy)", "E10.21 (Type 1 DM with diabetic nephropathy)"] },
+            { category_name: "Hypertension", codes: ["I10 (Essential hypertension) - *assess end-organ damage*", "I12.9 (Hypertensive CKD)", "I13.x (Hypertensive heart and CKD)"] },
+            { category_name: "Chronic Kidney Disease (non-diabetic)", codes: ["N18.3-N18.6 (CKD stages 3–5)", "N02-N08 (Various glomerular diseases, nephrotic syndrome)", "R80.9 (Proteinuria, unspecified) - *quantify protein excretion*"] },
+             { category_name: "Other", codes: ["R94.4 (Abnormal results of kidney function studies) - *follow-up*", "Z94.0 (Kidney transplant status) - *monitoring*"] }
+        ],
+        not_covered: [
+            "Screening in individuals without diabetes, hypertension, or known renal disease.",
+            "Z13.29 (Screening for other endocrine disorders) / Z13.22 (Screening for metabolic disorders) - too general.",
+            "More frequent testing than annually in stable diabetics with prior normal results without clinical change."
+        ],
+        frequency_notes: "Annually for diabetics without known nephropathy. More frequent (e.g., 3-6 months) if monitoring progression or response to therapy (e.g., ACEi).",
+        payer_notes: "Medicare covers for diabetes/CKD monitoring, not general screening. Commercial plans typically follow ADA guidelines for diabetic screening."
+    },
+     "A1C": {
+        measure_id: "A1C",
+        displayName: "Hemoglobin A1c (HbA1c)",
+        category: "Endocrine",
+        cpt_codes: "83036",
+        description: "Measures average blood glucose over ~3 months. Used for diagnosing and monitoring diabetes.",
+        covered_indications: [
+            { category_name: "Diabetes Mellitus (Types 1 & 2)", codes: ["E11.9 (Type 2 DM without complications)", "E10.9 (Type 1 DM without complications)", "E11.65 (Type 2 DM with hyperglycemia)", "E10.65 (Type 1 DM with hyperglycemia)", "E13.x (Other specified diabetes mellitus)"] },
+            { category_name: "Pre-Diabetes / Impaired Glucose", codes: ["R73.03 (Prediabetes)", "R73.01 (Impaired fasting glucose)", "R73.02 (Impaired glucose tolerance)", "R73.9 (Hyperglycemia, unspecified)"] },
+            { category_name: "Symptoms Suggesting Hyperglycemia", codes: ["R35.1 (Nocturia) / R35.0 (Frequency)", "R63.1 (Polydipsia)", "R63.4 (Abnormal weight loss)", "H53.8 (Other visual disturbances - *blurred vision*)"] },
+            { category_name: "Monitoring in Other Conditions", codes: ["Z79.52 (Long term (current) use of systemic steroids)", "E84.0 (Cystic fibrosis with pulmonary manifestations) - *if CF-related DM suspected/present*", "E08.x (Diabetes due to underlying condition)"] }
+        ],
+        not_covered: [
+            "Z13.1 (Encounter for screening for diabetes mellitus) - *Medicare covers FBG/GTT for screening, not A1c.*",
+            "Routine screening of non-diabetic, asymptomatic patients without risk factors.",
+            "Z00.00 (General exam).",
+            "Testing more frequently than every 3 months in stable diabetics (Medicare NCD 190.21)."
+        ],
+        frequency_notes: "Quarterly (every 3 months) for diabetics not at goal or with therapy changes. Twice yearly (every 6 months) for stable diabetics meeting goals. Annually for prediabetes monitoring. Medicare NCD allows monthly in unstable cases, but >1/month not covered.",
+        payer_notes: "While ADA accepts A1c for diagnosis, Medicare's *screening* benefit specifies glucose tests. For Medicare, use A1c diagnostically with risk factors (R73.x) or symptoms."
+    },
+     "ANA": {
+        measure_id: "ANA",
+        displayName: "Antinuclear Antibody (ANA)",
+        category: "InflammatoryAutoimmune",
+        cpt_codes: "86038 (ANA screen); 86039 (ANA titer)",
+        description: "Screens for autoantibodies common in systemic autoimmune diseases like Lupus. Not a general screening test.",
+        covered_indications: [
+            { category_name: "Lupus and Related Connective Tissue Diseases", codes: ["M32.10 (Systemic lupus erythematosus (SLE), organ or system involvement unspecified)", "M32.9 (SLE, unspecified)", "M34.0 (Progressive systemic sclerosis)", "M35.00 (Sicca syndrome [Sjogren])", "M35.1 (Mixed connective tissue disease - MCTD)"] },
+            { category_name: "Rheumatoid Arthritis and Overlap Syndromes", codes: ["M06.9 (Rheumatoid arthritis, unspecified)", "M05.9 (Rheumatoid arthritis with rheumatoid factor, unspecified) - *if overlap suspected*", "M35.9 (Systemic involvement of connective tissue, unspecified) - *undifferentiated CTD*"] },
+            { category_name: "Dermatomyositis/Polymyositis", codes: ["M33.90 (Dermatopolymyositis, unspecified)", "M33.20 (Polymyositis)"] },
+            { category_name: "Vasculitis and Related (Rule out)", codes: ["M31.30 (Granulomatosis with polyangiitis without renal involvement)", "M30.1 (Polyarteritis nodosa)"] },
+            { category_name: "Unexplained Multi-System Symptoms", codes: ["M25.50 (Pain in joint, multiple sites) + R50.9 (Fever)", "L93.2 (Other local lupus erythematosus - *discoid lupus*)", "R21 (Rash and other nonspecific skin eruption) + M79.10 (Myalgia)", "R76.0 (Raised antibody titer) - *if following up prior positive/equivocal screen*"] }
+        ],
+        not_covered: [
+            "General screening in patients without clinical signs/symptoms of autoimmune disease.",
+            "M79.7 (Fibromyalgia) or R53.82 (Chronic fatigue syndrome) *alone*.",
+            "Z13.89 (Screening for other specified disorders).",
+            "Repeated ANA testing in diagnosed/stable autoimmune disease (titer doesn't correlate well with activity)."
+        ],
+        frequency_notes: "Primarily for initial diagnosis. Follow-up typically involves more specific autoantibodies (dsDNA, ENA panel) or inflammatory markers (ESR/CRP).",
+        payer_notes: "Requires documented clinical suspicion of a relevant autoimmune condition."
+    },
+    "RF": {
+        measure_id: "RF",
+        displayName: "Rheumatoid Factor (RF)",
+        category: "InflammatoryAutoimmune",
+        cpt_codes: "86431",
+        description: "Detects antibodies associated with Rheumatoid Arthritis and some other autoimmune conditions.",
+        covered_indications: [
+            { category_name: "Suspected Rheumatoid Arthritis", codes: ["M06.9 (Rheumatoid arthritis, unspecified)", "M13.0 (Polyarthritis, unspecified)", "M25.50 (Pain in joint, multiple sites) - *if inflammatory pattern*", "M05.79 (Rheumatoid arthritis with rheumatoid factor of multiple sites without organ or systems involvement)"] },
+            { category_name: "Other Arthropathies (Rule out RA)", codes: ["M07.x (Psoriatic arthritis - *if atypical*)", "M1A.x (Chronic gout - *if polyarticular/unclear*)"] },
+            { category_name: "Sjogren’s Syndrome", codes: ["M35.00 (Sicca syndrome [Sjogren])"] },
+            { category_name: "Other Systemic Conditions", codes: ["D89.1 (Cryoglobulinemia)", "B18.2 (Chronic viral hepatitis C) - *can cause RF positivity*"] },
+             { category_name: "Symptoms Suggesting RA", codes: ["M25.60 (Stiffness of unspecified joint, not elsewhere classified) - *morning stiffness*", "R53.83 (Fatigue) + M25.50 (Polyarthralgia)"] }
+        ],
+        not_covered: [
+            "M19.x (Osteoarthritis) - unless ruling out coexisting RA.",
+            "M79.7 (Fibromyalgia) - non-inflammatory.",
+            "Screening asymptomatic individuals, even with family history.",
+            "Repeated testing in established RA (RF level doesn't track activity well)."
+        ],
+        frequency_notes: "Primarily for diagnosis. Not typically used for monitoring RA activity.",
+        payer_notes: "Must be linked to suspicion of RA or related inflammatory/autoimmune condition."
+    },
+    "ESR": {
+        measure_id: "ESR",
+        displayName: "Erythrocyte Sedimentation Rate (ESR)",
+        category: "InflammatoryAutoimmune",
+        cpt_codes: "85652",
+        description: "Non-specific marker of inflammation or infection. Used to detect and monitor inflammatory conditions.",
+        covered_indications: [
+            { category_name: "Giant Cell Arteritis / Polymyalgia Rheumatica", codes: ["M31.6 (Other giant cell arteritis)", "M35.3 (Polymyalgia rheumatica)"] },
+            { category_name: "Rheumatoid Arthritis and Connective Tissue Diseases", codes: ["M06.9 (RA, unspecified)", "M32.9 (SLE, unspecified)", "M34.0 (Progressive systemic sclerosis)", "M30.0 (Polyarteritis nodosa)"] },
+            { category_name: "Infections (Chronic/Deep)", codes: ["M86.9 (Osteomyelitis, unspecified)", "I33.0 (Acute and subacute infective endocarditis)", "A41.9 (Sepsis, unspecified organism)", "A15-A19 (Tuberculosis codes)", "T81.4XXA (Infection following a procedure, initial encounter)"] },
+            { category_name: "Malignancy (Certain Types)", codes: ["C90.00 (Multiple myeloma not having achieved remission)", "C81.10 (Hodgkin lymphoma, nodular sclerosis classical type)", "C81.90 (Hodgkin lymphoma, unspecified)"] },
+            { category_name: "General Inflammatory Symptoms / FUO", codes: ["R50.9 (Fever, unspecified)", "R63.4 (Abnormal weight loss)", "R61 (Generalized hyperhidrosis - *night sweats*)", "R69 (Illness, unspecified - *if FUO workup*)", "R79.82 (Elevated C-reactive protein (CRP))"] }
+        ],
+        not_covered: [
+            "General health screening in asymptomatic individuals.",
+            "Z00.00 (General exam).",
+            "Screening for cardiovascular risk.",
+            "Non-specific pain (e.g., M54.5 Low back pain) without signs of inflammation/infection.",
+            "Excessive frequency in stable chronic conditions."
+        ],
+        frequency_notes: "Frequency depends on condition being monitored (e.g., monthly for active GCA, less often for stable RA).",
+        payer_notes: "Requires a clinical reason related to suspected/known inflammation, infection, or specific malignancies."
+    },
+    "CRP": {
+        measure_id: "CRP",
+        displayName: "C-Reactive Protein (CRP / hs-CRP)",
+        category: "InflammatoryAutoimmune",
+        cpt_codes: "86140 (CRP); 86141 (hs-CRP)",
+        description: "Acute-phase reactant, marker of inflammation/infection. hs-CRP sometimes used for cardiac risk (limited coverage).",
+        covered_indications: [
+            { category_name: "Autoimmune/Inflammatory Diseases", codes: ["M06.9 (RA)", "M35.3 (PMR)", "M32.9 (SLE)", "K50.90 (Crohn's disease)", "K51.90 (Ulcerative colitis)"] },
+            { category_name: "Infection", codes: ["A41.9 (Sepsis)", "J18.9 (Pneumonia)", "M86.00 (Acute osteomyelitis)", "I33.0 (Endocarditis)", "T81.4XXA (Post-op infection)", "U07.1 (COVID-19)"] },
+            { category_name: "Cardiovascular (Limited Diagnostic Use)", codes: ["I20.0 (Unstable angina) - *if evaluating inflammation*", "I40.0 (Acute myocarditis)", "I30.9 (Acute pericarditis, unspecified)"] },
+            { category_name: "Other Inflammation", codes: ["R50.81 (Fever presenting with conditions classified elsewhere)", "R70.0 (Elevated ESR) - *check CRP correlation*"] }
+        ],
+        not_covered: [
+            "**hs-CRP (86141) for routine cardiovascular risk screening in asymptomatic individuals (Medicare generally does not cover).**",
+            "Z13.6 (Screening for CV disorders) - using hs-CRP.",
+            "General screening for inflammation (Z00.00).",
+            "Non-specific fatigue/malaise alone without suspicion of inflammatory process."
+        ],
+        frequency_notes: "Can be monitored frequently in acute illness (daily inpatient). Less frequent outpatient monitoring for chronic disease activity.",
+        payer_notes: "Medicare coverage for hs-CRP (cardiac risk) is very limited/often denied. Standard CRP requires indication for inflammation/infection. Commercial plans vary on hs-CRP coverage."
+    },
+     "VITD": {
+        measure_id: "VITD",
+        displayName: "Vitamin D, 25-Hydroxy",
+        category: "Vitamins",
+        cpt_codes: "82306",
+        description: "Measures Vitamin D level. Coverage is limited by Medicare/payers to specific conditions due to risk of deficiency or abnormal metabolism.",
+        covered_indications: [
+            { category_name: "Bone Density Disorders", codes: ["M81.0 (Age-related osteoporosis without current pathological fracture)", "M85.80 (Other specified disorders of bone density and structure, unspecified site - *osteopenia*)", "M83.9 (Adult osteomalacia, unspecified)", "M80.x (Osteoporosis with current pathological fracture)"] },
+            { category_name: "Hyperparathyroidism and Calcium Disorders", codes: ["E21.0 (Primary hyperparathyroidism)", "E21.3 (Hyperparathyroidism, unspecified)", "E20.9 (Hypoparathyroidism, unspecified)", "E83.52 (Hypercalcemia)", "E83.51 (Hypocalcemia)"] },
+            { category_name: "Chronic Kidney Disease", codes: ["N18.3 - N18.5 (CKD stage 3-5)", "N25.81 (Secondary hyperparathyroidism of renal origin)"] },
+            { category_name: "Malabsorption Syndromes", codes: ["K90.0 (Celiac disease)", "K90.9 (Intestinal malabsorption, unspecified)", "K50-K51 (Inflammatory bowel disease)", "K86.1 (Other chronic pancreatitis)", "Z98.84 (Bariatric surgery status)", "E84.0 (Cystic fibrosis)"] },
+            { category_name: "Hepatic Disease", codes: ["K74.60 (Unspecified cirrhosis of liver)", "K76.9 (Liver disease, unspecified)"] },
+            { category_name: "Musculoskeletal Symptoms (Suspected Deficiency)", codes: ["M79.1 (Myalgia)", "M83.x (Osteomalacia codes)", "E55.9 (Vitamin D deficiency, unspecified) - *if deficiency is known/suspected*", "R26.2 (Difficulty in walking, NEC) - *if due to weakness from deficiency*"] },
+            { category_name: "Granulomatous Diseases", codes: ["D86.0 (Sarcoidosis of lung)", "A15-A19 (Tuberculosis codes)", "B38.x (Coccidioidomycosis)", "B39.x (Histoplasmosis)"] },
+            { category_name: "Medications Affecting Vitamin D", codes: ["Z79.899 (Other long term (current) drug therapy) - *e.g., anticonvulsants, glucocorticoids, AIDS meds, antifungals*"] },
+            { category_name: "Monitoring Deficiency Treatment", codes: ["E55.9 (Vitamin D deficiency, unspecified) - *when on replacement therapy*"] }
+        ],
+        not_covered: [
+            "Routine screening in the general asymptomatic population.",
+            "Z00.00 (General exam).",
+            "Z13.828 (Encounter for screening for other nutritional disorders).",
+            "Testing more frequently than every 3-4 months during initial repletion, or more than annually once stable/replete (Medicare limits often ~3 tests/year max)."
+        ],
+        frequency_notes: "Test at diagnosis. Recheck 3-4 months after starting high-dose therapy. Annual check if stable on maintenance or with ongoing risk (CKD, malabsorption).",
+        payer_notes: "Medicare LCDs (e.g., L34658) strictly limit coverage to listed conditions. Commercial plans largely follow similar restrictions; USPSTF does not recommend general screening."
+    },
+    "HIV": {
+        measure_id: "HIV",
+        displayName: "HIV Screening/Testing",
+        category: "InfectiousDiseaseSTI",
+        cpt_codes: "87389 (Ag/Ab screen), 86701-86703 (Ab confirm), G0432/G0433 (Rapid screen)",
+        description: "Testing for Human Immunodeficiency Virus. Covered for screening based on risk/age and for diagnosis.",
+        covered_indications: [
+            { category_name: "Screening (Preventive)", codes: [
+                "Z11.4 (Encounter for screening for HIV) - *Use for USPSTF/CDC recommended screening (age 15-65 once, annually if risk).*",
+                "Z72.51 (High risk heterosexual behavior)", "Z72.52 (High risk homosexual behavior)", "Z72.53 (High risk bisexual behavior)",
+                "F11-F19 codes (Drug use) - *as risk factor*",
+                "Z34.x (Routine pregnancy supervision) + Z11.4 - *Prenatal screening*"
+                ] },
+            { category_name: "Diagnostic Testing (Symptoms/Exposure)", codes: [
+                "Z20.6 (Contact with and (suspected) exposure to HIV)",
+                "R75 (Inconclusive laboratory evidence of HIV)",
+                "B20 (HIV disease) - *for confirmation/monitoring if status previously unclear or for specific tests like viral load*",
+                "Symptoms like R50.9 (Fever), R59.1 (Generalized lymphadenopathy), R63.4 (Weight loss), R21 (Rash) - *if acute retroviral syndrome suspected*"
+                ] },
+             { category_name: "AIDS-Defining Illness", codes: ["C46.0 (Kaposi's sarcoma of skin)", "B59 (Pneumocystosis)", "B25.9 (Cytomegaloviral disease)"] }
+        ],
+        not_covered: [
+            "Screening more frequently than guidelines allow for low-risk individuals.",
+            "Using Z11.4 when a diagnostic reason (exposure/symptoms) exists (use Z20.6 or symptom codes instead).",
+            "Using B20 if the test is for initial screening/diagnosis (use Z11.4 or Z20.6)."
+        ],
+        frequency_notes: "Screening: Once for ages 15-65, annually if high risk. Diagnostic: As needed based on exposure or symptoms.",
+        payer_notes: "Medicare covers screening per USPSTF (G0432/33). Commercial plans cover broadly due to ACA preventive mandate (Z11.4)."
+    },
+    "HCV": {
+        measure_id: "HCV",
+        displayName: "Hepatitis C Testing",
+        category: "InfectiousDiseaseSTI",
+        cpt_codes: "86803 (Ab screen); 87521 (RNA quant); 87522 (RNA qual); 87902 (Genotype)",
+        description: "Testing for Hepatitis C virus. Expanded screening recommendations cover most adults.",
+        covered_indications: [
+            { category_name: "Screening (Preventive)", codes: [
+                "Z11.59 (Encounter for screening for other viral diseases - *Use for Hep C*) - *USPSTF: Adults 18-79 once; annually if ongoing risk.*",
+                "F11-F19 codes (Drug use, esp injection) - *risk factor*",
+                "Z20.5 (Contact with/exposure to viral hepatitis) - *includes transfusion < 1992*",
+                "Z34.x (Routine pregnancy supervision) + Z11.59 - *Prenatal screening*"
+                ] },
+            { category_name: "Diagnostic Testing (Symptoms/Risk/Labs)", codes: [
+                "R74.0 (Nonspecific elevation of levels of transaminase and LDH) - *Elevated LFTs*",
+                "R17 (Unspecified jaundice)",
+                "K75.9 (Inflammatory liver disease, unspecified)", "K76.0 (Fatty (change of) liver, NEC)",
+                "B17.10 (Acute hepatitis C without hepatic coma)",
+                "B18.2 (Chronic viral hepatitis C) - *for monitoring RNA/genotype*"
+                ] }
+        ],
+        not_covered: [
+            "Screening outside recommended age range (18-79) without specific risk factors.",
+            "Repetitive screening in low-risk individuals beyond the one-time recommendation.",
+            "Testing after confirmed cure (SVR) without new risk/exposure."
+        ],
+        frequency_notes: "Screening: Once for adults 18-79, annually if high risk (e.g., active IVDU).",
+        payer_notes: "Medicare covers one-time screening for 1945-1965 birth cohort + those w/ risk factors, and annual for high risk. Commercial plans cover USPSTF (18-79 once) as preventive."
+    },
+    "RPR": {
+        measure_id: "RPR",
+        displayName: "Syphilis Testing (RPR/VDRL)",
+        category: "InfectiousDiseaseSTI",
+        cpt_codes: "86592 (RPR qual); 86593 (RPR quant); 86780 (FTA-ABS)",
+        description: "Testing for Syphilis infection.",
+        covered_indications: [
+            { category_name: "Screening (Preventive)", codes: [
+                "Z11.3 (Encounter for screening for infections with a predominantly sexual mode of transmission) - *Use for syphilis screen.*",
+                "Z72.51 / Z72.52 / Z72.53 (High risk sexual behavior codes)",
+                "Z34.x (Routine pregnancy supervision) + Z11.3 - *Prenatal screening*"
+                ] },
+            { category_name: "Diagnostic Testing (Symptoms/Exposure)", codes: [
+                "Z20.2 (Contact with and (suspected) exposure to venereal disease) - *Exposure*",
+                "A51.0 (Primary genital syphilis)", "A51.3 (Secondary syphilis of skin or mucous membranes)", "A52.x (Late syphilis codes)", "A53.9 (Syphilis, unspecified)",
+                "R21 (Rash and other nonspecific skin eruption) - *if suspicious for secondary syphilis*",
+                "N97.9 (Female infertility, unspecified) / N46.9 (Male infertility, unspecified) - *part of infertility workup*"
+                ] }
+        ],
+        not_covered: [
+            "Routine screening in low-risk populations outside guidelines/frequency limits.",
+            "Using Z11.3 excessively without documented ongoing risk."
+        ],
+        frequency_notes: "Screening: Annually for high risk; per pregnancy guidelines. Diagnostic: As needed.",
+        payer_notes: "Medicare covers annual screening for high risk, and up to 3x per pregnancy. Commercial plans cover screening per USPSTF/CDC."
+    },
+     "HSVT2": {
+        measure_id: "HSVT2",
+        displayName: "Herpes Simplex Virus Type 2 (HSV-2)",
+        category: "InfectiousDiseaseSTI",
+        cpt_codes: "86696 (Ab test); 87529 (PCR)",
+        description: "Testing for Herpes Simplex Virus Type 2. Screening is generally NOT recommended or covered.",
+        covered_indications: [
+            { category_name: "Diagnostic Testing (Lesions/Symptoms/Exposure)", codes: [
+                "A60.01 (Herpesviral infection of penis)", "A60.04 (Herpesviral vulvovaginitis)",
+                "N48.1 (Balanitis) / N76.6 (Ulceration of vulva) - *if evaluating for HSV*",
+                "R30.0 (Dysuria) / R21 (Rash) - *if genital location and HSV suspected*",
+                "Z20.2 (Contact with and (suspected) exposure to venereal disease) - *Partner has HSV-2*"
+                ] }
+        ],
+        not_covered: [
+            "**Routine screening for HSV-2 in asymptomatic individuals (USPSTF recommends against).**",
+            "Z11.3 (Screening for STIs) - *Does not typically cover HSV screening.*",
+            "Testing based solely on patient request without symptoms or specific exposure."
+        ],
+        frequency_notes: "Test only when clinically indicated for diagnosis.",
+        payer_notes: "Most payers do not cover asymptomatic HSV screening due to lack of benefit and test limitations."
+    },
+     "GCCHL": {
+        measure_id: "GCCHL",
+        displayName: "Gonorrhea/Chlamydia NAAT",
+        category: "InfectiousDiseaseSTI",
+        cpt_codes: "87491 (Chlamydia NAAT); 87591 (Gonorrhea NAAT); 87801 (Combo NAAT)",
+        description: "Nucleic acid amplification test for Gonorrhea and Chlamydia.",
+        covered_indications: [
+            { category_name: "Screening (Preventive)", codes: [
+                "Z11.3 (Encounter for screening for infections with a predominantly sexual mode of transmission) - *Use for GC/Chl screen.*",
+                "Z72.51 / Z72.52 / Z72.53 (High risk sexual behavior codes)",
+                "Z34.x (Routine pregnancy supervision) + Z11.3 - *Prenatal screening*"
+                ] },
+            { category_name: "Diagnostic Testing (Symptoms/Exposure)", codes: [
+                "Z20.2 (Contact with and (suspected) exposure to venereal disease) - *Exposure*",
+                "N34.1 (Nonspecific urethritis)", "N72 (Inflammatory disease of cervix uteri)", "N73.9 (Female pelvic inflammatory disease, unspecified)", "N45.1 (Epididymitis)",
+                "N89.8 (Other specified noninflammatory disorders of vagina - *discharge*)", "R82.81 (Pyuria)", "R30.0 (Dysuria)",
+                "A56.01 (Chlamydial cervicitis)", "A54.00 (Gonococcal infection, unspecified)", "A54.02 (Gonococcal pelviperitonitis)"
+                ] }
+        ],
+        not_covered: [
+            "Screening outside recommended groups (e.g., low-risk older male) or frequency.",
+            "Routine 'test-of-cure' for uncomplicated infections (usually not needed, except pregnancy)."
+        ],
+        frequency_notes: "Screening: Annually for sexually active women <=24 and older women at risk; annually for high-risk men (MSM). Per pregnancy guidelines.",
+        payer_notes: "Medicare covers annual screening for high-risk women (chlamydia/gonorrhea) and high-risk men (gonorrhea). Commercial plans cover USPSTF guidelines preventively."
+    },
+    "TSH": {
+        measure_id: "TSH",
+        displayName: "Thyroid Stimulating Hormone (TSH)",
+        category: "Endocrine",
+        cpt_codes: "84443",
+        description: "Primary test for screening and diagnosing thyroid disorders and monitoring therapy.",
+        covered_indications: [
+            { category_name: "Hypothyroidism (Diagnosis/Monitoring)", codes: ["E03.9 (Hypothyroidism, unspecified)", "E03.8 (Other specified hypothyroidism)", "E02 (Subclinical iodine-deficiency hypothyroidism)", "Z79.890 (Other hormone replacement therapy - *thyroid*)"] },
+            { category_name: "Thyrotoxicosis (Hyperthyroidism - Diagnosis/Monitoring)", codes: ["E05.90 (Thyrotoxicosis, unspecified without thyrotoxic crisis or storm)", "E05.00 (Thyrotoxicosis with diffuse goiter without thyrotoxic crisis or storm - Graves')", "R61 (Generalized hyperhidrosis)", "R00.2 (Palpitations)", "R63.4 (Abnormal weight loss)"] },
+            { category_name: "Goiter and Thyroid Nodules", codes: ["E04.0 (Nontoxic diffuse goiter)", "E04.1 (Nontoxic single thyroid nodule)", "E04.2 (Nontoxic multinodular goiter)"] },
+            { category_name: "Other Endocrine/Metabolic Indications", codes: ["N91.2 (Amenorrhea, unspecified)", "N97.9 (Female infertility, unspecified)", "E78.5 (Hyperlipidemia, unspecified) - *if suspecting thyroid cause*", "F32.9 (Major depressive disorder, single episode, unspecified) - *rule out thyroid*", "R53.83 (Fatigue)"] },
+            { category_name: "Medication Effects", codes: ["Z79.899 (Other long term drug therapy) - *e.g., amiodarone, lithium*"] }
+        ],
+        not_covered: [
+            "Routine screening in asymptomatic individuals without risk factors or symptoms.",
+            "Z00.00 (General exam).",
+            "Z13.29 (Screening for other endocrine disorders).",
+            "Excessive frequency in stable, treated patients (e.g., weekly/monthly without dose changes)."
+        ],
+        frequency_notes: "Initial diagnosis. ~6-8 weeks after dose change. Annually or semi-annually for stable treated patients.",
+        payer_notes: "Requires clinical indication; not covered by Medicare as a general screening test."
+    },
+    "FT4": {
+        measure_id: "FT4",
+        displayName: "Free T4 (Thyroxine)",
+        category: "Endocrine",
+        cpt_codes: "84439",
+        description: "Measures unbound thyroxine. Used with TSH to assess thyroid status, especially if TSH is abnormal or pituitary issues suspected.",
+        covered_indications: [
+            { category_name: "Confirming Thyroid Dysfunction (with abnormal TSH)", codes: ["E03.x (Hypothyroidism codes)", "E05.x (Hyperthyroidism codes)", "R94.6 (Abnormal results of thyroid function studies) - *abnormal TSH*"] },
+            { category_name: "Suspected Central (Secondary/Tertiary) Hypothyroidism", codes: ["E23.0 (Hypopituitarism)", "E89.3 (Postprocedural hypopituitarism)"] },
+            { category_name: "Monitoring Certain Thyroid Conditions", codes: ["E05.00 (Graves' disease) - *during treatment*", "E06.x (Thyroiditis codes) - *to stage hyper/hypo phase*"] },
+            { category_name: "Pregnancy", codes: ["O99.284 (Endocrine, nutritional and metabolic diseases complicating pregnancy) - *TSH ranges change*"] }
+        ],
+        not_covered: [
+            "Routine screening without abnormal TSH or specific clinical suspicion (e.g., pituitary disease).",
+            "Monitoring stable primary hypothyroidism when TSH alone is sufficient.",
+            "Ordered with only vague symptoms if TSH is normal."
+        ],
+        frequency_notes: "Typically ordered with initial abnormal TSH or for specific conditions. Not needed for every routine TSH check in stable primary hypothyroidism.",
+        payer_notes: "Payers expect justification (abnormal TSH, suspected central issue) for Free T4 testing."
+    },
+     "PTH": {
+        measure_id: "PTH",
+        displayName: "Parathyroid Hormone (PTH)",
+        category: "Endocrine",
+        cpt_codes: "83970",
+        description: "Measures parathyroid hormone levels, key regulator of calcium. Tested for calcium disorders, parathyroid disease, and CKD.",
+        covered_indications: [
+            { category_name: "Hypercalcemia", codes: ["E83.52 (Hypercalcemia)", "R79.89 (Other specified abnormal findings of blood chemistry) - *if calcium elevated*"] },
+            { category_name: "Hypocalcemia", codes: ["E83.51 (Hypocalcemia)", "E20.9 (Hypoparathyroidism, unspecified)"] },
+            { category_name: "Hyperparathyroidism (Primary/Secondary)", codes: ["E21.0 (Primary hyperparathyroidism)", "E21.3 (Hyperparathyroidism, unspecified)", "E21.1 (Secondary hyperparathyroidism, NEC)"] },
+            { category_name: "Chronic Kidney Disease (CKD)", codes: ["N18.3 - N18.5 (CKD stage 3-5)", "N25.81 (Secondary hyperparathyroidism of renal origin)", "Z99.2 (Dependence on renal dialysis)"] },
+            { category_name: "Osteoporosis / Bone Disease (with abnormal Ca)", codes: ["M81.0 (Age-related osteoporosis) - *if hypercalcemia present*", "M80.x (Osteoporosis with fracture) - *if hypercalcemia present*", "M83.x (Osteomalacia)"] }
+        ],
+        not_covered: [
+            "Routine testing without abnormal calcium levels or CKD.",
+            "General fatigue or weakness workup without calcium indication.",
+            "Screening for osteoporosis (use DEXA, Vit D).",
+            "Excessive frequency in stable conditions."
+        ],
+        frequency_notes: "Tested when calcium is abnormal or for CKD monitoring (e.g., every 3-6 months in advanced CKD/dialysis).",
+        payer_notes: "Requires documented calcium abnormality, CKD, or suspected parathyroid disease."
+    },
+    "CAION": {
+        measure_id: "CAION",
+        displayName: "Ionized Calcium",
+        category: "ElectrolytesMinerals",
+        cpt_codes: "82330",
+        description: "Measures biologically active calcium. Used when total calcium may be inaccurate (albumin issues) or in critical illness/specific disorders.",
+        covered_indications: [
+            { category_name: "Confirming Calcium Disorders", codes: ["E83.52 (Hypercalcemia)", "E83.51 (Hypocalcemia) - *esp. if severe or albumin abnormal*", "R79.89 (Other specified abnormal findings of blood chemistry) - *confirming abnormal total Ca*"] },
+            { category_name: "Renal Failure / Critical Illness", codes: ["N18.5 / N18.6 (CKD 5 / ESRD)", "Z99.2 (Dialysis status)", "R65.21 (Severe sepsis with septic shock)", "E89.3 (Postprocedural hypoparathyroidism) - *acute post-op monitoring*"] },
+            { category_name: "Parathyroid Disorders", codes: ["E21.0 (Primary hyperparathyroidism)", "E20.9 (Hypoparathyroidism) - *precise monitoring*"] },
+            { category_name: "Neuromuscular Irritability / Symptoms", codes: ["R29.0 (Tetany)", "R20.8 (Other disturbances of skin sensation - *paresthesias*)"] }
+        ],
+        not_covered: [
+            "Routine testing when total calcium + albumin is sufficient.",
+            "General screening or fatigue workup.",
+            "Monitoring stable outpatients without specific indication."
+        ],
+        frequency_notes: "Ordered less frequently than total calcium. Used for specific diagnostic confirmation or acute/critical management.",
+        payer_notes: "Payers expect justification over total calcium; often used inpatient or for specific endocrine/renal consults."
+    },
+     "SPEP": {
+        measure_id: "SPEP",
+        displayName: "Serum Protein Electrophoresis (SPEP)",
+        category: "ProteinStudies",
+        cpt_codes: "84165 (SPEP screen); 84155 (SPEP w/ densitometry)",
+        description: "Separates serum proteins to detect monoclonal gammopathies (e.g., Multiple Myeloma, MGUS) or other protein abnormalities.",
+        covered_indications: [
+            { category_name: "Suspected Multiple Myeloma / Plasma Cell Dyscrasia", codes: [
+                "C90.00 (Multiple myeloma not having achieved remission)", "D47.2 (Monoclonal gammopathy of undetermined significance - MGUS)",
+                "R77.1 (Abnormality of plasma protein) - *e.g., high total protein/globulin*",
+                "D64.9 (Anemia, unspecified) + E83.52 (Hypercalcemia) + N18.x (CKD) - *CRAB criteria presence*",
+                "M89.9 (Disorder of bone, unspecified - *if lytic lesions*)", "M54.5 (Low back pain) - *if suspecting bone lesion/myeloma*",
+                "R70.0 (Elevated ESR) - *markedly elevated*"
+                ] },
+            { category_name: "Peripheral Neuropathy or Amyloidosis Suspicion", codes: [
+                "G60.9 (Hereditary and idiopathic neuropathy) - *unexplained neuropathy*",
+                "G90.09 (Other idiopathic peripheral autonomic neuropathy)",
+                "E85.4 (Organ-limited amyloidosis)", "E85.9 (Amyloidosis, unspecified)"
+                ] },
+            { category_name: "Other Indications", codes: ["R77.9 (Other abnormalities of plasma proteins) - *unexplained finding*"] }
+        ],
+        not_covered: [
+            "General screening without clinical suspicion or relevant abnormal labs (e.g., high total protein, anemia, high calcium).",
+            "Routine fatigue workup.",
+            "Excessive frequency for monitoring stable MGUS (typically annually)."
+        ],
+        frequency_notes: "Diagnosis. Monitoring MGUS (annual) or myeloma (every 3-6 months depending on treatment).",
+        payer_notes: "Requires documented clinical suspicion or specific lab abnormalities suggestive of monoclonal gammopathy."
+    },
+    "UPEP": {
+        measure_id: "UPEP",
+        displayName: "Urine Protein Electrophoresis (UPEP)",
+        category: "ProteinStudies",
+        cpt_codes: "84156",
+        description: "Separates urine proteins, primarily to detect Bence Jones proteins (free light chains) associated with myeloma.",
+        covered_indications: [
+            { category_name: "Suspected Multiple Myeloma / Plasma Cell Dyscrasia", codes: ["Codes from SPEP section if myeloma suspected", "R82.01 (Bence Jones proteinuria) - *specific finding*", "R80.9 (Proteinuria, unspecified) - *esp. if dipstick protein high but albumin normal/low*"] },
+            { category_name: "Known Myeloma/MGUS Monitoring", codes: ["C90.0x (Multiple myeloma)", "D47.2 (MGUS) - *monitoring light chain excretion*"] },
+            { category_name: "Amyloidosis Evaluation", codes: ["E85.x (Amyloidosis codes)"] },
+            { category_name: "Unexplained Renal Failure", codes: ["N18.9 (CKD, unspecified)", "N19 (Unspecified kidney failure) - *rule out myeloma kidney*"] }
+        ],
+        not_covered: [
+            "General screening without suspicion.",
+            "Patients without proteinuria unless high suspicion for myeloma.",
+            "Routine testing if SPEP is negative and no other indication."
+        ],
+        frequency_notes: "Diagnosis and monitoring of specific conditions. Often done alongside SPEP in initial myeloma workup.",
+        payer_notes: "Necessity often linked to SPEP findings or unexplained proteinuria/renal failure."
+    },
+    "THIA": {
+        measure_id: "THIA",
+        displayName: "Thiamine (Vitamin B1) Level",
+        category: "Vitamins",
+        cpt_codes: "84425",
+        description: "Measures Vitamin B1 level. Tested in suspected deficiency states like alcoholism, severe malnutrition, or specific neurological syndromes.",
+        covered_indications: [
+            { category_name: "Alcoholism and Wernicke’s Encephalopathy", codes: ["F10.20 (Alcohol dependence, uncomplicated)", "F10.10 (Alcohol abuse)", "E51.2 (Wernicke's encephalopathy)", "G32.81 (Cerebellar ataxia in diseases classified elsewhere - *if alcohol related*)", "R41.0 (Disorientation)", "R26.0 (Ataxic gait)", "H53.49 (Other visual disturbances - *ophthalmoplegia*)"] },
+            { category_name: "Malnutrition/Malabsorption", codes: ["E40-E46 (Malnutrition codes)", "R63.1 (Anorexia)", "K90.9 (Intestinal malabsorption, unspecified)", "K91.2 (Postsurgical malabsorption)", "Z98.84 (Bariatric surgery status)", "Z99.11 (Dependence on respirator [ventilator]) - *often assoc w/ malnutrition*"] },
+            { category_name: "Beriberi (Wet/Dry)", codes: ["E51.1 (Beriberi)", "I43 (Cardiomyopathy in diseases classified elsewhere - *nutritional*)", "I50.9 (Heart failure, unspecified) - *if suspected wet beriberi*", "G62.9 (Polyneuropathy, unspecified) - *if suspected dry beriberi*"] },
+             { category_name: "Other Risk Factors", codes: ["Z99.12 (Encounter for TPN)", "Z99.2 (Dependence on renal dialysis)"] }
+        ],
+        not_covered: [
+            "Routine testing as part of general 'vitamin panels' or fatigue workup.",
+            "Screening asymptomatic individuals without specific risk factors (alcoholism, severe malnutrition).",
+            "Repeat testing after treatment initiated (clinical response is usually monitored)."
+        ],
+        frequency_notes: "Primarily for initial diagnosis in high-risk, symptomatic patients.",
+        payer_notes: "Strict medical necessity criteria apply. Medicare does not cover broad nutritional screening panels."
+    }
+
+    // Add other lab tests here following the same structure...
+};
+
+
+// Category definitions for the Lab Tests
+const categories = {
+  ChemistryPanels: { name: "Chemistry Panels", measures: ["CMP", "LIPID", "LDLD"] },
+  ElectrolytesMinerals: { name: "Electrolytes / Minerals", measures: ["PHOS", "MAG", "CAION"] },
+  Hematology: { name: "Hematology", measures: ["CBC", "IRON"] },
+  Vitamins: { name: "Vitamins", measures: ["B12FOL", "VITD", "THIA"] },
+  Endocrine: { name: "Endocrine", measures: ["A1C", "TSH", "FT4", "PTH"] },
+  InflammatoryAutoimmune: { name: "Inflammatory / Autoimmune", measures: ["ANA", "RF", "ESR", "CRP"] },
+  ProteinStudies: { name: "Protein Studies", measures: ["SPEP", "UPEP"] },
+  UrineStudies: { name: "Urine Studies", measures: ["UA", "UACR"] },
+  CancerScreening: { name: "Cancer Screening", measures: ["PSA"] },
+  InfectiousDiseaseSTI: { name: "Infectious Disease / STI", measures: ["HIV", "HCV", "RPR", "HSVT2", "GCCHL"] }
+};
+
+
+// Function to clear active button state
+function clearActiveButtonState() {
+  document.querySelectorAll('.active-measure').forEach(btn => {
+    btn.classList.remove('active-measure');
+  });
+}
+
+// Generate buttons for the lab tests
+function generateButtons() {
+  const container = document.getElementById("allMeasuresButtons");
+  container.innerHTML = "";
+
+  // Get category keys and sort them (optional, but provides consistent order)
+  const categoryKeys = Object.keys(categories).sort();
+
+  categoryKeys.forEach(catKey => {
+      const category = categories[catKey];
+
+      // Create header for the category
+      const header = document.createElement("div");
+      header.className = "category-header";
+      header.textContent = category.name;
+      container.appendChild(header);
+
+      // Create buttons for measures in this category
+      category.measures.forEach(measureId => {
+          const measureData = labNecessityData[measureId];
+          if (measureData) {
+              const btn = document.createElement("button");
+              btn.textContent = measureData.displayName;
+              btn.setAttribute("data-measure", measureId);
+
+              // Add base class and category-specific class for styling
+              btn.className = `measure-button category-${catKey}`;
+
+              btn.addEventListener("click", function() {
+                  displayGuideline(measureId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+              container.appendChild(btn);
+          }
+      });
+  });
+}
+
+
+// Display guideline details
+function displayGuideline(measureID) {
+  currentGuideline = labNecessityData[measureID]; // Get data for the selected measure
+
+  const detailsDiv = document.getElementById("guidelineDetails");
+  const overviewBanner = document.getElementById("testOverviewBanner");
+  const testNameSpan = document.getElementById("testName");
+  const cptCodesSpan = document.getElementById("cptCodes");
+  const testDescSpan = document.getElementById("testDescription");
+  const notCoveredDropdown = document.getElementById("notCoveredDropdown");
+  const freqPayNotesContent = document.getElementById("freqPayNotesContent");
+
+  // Reset sections
+  detailsDiv.innerHTML = "";
+  notCoveredDropdown.innerHTML = "";
+  freqPayNotesContent.innerHTML = "";
+  document.getElementById("notCoveredDropdown").style.display = "none"; // Hide dropdown initially
+  document.getElementById("notCoveredBtn").textContent = "Not Covered / Insufficient Diagnoses ▼";
+
+  if (currentGuideline) {
+    // Populate Overview Banner
+    testNameSpan.textContent = currentGuideline.displayName || measureID;
+    cptCodesSpan.textContent = currentGuideline.cpt_codes || "N/A";
+    testDescSpan.textContent = currentGuideline.description || "No description available.";
+
+    // Populate Covered Indications
+    let coveredHtml = '<h3>Covered Indications</h3>';
+    if (currentGuideline.covered_indications && currentGuideline.covered_indications.length > 0) {
+        currentGuideline.covered_indications.forEach(cat => {
+            coveredHtml += `<h4>${cat.category_name}</h4><ul>`;
+            cat.codes.forEach(code => {
+                // Basic parsing to highlight code vs description
+                const match = code.match(/^([A-Z0-9.-]+(?: – [A-Z0-9.-]+)?)\s*\((.*)\)/);
+                if (match) {
+                    coveredHtml += `<li><code>${match[1]}</code> - ${match[2]}</li>`;
+                } else {
+                     coveredHtml += `<li>${code.replace(/\*([^*]+)\*/g, '<em>$1</em>')}</li>`; // Handle italics for notes
+                }
+            });
+            coveredHtml += `</ul>`;
+        });
+    } else {
+        coveredHtml += "<p>No specific covered indications listed.</p>";
+    }
+    detailsDiv.innerHTML = coveredHtml;
+
+    // Populate Not Covered Dropdown
+    let notCoveredHtml = '<ul>';
+    if (currentGuideline.not_covered && currentGuideline.not_covered.length > 0) {
+        currentGuideline.not_covered.forEach(item => {
+             const match = item.match(/^([A-Z0-9.-]+)\s*\((.*)\)/);
+             if (match) {
+                notCoveredHtml += `<li><code>${match[1]}</code> - ${match[2]}</li>`;
+             } else {
+                 notCoveredHtml += `<li>${item.replace(/\*([^*]+)\*/g, '<em>$1</em>')}</li>`; // Handle italics
+             }
+        });
+    } else {
+        notCoveredHtml += "<li>No specific non-covered scenarios listed. General screening often not covered.</li>";
+    }
+    notCoveredHtml += '</ul>';
+    notCoveredDropdown.innerHTML = notCoveredHtml;
+
+    // Populate Frequency & Payer Notes
+     let freqPayHtml = '';
+     if (currentGuideline.frequency_notes) {
+         freqPayHtml += `<p><strong>Frequency:</strong> ${currentGuideline.frequency_notes}</p>`;
+     }
+     if (currentGuideline.payer_notes) {
+         freqPayHtml += `<p><strong>Payer Specifics:</strong> ${currentGuideline.payer_notes}</p>`;
+     }
+     if (!freqPayHtml) {
+         freqPayHtml = "<p>No specific frequency or payer notes provided.</p>";
+     }
+     freqPayNotesContent.innerHTML = freqPayHtml;
+
+
+    // Show the details box
+    document.getElementById("details").style.display = "block";
+  } else {
+    // No details found
+    testNameSpan.textContent = "[Select Test]";
+    cptCodesSpan.textContent = "N/A";
+    testDescSpan.textContent = "Select a lab test from the buttons below.";
+    detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
+     notCoveredDropdown.innerHTML = "<p>N/A</p>";
+     freqPayNotesContent.innerHTML = "<p>N/A</p>";
+    document.getElementById("details").style.display = "block"; // Still show box, but with error
+  }
+
+  // Clear previous active button state and set new one
+  clearActiveButtonState();
+  document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {
+    btn.classList.add('active-measure');
+  });
+}
+
+
+// Document ready function
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for plan toggle buttons (keeping for potential future use, but only one active now)
+  document.getElementById("combined-btn").addEventListener("click", function() {
+      // Currently only one view, so just ensure it's active
+      document.querySelectorAll(".plan-button").forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+      currentPlan = "combined"; // Set context if needed later
+      // No need to regenerate buttons if data isn't changing based on plan
+  });
+
+
+  // Toggle Not Covered dropdown
+  document.getElementById("notCoveredBtn").addEventListener("click", function() {
+      const dropdown = document.getElementById("notCoveredDropdown");
+      if (dropdown.style.display === "none" || dropdown.style.display === "") {
+          dropdown.style.display = "block";
+          this.textContent = "Not Covered / Insufficient Diagnoses ▲";
+      } else {
+          dropdown.style.display = "none";
+          this.textContent = "Not Covered / Insufficient Diagnoses ▼";
+      }
+  });
+
+
+  // Close details button
+  document.getElementById("closeDetailsBtn").addEventListener("click", function() {
+    document.getElementById("details").style.display = "none";
+    currentGuideline = null;
+    clearActiveButtonState();
+  });
+
+  // Ask AI Section: Build and display a prompt based on the current guideline
+  document.getElementById("askAIBtn").addEventListener("click", function() {
+    if (!currentGuideline) {
+      alert("Please select a lab test first.");
+      return;
+    }
+
+    // Covered Indications formatted for prompt
+    let coveredText = "";
+    if (currentGuideline.covered_indications && currentGuideline.covered_indications.length > 0) {
+        currentGuideline.covered_indications.forEach(cat => {
+            coveredText += `\n${cat.category_name}:\n`;
+            cat.codes.forEach(code => { coveredText += `- ${code}\n`; });
+        });
+    } else {
+        coveredText = "\nNone specified.\n";
+    }
+
+    // Not Covered scenarios formatted for prompt
+    let notCoveredText = "";
+     if (currentGuideline.not_covered && currentGuideline.not_covered.length > 0) {
+        currentGuideline.not_covered.forEach(item => { notCoveredText += `- ${item}\n`; });
+    } else {
+        notCoveredText = "\nNone specified.\n";
+    }
+
+
+    const prompt = `Analyze the medical necessity for the lab test "${currentGuideline.displayName}" (CPT: ${currentGuideline.cpt_codes || 'N/A'}).
+Focus on ICD-10 codes.
+
+Summary: ${currentGuideline.description || ''}
+
+Covered Indications Include: ${coveredText}
+Insufficient/Not Covered Scenarios Include:\n${notCoveredText}
+Frequency/Payer Notes: ${currentGuideline.frequency_notes || 'N/A'} ${currentGuideline.payer_notes || ''}
+
+Based ONLY on the information above:
+1. List the specific ICD-10 codes mentioned as SUPPORTING medical necessity.
+2. List the specific ICD-10 codes mentioned as NOT SUPPORTING medical necessity or considered insufficient/screening.
+3. Briefly explain the primary reason(s) why routine screening is generally NOT covered for this test according to the provided text.`;
+
+    const txtArea = document.getElementById("exhaustiveQuery");
+    txtArea.value = prompt;
+    txtArea.style.display = "block";
+    document.getElementById("copyQueryBtn").style.display = "block";
+  });
+
+  // Copy the prompt to the clipboard
+  document.getElementById("copyQueryBtn").addEventListener("click", function() {
+    const txtArea = document.getElementById("exhaustiveQuery");
+    txtArea.select();
+    document.execCommand("copy");
+    alert("AI prompt copied to clipboard!");
+  });
+
+  // Initialize
+  generateButtons(); // Generate buttons based on hardcoded data
+  // Set the initial active plan button
+  document.getElementById("combined-btn").classList.add("active");
+
+});
+  </script>
+</body>
+</html>
