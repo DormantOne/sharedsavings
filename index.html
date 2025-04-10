@@ -1,7 +1,4 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1298,8 +1295,23 @@ document.getElementById("exclusionsBtn").textContent = "Exclusions ▼";
   </ul>
 `;
     
-    // Display gap closure information as a list
-    document.getElementById("gapText").innerHTML = gapMethodsHtml;
+// Find the button text for this measure
+let buttonText = ""; 
+document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {
+  // Prefer the text from the main grid, not the focus measures section
+  if (!btn.className.includes('focus-')) {
+    buttonText = btn.textContent.trim();
+  }
+});
+if (!buttonText) {
+  // If we didn't find it in the main grid, check the focus measures
+  document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {
+    buttonText = btn.textContent.trim();
+  });
+}
+
+// Display gap closure information as a list with the button text
+document.getElementById("gapText").innerHTML = `<strong>${buttonText}</strong> - ${gapMethodsHtml}`;
     
     // Populate the exclusions dropdown
 populateExclusions(found);
