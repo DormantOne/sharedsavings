@@ -1,0 +1,1496 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Measures Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 15px;
+      line-height: 1.4;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 22px;
+    }
+    /* Plan toggle buttons */
+    .plan-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    .plan-button {
+      padding: 8px 15px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .plan-button.active {
+      background-color: #28a745;
+      box-shadow: 0 0 5px rgba(40, 167, 69, 0.6);
+    }
+    /* Grid for measure buttons */
+    .grid-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    /* Category headers */
+    .category-header {
+      grid-column: 1 / -1;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 5px 0;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 5px;
+    }
+    /* Default button (blue for metabolic) */
+    .button {
+      background-color: #007bff; /* blue */
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    /* Red button (for cancer prevention) */
+    .red-button {
+      background-color: #dc3545;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    .red-button:hover {
+      background-color: #a71d2a;
+    }
+    /* Teal button (for administrative measures) */
+    .teal-button {
+      background-color: #20c997;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    .teal-button:hover {
+      background-color: #1aa179;
+    }
+    /* Small gray button (for other measures) */
+    .small-button {
+      background-color: #6c757d; /* gray */
+      font-size: 13px;
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    .small-button:hover {
+      background-color: #5a6268;
+    }
+    /* Point weight indicators */
+    .weight-1 {
+      position: relative;
+    }
+    .weight-1::before {
+      content: "×1";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background-color: rgba(200, 200, 200, 0.8);
+      color: #000;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    
+    .weight-2 {
+      position: relative;
+      box-shadow: 0 0 8px 2px rgba(255, 105, 180, 0.6); /* Pink glow */
+    }
+    .weight-2::before {
+      content: "×2";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background-color: rgba(255, 105, 180, 0.8);
+      color: #fff;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    
+    .weight-3 {
+      position: relative;
+      box-shadow: 0 0 10px 3px rgba(255, 215, 0, 0.7); /* Golden glow */
+    }
+    .weight-3::before {
+      content: "×3";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background-color: rgba(255, 215, 0, 0.8);
+      color: #000;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    
+    /* Details box */
+    #details {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      margin-bottom: 15px;
+      display: none;
+      position: relative;
+    }
+    #closeDetailsBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    #gapBanner {
+      background-color: #ffe6e6;
+      color: #a70000;
+      padding: 10px;
+      border: 1px solid #dc3545;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    #weightBanner {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      border: 1px solid #ffeeba;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    /* Unified button styling for the details section buttons */
+    .details-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+      justify-content: flex-start;
+    }
+
+    .details-buttons button {
+      flex: 1;
+      min-width: 90px;
+      background-color: #6c757d;
+      color: white;
+      padding: 8px 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      text-align: center;
+      transition: background-color 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .details-buttons button:hover {
+      background-color: #5a6268;
+    }
+
+    .details-buttons button.active {
+      background-color: #495057;
+      box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive adjustments for very small screens */
+    @media (max-width: 350px) {
+      .details-buttons {
+        flex-direction: column;
+      }
+      
+      .details-buttons button {
+        width: 100%;
+      }
+    }
+    
+    #extraDetails {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #e9ecef;
+      border-radius: 4px;
+    }
+    
+    #starRatingsDetails, #bonusTiersDetails {
+      display: none;
+      margin-top: 10px; 
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #e9ecef;
+      border-radius: 4px;
+    }
+    
+    .summary-stats {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    .stat {
+      background-color: #f0f0f0;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    /* Ask AI Section styling */
+    #askAISection {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f0f0f0;
+      margin-top: 30px;
+      text-align: center;
+    }
+    #exhaustiveQuery {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      display: none;
+    }
+    #copyQueryBtn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      display: none;
+    }
+    .link-buttons a {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .link-buttons a:hover {
+      background-color: #0056b3;
+    }
+    
+    /* Focus Measures Section Styling */
+    .focus-measures-section {
+      margin-bottom: 25px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 12px;
+      background-color: #f9f9f9;
+    }
+
+    .focus-measures-section h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .focus-buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Focus measure buttons - base shared styles */
+    .focus-metabolic, .focus-cancer, .focus-administrative, .focus-other {
+      color: white;
+      font-size: 12px;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+
+    /* Specific category colors */
+    .focus-metabolic {
+      background-color: #007bff; /* Blue for metabolic */
+    }
+    .focus-metabolic:hover {
+      background-color: #0056b3;
+    }
+
+    .focus-cancer {
+      background-color: #dc3545; /* Red for cancer */
+    }
+    .focus-cancer:hover {
+      background-color: #a71d2a;
+    }
+
+    .focus-administrative {
+      background-color: #20c997; /* Teal for administrative */
+    }
+    .focus-administrative:hover {
+      background-color: #1aa179;
+    }
+
+    .focus-other {
+      background-color: #6c757d; /* Gray for other */
+    }
+    .focus-other:hover {
+      background-color: #5a6268;
+    }
+
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+      .focus-buttons-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 buttons per row on mobile */
+        gap: 8px;
+      }
+      
+      .focus-metabolic, .focus-cancer, .focus-administrative, .focus-other {
+        width: 100%;  /* Full width within their grid cell */
+      }
+    }
+
+    /* Active state for all buttons */
+    .button.active-measure, 
+    .red-button.active-measure, 
+    .teal-button.active-measure, 
+    .small-button.active-measure {
+      outline: 3px solid #333;
+      box-shadow: 0 0 0 1px white inset;
+      position: relative;
+    }
+
+    .focus-metabolic.active-measure, 
+    .focus-cancer.active-measure, 
+    .focus-administrative.active-measure, 
+    .focus-other.active-measure {
+      outline: 3px solid #333;
+      box-shadow: 0 0 0 1px white inset;
+      position: relative;
+    }
+
+    /* Add a checkmark to active buttons */
+    .active-measure::after {
+      content: "✓";
+      position: absolute;
+      bottom: 3px;
+      right: 5px;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    /* Exclusions Button */
+.exclusions-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.exclusions-button:hover {
+  background-color: #c82333;
+}
+
+/* Exclusions Dropdown */
+#exclusionsDropdown {
+  display: none;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.exclusion-item {
+  margin-bottom: 8px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.exclusion-item:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #dc3545;
+}
+
+.frailty-item {
+  color: #dc3545;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+      <h2 style="margin: 0; margin-right: 15px;">Measures 2025</h2>
+    </div>
+    
+    <h5 class="disclaimer"><small>Below experimental view / possible errors, please <a href="https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ETaVvG0aWDlEtBOeYg9N0OQBXrH79wwiXb_HmyIAqd2h-g?e=fDijHn" target="_blank">vet with source</a></small></h5>
+    
+<!-- Plan Toggle Buttons -->
+<div class="plan-toggle">
+  <button id="medicare-btn" class="plan-button active">UPMC for Life (Medicare/SNP)</button>
+  <button id="commercial-btn" class="plan-button">Commercial</button>
+  <button id="medicaid-btn" class="plan-button">UPMC for You (Medicaid)</button>
+</div>
+    
+    <!-- Summary Stats -->
+    <div class="summary-stats" style="display: none;">
+      <div class="stat">Measures: <span id="measure-count">0</span></div>
+      <div class="stat">Points: <span id="point-count">0</span></div>
+    </div>
+
+    <div id="details">
+      <button id="closeDetailsBtn">Close</button>
+      <div id="gapBanner">Gap Information: <span id="gapText">[Gap info]</span></div>
+      <button id="exclusionsBtn" class="exclusions-button">Exclusions ▼</button>
+      <div id="exclusionsDropdown"></div>
+      <div id="weightBanner">Weight: <span id="weightText">[Weight info]</span></div>
+      <div id="guidelineDetails">
+        <ul>
+          <li>Please select a measure.</li>
+        </ul>
+      </div>
+      <div class="details-buttons">
+        <button id="toggleExtraBtn">Best Practices</button>
+        <button id="toggleStarRatingsBtn">Show Star Ratings</button>
+        <button id="toggleBonusTiersBtn" style="display: none;">Show Bonus Tiers</button>
+      </div>
+      <div id="extraDetails">
+        <ul>
+          <li>[Extra details here]</li>
+        </ul>
+      </div>
+      <div id="starRatingsDetails">
+        <h4>Star Ratings Thresholds</h4>
+        <div id="starRatingsContent">
+          <p>Select a measure to see star ratings.</p>
+        </div>
+      </div>
+      <div id="bonusTiersDetails">
+        <h4>Bonus Tier Thresholds</h4>
+        <div id="bonusTiersContent">
+          <p>Select a bonus measure to see tier thresholds.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons for measures -->
+    <div class="grid-buttons" id="allMeasuresButtons"></div>
+    
+    <!-- Focus Measures Section (Bonus Measures) moved here -->
+    <div class="focus-measures-section">
+      <h3>Bonus Measures</h3>
+      <div class="focus-buttons-container" id="focusMeasuresButtons"></div>
+    </div>
+    
+    <!-- Ask AI Section -->
+    <div id="askAISection">
+      <h3>Ask AI for Exclusion Diagnosis Codes</h3>
+      <p>This will compile the current guideline information into a prompt for you to copy and paste into your AI search bar.</p>
+      <button id="askAIBtn" class="small-button">Generate AI Prompt</button>
+      <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis prompt will appear here..." style="display:none;"></textarea>
+      <button id="copyQueryBtn" style="display:none;">Copy Prompt</button>
+      <div class="link-buttons">
+        <a href="https://www.openevidence.com/" target="_blank">Open Evidence</a>
+        <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+        <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+        <a href="https://gemini.google.com" target="_blank">Gemini</a>
+        <a href="https://www.deepseek.ai" target="_blank">DeepSeek</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+ // Global variables
+let medicalData = {};
+let currentPlan = "commercial";
+let currentGuideline = null;
+let starRatingsData = {};
+let bonusMeasuresData = {};
+
+// Define focused measures for each plan
+const focusedMeasures = {
+  "commercial": ["BCS-E", "CCS-E", "CHL", "GSD", "UCU"],
+  "medicaid": ["BCS-E", "CCS-E", "CHL", "GSD", "UCU"],
+  "medicare": ["FMC", "DMA", "PCR", "TRC-FU", "UCU"]
+};
+
+// Measure point values by plan
+const planData = {
+  "commercial": {
+    measurePoints: {
+      "AIS-E": 1,
+      "URI": 2,
+      "AMR": 1,
+      "BCS-E": 3,
+      "CCS-E": 2,
+      "CHL": 1,
+      "COL-E": 1,
+      "EED": 1,
+      "GSD": 2,
+      "CBP": 2,
+      "KED": 1,
+      "PCE": 1,
+      "PCR": 3,
+      "SPC": 2,
+      "SPD": 2
+    }
+  },
+  "medicaid": {
+    measurePoints: {
+      "AIS-E": 1,
+      "URI": 1,
+      "AMR": 3,
+      "BCS-E": 3,
+      "CCS-E": 2,
+      "CHL": 2,
+      "COL-E": 1,
+      "EED": 1,
+      "GSD": 3,
+      "CBP": 2,
+      "KED": 1,
+      "PCE": 1,
+      "PCR": 2,
+      "SPC": 1,
+      "SPD": 1
+    }
+  },
+  "medicare": {
+    measurePoints: {
+      "BCS-E": 1,
+      "COL-E": 1,
+      "EED": 1,
+      "GSD-Medicare": 3,
+      "COB": 1,
+      "CBP": 3,
+      "FMC": 1,
+      "KED": 1,
+      "CMA": 3,
+      "DMA": 3,
+      "HMA": 3,
+      "TRC": 1,
+      "TRC-ENG": 1,
+      "PCR": 3,
+      "POLY-ACH": 1,
+      "SPC": 1,
+      "SUPD": 1,
+      "TRC-FU": 1
+    }
+  }
+};
+
+// Category definitions
+const categories = {
+  metabolic: [
+    { displayName: "BP Control", measureId: "CBP" },
+    { displayName: "BP Med Adherence", measureId: "HMA" },
+    { displayName: "DM Glycemic Control", measureId: "GSD" },
+    { displayName: "DM Glycemic Control", measureId: "GSD-Medicare" },
+    { displayName: "DM Med Adherence", measureId: "DMA" },
+    { displayName: "Statin Adherence", measureId: "CMA" },
+    { displayName: "DM Eye Exam", measureId: "EED" },
+    { displayName: "DM Kidney Evaluation", measureId: "KED" },
+    { displayName: "DM Statin Use", measureId: "SUPD" },
+    { displayName: "CV Statin Therapy", measureId: "SPC" },
+    { displayName: "DM Statin Therapy", measureId: "SPD" }
+  ],
+  cancer: [
+    { displayName: "Breast Cancer Screen", measureId: "BCS-E" },
+    { displayName: "Colorectal Screen", measureId: "COL-E" },
+    { displayName: "Cervical Cancer Screen", measureId: "CCS-E" }
+  ],
+  administrative: [
+    { displayName: "Readmission Prevention", measureId: "PCR" },
+    { displayName: "ED Follow-Up Care", measureId: "FMC" },
+    { displayName: "Discharge Med Reconciliation", measureId: "TRC", type: "Reconciliation" },
+    { displayName: "Post-Discharge Engagement", measureId: "TRC-ENG", type: "Engagement" },
+    { displayName: "7-Day Inpatient Follow-Up", measureId: "TRC-FU" },
+    { displayName: "Unplanned Care Utilization", measureId: "UCU" }
+  ],
+  other: [
+    { displayName: "URI Treatment", measureId: "URI" },
+    { displayName: "Asthma Medication", measureId: "AMR" },
+    { displayName: "Bronchitis Treatment", measureId: "AAB" },
+    { displayName: "COPD Management", measureId: "PCE" },
+    { displayName: "Flu Immunization", measureId: "AIS-E" },
+    { displayName: "Opioid-Benzo Use", measureId: "COB" },
+    { displayName: "Anticholinergic Polypharmacy", measureId: "POLY-ACH" },
+    { displayName: "Chlamydia Screen", measureId: "CHL" }
+  ]
+};
+
+// Function to clear active button state
+function clearActiveButtonState() {
+  // Clear active state from all buttons
+  document.querySelectorAll('.active-measure').forEach(btn => {
+    btn.classList.remove('active-measure');
+  });
+}
+
+// Function to load star ratings JSON
+function loadStarRatings() {
+  fetch('stars.json')
+    .then(response => {
+      if (!response.ok) throw new Error("Error loading Star Ratings JSON: " + response.statusText);
+      return response.json();
+    })
+    .then(data => {
+      starRatingsData = data;
+      console.log("Loaded star ratings data:", starRatingsData);
+    })
+    .catch(error => {
+      console.error("Error loading star ratings data:", error);
+    });
+}
+
+// Function to load bonus measures JSON
+function loadBonusMeasures() {
+  fetch('bonus.json')
+    .then(response => {
+      if (!response.ok) throw new Error("Error loading Bonus Measures JSON: " + response.statusText);
+      return response.json();
+    })
+    .then(data => {
+      bonusMeasuresData = data;
+      console.log("Loaded bonus measures data:", bonusMeasuresData);
+    })
+    .catch(error => {
+      console.error("Error loading bonus measures data:", error);
+    });
+}
+
+// Convert plan name to service line key used in the star ratings JSON
+function getPlanServiceLineKey(planName) {
+  switch(planName) {
+    case "commercial": return "commercial";
+    case "medicaid": return "medicaid";
+    case "medicare": return "medicare";
+    default: return "";
+  }
+}
+
+// Function to check if a measure is a bonus measure for the current plan
+function isBonusMeasure(measureId) {
+  return focusedMeasures[currentPlan] && focusedMeasures[currentPlan].includes(measureId);
+}
+
+// Display star ratings for the current measure and plan
+function displayStarRatings(measureId) {
+  const starRatingsContent = document.getElementById("starRatingsContent");
+  const serviceLineKey = getPlanServiceLineKey(currentPlan);
+  
+  console.log("Displaying star ratings for:", measureId, "in", serviceLineKey);
+  
+  try {
+    // Check if we have data and the measure exists
+    if (!starRatingsData || 
+        !starRatingsData.healthcare_quality_measures || 
+        !starRatingsData.healthcare_quality_measures[measureId] || 
+        !starRatingsData.healthcare_quality_measures[measureId].service_lines ||
+        !starRatingsData.healthcare_quality_measures[measureId].service_lines[serviceLineKey]) {
+      
+      starRatingsContent.innerHTML = `<p>No star ratings data available for ${measureId} in the current plan.</p>`;
+      return;
+    }
+    
+    // Get the star ratings data for this measure and service line
+    const measureData = starRatingsData.healthcare_quality_measures[measureId];
+    const serviceLineData = measureData.service_lines[serviceLineKey];
+    
+    // Check if star thresholds exist
+    if (!serviceLineData.star_thresholds) {
+      starRatingsContent.innerHTML = `<p>No star ratings thresholds available for ${measureId}.</p>`;
+      return;
+    }
+    
+    // Format the data as a table
+    let html = `
+      <p><strong>${measureData.measure_name}</strong></p>
+      <p>Weight: ${serviceLineData.weight}</p>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <tr style="background-color: #f0f0f0; font-weight: bold;">
+          <td style="padding: 8px; border: 1px solid #ddd;">Star Rating</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">Threshold</td>
+        </tr>`;
+    
+    // Add rows for each star threshold
+    if (serviceLineData.star_thresholds["5_stars"]) {
+      html += `
+        <tr>
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐⭐⭐⭐ (5 Stars)</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["5_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+        </tr>`;
+    }
+    
+    if (serviceLineData.star_thresholds["4_stars"]) {
+      html += `
+        <tr>
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐⭐⭐ (4 Stars)</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["4_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+        </tr>`;
+    }
+    
+    if (serviceLineData.star_thresholds["3_stars"]) {
+      html += `
+        <tr>
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐⭐ (3 Stars)</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["3_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+        </tr>`;
+    }
+    
+    if (serviceLineData.star_thresholds["2_stars"]) {
+      html += `
+        <tr>
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐ (2 Stars)</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["2_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+        </tr>`;
+    }
+    
+    html += `</table>`;
+    
+    // Add note for PCR measure which is inversed
+    if (measureId === "PCR") {
+      html += `<p style="margin-top: 10px; font-style: italic; color: #dc3545;">Note: Lower scores are better for this measure.</p>`;
+    }
+    
+    starRatingsContent.innerHTML = html;
+  } catch (error) {
+    console.error("Error displaying star ratings:", error);
+    starRatingsContent.innerHTML = `<p>Error displaying star ratings: ${error.message}</p>`;
+  }
+}
+
+// Display bonus tiers for the current measure and plan
+function displayBonusTiers(measureId) {
+  const bonusTiersContent = document.getElementById("bonusTiersContent");
+  const serviceLineKey = getPlanServiceLineKey(currentPlan);
+  
+  console.log("Displaying bonus tiers for:", measureId, "in", serviceLineKey);
+  
+  // Debug data availability
+  console.log("Bonus measures data available:", !!bonusMeasuresData);
+  console.log("Bonus measures available:", bonusMeasuresData && !!bonusMeasuresData.bonus_measures);
+  
+  // Check if we have data and the measure exists
+  if (!bonusMeasuresData.bonus_measures || 
+      !bonusMeasuresData.bonus_measures[measureId] || 
+      !bonusMeasuresData.bonus_measures[measureId].service_lines ||
+      !bonusMeasuresData.bonus_measures[measureId].service_lines[serviceLineKey]) {
+    
+    bonusTiersContent.innerHTML = `<p>No bonus tier data available for ${measureId} in the current plan.</p>`;
+    return;
+  }
+  
+  // Get the bonus tier data for this measure and service line
+  const measureData = bonusMeasuresData.bonus_measures[measureId];
+  const serviceLineData = measureData.service_lines[serviceLineKey];
+  
+  // Format the data as a table
+// In the displayBonusTiers function
+// Format the data as a table
+let html = `
+  <p><strong>${measureData.measure_name}</strong></p>
+  <p>${serviceLineData.description}</p>
+  <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+    <tr style="background-color: #f0f0f0; font-weight: bold;">
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Threshold</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Bonus Weight</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 3</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_3.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_3.points}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 2</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_2.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_2.points}</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 1</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_1.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_1.points}</td>
+    </tr>
+  </table>`;
+    
+  // Add note for PCR measure which is inversed
+  if (measureId === "PCR" && serviceLineData.note) {
+    html += `<p style="margin-top: 10px; font-style: italic; color: #dc3545;">Note: ${serviceLineData.note}</p>`;
+  }
+  
+  bonusTiersContent.innerHTML = html;
+}
+
+function generateFocusMeasures(planName) {
+  const container = document.getElementById("focusMeasuresButtons");
+  container.innerHTML = "";
+  
+  const plan = planData[planName];
+  if (!plan) return;
+  
+  // Get measure points for this plan
+  const measurePoints = plan.measurePoints || {};
+  
+  // Get the focus measures for this plan
+  const focusedMeasureIds = focusedMeasures[planName] || [];
+  
+  // Find category for a measure ID
+  function findCategory(measureId) {
+    for (const category in categories) {
+      const found = categories[category].find(m => m.measureId === measureId);
+      if (found) return category;
+    }
+    return "other"; // Default
+  }
+  
+  // Find display name for a measure ID
+  function findDisplayName(measureId) {
+    for (const category in categories) {
+      const found = categories[category].find(m => m.measureId === measureId);
+      if (found) return found.displayName;
+    }
+    return measureId; // Default
+  }
+  
+  function createFocusButton(measureId, category) {
+    const displayName = findDisplayName(measureId);
+    
+    // Special handling for UCU which isn't in measurePoints
+    const points = measureId === "UCU" ? 3 : (measurePoints[measureId] || 1);
+    
+    const btn = document.createElement("button");
+    btn.textContent = displayName;
+    btn.setAttribute("data-measure", measureId);
+    btn.setAttribute("data-points", points);
+    
+    // Apply category-specific class
+    btn.className = `focus-${category}`;
+    
+    btn.addEventListener("click", function() {
+      displayGuideline(
+        measureId, 
+        null,
+        null,
+        points
+      );
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    container.appendChild(btn);
+  }
+  
+  // Process measures in category order
+  // First, gather all focus measures by category
+  const categorizedMeasures = {
+    metabolic: [],
+    cancer: [],
+    administrative: [],
+    other: []
+  };
+  
+  // Categorize all focus measures
+  focusedMeasureIds.forEach(measureId => {
+    // Special handling for UCU which isn't in measurePoints
+    if (measurePoints.hasOwnProperty(measureId) || measureId === "UCU") {
+      const category = findCategory(measureId);
+      categorizedMeasures[category].push(measureId);
+    }
+  });
+  
+  // Now create buttons in category order
+  categorizedMeasures.metabolic.forEach(measureId => {
+    createFocusButton(measureId, "metabolic");
+  });
+  
+  categorizedMeasures.cancer.forEach(measureId => {
+    createFocusButton(measureId, "cancer");
+  });
+  
+  categorizedMeasures.administrative.forEach(measureId => {
+    createFocusButton(measureId, "administrative");
+  });
+  
+  categorizedMeasures.other.forEach(measureId => {
+    createFocusButton(measureId, "other");
+  });
+}
+
+// Generate buttons for the current plan
+function generateButtons(planName) {
+  const container = document.getElementById("allMeasuresButtons");
+  container.innerHTML = "";
+  
+  const plan = planData[planName];
+  if (!plan) return;
+  
+  // Get measure points for this plan
+  const measurePoints = plan.measurePoints || {};
+  
+  // Only show measures that exist in this plan
+  function shouldShowMeasure(measureId) {
+    return measurePoints.hasOwnProperty(measureId);
+  }
+  
+  // Create header for a category
+  function createHeader(text) {
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.textContent = text;
+    container.appendChild(header);
+  }
+  
+  // Create button for a measure
+  function createButton(measure, className) {
+    if (!shouldShowMeasure(measure.measureId)) return;
+    
+    const points = measurePoints[measure.measureId] || 1;
+    
+    const btn = document.createElement("button");
+    btn.textContent = measure.displayName;
+    btn.setAttribute("data-measure", measure.measureId);
+    btn.setAttribute("data-points", points);
+    
+    // If type is provided (for TRC), attach it
+    if (measure.type) {
+      btn.setAttribute("data-type", measure.type);
+    }
+    
+    // Apply base class
+    btn.className = className;
+    
+    // Add weight-specific class
+    btn.classList.add(`weight-${points}`);
+    
+    btn.addEventListener("click", function() {
+      displayGuideline(
+        measure.measureId, 
+        null,
+        this.getAttribute("data-type"),
+        points
+      );
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    container.appendChild(btn);
+  }
+  
+  // Create buttons for a category, sorted by weight (3, 2, 1)
+  function createCategoryButtons(categoryMeasures, className) {
+    // First show high-weight measures (×3)
+    categoryMeasures.forEach(measure => {
+      if (shouldShowMeasure(measure.measureId) && measurePoints[measure.measureId] === 3) {
+        createButton(measure, className);
+      }
+    });
+    
+    // Then show medium-weight measures (×2)
+    categoryMeasures.forEach(measure => {
+      if (shouldShowMeasure(measure.measureId) && measurePoints[measure.measureId] === 2) {
+        createButton(measure, className);
+      }
+    });
+    
+    // Finally show low-weight measures (×1)
+    categoryMeasures.forEach(measure => {
+      if (shouldShowMeasure(measure.measureId) && measurePoints[measure.measureId] === 1) {
+        createButton(measure, className);
+      }
+    });
+  }
+
+  // Generate buttons by category
+  // Metabolic measures
+  let hasMetabolicMeasures = categories.metabolic.some(m => shouldShowMeasure(m.measureId));
+  if (hasMetabolicMeasures) {
+    createHeader("Metabolic/Cardiometabolic Measures");
+    createCategoryButtons(categories.metabolic, "button");
+  }
+  
+  // Cancer measures
+  let hasCancerMeasures = categories.cancer.some(m => shouldShowMeasure(m.measureId));
+  if (hasCancerMeasures) {
+    createHeader("Cancer Prevention");
+    createCategoryButtons(categories.cancer, "red-button");
+  }
+  
+  // Administrative measures
+  let hasAdminMeasures = categories.administrative.some(m => shouldShowMeasure(m.measureId));
+  if (hasAdminMeasures) {
+    createHeader("Administrative");
+    createCategoryButtons(categories.administrative, "teal-button");
+  }
+  
+  // Other measures
+  let hasOtherMeasures = categories.other.some(m => shouldShowMeasure(m.measureId));
+  if (hasOtherMeasures) {
+    createHeader("Other Measures");
+    createCategoryButtons(categories.other, "small-button");
+  }
+  
+  // Update summary statistics
+  updateSummaryStats(planName);
+}
+
+// Update summary statistics
+function updateSummaryStats(planName) {
+  const plan = planData[planName];
+  if (!plan) return;
+  
+  const measurePoints = plan.measurePoints || {};
+  const measures = Object.keys(measurePoints);
+  const totalMeasures = measures.length;
+  
+  // Calculate total points by summing up all point values
+  let totalPoints = 0;
+  measures.forEach(measure => {
+    totalPoints += measurePoints[measure];
+  });
+  
+  document.getElementById("measure-count").textContent = totalMeasures;
+  document.getElementById("point-count").textContent = totalPoints;
+}
+
+// Switch to a different plan
+function switchPlan(planName) {
+  if (!planData[planName]) return;
+  
+  // Update active button
+  document.querySelectorAll(".plan-button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  document.getElementById(`${planName}-btn`).classList.add("active");
+  
+  // Hide details panel
+  document.getElementById("details").style.display = "none";
+  
+  // Update current plan
+  currentPlan = planName;
+  
+  // Generate focus measure buttons
+  generateFocusMeasures(planName);
+  
+  // Generate all measure buttons
+  generateButtons(planName);
+}
+// Function to populate exclusions dropdown
+function populateExclusions(guideline) {
+  // Reset exclusions dropdown
+  const dropdown = document.getElementById("exclusionsDropdown");
+  dropdown.style.display = "none";
+  const exclusionsBtn = document.getElementById("exclusionsBtn");
+  exclusionsBtn.textContent = "Exclusions ▼";
+  
+  // Generate exclusions content
+  let exclusionsHtml = "";
+  let frailtyFound = false;
+  
+  if (guideline.denominator_exclusions && guideline.denominator_exclusions.length > 0) {
+    // Build exclusions list
+    exclusionsHtml += "<div>";
+    
+    for (let i = 0; i < guideline.denominator_exclusions.length; i++) {
+      const exclusion = guideline.denominator_exclusions[i];
+      const exclusionLower = exclusion.toLowerCase();
+      
+      // Check for frailty or advanced illness
+      if (exclusionLower.includes("frailty") || exclusionLower.includes("advanced illness")) {
+        frailtyFound = true;
+        exclusionsHtml += `<div class="exclusion-item frailty-item">${exclusion}</div>`;
+      } else {
+        exclusionsHtml += `<div class="exclusion-item">${exclusion}</div>`;
+      }
+    }
+    
+    exclusionsHtml += "</div>";
+    
+    // Add frailty dot phrase if needed
+    if (frailtyFound) {
+      exclusionsHtml += `
+        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
+          <p><strong>Epic Dot Phrase:</strong> <code>.frailtynote</code> - For frailty documentation, search terms, suggested dx & actions</p>
+        </div>
+      `;
+    }
+  } else {
+    exclusionsHtml = "<p>No exclusions specified for this measure.</p>";
+  }
+  
+  dropdown.innerHTML = exclusionsHtml;
+  
+  
+}
+
+// Display guideline details
+function displayGuideline(measureID, subtype, type, points) {
+  const guidelines = medicalData.conditions;
+  let found = null;
+  
+  // Loop through all guidelines
+  for (const key in guidelines) {
+    if (guidelines.hasOwnProperty(key)) {
+      const guideline = guidelines[key];
+      if (guideline.measure_id === measureID) {
+        // For duplicate measure IDs, check type if provided
+        if (measureID === "TRC" && type) {
+          if (type === "Reconciliation" && guideline.description.includes("medication reconciliation")) {
+            found = { title: key, ...guideline };
+            break;
+          }
+          if (type === "Engagement" && guideline.description.includes("patient engagement")) {
+            found = { title: key, ...guideline };
+            break;
+          }
+        } else if (measureID === "TRC-FU" && key.includes("7-Day Follow-Up")) {
+          found = { title: key, ...guideline };
+          break;
+        } else {
+          found = { title: key, ...guideline };
+          break;
+        }
+      }
+    }
+  }
+  
+  // Now assign found to currentGuideline
+  currentGuideline = found;
+  
+  const detailsDiv = document.getElementById("guidelineDetails");
+  const extraDiv = document.getElementById("extraDetails");
+  
+  // Reset star ratings and bonus tiers divs to hidden when a new measure is selected
+  document.getElementById("starRatingsDetails").style.display = "none";
+  document.getElementById("toggleStarRatingsBtn").innerText = "Show Star Ratings";
+  
+  // Reset exclusions dropdown
+document.getElementById("exclusionsDropdown").style.display = "none";
+document.getElementById("exclusionsBtn").textContent = "Exclusions ▼";
+
+  document.getElementById("bonusTiersDetails").style.display = "none";
+  document.getElementById("toggleBonusTiersBtn").innerText = "Show Bonus Tiers";
+  
+  // Show or hide the bonus tiers button based on whether the measure is a bonus measure
+  const bonusTiersBtn = document.getElementById("toggleBonusTiersBtn");
+  if (found && isBonusMeasure(measureID)) {
+    bonusTiersBtn.style.display = "inline-block";
+    console.log("Showing bonus tiers button for measure:", measureID);
+  } else {
+    bonusTiersBtn.style.display = "none";
+    console.log("Hiding bonus tiers button for measure:", measureID);
+  }
+  
+  if (found) {
+    // Handle description array - display each item as a separate paragraph
+    let descriptionHtml = "";
+    if (Array.isArray(found.description)) {
+      descriptionHtml = found.description.map(desc => `<p>${desc}</p>`).join('');
+    } else {
+      descriptionHtml = found.description;
+    }
+
+    // Create PDF link if available
+    let pdfLinkHtml = "";
+    if (found.link) {
+      pdfLinkHtml = `<a href="${found.link}" target="_blank" style="margin-left: 10px; color: #007bff;"><br>Link to Shared Savings Section</a>`;
+    }
+    
+    detailsDiv.innerHTML = `
+      <ul>
+        <li><strong>Title:</strong> ${found.title}</li>
+        <li><strong>Measure ID:</strong> ${found.measure_id} ${pdfLinkHtml}</li>
+        <li><strong>Description:</strong> <div>${descriptionHtml}</div></li>
+        <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>
+        <li><strong>Ages:</strong> ${found.ages}</li>
+      </ul>
+    `;
+    
+    // Build exclusions HTML as a list
+    let exclusionsHtml = "";
+    if (found.denominator_exclusions && found.denominator_exclusions.length > 0) {
+      exclusionsHtml = `<ul>${found.denominator_exclusions.map(exclusion => `<li>${exclusion}</li>`).join('')}</ul>`;
+    } else {
+      exclusionsHtml = "None";
+    }
+    
+    // Build gap closure methods as a list
+    let gapMethodsHtml = "";
+    if (found.methods_to_close_gap && found.methods_to_close_gap.length > 0) {
+      gapMethodsHtml = `<ul>${found.methods_to_close_gap.map(method => `<li>${method}</li>`).join('')}</ul>`;
+    } else {
+      gapMethodsHtml = "No gap closure methods specified";
+    }
+    
+    // Build best practices HTML
+    let practicesHtml = "";
+    if (found.best_practices && found.best_practices.length > 0) {
+      practicesHtml = `<ul>${found.best_practices.map(practice => `<li>${practice}</li>`).join('')}</ul>`;
+    } else {
+      practicesHtml = "None specified";
+    }
+    
+    extraDiv.innerHTML = `
+  <ul>
+    <li><strong>Best Practices:</strong> ${practicesHtml}</li>
+    <li><strong>Epic Dot Phrase:</strong> <code>.${measureID.toLowerCase()}patientinfo</code> - Patient info for this measure</li>
+  </ul>
+`;
+    
+    // Display gap closure information as a list
+    document.getElementById("gapText").innerHTML = gapMethodsHtml;
+    
+    // Populate the exclusions dropdown
+populateExclusions(found);
+
+// Display weight information
+const weightText = document.getElementById("weightText");
+if (points === 3) {
+  weightText.innerHTML = `<strong>HIGH PRIORITY MEASURE (×3)</strong> - This measure is weighted TRIPLE!`;
+} else if (points === 2) {
+  weightText.innerHTML = `<strong>MEDIUM PRIORITY MEASURE (×2)</strong> - This measure is weighted DOUBLE!`;
+} else {
+  weightText.innerHTML = `<strong>STANDARD MEASURE (×1)</strong> - This measure is weighted one`;
+}
+    
+    // Show the details box
+    document.getElementById("details").style.display = "block";
+  } else {
+    // No details found
+    detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;
+    extraDiv.innerHTML = "";
+    document.getElementById("details").style.display = "block";
+  }
+
+  // Clear previous active button state
+  clearActiveButtonState();
+  
+  // Set active state on matching buttons
+  document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {
+    btn.classList.add('active-measure');
+  });
+}
+
+// Document ready function
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for plan toggle buttons
+  document.getElementById("commercial-btn").addEventListener("click", function() {
+    switchPlan("commercial");
+  });
+
+  document.getElementById("medicaid-btn").addEventListener("click", function() {
+    switchPlan("medicaid");
+  });
+
+  document.getElementById("medicare-btn").addEventListener("click", function() {
+    switchPlan("medicare");
+  });
+
+  // Add event listener for exclusions button
+document.getElementById("exclusionsBtn").addEventListener("click", function() {
+  const dropdown = document.getElementById("exclusionsDropdown");
+  if (dropdown.style.display === "none" || dropdown.style.display === "") {
+    dropdown.style.display = "block";
+    this.textContent = "Exclusions ▲";
+  } else {
+    dropdown.style.display = "none";
+    this.textContent = "Exclusions ▼";
+  }
+});
+
+
+
+// Toggle best practices
+document.getElementById("toggleExtraBtn").addEventListener("click", function() {
+  const extraDiv = document.getElementById("extraDetails");
+  if (extraDiv.style.display === "none" || extraDiv.style.display === "") {
+    extraDiv.style.display = "block";
+    this.innerText = "Hide Best Practices";
+  } else {
+    extraDiv.style.display = "none";
+    this.innerText = "Best Practices";
+  }
+});
+
+ 
+
+// Add event listener for toggle star ratings button
+document.getElementById("toggleStarRatingsBtn").addEventListener("click", function() {
+  const starRatingsDiv = document.getElementById("starRatingsDetails");
+  if (starRatingsDiv.style.display === "none" || starRatingsDiv.style.display === "") {
+    starRatingsDiv.style.display = "block";
+    this.innerText = "Hide Star Ratings";
+    
+    // Call displayStarRatings with current measure if available
+    if (currentGuideline && typeof displayStarRatings === "function") {
+      console.log("Calling displayStarRatings with:", currentGuideline.measure_id);
+      displayStarRatings(currentGuideline.measure_id);
+    } else {
+      console.log("Cannot display star ratings - currentGuideline or function missing");
+      document.getElementById("starRatingsContent").innerHTML = "<p>Star ratings information not available for this measure.</p>";
+    }
+  } else {
+    starRatingsDiv.style.display = "none";
+    this.innerText = "Show Star Ratings";
+  }
+});
+  
+  // Add event listener for toggle bonus tiers button
+  document.getElementById("toggleBonusTiersBtn").addEventListener("click", function() {
+    const bonusTiersDiv = document.getElementById("bonusTiersDetails");
+    if (bonusTiersDiv.style.display === "none" || bonusTiersDiv.style.display === "") {
+      bonusTiersDiv.style.display = "block";
+      this.innerText = "Hide Bonus Tiers";
+      
+      // Display bonus tiers for current measure if available
+      if (currentGuideline) {
+        displayBonusTiers(currentGuideline.measure_id);
+      }
+    } else {
+      bonusTiersDiv.style.display = "none";
+      this.innerText = "Show Bonus Tiers";
+    }
+  });
+  
+  // Close details button
+  document.getElementById("closeDetailsBtn").addEventListener("click", function() {
+    document.getElementById("details").style.display = "none";
+    currentGuideline = null;
+    
+    // Clear active button state when closing details
+    clearActiveButtonState();
+  });
+
+  // Ask AI Section: Build and display a prompt based on the current guideline
+  document.getElementById("askAIBtn").addEventListener("click", function() {
+    if (!currentGuideline) {
+      alert("Please select a measure first.");
+      return;
+    }
+    
+    // Format exclusions for AI prompt - join with "or" instead of using bullet points
+    const exclusions = currentGuideline.denominator_exclusions && currentGuideline.denominator_exclusions.length > 0
+      ? currentGuideline.denominator_exclusions.map(code => code.trim()).join(' or ')
+      : "None specified";
+    
+    
+      // In the Ask AI button click handler
+const points = planData[currentPlan].measurePoints[currentGuideline.measure_id] || 1;
+let weightInfo = points === 3 
+  ? "This is a HIGH PRIORITY (×3) measure weighted TRIPLE." 
+  : points === 2
+  ? "This is a MEDIUM PRIORITY (×2) measure weighted DOUBLE."
+  : "This is a STANDARD (×1) measure weighted one.";
+
+    const prompt = `Dear AI, please consider this healthcare measure:
+Measure ID: ${currentGuideline.measure_id}
+Description: ${Array.isArray(currentGuideline.description) ? currentGuideline.description.join('\n') : currentGuideline.description}
+Priority Weight: ${points} (${weightInfo})
+Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. The exclusions are: ${exclusions}
+Please provide any additional important insights you may have afterward.`;
+    
+    const txtArea = document.getElementById("exhaustiveQuery");
+    txtArea.value = prompt;
+    txtArea.style.display = "block";
+    document.getElementById("copyQueryBtn").style.display = "block";
+  });
+
+  // Copy the prompt to the clipboard
+  document.getElementById("copyQueryBtn").addEventListener("click", function() {
+    const txtArea = document.getElementById("exhaustiveQuery");
+    txtArea.select();
+    document.execCommand("copy");
+    alert("Exclusion diagnosis prompt copied to clipboard!");
+  });
+
+  // Load data and initialize
+  // First, load the rules8.json file
+  fetch('rules8.json')
+    .then(response => {
+      if (!response.ok) throw new Error("Error loading JSON: " + response.statusText);
+      return response.json();
+    })
+    .then(data => {
+      medicalData = data;
+      console.log("Loaded rules8.json:", medicalData);
+      
+      // Then load star ratings data
+      loadStarRatings();
+      
+      // Load bonus measures data
+      loadBonusMeasures();
+      
+      // Initialize with Medicare plan instead of Commercial
+      switchPlan("medicare");
+    })
+    .catch(error => {
+      console.error("Error loading data:", error);
+      alert("Error loading data file. Please ensure rules8.json is available.");
+      generateFocusMeasures("medicare");
+      generateButtons("medicare");
+    });
+});
+  </script>
+</body>
+</html>
