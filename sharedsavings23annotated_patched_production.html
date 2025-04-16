@@ -1098,7 +1098,7 @@
 <!-- 550000 -->
       <div id="gapBanner">Gap: <span id="gapText">[Gap info]</span></div>
 <!-- 551000 -->
-      <button id="exclusionsBtn" class="exclusions-button">Exclusions ▼</button>
+      <button id="exclusionsBtn" class="exclusions-button">Exclusions</button>
 <!-- 552000 -->
       <div id="exclusionsDropdown"></div>
 <!-- 553000 -->
@@ -1712,7 +1712,7 @@ function populateExclusions(guideline) {
   const dropdown = document.getElementById("exclusionsDropdown");
   dropdown.style.display = "none";
   const exclusionsBtn = document.getElementById("exclusionsBtn");
-  exclusionsBtn.textContent = "Exclusions ▼";
+  exclusionsBtn.textContent = "Exclusions";
   // Generate exclusions content
   let exclusionsHtml = "";
   let frailtyFound = false;
