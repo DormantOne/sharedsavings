@@ -1,0 +1,2357 @@
+<!-- 1000 -->
+
+<!-- 2000 -->
+
+<!-- 3000 -->
+<!DOCTYPE html>
+<!-- 4000 -->
+<html lang="en">
+<!-- 5000 -->
+<head>
+<!-- 6000 -->
+  <meta charset="utf-8"/>
+<!-- 7000 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- 8000 -->
+  <title>Measures Dashboard</title>
+<!-- 9000 -->
+  <style>
+/* 10000 */
+    body {
+/* 11000 */
+      font-family: Arial, sans-serif;
+/* 12000 */
+      margin: 15px;
+/* 13000 */
+      line-height: 1.4;
+/* 14000 */
+    }
+/* 15000 */
+    .container {
+/* 16000 */
+      max-width: 1000px;
+/* 17000 */
+      margin: auto;
+/* 18000 */
+    }
+/* 19000 */
+    h1 {
+/* 20000 */
+      margin: 10px 0;
+/* 21000 */
+      font-size: 22px;
+/* 22000 */
+    }
+/* 23000 */
+    /* Plan toggle buttons */
+/* 24000 */
+    .plan-toggle {
+/* 25000 */
+      display: flex;
+/* 26000 */
+      gap: 8px;
+/* 27000 */
+      margin-bottom: 15px;
+/* 28000 */
+    }
+/* 29000 */
+    .plan-button {
+/* 30000 */
+      padding: 8px 15px;
+/* 31000 */
+      background-color: #6c757d;
+/* 32000 */
+      color: white;
+/* 33000 */
+      border: none;
+/* 34000 */
+      border-radius: 4px;
+/* 35000 */
+      cursor: pointer;
+/* 36000 */
+      font-size: 14px;
+/* 37000 */
+      transition: all 0.2s;
+/* 38000 */
+    }
+/* 39000 */
+    .plan-button.active {
+/* 40000 */
+      background-color: #28a745;
+/* 41000 */
+      box-shadow: 0 0 5px rgba(40, 167, 69, 0.6);
+/* 42000 */
+    }
+/* 43000 */
+    /* Grid for measure buttons */
+/* 44000 */
+    .grid-buttons {
+/* 45000 */
+      display: grid;
+/* 46000 */
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+/* 47000 */
+      gap: 10px;
+/* 48000 */
+      margin-bottom: 15px;
+/* 49000 */
+    }
+/* 50000 */
+    /* Category headers */
+/* 51000 */
+    .category-header {
+/* 52000 */
+      grid-column: 1 / -1;
+/* 53000 */
+      font-weight: bold;
+/* 54000 */
+      font-size: 16px;
+/* 55000 */
+      padding: 5px 0;
+/* 56000 */
+      border-bottom: 1px solid #ccc;
+/* 57000 */
+      margin-bottom: 5px;
+/* 58000 */
+    }
+/* 59000 */
+    /* Default button (blue for metabolic) */
+/* 60000 */
+    .button {
+/* 61000 */
+      background-color: #007bff; /* blue */
+/* 62000 */
+      color: white;
+/* 63000 */
+      padding: 12px;
+/* 64000 */
+      border: none;
+/* 65000 */
+      border-radius: 4px;
+/* 66000 */
+      cursor: pointer;
+/* 67000 */
+      font-size: 14px;
+/* 68000 */
+      text-align: center;
+/* 69000 */
+      transition: background-color 0.2s;
+/* 70000 */
+    }
+/* 71000 */
+    .button:hover {
+/* 72000 */
+      background-color: #0056b3;
+/* 73000 */
+    }
+/* 74000 */
+    /* Red button (for cancer prevention) */
+/* 75000 */
+    .red-button {
+/* 76000 */
+      background-color: #dc3545;
+/* 77000 */
+      color: white;
+/* 78000 */
+      padding: 12px;
+/* 79000 */
+      border: none;
+/* 80000 */
+      border-radius: 4px;
+/* 81000 */
+      cursor: pointer;
+/* 82000 */
+      font-size: 14px;
+/* 83000 */
+      text-align: center;
+/* 84000 */
+      transition: background-color 0.2s;
+/* 85000 */
+    }
+/* 86000 */
+    .red-button:hover {
+/* 87000 */
+      background-color: #a71d2a;
+/* 88000 */
+    }
+/* 89000 */
+    /* Teal button (for administrative measures) */
+/* 90000 */
+    .teal-button {
+/* 91000 */
+      background-color: #20c997;
+/* 92000 */
+      color: white;
+/* 93000 */
+      padding: 12px;
+/* 94000 */
+      border: none;
+/* 95000 */
+      border-radius: 4px;
+/* 96000 */
+      cursor: pointer;
+/* 97000 */
+      font-size: 14px;
+/* 98000 */
+      text-align: center;
+/* 99000 */
+      transition: background-color 0.2s;
+/* 100000 */
+    }
+/* 101000 */
+    .teal-button:hover {
+/* 102000 */
+      background-color: #1aa179;
+/* 103000 */
+    }
+/* 104000 */
+    /* Small gray button (for other measures) */
+/* 105000 */
+    .small-button {
+/* 106000 */
+      background-color: #6c757d; /* gray */
+/* 107000 */
+      font-size: 13px;
+/* 108000 */
+      padding: 10px;
+/* 109000 */
+      color: white;
+/* 110000 */
+      border: none;
+/* 111000 */
+      border-radius: 4px;
+/* 112000 */
+      cursor: pointer;
+/* 113000 */
+      text-align: center;
+/* 114000 */
+      transition: background-color 0.2s;
+/* 115000 */
+    }
+/* 116000 */
+    .small-button:hover {
+/* 117000 */
+      background-color: #5a6268;
+/* 118000 */
+    }
+/* 119000 */
+    /* Point weight indicators */
+/* 120000 */
+    .weight-1 {
+/* 121000 */
+      position: relative;
+/* 122000 */
+    }
+/* 123000 */
+    .weight-1::before {
+/* 124000 */
+      content: "×1";
+/* 125000 */
+      position: absolute;
+/* 126000 */
+      top: 5px;
+/* 127000 */
+      left: 5px;
+/* 128000 */
+      background-color: rgba(200, 200, 200, 0.8);
+/* 129000 */
+      color: #000;
+/* 130000 */
+      font-size: 12px;
+/* 131000 */
+      padding: 2px 4px;
+/* 132000 */
+      border-radius: 3px;
+/* 133000 */
+      font-weight: bold;
+/* 134000 */
+    }
+/* 135000 */
+
+/* 136000 */
+    .weight-2 {
+/* 137000 */
+      position: relative;
+/* 138000 */
+      box-shadow: 0 0 8px 2px rgba(255, 105, 180, 0.6); /* Pink glow */
+/* 139000 */
+    }
+/* 140000 */
+    .weight-2::before {
+/* 141000 */
+      content: "×2";
+/* 142000 */
+      position: absolute;
+/* 143000 */
+      top: 5px;
+/* 144000 */
+      left: 5px;
+/* 145000 */
+      background-color: rgba(255, 105, 180, 0.8);
+/* 146000 */
+      color: #fff;
+/* 147000 */
+      font-size: 12px;
+/* 148000 */
+      padding: 2px 4px;
+/* 149000 */
+      border-radius: 3px;
+/* 150000 */
+      font-weight: bold;
+/* 151000 */
+    }
+/* 152000 */
+
+/* 153000 */
+    .weight-3 {
+/* 154000 */
+      position: relative;
+/* 155000 */
+      box-shadow: 0 0 10px 3px rgba(255, 215, 0, 0.7); /* Golden glow */
+/* 156000 */
+    }
+/* 157000 */
+    .weight-3::before {
+/* 158000 */
+      content: "×3";
+/* 159000 */
+      position: absolute;
+/* 160000 */
+      top: 5px;
+/* 161000 */
+      left: 5px;
+/* 162000 */
+      background-color: rgba(255, 215, 0, 0.8);
+/* 163000 */
+      color: #000;
+/* 164000 */
+      font-size: 12px;
+/* 165000 */
+      padding: 2px 4px;
+/* 166000 */
+      border-radius: 3px;
+/* 167000 */
+      font-weight: bold;
+/* 168000 */
+    }
+/* 169000 */
+
+/* 170000 */
+    /* Details box */
+/* 171000 */
+    #details {
+/* 172000 */
+      border: 1px solid #ccc;
+/* 173000 */
+      padding: 15px;
+/* 174000 */
+      border-radius: 4px;
+/* 175000 */
+      background-color: #f8f9fa;
+/* 176000 */
+      margin-bottom: 15px;
+/* 177000 */
+      display: none;
+/* 178000 */
+      position: relative;
+/* 179000 */
+    }
+/* 180000 */
+    #closeDetailsBtn {
+/* 181000 */
+      position: absolute;
+/* 182000 */
+      top: 10px;
+/* 183000 */
+      right: 10px;
+/* 184000 */
+      background-color: #dc3545;
+/* 185000 */
+      color: white;
+/* 186000 */
+      border: none;
+/* 187000 */
+      padding: 5px 10px;
+/* 188000 */
+      cursor: pointer;
+/* 189000 */
+      border-radius: 4px;
+/* 190000 */
+      font-size: 14px;
+/* 191000 */
+    }
+/* 192000 */
+    /* --- MODIFY existing #gapBanner rule --- */
+/* 193000 */
+#gapBanner {
+/* 194000 */
+  background-color: #ffe6e6;
+/* 195000 */
+  /* Make the base text color slightly transparent */
+/* 196000 */
+  color: rgba(167, 0, 0, 0.75); /* Was 0.75 */
+/* 197000 */
+  padding: 10px;
+/* 198000 */
+  border: 1px solid #dc3545;
+/* 199000 */
+  border-radius: 4px;
+/* 200000 */
+  margin-bottom: 10px;
+/* 201000 */
+  font-weight: bold;
+/* 202000 */
+  /* Ensure other styles you might have here are kept */
+/* 203000 */
+}
+/* 204000 */
+
+/* 205000 */
+#gapText strong::before {
+/* 206000 */
+  content: '[';
+/* 207000 */
+  color: #d0d00b; /* A distinct yellow */
+/* 208000 */
+  font-weight: bold; /* Don't inherit bold */
+/* 209000 */
+  font-size: 1.1em;  /* Slightly smaller than the measure name */
+/* 210000 */
+  margin-right: 0.2em; /* Space after opening bracket */
+/* 211000 */
+  /* vertical-align: middle; */ /* Uncomment if vertical alignment is off */
+/* 212000 */
+}
+/* 213000 */
+
+/* 214000 */
+#gapText strong::after {
+/* 215000 */
+  content: ']';
+/* 216000 */
+  color: #d0d00b; /* A distinct yellow */
+/* 217000 */
+  font-weight: bold; /* Don't inherit bold */
+/* 218000 */
+  font-size: 1.1em;  /* Slightly smaller than the measure name */
+/* 219000 */
+  margin-left: 0.2em; /* Space before closing bracket */
+/* 220000 */
+  /* vertical-align: middle; */ /* Uncomment if vertical alignment is off */
+/* 221000 */
+}
+/* 222000 */
+
+/* 223000 */
+/* Ensure the strong tag itself doesn't have conflicting styles */
+/* 224000 */
+#gapText strong {
+/* 225000 */
+  font-size: 1.1em;
+/* 226000 */
+  color: #c82333;
+/* 227000 */
+  font-weight: bold;
+/* 228000 */
+  background-color: transparent;
+/* 229000 */
+  padding: 0; /* No padding */
+/* 230000 */
+  border-radius: 0;
+/* 231000 */
+  opacity: 1;
+/* 232000 */
+  text-decoration: none;
+/* 233000 */
+  font-style: normal;
+/* 234000 */
+  /* NO border-bottom from previous ideas */
+/* 235000 */
+}
+/* 236000 */
+
+/* 237000 */
+
+/* 238000 */
+/* --- ADD this new rule for the list inside gapText --- */
+/* 239000 */
+#gapText ul {
+/* 240000 */
+    color: #a70000; /* Reset list text color to the original banner red */
+/* 241000 */
+    /* Optional: Add some space above the list */
+/* 242000 */
+    margin-top: 5px;
+/* 243000 */
+}
+/* 244000 */
+    #weightBanner {
+/* 245000 */
+      background-color: #fff3cd;
+/* 246000 */
+      color: #856404;
+/* 247000 */
+      padding: 10px;
+/* 248000 */
+      border: 1px solid #ffeeba;
+/* 249000 */
+      border-radius: 4px;
+/* 250000 */
+      margin-bottom: 10px;
+/* 251000 */
+      font-weight: bold;
+/* 252000 */
+    }
+/* 253000 */
+
+/* 254000 */
+    /* Unified button styling for the details section buttons */
+/* 255000 */
+    .details-buttons {
+/* 256000 */
+      display: flex;
+/* 257000 */
+      flex-wrap: wrap;
+/* 258000 */
+      gap: 8px;
+/* 259000 */
+      margin: 12px 0;
+/* 260000 */
+      justify-content: flex-start;
+/* 261000 */
+    }
+/* 262000 */
+
+/* 263000 */
+    .details-buttons button {
+/* 264000 */
+      flex: 1;
+/* 265000 */
+      min-width: 90px;
+/* 266000 */
+      background-color: #6c757d;
+/* 267000 */
+      color: white;
+/* 268000 */
+      padding: 8px 5px;
+/* 269000 */
+      border: none;
+/* 270000 */
+      border-radius: 4px;
+/* 271000 */
+      cursor: pointer;
+/* 272000 */
+      font-size: 12px;
+/* 273000 */
+      text-align: center;
+/* 274000 */
+      transition: background-color 0.2s;
+/* 275000 */
+      white-space: nowrap;
+/* 276000 */
+      overflow: hidden;
+/* 277000 */
+      text-overflow: ellipsis;
+/* 278000 */
+    }
+/* 279000 */
+
+/* 280000 */
+    .details-buttons button:hover {
+/* 281000 */
+      background-color: #5a6268;
+/* 282000 */
+    }
+/* 283000 */
+
+/* 284000 */
+    .details-buttons button.active {
+/* 285000 */
+      background-color: #495057;
+/* 286000 */
+      box-shadow: 0 0 4px rgba(0,0,0,0.3);
+/* 287000 */
+    }
+/* 288000 */
+
+/* 289000 */
+    /* Responsive adjustments for very small screens */
+/* 290000 */
+    @media (max-width: 350px) {
+/* 291000 */
+      .details-buttons {
+/* 292000 */
+        flex-direction: column;
+/* 293000 */
+      }
+/* 294000 */
+
+/* 295000 */
+      .details-buttons button {
+/* 296000 */
+        width: 100%;
+/* 297000 */
+      }
+/* 298000 */
+    }
+/* 299000 */
+
+/* 300000 */
+    #extraDetails {
+/* 301000 */
+      display: none;
+/* 302000 */
+      margin-top: 10px;
+/* 303000 */
+      padding: 10px;
+/* 304000 */
+      border: 1px solid #ddd;
+/* 305000 */
+      background-color: #e9ecef;
+/* 306000 */
+      border-radius: 4px;
+/* 307000 */
+    }
+/* 308000 */
+
+/* 309000 */
+    #starRatingsDetails, #bonusTiersDetails {
+/* 310000 */
+      display: none;
+/* 311000 */
+      margin-top: 10px;
+/* 312000 */
+      padding: 10px;
+/* 313000 */
+      border: 1px solid #ddd;
+/* 314000 */
+      background-color: #e9ecef;
+/* 315000 */
+      border-radius: 4px;
+/* 316000 */
+    }
+/* 317000 */
+
+/* 318000 */
+    .summary-stats {
+/* 319000 */
+      display: flex;
+/* 320000 */
+      gap: 15px;
+/* 321000 */
+      margin-bottom: 15px;
+/* 322000 */
+      font-size: 14px;
+/* 323000 */
+    }
+/* 324000 */
+    .stat {
+/* 325000 */
+      background-color: #f0f0f0;
+/* 326000 */
+      padding: 8px 12px;
+/* 327000 */
+      border-radius: 4px;
+/* 328000 */
+      font-weight: bold;
+/* 329000 */
+    }
+/* 329100 START: Frailty Button CSS */
+/* 329100 */
+    /* --- Frailty Toggle Button Styles --- */
+/* 329110 */
+    .frailty-toggle-container {
+/* 329120 */
+      display: flex;
+/* 329130 */
+      gap: 10px;
+/* 329140 */
+      margin-bottom: 15px;
+/* 329150 */
+    }
+/* 329160 */
+    .frailty-button {
+/* 329170 */
+      padding: 5px 10px; /* Smaller padding than plan buttons */
+/* 329180 */
+      font-size: 12px;   /* Smaller font size */
+/* 329190 */
+      border: 1px solid #ccc;
+/* 329200 */
+      border-radius: 4px;
+/* 329210 */
+      background-color: #e9ecef; /* Light grey default */
+/* 329220 */
+      color: #333;
+/* 329230 */
+      cursor: pointer;
+/* 329240 */
+      transition: background-color 0.2s, border-color 0.2s;
+/* 329250 */
+    }
+/* 329260 */
+    .frailty-button:hover {
+/* 329270 */
+      background-color: #ced4da; /* Darker grey on hover */
+/* 329280 */
+      border-color: #adb5bd;
+/* 329290 */
+    }
+/* 329300 */
+    .frailty-button.active {
+/* 329310 */
+      background-color: #ffc107; /* Yellow indicates active */
+/* 329320 */
+      border-color: #ffa000;
+/* 329330 */
+      font-weight: bold;
+/* 329340 */
+      color: #333; /* Ensure text remains dark */
+/* 329350 */
+    }
+/* 329360 */
+   .frailty-button.inactive-button {
+/* 329370 */
+      background-color: #f8f9fa; /* Very light grey */
+/* 329380 */
+      color: #aaa;             /* Dimmed text */
+/* 329390 */
+      cursor: not-allowed;     /* Not-allowed cursor */
+/* 329400 */
+      border-color: #eee;
+/* 329410 */
+   }
+/* 329420 */
+    /* --- End Frailty Toggle Button Styles --- */
+/* 329430 */
+/* 329430 END: Frailty Button CSS */
+/* 330000 */
+    /* Ask AI Section styling */
+/* 331000 */
+    #askAISection {
+/* 332000 */
+      border: 1px solid #ccc;
+/* 333000 */
+      padding: 15px;
+/* 334000 */
+      border-radius: 4px;
+/* 335000 */
+      background-color: #f0f0f0;
+/* 336000 */
+      margin-top: 30px;
+/* 337000 */
+      text-align: center;
+/* 338000 */
+    }
+/* 339000 */
+    #exhaustiveQuery {
+/* 340000 */
+      width: 100%;
+/* 341000 */
+      height: 80px;
+/* 342000 */
+      margin-top: 10px;
+/* 343000 */
+      display: none;
+/* 344000 */
+    }
+/* 345000 */
+    #copyQueryBtn {
+/* 346000 */
+      background-color: #28a745;
+/* 347000 */
+      color: white;
+/* 348000 */
+      padding: 10px;
+/* 349000 */
+      border: none;
+/* 350000 */
+      border-radius: 4px;
+/* 351000 */
+      cursor: pointer;
+/* 352000 */
+      font-size: 16px;
+/* 353000 */
+      margin-top: 10px;
+/* 354000 */
+      display: none;
+/* 355000 */
+    }
+/* 356000 */
+    .link-buttons a {
+/* 357000 */
+      display: inline-block;
+/* 358000 */
+      margin: 5px;
+/* 359000 */
+      padding: 8px 12px;
+/* 360000 */
+      background-color: #007bff;
+/* 361000 */
+      color: white;
+/* 362000 */
+      text-decoration: none;
+/* 363000 */
+      border-radius: 4px;
+/* 364000 */
+    }
+/* 365000 */
+    .link-buttons a:hover {
+/* 366000 */
+      background-color: #0056b3;
+/* 367000 */
+    }
+/* 368000 */
+
+/* 369000 */
+    /* Focus Measures Section Styling */
+/* 370000 */
+    .focus-measures-section {
+/* 371000 */
+      margin-bottom: 25px;
+/* 372000 */
+      border: 1px solid #e0e0e0;
+/* 373000 */
+      border-radius: 6px;
+/* 374000 */
+      padding: 12px;
+/* 375000 */
+      background-color: #f9f9f9;
+/* 376000 */
+    }
+/* 377000 */
+
+/* 378000 */
+    .focus-measures-section h3 {
+/* 379000 */
+      margin-top: 0;
+/* 380000 */
+      margin-bottom: 15px;
+/* 381000 */
+      font-size: 18px;
+/* 382000 */
+      color: #333;
+/* 383000 */
+    }
+/* 384000 */
+
+/* 385000 */
+    .focus-buttons-container {
+/* 386000 */
+      display: flex;
+/* 387000 */
+      flex-wrap: wrap;
+/* 388000 */
+      gap: 8px;
+/* 389000 */
+    }
+/* 390000 */
+
+/* 391000 */
+    /* Focus measure buttons - base shared styles */
+/* 392000 */
+    .focus-metabolic, .focus-cancer, .focus-administrative, .focus-other {
+/* 393000 */
+      color: white;
+/* 394000 */
+      font-size: 12px;
+/* 395000 */
+      padding: 8px 10px;
+/* 396000 */
+      border: none;
+/* 397000 */
+      border-radius: 4px;
+/* 398000 */
+      cursor: pointer;
+/* 399000 */
+      transition: background-color 0.2s;
+/* 400000 */
+      width: 130px;
+/* 401000 */
+      white-space: nowrap;
+/* 402000 */
+      overflow: hidden;
+/* 403000 */
+      text-overflow: ellipsis;
+/* 404000 */
+      text-align: center;
+/* 405000 */
+    }
+/* 406000 */
+
+/* 407000 */
+    /* Specific category colors */
+/* 408000 */
+    .focus-metabolic {
+/* 409000 */
+      background-color: #007bff; /* Blue for metabolic */
+/* 410000 */
+    }
+/* 411000 */
+    .focus-metabolic:hover {
+/* 412000 */
+      background-color: #0056b3;
+/* 413000 */
+    }
+/* 414000 */
+
+/* 415000 */
+    .focus-cancer {
+/* 416000 */
+      background-color: #dc3545; /* Red for cancer */
+/* 417000 */
+    }
+/* 418000 */
+    .focus-cancer:hover {
+/* 419000 */
+      background-color: #a71d2a;
+/* 420000 */
+    }
+/* 421000 */
+
+/* 422000 */
+    .focus-administrative {
+/* 423000 */
+      background-color: #20c997; /* Teal for administrative */
+/* 424000 */
+    }
+/* 425000 */
+    .focus-administrative:hover {
+/* 426000 */
+      background-color: #1aa179;
+/* 427000 */
+    }
+/* 428000 */
+
+/* 429000 */
+    .focus-other {
+/* 430000 */
+      background-color: #6c757d; /* Gray for other */
+/* 431000 */
+    }
+/* 432000 */
+    .focus-other:hover {
+/* 433000 */
+      background-color: #5a6268;
+/* 434000 */
+    }
+/* 435000 */
+
+/* 436000 */
+    /* Responsive adjustments for mobile */
+/* 437000 */
+    @media (max-width: 768px) {
+/* 438000 */
+      .focus-buttons-container {
+/* 439000 */
+        display: grid;
+/* 440000 */
+        grid-template-columns: repeat(2, 1fr); /* 2 buttons per row on mobile */
+/* 441000 */
+        gap: 8px;
+/* 442000 */
+      }
+/* 443000 */
+
+/* 444000 */
+      .focus-metabolic, .focus-cancer, .focus-administrative, .focus-other {
+/* 445000 */
+        width: 100%;  /* Full width within their grid cell */
+/* 446000 */
+      }
+/* 447000 */
+    }
+/* 448000 */
+
+/* 449000 */
+    /* Active state for all buttons */
+/* 450000 */
+    .button.active-measure,
+/* 451000 */
+    .red-button.active-measure,
+/* 452000 */
+    .teal-button.active-measure,
+/* 453000 */
+    .small-button.active-measure {
+/* 454000 */
+      outline: 3px solid #333;
+/* 455000 */
+      box-shadow: 0 0 0 1px white inset;
+/* 456000 */
+      position: relative;
+/* 457000 */
+    }
+/* 458000 */
+
+/* 459000 */
+    .focus-metabolic.active-measure,
+/* 460000 */
+    .focus-cancer.active-measure,
+/* 461000 */
+    .focus-administrative.active-measure,
+/* 462000 */
+    .focus-other.active-measure {
+/* 463000 */
+      outline: 3px solid #333;
+/* 464000 */
+      box-shadow: 0 0 0 1px white inset;
+/* 465000 */
+      position: relative;
+/* 466000 */
+    }
+/* 467000 */
+
+/* 468000 */
+    /* Add a checkmark to active buttons */
+/* 469000 */
+    .active-measure::after {
+/* 470000 */
+      content: "✓";
+/* 471000 */
+      position: absolute;
+/* 472000 */
+      bottom: 3px;
+/* 473000 */
+      right: 5px;
+/* 474000 */
+      font-weight: bold;
+/* 475000 */
+      font-size: 12px;
+/* 476000 */
+    }
+/* 477000 */
+/* 477500 START: Frailty Excluded CSS */
+/* 477500 */
+    /* --- Style for buttons when frailty exclusion applies and is toggled --- */
+/* 477510 */
+    .frailty-excluded {
+/* 477520 */
+      /* Light grey/white hash pattern */
+/* 477530 */
+      background-image: repeating-linear-gradient(
+/* 477540 */
+        -45deg,
+/* 477550 */
+        #ffffff 0px,
+/* 477560 */
+        #ffffff 5px,
+/* 477570 */
+        #dddddd 5px, /* Use a light grey for the lines */
+/* 477580 */
+        #dddddd 10px
+/* 477590 */
+      );
+/* 477600 */
+      color: #000 !important; /* Ensure text is readable over pattern */
+/* 477610 */
+      border: 1px solid #aaa; /* Add a border to define edge */
+/* 477620 */
+      box-shadow: inset 0 0 3px rgba(0,0,0,0.2); /* Optional inner shadow */
+/* 477630 */
+    }
+/* 477640 */
+    /* Optional: Adjust pseudo-elements if needed */
+/* 477650 */
+    .frailty-excluded::before {
+/* 477660 */
+       /* Example: Make weight indicator less prominent */
+/* 477670 */
+       opacity: 0.6;
+/* 477680 */
+    }
+/* 477690 */
+    .frailty-excluded::after {
+/* 477700 */
+       /* Hide checkmark if shown when frailty excluded? Maybe not. */
+/* 477710 */
+       /* display: none; */ /* Keep checkmark for now */
+/* 477720 */
+    }
+/* 477730 */
+    /* --- End Frailty Excluded Style --- */
+/* 477740 */
+/* 477740 END: Frailty Excluded CSS */
+/* 478000 */
+    /* Exclusions Button */
+/* 479000 */
+.exclusions-button {
+/* 480000 */
+  background-color: #dc3545;
+/* 481000 */
+  color: white;
+/* 482000 */
+  padding: 8px 12px;
+/* 483000 */
+  border: none;
+/* 484000 */
+  border-radius: 4px;
+/* 485000 */
+  cursor: pointer;
+/* 486000 */
+  font-size: 14px;
+/* 487000 */
+  margin-top: 5px;
+/* 488000 */
+  margin-bottom: 10px;
+/* 489000 */
+  display: block;
+/* 490000 */
+}
+/* 491000 */
+
+/* 492000 */
+.exclusions-button:hover {
+/* 493000 */
+  background-color: #c82333;
+/* 494000 */
+}
+/* 495000 */
+
+/* 496000 */
+/* Exclusions Dropdown */
+/* 497000 */
+#exclusionsDropdown {
+/* 498000 */
+  display: none;
+/* 499000 */
+  padding: 12px;
+/* 500000 */
+  background-color: #f8f9fa;
+/* 501000 */  border: 3px solid #dc3545; /* Thick red border */
+/* 502000 */
+  border-radius: 4px;
+/* 503000 */
+  margin-bottom: 15px;
+/* 504000 */
+}
+/* 505000 */
+
+/* 506000 */
+.exclusion-item {
+/* 507000 */
+  margin-bottom: 8px;
+/* 508000 */
+  padding-left: 15px;
+/* 509000 */
+  position: relative;
+/* 510000 */
+}
+/* 511000 */
+
+/* 512000 */
+.exclusion-item:before {
+/* 513000 */
+  content: "•";
+/* 514000 */
+  position: absolute;
+/* 515000 */
+  left: 0;
+/* 516000 */
+  color: #dc3545;
+/* 517000 */
+}
+/* 518000 */
+
+/* 519000 */
+.frailty-item {
+/* 520000 */
+  color: #dc3545;
+/* 521000 */
+  font-weight: bold;
+/* 522000 */
+}
+/* 523000 */
+
+/* 524000 */
+
+<!-- 525000 -->
+</style>
+<!-- 526000 -->
+</head>
+<!-- 527000 -->
+<body>
+<!-- 528000 -->
+  <div class="container">
+<!-- 529000 -->
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+<!-- 530000 -->
+      <h2 style="margin: 0; margin-right: 15px;">Measures 2025</h2>
+<!-- 531000 -->
+    </div>
+<!-- 532000 -->
+
+<!-- 533000 -->
+    <!-- Disclaimer moved to bottom -->
+<!-- 534000 -->
+
+<!-- 535000 -->
+<!-- Plan Toggle Buttons -->
+<!-- 536000 -->
+<div class="plan-toggle">
+<!-- 537000 -->
+  <button id="medicare-btn" class="plan-button active">UPMC for Life (Medicare/SNP)</button>
+<!-- 538000 -->
+  <button id="commercial-btn" class="plan-button">Commercial</button>
+<!-- 539000 -->
+  <button id="medicaid-btn" class="plan-button">UPMC for You (Medicaid)</button>
+<!-- 540000 -->
+</div>
+<!-- 540500 START: Frailty Buttons HTML -->
+<!-- 540500 -->
+    <!-- Frailty Exclusion Toggle Buttons -->
+<!-- 540510 -->
+    <div class="frailty-toggle-container" id="frailtyToggleContainer">
+<!-- 540520 -->
+      <button id="showFrailtyBtn" class="frailty-button">Show Frailty Exclusions</button>
+<!-- 540530 -->
+      <button id="findFrailtyBtn" class="frailty-button inactive-button">Find Frailty Exclusions</button>
+<!-- 540540 -->
+    </div>
+<!-- 540550 -->
+<!-- 540550 END: Frailty Buttons HTML -->
+<!-- 541000 -->
+
+<!-- 542000 -->
+    <!-- Summary Stats -->
+<!-- 543000 -->
+    <div class="summary-stats" style="display: none;">
+<!-- 544000 -->
+      <div class="stat">Measures: <span id="measure-count">0</span></div>
+<!-- 545000 -->
+      <div class="stat">Points: <span id="point-count">0</span></div>
+<!-- 546000 -->
+    </div>
+<!-- 547000 -->
+
+<!-- 548000 -->
+    <div id="details">
+<!-- 549000 -->
+      <button id="closeDetailsBtn">Close</button>
+<!-- 550000 -->
+      <div id="gapBanner">Gap: <span id="gapText">[Gap info]</span></div>
+<!-- 551000 -->
+      <button id="exclusionsBtn" class="exclusions-button">Exclusions</button>
+<!-- 552000 -->
+      <div id="exclusionsDropdown"></div>
+<!-- 553000 -->
+      <div id="weightBanner">Weight: <span id="weightText">[Weight info]</span></div>
+<!-- 554000 -->
+      <div id="guidelineDetails">
+<!-- 555000 -->
+        <ul>
+<!-- 556000 -->
+          <li>Please select a measure.</li>
+<!-- 557000 -->
+        </ul>
+<!-- 558000 -->
+      </div>
+<!-- 559000 -->
+      <div class="details-buttons">
+<!-- 560000 -->
+        <button id="toggleExtraBtn">Best Practices</button>
+<!-- 561000 -->
+        <button id="toggleStarRatingsBtn">Show Star Ratings</button>
+<!-- 562000 -->
+        <button id="toggleBonusTiersBtn" style="display: none;">Show Bonus Tiers</button>
+<!-- 563000 -->
+      </div>
+<!-- 564000 -->
+      <div id="extraDetails">
+<!-- 565000 -->
+        <ul>
+<!-- 566000 -->
+          <li>[Extra details here]</li>
+<!-- 567000 -->
+        </ul>
+<!-- 568000 -->
+      </div>
+<!-- 569000 -->
+      <div id="starRatingsDetails">
+<!-- 570000 -->
+        <h4>Star Ratings Thresholds</h4>
+<!-- 571000 -->
+        <div id="starRatingsContent">
+<!-- 572000 -->
+          <p>Select a measure to see star ratings.</p>
+<!-- 573000 -->
+        </div>
+<!-- 574000 -->
+      </div>
+<!-- 575000 -->
+      <div id="bonusTiersDetails">
+<!-- 576000 -->
+        <h4>Bonus Tier Thresholds</h4>
+<!-- 577000 -->
+        <div id="bonusTiersContent">
+<!-- 578000 -->
+          <p>Select a bonus measure to see tier thresholds.</p>
+<!-- 579000 -->
+        </div>
+<!-- 580000 -->
+      </div>
+<!-- 581000 -->
+    </div>
+<!-- 582000 -->
+
+<!-- 583000 -->
+    <!-- Buttons for measures -->
+<!-- 584000 -->
+    <div class="grid-buttons" id="allMeasuresButtons"></div>
+<!-- 585000 -->
+
+<!-- 586000 -->
+    <!-- Focus Measures Section (Bonus Measures) moved here -->
+<!-- 587000 -->
+    <div class="focus-measures-section">
+<!-- 588000 -->
+      <h3>Bonus Measures</h3>
+<!-- 589000 -->
+      <div class="focus-buttons-container" id="focusMeasuresButtons"></div>
+<!-- 590000 -->
+    </div>
+<!-- 591000 -->
+
+<!-- 592000 -->
+    <!-- Ask AI Section -->
+<!-- 593000 -->
+    <div id="askAISection">
+<!-- 594000 -->
+      <h3>Ask AI for Exclusion Diagnosis Codes</h3>
+<!-- 595000 -->
+      <p>This will compile the current guideline information into a prompt for you to copy and paste into your AI search bar.</p>
+<!-- 596000 -->
+      <button id="askAIBtn" class="small-button">Generate AI Prompt</button>
+<!-- 597000 -->
+      <textarea id="exhaustiveQuery" placeholder="Exclusion diagnosis prompt will appear here..." style="display:none;"></textarea>
+<!-- 598000 -->
+      <button id="copyQueryBtn" style="display:none;">Copy Prompt</button>
+<!-- 599000 -->
+      <div class="link-buttons">
+<!-- 600000 -->
+        <a href="https://www.openevidence.com/" target="_blank">Open Evidence</a>
+<!-- 601000 -->
+        <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+<!-- 602000 -->
+        <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+<!-- 603000 -->
+        <a href="https://gemini.google.com" target="_blank">Gemini</a>
+<!-- 604000 -->
+        <a href="https://www.deepseek.ai" target="_blank">DeepSeek</a>
+<!-- 605000 -->
+      </div>
+<!-- 606000 -->
+    </div>
+<!-- 607000 -->
+    <!-- Disclaimer moved here -->
+    <h5 class="disclaimer"><small>Below experimental view / possible errors, please <a href="https://upmchs-my.sharepoint.com/:b:/g/personal/sohnae_upmc_edu/ETaVvG0aWDlEtBOeYg9N0OQBXrH79wwiXb_HmyIAqd2h-g?e=fDijHn" target="_blank">vet with source</a></small></h5>
+  </div>
+<!-- 608000 -->
+
+  <script>  // 609000
+ // Global variables  // 610000
+let medicalData = {};  // 611000
+let currentPlan = "commercial";  // 612000
+let currentGuideline = null;  // 613000
+let starRatingsData = {};  // 614000
+let bonusMeasuresData = {};  // 615000
+// --- START: Frailty Globals --- // 616000
+let isFrailtyHighlightActive = false; // Track frailty highlight state // 616010
+// Define Measure IDs subject to frailty exclusions (based on provided HTML categories) // 616011
+const frailtyExcludedMeasureIds = ['CBP', 'BCS-E', 'COL-E', 'EED', 'GSD', 'GSD-Medicare', 'KED', 'SPC', 'SPD']; // 616012
+// --- END: Frailty Globals --- // 616013
+
+// Define focused measures for each plan  // 617000
+const focusedMeasures = {  // 618000
+  "commercial": ["BCS-E", "CCS-E", "CHL", "GSD", "UCU"],  // 619000
+  "medicaid": ["BCS-E", "CCS-E", "CHL", "GSD", "UCU"],  // 620000
+  "medicare": ["FMC", "DMA", "PCR", "TRC-FU", "UCU"]  // 621000
+};  // 622000
+
+// Measure point values by plan  // 624000
+const planData = {  // 625000
+  "commercial": {  // 626000
+    measurePoints: {  // 627000
+      "AIS-E": 1,  // 628000
+      "URI": 2,  // 629000
+      "AMR": 1,  // 630000
+      "BCS-E": 3,  // 631000
+      "CCS-E": 2,  // 632000
+      "CHL": 1,  // 633000
+      "COL-E": 1,  // 634000
+      "EED": 1,  // 635000
+      "GSD": 2,  // 636000
+      "CBP": 2,  // 637000
+      "KED": 1,  // 638000
+      "PCE": 1,  // 639000
+      "PCR": 3,  // 640000
+      "SPC": 2,  // 641000
+      "SPD": 2  // 642000
+    }  // 643000
+  },  // 644000
+  "medicaid": {  // 645000
+    measurePoints: {  // 646000
+      "AIS-E": 1,  // 647000
+      "URI": 1,  // 648000
+      "AMR": 3,  // 649000
+      "BCS-E": 3,  // 650000
+      "CCS-E": 2,  // 651000
+      "CHL": 2,  // 652000
+      "COL-E": 1,  // 653000
+      "EED": 1,  // 654000
+      "GSD": 3,  // 655000
+      "CBP": 2,  // 656000
+      "KED": 1,  // 657000
+      "PCE": 1,  // 658000
+      "PCR": 2,  // 659000
+      "SPC": 1,  // 660000
+      "SPD": 1  // 661000
+    }  // 662000
+  },  // 663000
+  "medicare": {  // 664000
+    measurePoints: {  // 665000
+      "BCS-E": 1,  // 666000
+      "COL-E": 1,  // 667000
+      "EED": 1,  // 668000
+      "GSD-Medicare": 3,  // 669000
+      "COB": 1,  // 670000
+      "CBP": 3,  // 671000
+      "FMC": 1,  // 672000
+      "KED": 1,  // 673000
+      "CMA": 3,  // 674000
+      "DMA": 3,  // 675000
+      "HMA": 3,  // 676000
+      "TRC": 1,  // 677000
+      "TRC-ENG": 1,  // 678000
+      "PCR": 3,  // 679000
+      "POLY-ACH": 1,  // 680000
+      "SPC": 1,  // 681000
+      "SUPD": 1,  // 682000
+      "TRC-FU": 1  // 683000
+    }  // 684000
+  }  // 685000
+};  // 686000
+
+// Category definitions  // 688000
+const categories = {  // 689000
+  metabolic: [  // 690000
+    { displayName: "BP Control", measureId: "CBP" },  // 691000
+    { displayName: "BP Med Adherence", measureId: "HMA" },  // 692000
+    { displayName: "DM Glycemic Control", measureId: "GSD" },  // 693000
+    { displayName: "DM Glycemic Control", measureId: "GSD-Medicare" },  // 694000
+    { displayName: "DM Med Adherence", measureId: "DMA" },  // 695000
+    { displayName: "Statin Adherence", measureId: "CMA" },  // 696000
+    { displayName: "DM Eye Exam", measureId: "EED" },  // 697000
+    { displayName: "DM Kidney Evaluation", measureId: "KED" },  // 698000
+    { displayName: "DM Statin Use", measureId: "SUPD" },  // 699000
+    { displayName: "CV Statin Therapy", measureId: "SPC" },  // 700000
+    { displayName: "DM Statin Therapy", measureId: "SPD" }  // 701000
+  ],  // 702000
+  cancer: [  // 703000
+    { displayName: "Breast Cancer Screen", measureId: "BCS-E" },  // 704000
+    { displayName: "Colorectal Screen", measureId: "COL-E" },  // 705000
+    { displayName: "Cervical Cancer Screen", measureId: "CCS-E" }  // 706000
+  ],  // 707000
+  administrative: [  // 708000
+    { displayName: "Readmission Prevention", measureId: "PCR" },  // 709000
+    { displayName: "ED Follow-Up Care", measureId: "FMC" },  // 710000
+    { displayName: "Discharge Med Reconciliation", measureId: "TRC", type: "Reconciliation" },  // 711000
+    { displayName: "Post-Discharge Engagement", measureId: "TRC-ENG", type: "Engagement" },  // 712000
+    { displayName: "7-Day Inpatient Follow-Up", measureId: "TRC-FU" },  // 713000
+    { displayName: "Unplanned Care Utilization", measureId: "UCU" }  // 714000
+  ],  // 715000
+  other: [  // 716000
+    { displayName: "URI Treatment", measureId: "URI" },  // 717000
+    { displayName: "Asthma Medication", measureId: "AMR" },  // 718000
+    { displayName: "Bronchitis Treatment", measureId: "AAB" },  // 719000
+    { displayName: "COPD Management", measureId: "PCE" },  // 720000
+    { displayName: "Flu Immunization", measureId: "AIS-E" },  // 721000
+    { displayName: "Opioid-Benzo Use", measureId: "COB" },  // 722000
+    { displayName: "Anticholinergic Polypharmacy", measureId: "POLY-ACH" },  // 723000
+    { displayName: "Chlamydia Screen", measureId: "CHL" }  // 724000
+  ]  // 725000
+};  // 726000
+
+// Function to clear active button state  // 728000
+function clearActiveButtonState() {  // 729000
+  // Clear active state from all buttons  // 730000
+  document.querySelectorAll('.active-measure').forEach(btn => {  // 731000
+    btn.classList.remove('active-measure');  // 732000
+  });  // 733000
+}  // 734000
+
+// Function to load star ratings JSON  // 736000
+function loadStarRatings() {  // 737000
+  fetch('stars.json')  // 738000
+    .then(response => {  // 739000
+      if (!response.ok) throw new Error("Error loading Star Ratings JSON: " + response.statusText);  // 740000
+      return response.json();  // 741000
+    })  // 742000
+    .then(data => {  // 743000
+      starRatingsData = data;  // 744000
+      console.log("Loaded star ratings data:", starRatingsData);  // 745000
+    })  // 746000
+    .catch(error => {  // 747000
+      console.error("Error loading star ratings data:", error);  // 748000
+    });  // 749000
+}  // 750000
+
+// Function to load bonus measures JSON  // 752000
+function loadBonusMeasures() {  // 753000
+  fetch('bonus.json')  // 754000
+    .then(response => {  // 755000
+      if (!response.ok) throw new Error("Error loading Bonus Measures JSON: " + response.statusText);  // 756000
+      return response.json();  // 757000
+    })  // 758000
+    .then(data => {  // 759000
+      bonusMeasuresData = data;  // 760000
+      console.log("Loaded bonus measures data:", bonusMeasuresData);  // 761000
+    })  // 762000
+    .catch(error => {  // 763000
+      console.error("Error loading bonus measures data:", error);  // 764000
+    });  // 765000
+}  // 766000
+
+// Convert plan name to service line key used in the star ratings JSON  // 768000
+function getPlanServiceLineKey(planName) {  // 769000
+  switch(planName) {  // 770000
+    case "commercial": return "commercial";  // 771000
+    case "medicaid": return "medicaid";  // 772000
+    case "medicare": return "medicare";  // 773000
+    default: return "";  // 774000
+  }  // 775000
+}  // 776000
+
+// Function to check if a measure is a bonus measure for the current plan  // 778000
+function isBonusMeasure(measureId) {  // 779000
+  return focusedMeasures[currentPlan] && focusedMeasures[currentPlan].includes(measureId);  // 780000
+}  // 781000
+
+// Display star ratings for the current measure and plan  // 783000
+function displayStarRatings(measureId) {  // 784000
+  const starRatingsContent = document.getElementById("starRatingsContent");  // 785000
+  const serviceLineKey = getPlanServiceLineKey(currentPlan);  // 786000
+
+  console.log("Displaying star ratings for:", measureId, "in", serviceLineKey);  // 788000
+
+  try {  // 790000
+    // Check if we have data and the measure exists  // 791000
+    if (!starRatingsData ||   // 792000
+        !starRatingsData.healthcare_quality_measures ||   // 793000
+        !starRatingsData.healthcare_quality_measures[measureId] ||   // 794000
+        !starRatingsData.healthcare_quality_measures[measureId].service_lines ||  // 795000
+        !starRatingsData.healthcare_quality_measures[measureId].service_lines[serviceLineKey]) {  // 796000
+
+      starRatingsContent.innerHTML = `<p>No star ratings data available for ${measureId} in the current plan.</p>`;  // 798000
+      return;  // 799000
+    }  // 800000
+
+    // Get the star ratings data for this measure and service line  // 802000
+    const measureData = starRatingsData.healthcare_quality_measures[measureId];  // 803000
+    const serviceLineData = measureData.service_lines[serviceLineKey];  // 804000
+
+    // Check if star thresholds exist  // 806000
+    if (!serviceLineData.star_thresholds) {  // 807000
+      starRatingsContent.innerHTML = `<p>No star ratings thresholds available for ${measureId}.</p>`;  // 808000
+      return;  // 809000
+    }  // 810000
+
+    // Format the data as a table  // 812000
+    let html = `  // 813000
+      <p><strong>${measureData.measure_name}</strong></p>  // 814000
+      <p>Weight: ${serviceLineData.weight}</p>  // 815000
+      <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">  // 816000
+        <tr style="background-color: #f0f0f0; font-weight: bold;">  // 817000
+          <td style="padding: 8px; border: 1px solid #ddd;">Star Rating</td>  // 818000
+          <td style="padding: 8px; border: 1px solid #ddd;">Threshold</td>  // 819000
+        </tr>`;  // 820000
+
+    // Add rows for each star threshold  // 822000
+    if (serviceLineData.star_thresholds["5_stars"]) {  // 823000
+      html += `  // 824000
+        <tr>  // 825000
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐⭐⭐⭐ (5 Stars)</td>  // 826000
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["5_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 827000
+        </tr>`;  // 828000
+    }  // 829000
+
+    if (serviceLineData.star_thresholds["4_stars"]) {  // 831000
+      html += `  // 832000
+        <tr>  // 833000
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐⭐⭐ (4 Stars)</td>  // 834000
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["4_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 835000
+        </tr>`;  // 836000
+    }  // 837000
+
+    if (serviceLineData.star_thresholds["3_stars"]) {  // 839000
+      html += `  // 840000
+        <tr>  // 841000
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐⭐ (3 Stars)</td>  // 842000
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["3_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 843000
+        </tr>`;  // 844000
+    }  // 845000
+
+    if (serviceLineData.star_thresholds["2_stars"]) {  // 847000
+      html += `  // 848000
+        <tr>  // 849000
+          <td style="padding: 8px; border: 1px solid #ddd;">⭐⭐ (2 Stars)</td>  // 850000
+          <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.star_thresholds["2_stars"] * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 851000
+        </tr>`;  // 852000
+    }  // 853000
+
+    html += `</table>`;  // 855000
+
+    // Add note for PCR measure which is inversed  // 857000
+    if (measureId === "PCR") {  // 858000
+      html += `<p style="margin-top: 10px; font-style: italic; color: #dc3545;">Note: Lower scores are better for this measure.</p>`;  // 859000
+    }  // 860000
+
+    starRatingsContent.innerHTML = html;  // 862000
+  } catch (error) {  // 863000
+    console.error("Error displaying star ratings:", error);  // 864000
+    starRatingsContent.innerHTML = `<p>Error displaying star ratings: ${error.message}</p>`;  // 865000
+  }  // 866000
+}  // 867000
+
+// Display bonus tiers for the current measure and plan  // 869000
+function displayBonusTiers(measureId) {  // 870000
+  const bonusTiersContent = document.getElementById("bonusTiersContent");  // 871000
+  const serviceLineKey = getPlanServiceLineKey(currentPlan);  // 872000
+
+  console.log("Displaying bonus tiers for:", measureId, "in", serviceLineKey);  // 874000
+
+  // Debug data availability  // 876000
+  console.log("Bonus measures data available:", !!bonusMeasuresData);  // 877000
+  console.log("Bonus measures available:", bonusMeasuresData && !!bonusMeasuresData.bonus_measures);  // 878000
+
+  // Check if we have data and the measure exists  // 880000
+  if (!bonusMeasuresData.bonus_measures ||   // 881000
+      !bonusMeasuresData.bonus_measures[measureId] ||   // 882000
+      !bonusMeasuresData.bonus_measures[measureId].service_lines ||  // 883000
+      !bonusMeasuresData.bonus_measures[measureId].service_lines[serviceLineKey]) {  // 884000
+
+    bonusTiersContent.innerHTML = `<p>No bonus tier data available for ${measureId} in the current plan.</p>`;  // 886000
+    return;  // 887000
+  }  // 888000
+
+  // Get the bonus tier data for this measure and service line  // 890000
+  const measureData = bonusMeasuresData.bonus_measures[measureId];  // 891000
+  const serviceLineData = measureData.service_lines[serviceLineKey];  // 892000
+
+  // Format the data as a table  // 894000
+// In the displayBonusTiers function  // 895000
+// Format the data as a table  // 896000
+let html = `  // 897000
+  <p><strong>${measureData.measure_name}</strong></p>  // 898000
+  <p>${serviceLineData.description}</p>  // 899000
+  <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">  // 900000
+    <tr style="background-color: #f0f0f0; font-weight: bold;">  // 901000
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier</td>  // 902000
+      <td style="padding: 8px; border: 1px solid #ddd;">Threshold</td>  // 903000
+      <td style="padding: 8px; border: 1px solid #ddd;">Bonus Weight</td>  // 904000
+    </tr>  // 905000
+    <tr>  // 906000
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 3</td>  // 907000
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_3.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 908000
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_3.points}</td>  // 909000
+    </tr>  // 910000
+    <tr>  // 911000
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 2</td>  // 912000
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_2.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 913000
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_2.points}</td>  // 914000
+    </tr>  // 915000
+    <tr>  // 916000
+      <td style="padding: 8px; border: 1px solid #ddd;">Tier 1</td>  // 917000
+      <td style="padding: 8px; border: 1px solid #ddd;">${(serviceLineData.tiers.tier_1.threshold * 100).toFixed(1)}%${measureId === 'PCR' ? ' or below' : ' or above'}</td>  // 918000
+      <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">${serviceLineData.tiers.tier_1.points}</td>  // 919000
+    </tr>  // 920000
+  </table>`;  // 921000
+
+  // Add note for PCR measure which is inversed  // 923000
+  if (measureId === "PCR" && serviceLineData.note) {  // 924000
+    html += `<p style="margin-top: 10px; font-style: italic; color: #dc3545;">Note: ${serviceLineData.note}</p>`;  // 925000
+  }  // 926000
+
+  bonusTiersContent.innerHTML = html;  // 928000
+}  // 929000
+
+function generateFocusMeasures(planName) {  // 931000
+  const container = document.getElementById("focusMeasuresButtons");  // 932000
+  container.innerHTML = "";  // 933000
+
+  const plan = planData[planName];  // 935000
+  if (!plan) return;  // 936000
+
+  // Get measure points for this plan  // 938000
+  const measurePoints = plan.measurePoints || {};  // 939000
+
+  // Get the focus measures for this plan  // 941000
+  const focusedMeasureIds = focusedMeasures[planName] || [];  // 942000
+
+  // Find category for a measure ID  // 944000
+  function findCategory(measureId) {  // 945000
+    for (const category in categories) {  // 946000
+      const found = categories[category].find(m => m.measureId === measureId);  // 947000
+      if (found) return category;  // 948000
+    }  // 949000
+    return "other"; // Default  // 950000
+  }  // 951000
+
+  // Find display name for a measure ID  // 953000
+  function findDisplayName(measureId) {  // 954000
+    for (const category in categories) {  // 955000
+      const found = categories[category].find(m => m.measureId === measureId);  // 956000
+      if (found) return found.displayName;  // 957000
+    }  // 958000
+    return measureId; // Default  // 959000
+  }  // 960000
+
+  function createFocusButton(measureId, category) {  // 962000
+    const displayName = findDisplayName(measureId);  // 963000
+
+    // Special handling for UCU which isn't in measurePoints  // 965000
+    const points = measureId === "UCU" ? 3 : (measurePoints[measureId] || 1);  // 966000
+
+    const btn = document.createElement("button");  // 968000
+    btn.textContent = displayName;  // 969000
+    btn.setAttribute("data-measure", measureId);  // 970000
+    btn.setAttribute("data-points", points);  // 971000
+
+    // Apply category-specific class  // 973000
+    btn.className = `focus-${category}`;  // 974000
+
+    btn.addEventListener("click", function() {  // 976000
+      displayGuideline(  // 977000
+        measureId,   // 978000
+        null,  // 979000
+        null,  // 980000
+        points  // 981000
+      );  // 982000
+      window.scrollTo({ top: 0, behavior: 'smooth' });  // 983000
+    });  // 984000
+
+    container.appendChild(btn);  // 986000
+  }  // 987000
+
+  // Process measures in category order  // 989000
+  // First, gather all focus measures by category  // 990000
+  const categorizedMeasures = {  // 991000
+    metabolic: [],  // 992000
+    cancer: [],  // 993000
+    administrative: [],  // 994000
+    other: []  // 995000
+  };  // 996000
+
+  // Categorize all focus measures  // 998000
+  focusedMeasureIds.forEach(measureId => {  // 999000
+    // Special handling for UCU which isn't in measurePoints  // 1000000
+    if (measurePoints.hasOwnProperty(measureId) || measureId === "UCU") {  // 1001000
+      const category = findCategory(measureId);  // 1002000
+      categorizedMeasures[category].push(measureId);  // 1003000
+    }  // 1004000
+  });  // 1005000
+
+  // Now create buttons in category order  // 1007000
+  categorizedMeasures.metabolic.forEach(measureId => {  // 1008000
+    createFocusButton(measureId, "metabolic");  // 1009000
+  });  // 1010000
+
+  categorizedMeasures.cancer.forEach(measureId => {  // 1012000
+    createFocusButton(measureId, "cancer");  // 1013000
+  });  // 1014000
+
+  categorizedMeasures.administrative.forEach(measureId => {  // 1016000
+    createFocusButton(measureId, "administrative");  // 1017000
+  });  // 1018000
+
+  categorizedMeasures.other.forEach(measureId => {  // 1020000
+    createFocusButton(measureId, "other");  // 1021000
+  });  // 1022000
+}  // 1023000
+
+// Generate buttons for the current plan  // 1025000
+function generateButtons(planName) {  // 1026000
+  const container = document.getElementById("allMeasuresButtons");  // 1027000
+  container.innerHTML = "";  // 1028000
+
+  const plan = planData[planName];  // 1030000
+  if (!plan) return;  // 1031000
+
+  // Get measure points for this plan  // 1033000
+  const measurePoints = plan.measurePoints || {};  // 1034000
+
+  // Only show measures that exist in this plan  // 1036000
+  function shouldShowMeasure(measureId) {  // 1037000
+    return measurePoints.hasOwnProperty(measureId);  // 1038000
+  }  // 1039000
+
+  // Create header for a category  // 1041000
+  function createHeader(text) {  // 1042000
+    const header = document.createElement("div");  // 1043000
+    header.className = "category-header";  // 1044000
+    header.textContent = text;  // 1045000
+    container.appendChild(header);  // 1046000
+  }  // 1047000
+
+  // Create button for a measure  // 1049000
+  function createButton(measure, className) {  // 1050000
+    if (!shouldShowMeasure(measure.measureId)) return;  // 1051000
+
+    const points = measurePoints[measure.measureId] || 1;  // 1053000
+
+    const btn = document.createElement("button");  // 1055000
+    btn.textContent = measure.displayName;  // 1056000
+    btn.setAttribute("data-measure", measure.measureId);  // 1057000
+    btn.setAttribute("data-points", points);  // 1058000
+
+    // If type is provided (for TRC), attach it  // 1060000
+    if (measure.type) {  // 1061000
+      btn.setAttribute("data-type", measure.type);  // 1062000
+    }  // 1063000
+
+    // Apply base class  // 1065000
+    btn.className = className;  // 1066000
+
+    // Add weight-specific class  // 1068000
+    btn.classList.add(`weight-${points}`);  // 1069000
+
+    btn.addEventListener("click", function() {  // 1071000
+      displayGuideline(  // 1072000
+        measure.measureId,   // 1073000
+        null,  // 1074000
+        this.getAttribute("data-type"),  // 1075000
+        points  // 1076000
+      );  // 1077000
+      window.scrollTo({ top: 0, behavior: 'smooth' });  // 1078000
+    });  // 1079000
+
+    container.appendChild(btn);  // 1081000
+  }  // 1082000
+
+  // Create buttons for a category, sorted by weight (3, 2, 1)  // 1084000
+  function createCategoryButtons(categoryMeasures, className) {  // 1085000
+    // First show high-weight measures (×3)  // 1086000
+    categoryMeasures.forEach(measure => {  // 1087000
+      if (shouldShowMeasure(measure.measureId) && measurePoints[measure.measureId] === 3) {  // 1088000
+        createButton(measure, className);  // 1089000
+      }  // 1090000
+    });  // 1091000
+
+    // Then show medium-weight measures (×2)  // 1093000
+    categoryMeasures.forEach(measure => {  // 1094000
+      if (shouldShowMeasure(measure.measureId) && measurePoints[measure.measureId] === 2) {  // 1095000
+        createButton(measure, className);  // 1096000
+      }  // 1097000
+    });  // 1098000
+
+    // Finally show low-weight measures (×1)  // 1100000
+    categoryMeasures.forEach(measure => {  // 1101000
+      if (shouldShowMeasure(measure.measureId) && measurePoints[measure.measureId] === 1) {  // 1102000
+        createButton(measure, className);  // 1103000
+      }  // 1104000
+    });  // 1105000
+  }  // 1106000
+
+  // Generate buttons by category  // 1108000
+  // Metabolic measures  // 1109000
+  let hasMetabolicMeasures = categories.metabolic.some(m => shouldShowMeasure(m.measureId));  // 1110000
+  if (hasMetabolicMeasures) {  // 1111000
+    createHeader("Metabolic/Cardiometabolic Measures");  // 1112000
+    createCategoryButtons(categories.metabolic, "button");  // 1113000
+  }  // 1114000
+
+  // Cancer measures  // 1116000
+  let hasCancerMeasures = categories.cancer.some(m => shouldShowMeasure(m.measureId));  // 1117000
+  if (hasCancerMeasures) {  // 1118000
+    createHeader("Cancer Prevention");  // 1119000
+    createCategoryButtons(categories.cancer, "red-button");  // 1120000
+  }  // 1121000
+
+  // Administrative measures  // 1123000
+  let hasAdminMeasures = categories.administrative.some(m => shouldShowMeasure(m.measureId));  // 1124000
+  if (hasAdminMeasures) {  // 1125000
+    createHeader("Administrative");  // 1126000
+    createCategoryButtons(categories.administrative, "teal-button");  // 1127000
+  }  // 1128000
+
+  // Other measures  // 1130000
+  let hasOtherMeasures = categories.other.some(m => shouldShowMeasure(m.measureId));  // 1131000
+  if (hasOtherMeasures) {  // 1132000
+    createHeader("Other Measures");  // 1133000
+    createCategoryButtons(categories.other, "small-button");  // 1134000
+  }  // 1135000
+
+  // Update summary statistics  // 1137000
+  updateSummaryStats(planName);  // 1138000
+}  // 1139000
+
+// Update summary statistics  // 1141000
+function updateSummaryStats(planName) {  // 1142000
+  const plan = planData[planName];  // 1143000
+  if (!plan) return;  // 1144000
+
+  const measurePoints = plan.measurePoints || {};  // 1146000
+  const measures = Object.keys(measurePoints);  // 1147000
+  const totalMeasures = measures.length;  // 1148000
+
+  // Calculate total points by summing up all point values  // 1150000
+  let totalPoints = 0;  // 1151000
+  measures.forEach(measure => {  // 1152000
+    totalPoints += measurePoints[measure];  // 1153000
+  });  // 1154000
+
+  document.getElementById("measure-count").textContent = totalMeasures;  // 1156000
+  document.getElementById("point-count").textContent = totalPoints;  // 1157000
+}  // 1158000
+
+// Switch to a different plan  // 1160000
+function switchPlan(planName) {  // 1161000
+  if (!planData[planName]) return;  // 1162000
+
+  // --- START: Frailty Deactivation on Plan Switch --- // 1172100
+  // Deactivate frailty highlighting if active when switching plans // 1172110
+  if (isFrailtyHighlightActive) { // 1172120
+    const showFrailtyBtnRef = document.getElementById("showFrailtyBtn"); // 1172130
+    if (showFrailtyBtnRef && showFrailtyBtnRef.classList.contains('active')) { // 1172140
+      // Simulate a click ONLY if it's currently active to toggle it off // 1172141
+      showFrailtyBtnRef.click(); // 1172150
+    } // 1172160
+  } // 1172170
+  // --- END: Frailty Deactivation on Plan Switch --- // 1172180
+
+  // Update active button  // 1164000
+  document.querySelectorAll(".plan-button").forEach(btn => {  // 1165000
+    btn.classList.remove("active");  // 1166000
+  });  // 1167000
+  document.getElementById(`${planName}-btn`).classList.add("active");  // 1168000
+
+  // Hide details panel  // 1170000
+  document.getElementById("details").style.display = "none";  // 1171000
+
+  // Update current plan  // 1173000
+  currentPlan = planName;  // 1174000
+
+  // Generate focus measure buttons  // 1176000
+  generateFocusMeasures(planName);  // 1177000
+
+  // Generate all measure buttons  // 1179000
+  generateButtons(planName);  // 1180000
+}  // 1181000
+// Function to populate exclusions dropdown  // 1182000
+function populateExclusions(guideline) {  // 1183000
+  // Reset exclusions dropdown  // 1184000
+  const dropdown = document.getElementById("exclusionsDropdown");  // 1185000
+  dropdown.style.display = "none";  // 1186000
+  const exclusionsBtn = document.getElementById("exclusionsBtn");  // 1187000
+  exclusionsBtn.textContent = "Exclusions";  // 1188000
+
+  // Generate exclusions content  // 1190000
+  let exclusionsHtml = "";  // 1191000
+  let frailtyFound = false;  // 1192000
+
+  if (guideline.denominator_exclusions && guideline.denominator_exclusions.length > 0) {  // 1194000
+    // Build exclusions list  // 1195000
+    exclusionsHtml += "<div>";  // 1196000
+
+    for (let i = 0; i < guideline.denominator_exclusions.length; i++) {  // 1198000
+      const exclusion = guideline.denominator_exclusions[i];  // 1199000
+      const exclusionLower = exclusion.toLowerCase();  // 1200000
+
+      // Check for frailty or advanced illness  // 1202000
+      if (exclusionLower.includes("frailty") || exclusionLower.includes("advanced illness")) {  // 1203000
+        frailtyFound = true;  // 1204000
+        exclusionsHtml += `<div class="exclusion-item frailty-item">${exclusion}</div>`;  // 1205000
+      } else {  // 1206000
+        exclusionsHtml += `<div class="exclusion-item">${exclusion}</div>`;  // 1207000
+      }  // 1208000
+    }  // 1209000
+
+    exclusionsHtml += "</div>";  // 1211000
+
+    // Add frailty dot phrase if needed  // 1213000
+// 1220000
+  } else {  // 1221000
+    exclusionsHtml = "<p>No exclusions specified for this measure.</p>";  // 1222000
+  }  // 1223000
+
+  dropdown.innerHTML = exclusionsHtml;  // 1225000
+
+
+}  // 1228000
+
+// Display guideline details  // 1230000
+function displayGuideline(measureID, subtype, type, points) {  // 1231000
+  const guidelines = medicalData.conditions;  // 1232000
+  let found = null;  // 1233000
+
+  // Loop through all guidelines  // 1235000
+  for (const key in guidelines) {  // 1236000
+    if (guidelines.hasOwnProperty(key)) {  // 1237000
+      const guideline = guidelines[key];  // 1238000
+      if (guideline.measure_id === measureID) {  // 1239000
+        // For duplicate measure IDs, check type if provided  // 1240000
+        if (measureID === "TRC" && type) {  // 1241000
+          if (type === "Reconciliation" && guideline.description.includes("medication reconciliation")) {  // 1242000
+            found = { title: key, ...guideline };  // 1243000
+            break;  // 1244000
+          }  // 1245000
+          if (type === "Engagement" && guideline.description.includes("patient engagement")) {  // 1246000
+            found = { title: key, ...guideline };  // 1247000
+            break;  // 1248000
+          }  // 1249000
+        } else if (measureID === "TRC-FU" && key.includes("7-Day Follow-Up")) {  // 1250000
+          found = { title: key, ...guideline };  // 1251000
+          break;  // 1252000
+        } else {  // 1253000
+          found = { title: key, ...guideline };  // 1254000
+          break;  // 1255000
+        }  // 1256000
+      }  // 1257000
+    }  // 1258000
+  }  // 1259000
+
+  // Now assign found to currentGuideline  // 1261000
+  currentGuideline = found;  // 1262000
+
+  const detailsDiv = document.getElementById("guidelineDetails");  // 1264000
+  const extraDiv = document.getElementById("extraDetails");  // 1265000
+
+  // Reset star ratings and bonus tiers divs to hidden when a new measure is selected  // 1267000
+  document.getElementById("starRatingsDetails").style.display = "none";  // 1268000
+  document.getElementById("toggleStarRatingsBtn").innerText = "Show Star Ratings";  // 1269000
+
+  // Reset exclusions dropdown  // 1271000
+document.getElementById("exclusionsDropdown").style.display = "none";  // 1272000
+document.getElementById("exclusionsBtn").textContent = "See Exclusions";  // 1273000
+
+  document.getElementById("bonusTiersDetails").style.display = "none";  // 1275000
+  document.getElementById("toggleBonusTiersBtn").innerText = "Show Bonus Tiers";  // 1276000
+
+  // Show or hide the bonus tiers button based on whether the measure is a bonus measure  // 1278000
+  const bonusTiersBtn = document.getElementById("toggleBonusTiersBtn");  // 1279000
+  if (found && isBonusMeasure(measureID)) {  // 1280000
+    bonusTiersBtn.style.display = "inline-block";  // 1281000
+    console.log("Showing bonus tiers button for measure:", measureID);  // 1282000
+  } else {  // 1283000
+    bonusTiersBtn.style.display = "none";  // 1284000
+    console.log("Hiding bonus tiers button for measure:", measureID);  // 1285000
+  }  // 1286000
+
+  if (found) {  // 1288000
+    // Handle description array - display each item as a separate paragraph  // 1289000
+    let descriptionHtml = "";  // 1290000
+    if (Array.isArray(found.description)) {  // 1291000
+      descriptionHtml = found.description.map(desc => `<p>${desc}</p>`).join('');  // 1292000
+    } else {  // 1293000
+      descriptionHtml = found.description;  // 1294000
+    }  // 1295000
+
+    // Create PDF link if available  // 1297000
+    let pdfLinkHtml = "";  // 1298000
+    if (found.link) {  // 1299000
+      pdfLinkHtml = `<a href="${found.link}" target="_blank" style="margin-left: 10px; color: #007bff;"><br>Link to Shared Savings Section</a>`;  // 1300000
+    }  // 1301000
+
+    detailsDiv.innerHTML = `  // 1303000
+      <ul>  // 1304000
+        <li><strong>Title:</strong> ${found.title}</li>  // 1305000
+        <li><strong>Measure ID:</strong> ${found.measure_id} ${pdfLinkHtml}</li>  // 1306000
+        <li><strong>Description:</strong> <div>${descriptionHtml}</div></li>  // 1307000
+        <li><strong>Measurement Period:</strong> ${found.measurement_period}</li>  // 1308000
+        <li><strong>Ages:</strong> ${found.ages}</li>  // 1309000
+      </ul>  // 1310000
+    `;  // 1311000
+
+    // Build exclusions HTML as a list  // 1313000
+    let exclusionsHtml = "";  // 1314000
+    if (found.denominator_exclusions && found.denominator_exclusions.length > 0) {  // 1315000
+      exclusionsHtml = `<ul>${found.denominator_exclusions.map(exclusion => `<li>${exclusion}</li>`).join('')}</ul>`;  // 1316000
+    } else {  // 1317000
+      exclusionsHtml = "None";  // 1318000
+    }  // 1319000
+
+    // Build gap closure methods as a list  // 1321000
+    let gapMethodsHtml = "";  // 1322000
+    if (found.methods_to_close_gap && found.methods_to_close_gap.length > 0) {  // 1323000
+      gapMethodsHtml = `<ul>${found.methods_to_close_gap.map(method => `<li>${method}</li>`).join('')}</ul>`;  // 1324000
+    } else {  // 1325000
+      gapMethodsHtml = "No gap closure methods specified";  // 1326000
+    }  // 1327000
+
+    // Build best practices HTML  // 1329000
+    let practicesHtml = "";  // 1330000
+    if (found.best_practices && found.best_practices.length > 0) {  // 1331000
+      practicesHtml = `<ul>${found.best_practices.map(practice => `<li>${practice}</li>`).join('')}</ul>`;  // 1332000
+    } else {  // 1333000
+      practicesHtml = "None specified";  // 1334000
+    }  // 1335000
+
+    extraDiv.innerHTML = `  // 1337000
+  <ul>  // 1338000
+    <li><strong>Best Practices:</strong> ${practicesHtml}</li>  // 1339000
+    <li><strong>Epic Dot Phrase:</strong> <code>.${measureID.toLowerCase()}patientinfo</code> - Patient info for this measure</li>  // 1340000
+  </ul>  // 1341000
+`;  // 1342000
+
+// Find the button text for this measure  // 1344000
+let buttonText = "";   // 1345000
+document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {  // 1346000
+  // Prefer the text from the main grid, not the focus measures section  // 1347000
+  if (!btn.className.includes('focus-')) {  // 1348000
+    buttonText = btn.textContent.trim();  // 1349000
+  }  // 1350000
+});  // 1351000
+if (!buttonText) {  // 1352000
+  // If we didn't find it in the main grid, check the focus measures  // 1353000
+  document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {  // 1354000
+    buttonText = btn.textContent.trim();  // 1355000
+  });  // 1356000
+}  // 1357000
+
+// Display gap closure information as a list with the button text  // 1359000
+document.getElementById("gapText").innerHTML = `<strong>${buttonText}</strong> ${gapMethodsHtml}`;  // 1360000
+
+    // Populate the exclusions dropdown  // 1362000
+populateExclusions(found);  // 1363000
+
+// Display weight information  // 1365000
+const weightText = document.getElementById("weightText");  // 1366000
+if (points === 3) {  // 1367000
+  weightText.innerHTML = `<strong>HIGH PRIORITY MEASURE (×3)</strong> - This measure is weighted TRIPLE!`;  // 1368000
+} else if (points === 2) {  // 1369000
+  weightText.innerHTML = `<strong>MEDIUM PRIORITY MEASURE (×2)</strong> - This measure is weighted DOUBLE!`;  // 1370000
+} else {  // 1371000
+  weightText.innerHTML = `<strong>STANDARD MEASURE (×1)</strong> - This measure is weighted one`;  // 1372000
+}  // 1373000
+
+    // Show the details box  // 1375000
+    document.getElementById("details").style.display = "block";  // 1376000
+  } else {  // 1377000
+    // No details found  // 1378000
+    detailsDiv.innerHTML = `<p>No details found for measure ${measureID}.</p>`;  // 1379000
+    extraDiv.innerHTML = "";  // 1380000
+    document.getElementById("details").style.display = "block";  // 1381000
+  }  // 1382000
+
+  // Clear previous active button state  // 1384000
+  clearActiveButtonState();  // 1385000
+
+  // Set active state on matching buttons  // 1387000
+  document.querySelectorAll(`button[data-measure="${measureID}"]`).forEach(btn => {  // 1388000
+    btn.classList.add('active-measure');  // 1389000
+  });  // 1390000
+}  // 1391000
+
+// Document ready function  // 1393000
+document.addEventListener('DOMContentLoaded', function() {  // 1394000
+
+  // --- START: Frailty Button Setup --- // 1394100
+  // Add event listener for frailty exclusion toggle button // 1394110
+  const showFrailtyBtn = document.getElementById("showFrailtyBtn"); // 1394120
+  if (showFrailtyBtn) { // 1394130
+    showFrailtyBtn.addEventListener("click", function() { // 1394140
+      // 1. Toggle the global state // 1394141
+      isFrailtyHighlightActive = !isFrailtyHighlightActive; // 1394150
+      // 2. Toggle button visual state (active class and text) // 1394151
+      this.classList.toggle("active", isFrailtyHighlightActive); // 1394160
+      this.textContent = isFrailtyHighlightActive ? "Hide Frailty Exclusions" : "Show Frailty Exclusions"; // 1394170
+      // 3. Apply/Remove .frailty-excluded class from relevant measure buttons // 1394171
+      const allMeasureButtons = document.querySelectorAll( // 1394172
+        '.grid-buttons button, .focus-buttons-container button' // Select from both sections // 1394173
+      ); // 1394180
+      allMeasureButtons.forEach(btn => { // 1394190
+        const measureId = btn.getAttribute('data-measure'); // 1394200
+        if (measureId && frailtyExcludedMeasureIds.includes(measureId)) { // 1394210
+          // This button's measure IS affected by frailty // 1394211
+          btn.classList.toggle('frailty-excluded', isFrailtyHighlightActive); // 1394220
+        } else if (measureId) { // 1394230
+          // This button's measure is NOT affected, ensure class is removed // 1394231
+          btn.classList.remove('frailty-excluded'); // 1394240
+        } // 1394250
+        // Note: Buttons without data-measure are ignored (e.g., category headers) // 1394251
+      }); // 1394260
+    }); // 1394270
+  } else { // 1394280
+    console.error("Frailty toggle button ('showFrailtyBtn') not found!"); // 1394290
+  } // 1394300
+  // Make the 'Find Frailty' button visually inactive and disabled // 1394310
+  const findFrailtyBtn = document.getElementById("findFrailtyBtn"); // 1394320
+  if (findFrailtyBtn) { // 1394330
+      findFrailtyBtn.disabled = true; // Disable functionality // 1394340
+      // The .inactive-button class handles the visuals via CSS // 1394341
+  } // 1394350
+  // --- END: Frailty Button Setup --- // 1394360
+
+  // Add event listeners for plan toggle buttons  // 1395000
+  document.getElementById("commercial-btn").addEventListener("click", function() {  // 1396000
+    switchPlan("commercial");  // 1397000
+  });  // 1398000
+
+  document.getElementById("medicaid-btn").addEventListener("click", function() {  // 1400000
+    switchPlan("medicaid");  // 1401000
+  });  // 1402000
+
+  document.getElementById("medicare-btn").addEventListener("click", function() {  // 1404000
+    switchPlan("medicare");  // 1405000
+  });  // 1406000
+
+  // Add event listener for exclusions button  // 1408000
+document.getElementById("exclusionsBtn").addEventListener("click", function() {  // 1409000
+  const dropdown = document.getElementById("exclusionsDropdown");  // 1410000
+  if (dropdown.style.display === "none" || dropdown.style.display === "") {  // 1411000
+    dropdown.style.display = "block";  // 1412000
+    this.textContent = "Hide Exclusions";  // 1413000
+  } else {  // 1414000
+    dropdown.style.display = "none";  // 1415000
+    this.textContent = "See Exclusions";  // 1416000
+  }  // 1417000
+});  // 1418000
+
+
+
+// Toggle best practices  // 1422000
+document.getElementById("toggleExtraBtn").addEventListener("click", function() {  // 1423000
+  const extraDiv = document.getElementById("extraDetails");  // 1424000
+  if (extraDiv.style.display === "none" || extraDiv.style.display === "") {  // 1425000
+    extraDiv.style.display = "block";  // 1426000
+    this.innerText = "Hide Best Practices";  // 1427000
+  } else {  // 1428000
+    extraDiv.style.display = "none";  // 1429000
+    this.innerText = "Best Practices";  // 1430000
+  }  // 1431000
+});  // 1432000
+
+
+
+// Add event listener for toggle star ratings button  // 1436000
+document.getElementById("toggleStarRatingsBtn").addEventListener("click", function() {  // 1437000
+  const starRatingsDiv = document.getElementById("starRatingsDetails");  // 1438000
+  if (starRatingsDiv.style.display === "none" || starRatingsDiv.style.display === "") {  // 1439000
+    starRatingsDiv.style.display = "block";  // 1440000
+    this.innerText = "Hide Star Ratings";  // 1441000
+
+    // Call displayStarRatings with current measure if available  // 1443000
+    if (currentGuideline && typeof displayStarRatings === "function") {  // 1444000
+      console.log("Calling displayStarRatings with:", currentGuideline.measure_id);  // 1445000
+      displayStarRatings(currentGuideline.measure_id);  // 1446000
+    } else {  // 1447000
+      console.log("Cannot display star ratings - currentGuideline or function missing");  // 1448000
+      document.getElementById("starRatingsContent").innerHTML = "<p>Star ratings information not available for this measure.</p>";  // 1449000
+    }  // 1450000
+  } else {  // 1451000
+    starRatingsDiv.style.display = "none";  // 1452000
+    this.innerText = "Show Star Ratings";  // 1453000
+  }  // 1454000
+});  // 1455000
+
+  // Add event listener for toggle bonus tiers button  // 1457000
+  document.getElementById("toggleBonusTiersBtn").addEventListener("click", function() {  // 1458000
+    const bonusTiersDiv = document.getElementById("bonusTiersDetails");  // 1459000
+    if (bonusTiersDiv.style.display === "none" || bonusTiersDiv.style.display === "") {  // 1460000
+      bonusTiersDiv.style.display = "block";  // 1461000
+      this.innerText = "Hide Bonus Tiers";  // 1462000
+
+      // Display bonus tiers for current measure if available  // 1464000
+      if (currentGuideline) {  // 1465000
+        displayBonusTiers(currentGuideline.measure_id);  // 1466000
+      }  // 1467000
+    } else {  // 1468000
+      bonusTiersDiv.style.display = "none";  // 1469000
+      this.innerText = "Show Bonus Tiers";  // 1470000
+    }  // 1471000
+  });  // 1472000
+
+  // Close details button  // 1474000
+  document.getElementById("closeDetailsBtn").addEventListener("click", function() {  // 1475000
+    document.getElementById("details").style.display = "none";  // 1476000
+    currentGuideline = null;  // 1477000
+
+    // --- START: Frailty Deactivation on Close --- // 1478100
+    // Also deactivate frailty highlighting if active // 1478110
+    if (isFrailtyHighlightActive) { // 1478120
+       const showFrailtyBtnRef = document.getElementById("showFrailtyBtn"); // 1478130
+       if (showFrailtyBtnRef && showFrailtyBtnRef.classList.contains('active')) { // 1478140
+           // Simulate a click ONLY if it's currently active to toggle it off // 1478141
+           showFrailtyBtnRef.click(); // 1478150
+       } // 1478160
+    } // 1478170
+    // --- END: Frailty Deactivation on Close --- // 1478180
+
+    // Clear active button state when closing details  // 1479000
+    clearActiveButtonState();  // 1480000
+  });  // 1481000
+
+  // Ask AI Section: Build and display a prompt based on the current guideline  // 1483000
+  document.getElementById("askAIBtn").addEventListener("click", function() {  // 1484000
+    if (!currentGuideline) {  // 1485000
+      alert("Please select a measure first.");  // 1486000
+      return;  // 1487000
+    }  // 1488000
+
+    // Format exclusions for AI prompt - join with "or" instead of using bullet points  // 1490000
+    const exclusions = currentGuideline.denominator_exclusions && currentGuideline.denominator_exclusions.length > 0  // 1491000
+      ? currentGuideline.denominator_exclusions.map(code => code.trim()).join(' or ')  // 1492000
+      : "None specified";  // 1493000
+
+
+      // In the Ask AI button click handler  // 1496000
+const points = planData[currentPlan].measurePoints[currentGuideline.measure_id] || 1;  // 1497000
+let weightInfo = points === 3   // 1498000
+  ? "This is a HIGH PRIORITY (×3) measure weighted TRIPLE."   // 1499000
+  : points === 2  // 1500000
+  ? "This is a MEDIUM PRIORITY (×2) measure weighted DOUBLE."  // 1501000
+  : "This is a STANDARD (×1) measure weighted one.";  // 1502000
+
+    const prompt = `Dear AI, please consider this healthcare measure:  // 1504000
+Measure ID: ${currentGuideline.measure_id}  // 1505000
+Description: ${Array.isArray(currentGuideline.description) ? currentGuideline.description.join('\n') : currentGuideline.description}  // 1506000
+Priority Weight: ${points} (${weightInfo})  // 1507000
+Please find the diagnosis codes for the exclusions and give them as numbers separated by "or" so that I can put them into a search bar. The exclusions are: ${exclusions}  // 1508000
+Please provide any additional important insights you may have afterward.`;  // 1509000
+
+    const txtArea = document.getElementById("exhaustiveQuery");  // 1511000
+    txtArea.value = prompt;  // 1512000
+    txtArea.style.display = "block";  // 1513000
+    document.getElementById("copyQueryBtn").style.display = "block";  // 1514000
+  });  // 1515000
+
+  // Copy the prompt to the clipboard  // 1517000
+  document.getElementById("copyQueryBtn").addEventListener("click", function() {  // 1518000
+    const txtArea = document.getElementById("exhaustiveQuery");  // 1519000
+    txtArea.select();  // 1520000
+    document.execCommand("copy");  // 1521000
+    alert("Exclusion diagnosis prompt copied to clipboard!");  // 1522000
+  });  // 1523000
+
+  // Load data and initialize  // 1525000
+  // First, load the rules8.json file  // 1526000
+  fetch('rules8.json')  // 1527000
+    .then(response => {  // 1528000
+      if (!response.ok) throw new Error("Error loading JSON: " + response.statusText);  // 1529000
+      return response.json();  // 1530000
+    })  // 1531000
+    .then(data => {  // 1532000
+      medicalData = data;  // 1533000
+      console.log("Loaded rules8.json:", medicalData);  // 1534000
+
+      // Then load star ratings data  // 1536000
+      loadStarRatings();  // 1537000
+
+      // Load bonus measures data  // 1539000
+      loadBonusMeasures();  // 1540000
+
+      // Initialize with Medicare plan instead of Commercial  // 1542000
+      switchPlan("medicare");  // 1543000
+    })  // 1544000
+    .catch(error => {  // 1545000
+      console.error("Error loading data:", error);  // 1546000
+      alert("Error loading data file. Please ensure rules8.json is available.");  // 1547000
+      generateFocusMeasures("medicare");  // 1548000
+      generateButtons("medicare");  // 1549000
+    });  // 1550000
+});  // 1551000
+<!-- 1552000 -->
+  </script>
+<!-- 1553000 -->
+</body>
+<!-- 1554000 -->
+</html>
