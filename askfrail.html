@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Generator for Frailty/Advanced Illness Exclusion</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f4; max-width: 850px; margin: auto; }
+        .container { background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { text-align: center; margin-bottom: 25px; color: #5a007a; font-size: 1.8em;}
+        .step { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #fdfdfd; }
+        .step h3 { margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px; font-size: 1.2em; color: #444; }
+
+        /* Measure Buttons */
+        .measure-buttons button { display: inline-block; margin: 4px; padding: 8px 12px; background-color: #6c757d; color: white; border: 1px solid #6c757d; border-radius: 4px; cursor: pointer; font-size: 13px; transition: background-color 0.2s, border-color 0.2s; text-align: center; min-width: 90px; }
+        .measure-buttons button:hover { background-color: #5a6268; border-color: #5a6268; }
+        .measure-buttons button.allows-frailty-alone { background-color: #17a2b8; border-color: #17a2b8; }
+        .measure-buttons button.allows-frailty-alone:hover { background-color: #138496; border-color: #117a8b; }
+        .measure-buttons button.selected { background-color: #28a745 !important; border-color: #28a745 !important; box-shadow: 0 0 5px rgba(40, 167, 69, 0.6); color: white !important; }
+        .measure-category { margin-bottom: 8px; }
+        .measure-category span { font-weight: bold; margin-right: 8px; color: #555; font-size: 0.95em; display: block; margin-bottom: 4px; }
+
+        /* Patient Description */
+        #patient-description-label { font-weight: bold; color: #555; display: block; margin-bottom: 5px;}
+        #patient-description { width: 98%; min-height: 80px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; margin-bottom: 10px; box-sizing: border-box;}
+        #description-instructions { font-size: 0.9em; color: #555; margin-bottom: 15px; }
+        #description-instructions ul { margin-top: 5px; margin-bottom: 0; padding-left: 20px;}
+
+        /* Prompt Area */
+        #prompt-area { display: none; margin-top: 15px;}
+         #prompt-indicator { font-size: 0.9em; color: #555; margin-bottom: 5px; font-style: italic;}
+        #generated-prompt { width: 98%; height: 350px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; background-color: #e9ecef; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; box-sizing: border-box;}
+        .action-buttons button {
+            margin: 10px 10px 5px 0;
+            padding: 10px 15px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+         /* Specific Button Colors */
+         #generate-prompt-btn { background-color: #007bff; }
+         #generate-prompt-btn:hover { background-color: #0056b3; }
+         #generate-openevidence-prompt-btn { background-color: #ffc107; color: #333; } /* Yellow */
+         #generate-openevidence-prompt-btn:hover { background-color: #e0a800; }
+         #copy-prompt-btn { background-color: #28a745;}
+         #copy-prompt-btn:hover { background-color: #218838;}
+
+
+         /* AI Links */
+         .ai-links { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ccc;}
+         .ai-links h4 { margin-top: 0; margin-bottom: 10px; font-size: 1.1em;}
+         .ai-links a {
+            display: inline-block;
+            margin: 5px;
+            padding: 6px 10px;
+            background-color: #5a007a; /* UPMC Purple */
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+         }
+          .ai-links a:hover { background-color: #41005a;}
+          /* Highlight OpenEvidence link */
+          .ai-links a[href*="openevidence.com"] {
+             background-color: #e0a800; /* Match button */
+             color: #333;
+             font-weight: bold;
+          }
+          .ai-links a[href*="openevidence.com"]:hover {
+             background-color: #c69500;
+          }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Prompt Generator: 2025 Frailty & Advanced Illness Exclusions</h1>
+        <p>This tool helps create a prompt for an AI assistant to evaluate potential NCQA Frailty/Advanced Illness exclusions based on UPMC Health Plan's 2025 criteria. Use the appropriate button for your chosen AI.</p>
+
+        <!-- Step 1: Select Measure -->
+        <div class="step" id="measure-selection-step">
+             <h3>Step 1: Select the Quality Measure</h3>
+            <div class="measure-buttons" id="measure-buttons">
+                 <div class="measure-category">
+                     <span>Metabolic/CV:</span>
+                    <button data-measure-id="CBP" class="allows-frailty-alone" data-measure-name="Controlling High Blood Pressure">Controlling HBP</button>
+                    <button data-measure-id="KED" class="allows-frailty-alone" data-measure-name="DM Kidney Health Evaluation">DM Kidney Eval</button>
+                    <button data-measure-id="EED" data-measure-name="DM Eye Exam">DM Eye Exam</button>
+                    <button data-measure-id="GSD" data-measure-name="DM Glycemic Status Assessment">DM Glycemic Status</button>
+                    <button data-measure-id="SPC" data-measure-name="Statin Therapy (Cardiovascular)">Statin Therapy (CV)</button>
+                    <button data-measure-id="SPD" data-measure-name="Statin Therapy (Diabetes)">Statin Therapy (DM)</button>
+                </div>
+                 <div class="measure-category">
+                     <span>Cancer Screening:</span>
+                    <button data-measure-id="BCS" data-measure-name="Breast Cancer Screening">Breast Cancer</button>
+                    <button data-measure-id="COL" data-measure-name="Colorectal Cancer Screening">Colorectal Cancer</button>
+                 </div>
+                 <p style="font-size:0.85em; color: #555; margin-top: 10px;">
+                     <span style="display: inline-block; width: 12px; height: 12px; background-color: #17a2b8; border-radius: 2px; margin-right: 4px; vertical-align: middle;"></span> = Frailty Alone exclusion *might* apply (Age 81+)
+                     <br>
+                     <span style="display: inline-block; width: 12px; height: 12px; background-color: #6c757d; border-radius: 2px; margin-right: 4px; vertical-align: middle;"></span> = Frailty + Advanced Illness exclusion needed (Age 66+)
+                 </p>
+            </div>
+        </div>
+
+        <!-- Step 2: Describe Patient -->
+        <div class="step" id="patient-info-step">
+            <h3>Step 2: Describe the Patient</h3>
+            <label id="patient-description-label" for="patient-description">Provide a brief clinical summary:</label>
+            <textarea id="patient-description" placeholder="Example: 81 yo M with history of falls (coded 3x last year), uses walker, has stage 4 CKD and metastatic prostate cancer."></textarea>
+            <div id="description-instructions">
+                Include key details from clinical notes/claims:
+                <ul>
+                    <li>**Age** (as of Dec 31 of measurement year)</li>
+                    <li>Major **diagnoses** (esp. cancer type/stage, organ failure, dementia, neuro conditions)</li>
+                    <li>**Functional Status** (e.g., walker/wheelchair use, bed confined, falls history, care needs)</li>
+                    <li>**Device Dependence** (e.g., Oxygen, Respirator)</li>
+                    <li>Severe **Nutritional Issues** (e.g., Cachexia, Failure to Thrive)</li>
+                     <li>**Dementia Medications** (if applicable)</li>
+                     <li>Mention **Dates of Service** if known (e.g., "frailty coded on 2 different dates").</li>
+                </ul>
+            </div>
+             <div class="action-buttons">
+                 <button id="generate-prompt-btn">Generate Detailed AI Prompt</button>
+                 <button id="generate-openevidence-prompt-btn">Generate OpenEvidence Prompt</button>
+             </div>
+        </div>
+
+        <!-- Step 3: Generated Prompt & Actions -->
+        <div class="step" id="prompt-area">
+            <h3>Step 3: AI Prompt (Copy and Paste)</h3>
+            <div id="prompt-indicator">Prompt generated for: General AI</div>
+            <textarea id="generated-prompt" readonly placeholder="Prompt will appear here..."></textarea>
+             <div class="action-buttons">
+                <button id="copy-prompt-btn">Copy Prompt</button>
+            </div>
+
+             <div class="ai-links">
+                <h4>Paste into an AI Assistant:</h4>
+                 <a href="https://www.openevidence.com/" target="_blank">OpenEvidence</a>
+                <a href="https://perplexity.ai/" target="_blank">Perplexity</a>
+                <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
+                <a href="https://gemini.google.com/" target="_blank">Gemini</a>
+                <a href="https://claude.ai/" target="_blank">Claude</a>
+                <a href="https://copilot.microsoft.com/" target="_blank">Copilot</a>
+            </div>
+        </div>
+
+    </div> <!-- End Container -->
+
+    <script>
+        // --- Configuration ---
+        const measures = { // same as before
+            'CBP': { name: 'Controlling High Blood Pressure', rule: 'frailty_or_advanced' },
+            'KED': { name: 'DM Kidney Health Evaluation', rule: 'frailty_or_advanced' },
+            'BCS': { name: 'Breast Cancer Screening', rule: 'advanced_only' },
+            'COL': { name: 'Colorectal Cancer Screening', rule: 'advanced_only' },
+            'EED': { name: 'DM Eye Exam', rule: 'advanced_only' },
+            'GSD': { name: 'DM Glycemic Status Assessment', rule: 'advanced_only' },
+            'SPC': { name: 'Statin Therapy (Cardiovascular)', rule: 'advanced_only' },
+            'SPD': { name: 'Statin Therapy (Diabetes)', rule: 'advanced_only' }
+        };
+
+        const frailtyCodeList = [ // same as before
+            'Z73.6', 'R62.7', 'R54', 'Z74.01', 'R64', 'Z99.89', 'Z99.11', 'Z99.81', 'Z99.3',
+            'R26.2', 'W10.2XXA', 'W10.2XXD', 'W10.2XXS', 'W18.39XA', 'W18.39XD', 'W18.39XS',
+            'W19.XXXA', 'W19.XXXD', 'W19.XXXS', 'R26.89', 'Z91.81', 'M62.81', 'Z74.1',
+            'Z74.3', 'L89.149', 'L89.899', 'L89.139', 'L89.119', 'L89.159', 'L89.309',
+            'L89.209', 'L89.90', 'E0135', 'E0143', 'R53.1'
+        ].join(', ');
+
+        const advancedIllnessCodeList = [ // same as before
+            'C91.00', 'C93.00', 'C92.00', 'F10.97', 'K70.31', 'K70.30', 'G30.8', 'G30.0',
+            'G30.1', 'G12.21', 'N18.5', 'K74.69', 'A81.00', 'F02.811', 'F02.80', 'G31.83',
+            'G31.09', 'F01.511', 'F01.50', 'J43.2', 'J43.1', 'N18.6', 'I50.41', 'I50.43',
+            'I50.42', 'I50.40', 'I50.31', 'I50.32', 'I50.21', 'I50.22', 'I50.82', 'I50.84',
+            'K74.2', 'G10', 'I12.0', 'I13.0', 'C25.0', 'C25.1', 'C25.2', 'C94.30', 'C93.Z0',
+            'G20', 'G31.01', 'J84.170', 'J84.112', 'J96.22', 'J96.21', 'J96.11', 'J96.92',
+            'J96.91', 'C77.9', 'C77.3', 'C77.4', 'C77.2', 'C77.1', 'C77.0', 'C77.8', 'C79.11',
+            'C79.31', 'C79.32', 'C78.89', 'C79.00', 'C78.5', 'C78.7', 'C78.00', 'C78.1',
+            'C79.49', 'C78.2', 'C78.39', 'C78.6', 'C79.2'
+        ].join(', ');
+
+        // --- State Variables ---
+        let selectedMeasureId = null;
+        let selectedMeasureName = "";
+
+        // --- DOM Elements ---
+        const measureButtonsContainer = document.getElementById('measure-buttons');
+        const patientDescriptionInput = document.getElementById('patient-description');
+        const generatePromptBtn = document.getElementById('generate-prompt-btn');
+        const generateOpenEvidencePromptBtn = document.getElementById('generate-openevidence-prompt-btn'); // New button
+        const promptArea = document.getElementById('prompt-area');
+        const generatedPromptTextarea = document.getElementById('generated-prompt');
+        const copyPromptBtn = document.getElementById('copy-prompt-btn');
+        const promptIndicator = document.getElementById('prompt-indicator'); // To show which prompt type
+
+        // --- Functions ---
+
+        function clearMeasureSelection() {
+            measureButtonsContainer.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            selectedMeasureId = null;
+            selectedMeasureName = "";
+            promptArea.style.display = 'none';
+             generatedPromptTextarea.value = '';
+        }
+
+        // Function for the DETAILED prompt (for general AIs)
+        function generateDetailedPromptText() {
+            const patientDesc = patientDescriptionInput.value.trim();
+
+            if (!selectedMeasureId || !patientDesc) return null; // Basic validation handled by caller
+
+            const measureInfo = measures[selectedMeasureId];
+
+            const rulesSummary = `
+Analyze the following patient scenario against the NCQA 2025 Frailty and Advanced Illness exclusion criteria for the specified quality measure.
+
+**Context: NCQA 2025 Exclusion Rules**
+1.  **Frailty Alone Exclusion:** Applies ONLY to ${measures['CBP'].name} and ${measures['KED'].name}. Requires Age >= 81 AND >= 2 Frailty Indicators (from distinct dates, measurement year, using codes below).
+2.  **Frailty + Advanced Illness Exclusion:** Applies to most listed measures. Requires Age >= 66 AND >= 2 Frailty Indicators (distinct dates, measurement year, using codes below) AND >= 1 Advanced Illness Indicator (codes below OR dementia med, coded measurement year OR year prior).
+
+Timing Note: Frailty codes - measurement year. Advanced Illness - measurement year OR year prior. Distinct dates for Frailty. Lab POS 81 excluded.
+`;
+
+            const prompt = `
+${rulesSummary}
+--------------------------------------------------
+**Quality Measure:** ${selectedMeasureName} (${selectedMeasureId})
+
+**Patient Description:**
+${patientDesc}
+--------------------------------------------------
+**Reference Code Lists (Codes ONLY):**
+
+**Frailty Indicator Codes:**
+[${frailtyCodeList}]
+
+**Advanced Illness Indicator Codes:**
+[${advancedIllnessCodeList}]
+(Note: Dispensed Dementia Medication also qualifies as an Advanced Illness Indicator)
+--------------------------------------------------
+**Tasks:**
+1.  Determine the applicable exclusion rule(s) for this measure based on the rules summary.
+2.  Does the patient's age (from description) meet the threshold for the applicable rule(s)?
+3.  Estimate the number of distinct Frailty Indicators implied by the description (referencing the Frailty Code List).
+4.  Estimate if at least one Advanced Illness Indicator is implied (referencing the Advanced Illness Code List or dementia med mention).
+5.  State if criteria ARE LIKELY MET or NOT MET for the applicable rule. Explain reasoning (age, # frailty indicators, advanced illness presence).
+6.  List the most likely potential codes (from reference lists only) corresponding to the description.
+
+Provide a concise analysis focused only on the provided info.
+`;
+            return prompt;
+        }
+
+        // Function for the CONCISE prompt (for OpenEvidence)
+         function generateOpenEvidencePromptText() {
+            const patientDesc = patientDescriptionInput.value.trim();
+            if (!selectedMeasureId || !patientDesc) return null; // Basic validation handled by caller
+
+            const measureInfo = measures[selectedMeasureId];
+
+            // Much shorter context - assumes OE knows NCQA basics
+            const prompt = `
+Evaluate for NCQA 2025 Frailty/Advanced Illness exclusion for measure "${selectedMeasureName} (${selectedMeasureId})".
+
+Patient Summary: ${patientDesc}
+
+Consider standard NCQA age thresholds (81+ Frailty Alone for applicable measures, 66+ Frailty+Advanced Illness for others), requirement for >=2 frailty indicators (distinct dates), and >=1 advanced illness indicator (can be prior year) where applicable.
+
+Is the patient likely excluded? Briefly state reasoning and list potential qualifying ICD/HCPCS codes based on the summary.
+`;
+            return prompt;
+        }
+
+        // --- Event Listeners ---
+
+        measureButtonsContainer.addEventListener('click', function(event) { // same as before
+            if (event.target.tagName === 'BUTTON') {
+                const button = event.target;
+                const measureId = button.dataset.measureId;
+                const measureName = button.dataset.measureName;
+
+                if (measureId === selectedMeasureId) {
+                     clearMeasureSelection();
+                } else {
+                    clearMeasureSelection();
+                    button.classList.add('selected');
+                    selectedMeasureId = measureId;
+                    selectedMeasureName = measureName;
+                     promptArea.style.display = 'none';
+                     generatedPromptTextarea.value = '';
+                }
+            }
+        });
+
+        // Generate DETAILED Prompt Button Click
+        generatePromptBtn.addEventListener('click', function() {
+             if (!selectedMeasureId) { alert("Please select a Quality Measure first."); return; }
+             if (!patientDescriptionInput.value.trim()) { alert("Please enter a description of the patient."); patientDescriptionInput.focus(); return; }
+
+             const promptText = generateDetailedPromptText();
+             if (promptText) {
+                 generatedPromptTextarea.value = promptText;
+                 promptIndicator.textContent = 'Prompt generated for: General AI'; // Indicate type
+                 promptArea.style.display = 'block';
+             } else {
+                 promptArea.style.display = 'none';
+             }
+        });
+
+         // Generate OPENEVIDENCE Prompt Button Click
+        generateOpenEvidencePromptBtn.addEventListener('click', function() {
+             if (!selectedMeasureId) { alert("Please select a Quality Measure first."); return; }
+             if (!patientDescriptionInput.value.trim()) { alert("Please enter a description of the patient."); patientDescriptionInput.focus(); return; }
+
+             const promptText = generateOpenEvidencePromptText();
+             if (promptText) {
+                 generatedPromptTextarea.value = promptText;
+                  promptIndicator.textContent = 'Prompt generated for: OpenEvidence (Concise)'; // Indicate type
+                 promptArea.style.display = 'block';
+             } else {
+                 promptArea.style.display = 'none';
+             }
+        });
+
+        copyPromptBtn.addEventListener('click', function() { // same as before
+            if (!generatedPromptTextarea.value) return;
+
+            generatedPromptTextarea.select();
+             generatedPromptTextarea.setSelectionRange(0, 99999);
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const originalText = copyPromptBtn.textContent;
+                    copyPromptBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyPromptBtn.textContent = originalText;
+                    }, 1500);
+                } else { alert('Copying failed. Please copy manually.'); }
+            } catch (err) {
+                alert('Copying failed. Please copy manually.');
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            window.getSelection().removeAllRanges();
+        });
+
+    </script>
+
+</body>
+</html>
