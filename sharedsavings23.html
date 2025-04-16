@@ -1213,9 +1213,7 @@
   </div>
 <!-- 608000 -->
 
-  <script>  // 609000
- // Global variables  // 610000
-let medicalData = {};  // 611000
+  <script>let medicalData = {};  // 611000
 let currentPlan = "commercial";  // 612000
 let currentGuideline = null;  // 613000
 let starRatingsData = {};  // 614000
@@ -1818,7 +1816,6 @@ function populateExclusions(guideline) {  // 1183000
     exclusionsHtml += "</div>";  // 1211000
     
     // Add frailty dot phrase if needed  // 1213000
-// 1220000
   } else {  // 1221000
     exclusionsHtml = "<p>No exclusions specified for this measure.</p>";  // 1222000
   }  // 1223000
@@ -2011,10 +2008,10 @@ document.getElementById("exclusionsBtn").addEventListener("click", function() { 
   const dropdown = document.getElementById("exclusionsDropdown");  // 1410000
   if (dropdown.style.display === "none" || dropdown.style.display === "") {  // 1411000
     dropdown.style.display = "block";  // 1412000
-    this.textContent = "Hide Exclusions";  // 1413000
+    this.textContent = "See Exclusions";  // 1413000
   } else {  // 1414000
     dropdown.style.display = "none";  // 1415000
-    this.textContent = "See Exclusions";  // 1416000
+    this.textContent = "Hide Exclusions";  // 1416000
   }  // 1417000
 });  // 1418000
 
