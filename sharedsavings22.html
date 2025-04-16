@@ -193,7 +193,7 @@
 #gapBanner {
   background-color: #ffe6e6;
   /* Make the base text color slightly transparent */
-  color: rgba(167, 0, 0, 0.4); /* Was 0.75 */
+  color: rgba(167, 0, 0, 0.75); /* Was 0.75 */
   padding: 10px;
   border: 1px solid #dc3545;
   border-radius: 4px;
@@ -202,19 +202,38 @@
   /* Ensure other styles you might have here are kept */
 }
 
-/* --- MODIFY or ADD #gapText strong rule --- */
-#gapText strong {
-  font-size: 1.1em;         /* Keep it slightly larger */
-  color: #c82333;           /* Use a deeper red (like red-button hover) */
-  /* Remove highlight styles from previous attempt */
-  background-color: transparent;
-  padding: 0;
-  border-radius: 0;
-  /* Ensure it's fully opaque if parent had opacity (it doesn't now, but good practice) */
-  opacity: 1;
-  /* Ensure font-weight remains bold */
-   font-weight: bold; /* Explicitly set bold */
+#gapText strong::before {
+  content: '[';
+  color: #ffc107; /* A distinct yellow */
+  font-weight: normal; /* Don't inherit bold */
+  font-size: 0.9em;  /* Slightly smaller than the measure name */
+  margin-right: 0.2em; /* Space after opening bracket */
+  /* vertical-align: middle; */ /* Uncomment if vertical alignment is off */
 }
+
+#gapText strong::after {
+  content: ']';
+  color: #ffc107; /* A distinct yellow */
+  font-weight: normal; /* Don't inherit bold */
+  font-size: 0.9em;  /* Slightly smaller than the measure name */
+  margin-left: 0.2em; /* Space before closing bracket */
+  /* vertical-align: middle; */ /* Uncomment if vertical alignment is off */
+}
+
+/* Ensure the strong tag itself doesn't have conflicting styles */
+#gapText strong {
+  font-size: 1.1em;
+  color: #c82333;
+  font-weight: bold;
+  background-color: transparent;
+  padding: 0; /* No padding */
+  border-radius: 0;
+  opacity: 1;
+  text-decoration: none;
+  font-style: normal;
+  /* NO border-bottom from previous ideas */
+}
+
 
 /* --- ADD this new rule for the list inside gapText --- */
 #gapText ul {
