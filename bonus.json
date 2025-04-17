@@ -279,19 +279,19 @@
           "description": "Bonus points for meeting performance thresholds in diabetes medication adherence",
           "tiers": {
             "tier_1": {
-              "threshold": 0.95,
+              "threshold": 0.90,
               "points": 1,
-              "description": "Performance at or above 95.0%"
+              "description": "Performance at or above 90.0%"
             },
             "tier_2": {
-              "threshold": 0.96,
+              "threshold": 0.91,
               "points": 2,
-              "description": "Performance at or above 96.0%"
+              "description": "Performance at or above 91.0%"
             },
             "tier_3": {
-              "threshold": 0.97,
+              "threshold": 0.93,
               "points": 3,
-              "description": "Performance at or above 97.0%"
+              "description": "Performance at or above 93.0%"
             }
           }
         }
