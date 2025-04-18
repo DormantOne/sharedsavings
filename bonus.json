@@ -196,49 +196,27 @@
       "measure_id": "PCR",
       "measure_name": "Plan All-Cause Readmissions",
       "service_lines": {
-        "commercial": {
-          "line_name": "Commercial",
-          "description": "Bonus points for meeting performance thresholds in reducing readmissions",
+        "medicare": {
+          "line_name": "UPMC for Life (Medicare/SNP)",
+          "description": "Bonus points for meeting performance thresholds in reducing Medicare readmissions",
           "tiers": {
             "tier_1": {
-              "threshold": 0.55,
+              "threshold": 0.075,
               "points": 1,
-              "description": "Performance at or below 0.55 (O/E ratio)"
+              "description": "Performance at or below 7.50%"
             },
             "tier_2": {
-              "threshold": 0.50,
+              "threshold": 0.070,
               "points": 2,
-              "description": "Performance at or below 0.50 (O/E ratio)"
+              "description": "Performance at or below 7.00%"
             },
             "tier_3": {
-              "threshold": 0.45,
+              "threshold": 0.060,
               "points": 3,
-              "description": "Performance at or below 0.45 (O/E ratio)"
+              "description": "Performance at or below 6.00%"
             }
           },
-          "note": "Lower values indicate better performance (O/E ratio). OCR data shows Medicare values as % (7.50, 7.00, 6.00) and Commercial/Medicaid not explicitly listed under PCR. JSON structure maintained; Commercial/Medicaid thresholds not updated from OCR due to lack of matching data/type."
-        },
-        "medicaid": {
-          "line_name": "UPMC for You (Medicaid)",
-          "description": "Bonus points for meeting performance thresholds in reducing readmissions",
-          "tiers": {
-            "tier_1": {
-              "threshold": 0.80,
-              "points": 1,
-              "description": "Performance at or below 0.80 (O/E ratio)"
-            },
-            "tier_2": {
-              "threshold": 0.75,
-              "points": 2,
-              "description": "Performance at or below 0.75 (O/E ratio)"
-            },
-            "tier_3": {
-              "threshold": 0.70,
-              "points": 3,
-              "description": "Performance at or below 0.70 (O/E ratio)"
-            }
-          },
-          "note": "Lower values indicate better performance (O/E ratio). OCR data shows Medicare values as % (7.50, 7.00, 6.00) and Commercial/Medicaid not explicitly listed under PCR. JSON structure maintained; Commercial/Medicaid thresholds not updated from OCR due to lack of matching data/type."
+          "note": "Lower values indicate better performance (Rate)"
         }
       }
     },
@@ -320,7 +298,7 @@
               "description": "Performance at or above 92.0%"
             }
           },
-          "note": "OCR data source had blank targets for this measure; retaining original JSON values."
+          "note": "OCR data source had blank targets for this measure; retaining original JSON values from bonuscurrent.json."
         }
       }
     }
