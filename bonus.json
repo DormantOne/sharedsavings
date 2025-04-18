@@ -273,34 +273,6 @@
           }
         }
       }
-    },
-    "TRC-FU": {
-      "measure_id": "TRC-FU",
-      "measure_name": "7-Day Follow-Up for Inpatient Discharge",
-      "service_lines": {
-        "medicare": {
-          "line_name": "UPMC for Life (Medicare/SNP)",
-          "description": "Bonus points for meeting performance thresholds in 7-day follow-up",
-          "tiers": {
-            "tier_1": {
-              "threshold": 0.85,
-              "points": 1,
-              "description": "Performance at or above 85.0%"
-            },
-            "tier_2": {
-              "threshold": 0.88,
-              "points": 2,
-              "description": "Performance at or above 88.0%"
-            },
-            "tier_3": {
-              "threshold": 0.92,
-              "points": 3,
-              "description": "Performance at or above 92.0%"
-            }
-          },
-          "note": "OCR data source had blank targets for this measure; retaining original JSON values from bonuscurrent.json."
-        }
-      }
     }
   }
 }
