@@ -1,4 +1,3 @@
-
 {
   "bonus_measures": {
     "BCS-E": {
@@ -10,19 +9,19 @@
           "description": "Bonus points for meeting performance thresholds in breast cancer screening",
           "tiers": {
             "tier_1": {
-              "threshold": 0.82,
+              "threshold": 0.794,
               "points": 1,
-              "description": "Performance at or above 82.0%"
+              "description": "Performance at or above 79.4%"
             },
             "tier_2": {
-              "threshold": 0.85,
+              "threshold": 0.808,
               "points": 2,
-              "description": "Performance at or above 85.0%"
+              "description": "Performance at or above 80.8%"
             },
             "tier_3": {
-              "threshold": 0.90,
+              "threshold": 0.822,
               "points": 3,
-              "description": "Performance at or above 90.0%"
+              "description": "Performance at or above 82.2%"
             }
           }
         },
@@ -31,19 +30,19 @@
           "description": "Bonus points for meeting performance thresholds in breast cancer screening",
           "tiers": {
             "tier_1": {
-              "threshold": 0.70,
+              "threshold": 0.64,
               "points": 1,
-              "description": "Performance at or above 70.0%"
+              "description": "Performance at or above 64.0%"
             },
             "tier_2": {
-              "threshold": 0.75,
+              "threshold": 0.661,
               "points": 2,
-              "description": "Performance at or above 75.0%"
+              "description": "Performance at or above 66.1%"
             },
             "tier_3": {
-              "threshold": 0.80,
+              "threshold": 0.682,
               "points": 3,
-              "description": "Performance at or above 80.0%"
+              "description": "Performance at or above 68.2%"
             }
           }
         }
@@ -58,19 +57,19 @@
           "description": "Bonus points for meeting performance thresholds in cervical cancer screening",
           "tiers": {
             "tier_1": {
-              "threshold": 0.82,
+              "threshold": 0.785,
               "points": 1,
-              "description": "Performance at or above 82.0%"
+              "description": "Performance at or above 78.5%"
             },
             "tier_2": {
-              "threshold": 0.85,
+              "threshold": 0.80,
               "points": 2,
-              "description": "Performance at or above 85.0%"
+              "description": "Performance at or above 80.0%"
             },
             "tier_3": {
-              "threshold": 0.88,
+              "threshold": 0.815,
               "points": 3,
-              "description": "Performance at or above 88.0%"
+              "description": "Performance at or above 81.5%"
             }
           }
         },
@@ -79,19 +78,19 @@
           "description": "Bonus points for meeting performance thresholds in cervical cancer screening",
           "tiers": {
             "tier_1": {
-              "threshold": 0.72,
+              "threshold": 0.652,
               "points": 1,
-              "description": "Performance at or above 72.0%"
+              "description": "Performance at or above 65.2%"
             },
             "tier_2": {
-              "threshold": 0.75,
+              "threshold": 0.676,
               "points": 2,
-              "description": "Performance at or above 75.0%"
+              "description": "Performance at or above 67.6%"
             },
             "tier_3": {
-              "threshold": 0.78,
+              "threshold": 0.70,
               "points": 3,
-              "description": "Performance at or above 78.0%"
+              "description": "Performance at or above 70.0%"
             }
           }
         }
@@ -106,19 +105,19 @@
           "description": "Bonus points for meeting performance thresholds in chlamydia screening",
           "tiers": {
             "tier_1": {
-              "threshold": 0.66,
+              "threshold": 0.542,
               "points": 1,
-              "description": "Performance at or above 66.0%"
+              "description": "Performance at or above 54.2%"
             },
             "tier_2": {
-              "threshold": 0.70,
+              "threshold": 0.5995,
               "points": 2,
-              "description": "Performance at or above 70.0%"
+              "description": "Performance at or above 59.95%"
             },
             "tier_3": {
-              "threshold": 0.75,
+              "threshold": 0.657,
               "points": 3,
-              "description": "Performance at or above 75.0%"
+              "description": "Performance at or above 65.7%"
             }
           }
         },
@@ -127,19 +126,19 @@
           "description": "Bonus points for meeting performance thresholds in chlamydia screening",
           "tiers": {
             "tier_1": {
-              "threshold": 0.72,
+              "threshold": 0.668,
               "points": 1,
-              "description": "Performance at or above 72.0%"
+              "description": "Performance at or above 66.8%"
             },
             "tier_2": {
-              "threshold": 0.75,
+              "threshold": 0.6885,
               "points": 2,
-              "description": "Performance at or above 75.0%"
+              "description": "Performance at or above 68.85%"
             },
             "tier_3": {
-              "threshold": 0.78,
+              "threshold": 0.709,
               "points": 3,
-              "description": "Performance at or above 78.0%"
+              "description": "Performance at or above 70.9%"
             }
           }
         }
@@ -154,19 +153,19 @@
           "description": "Bonus points for meeting performance thresholds in glycemic status assessment",
           "tiers": {
             "tier_1": {
-              "threshold": 0.75,
+              "threshold": 0.71,
               "points": 1,
-              "description": "Performance at or above 75.0%"
+              "description": "Performance at or above 71.0%"
             },
             "tier_2": {
-              "threshold": 0.80,
+              "threshold": 0.729,
               "points": 2,
-              "description": "Performance at or above 80.0%"
+              "description": "Performance at or above 72.9%"
             },
             "tier_3": {
-              "threshold": 0.85,
+              "threshold": 0.748,
               "points": 3,
-              "description": "Performance at or above 85.0%"
+              "description": "Performance at or above 74.8%"
             }
           }
         },
@@ -175,19 +174,19 @@
           "description": "Bonus points for meeting performance thresholds in glycemic status assessment",
           "tiers": {
             "tier_1": {
-              "threshold": 0.72,
+              "threshold": 0.68,
               "points": 1,
-              "description": "Performance at or above 72.0%"
+              "description": "Performance at or above 68.0%"
             },
             "tier_2": {
-              "threshold": 0.76,
+              "threshold": 0.69,
               "points": 2,
-              "description": "Performance at or above 76.0%"
+              "description": "Performance at or above 69.0%"
             },
             "tier_3": {
-              "threshold": 0.80,
+              "threshold": 0.70,
               "points": 3,
-              "description": "Performance at or above 80.0%"
+              "description": "Performance at or above 70.0%"
             }
           }
         }
@@ -217,7 +216,7 @@
               "description": "Performance at or below 0.45 (O/E ratio)"
             }
           },
-          "note": "Lower values indicate better performance (O/E ratio)"
+          "note": "Lower values indicate better performance (O/E ratio). OCR data shows Medicare values as % (7.50, 7.00, 6.00) and Commercial/Medicaid not explicitly listed under PCR. JSON structure maintained; Commercial/Medicaid thresholds not updated from OCR due to lack of matching data/type."
         },
         "medicaid": {
           "line_name": "UPMC for You (Medicaid)",
@@ -239,7 +238,7 @@
               "description": "Performance at or below 0.70 (O/E ratio)"
             }
           },
-          "note": "Lower values indicate better performance (O/E ratio)"
+          "note": "Lower values indicate better performance (O/E ratio). OCR data shows Medicare values as % (7.50, 7.00, 6.00) and Commercial/Medicaid not explicitly listed under PCR. JSON structure maintained; Commercial/Medicaid thresholds not updated from OCR due to lack of matching data/type."
         }
       }
     },
@@ -252,19 +251,19 @@
           "description": "Bonus points for meeting performance thresholds in follow-up care",
           "tiers": {
             "tier_1": {
-              "threshold": 0.80,
+              "threshold": 0.69,
               "points": 1,
-              "description": "Performance at or above 80.0%"
+              "description": "Performance at or above 69.0%"
             },
             "tier_2": {
-              "threshold": 0.85,
+              "threshold": 0.71,
               "points": 2,
-              "description": "Performance at or above 85.0%"
+              "description": "Performance at or above 71.0%"
             },
             "tier_3": {
-              "threshold": 0.90,
+              "threshold": 0.75,
               "points": 3,
-              "description": "Performance at or above 90.0%"
+              "description": "Performance at or above 75.0%"
             }
           }
         }
@@ -320,7 +319,8 @@
               "points": 3,
               "description": "Performance at or above 92.0%"
             }
-          }
+          },
+          "note": "OCR data source had blank targets for this measure; retaining original JSON values."
         }
       }
     }
